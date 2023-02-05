@@ -5,35 +5,41 @@
  * @version 1.0
  */
 
-package com.nurikabe.menus;
+package com.l3infogrp5.nurikabe.menus;
 
-public class Menu_mode_jeu{
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+public class Menu_mode_jeu extends Application{
 
     /**
      * Le boutton pour revenir au menu précédant
      */
     Boutton_retour retour;
 
-    /**
-     * Les bouttons pour acceder au niveau d'un mode de jeu
-     */
-    Button detente, sans_fin, chrono;
-
-    /**
-     * Le boutton pour acceder au menu des score pour le mode de jeu sans fin
-     */
-    Button menu_score_sf;
 
     /**
      * Constructeur du menu des mode de jeu
      */
-    Menu_mode_jeu() {
+   /* Menu_mode_jeu() {
         // retour = new Boutton_retour();
-        detente = new Button("Détente");
-        sans_fin = new Button("Contre la montre");
-        chrono = new Button("Sans fin");
-        ImageView iw = new ImageView(new Image("trophee.png"));
-        menu_score_sf = new Button("", iw);
+    }*/
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../../../FXML/menu_mode.fxml"));
+
+        Scene scene = new Scene(root);
+
+        stage.setTitle("Modes de Jeux");
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**

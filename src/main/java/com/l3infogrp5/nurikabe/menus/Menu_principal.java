@@ -5,27 +5,28 @@
  * @version 1.0
  */
 
-package com.nurikabe.menus;
+package com.l3infogrp5.nurikabe.menus;
 
-public class Menu_principal {
-    /**
-     * Le nom du jeu
-     */
-    static Label nurikabe = new Label("NURIKABE");
 
-    /**
-     * Les boutton menant au divers menu du jeu
-     */
-    Button joueur, profils, regles, quitter;
+import java.io.IOException;
 
-    /**
-     * Constructeur du menu principal
-     */
-    Menu_principal() {
-        joueur = new Button("Jouer");
-        profils = new Button("Profils");
-        regles = new Button("Règles");
-        quitter = new Button("Quitter");
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Menu_principal extends Application{
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../../../FXML/menu_principal.fxml"));
+
+        Scene scene = new Scene(root);
+
+        stage.setTitle("Modes de Jeux");
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
@@ -34,7 +35,7 @@ public class Menu_principal {
      * 
      * @return void
      */
-    public void creation_menu_principal() {
+    public static void creation_menu_principal() {
 
     }
 

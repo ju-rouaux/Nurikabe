@@ -5,27 +5,39 @@
  * @version 1.0
  */
 
-package com.nurikabe.menus;
+package com.l3infogrp5.nurikabe.menus;
 
-public class Menu_selection_niveau {
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Menu_selection_niveau extends Application{
     /**
      * Le boutton pour revenir au menu précédant
      */
     Boutton_retour retour;
 
-    /**
-     * La liste des boutton contentant les niveaux
-     */
-    Button grille_bouttons[];
 
     /**
      * Constructeur du Menue de selection de niveau
      */
-    Menu_selection_niveau() {
-        grille_button = new Button[nb_niveaux];
-        for (int i = 0; i < nb_niveaux; i++) {
-            grille_bouttons[i] = new Button("Niveau" + i);
-        }
+    Menu_selection_niveau(int nb_niveaux) {
+        // retour = new Boutton_retour();
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../../../FXML/menu_selection_niv.fxml"));
+
+        Scene scene = new Scene(root);
+
+        stage.setTitle("Modes de Jeux");
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
