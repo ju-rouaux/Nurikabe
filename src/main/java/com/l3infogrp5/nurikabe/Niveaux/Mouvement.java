@@ -1,5 +1,7 @@
 /**
  * Classe permetant de stocker un mouvement en stockant l'état initial d'une case et son état modifié
+ * @author Killian Rattier
+ * @version 1.0
  */
 public class Mouvement {
     

@@ -1,5 +1,7 @@
 /**
  * Classe héritant d'une case implémentant une case numérique
+ * @author Killian Rattier
+ * @version 1.0
  */
 public class CaseNum extends Case {
 

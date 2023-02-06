@@ -3,6 +3,8 @@ import java.util.*;
 /**
  * Classe implémentant une grille contenant un ensemble de cases et stockant les mouvements
  * effectués sur celle-ci
+ * @author Killian Rattier
+ * @version 1.0
  */
 public class Grille {
 

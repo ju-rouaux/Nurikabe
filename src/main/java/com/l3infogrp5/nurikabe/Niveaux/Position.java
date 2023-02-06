@@ -1,3 +1,8 @@
+/**
+ * Permet de définir la position en x,y dans une matrice
+ * @author Killian Rattier
+ * @version 1.0
+ */
 public class Position {
 
     public int x,y;

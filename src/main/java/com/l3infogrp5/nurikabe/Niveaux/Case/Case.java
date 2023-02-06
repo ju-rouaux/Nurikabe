@@ -1,5 +1,7 @@
 /**
  * Classe abstraite implémentant une case d'une grille
+ * @author Killian Rattier
+ * @version 1.0
  */
 abstract public class Case {
 

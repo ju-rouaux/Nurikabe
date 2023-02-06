@@ -1,6 +1,8 @@
 /**
  * Classe implémentant un niveau.
  * Un niveau à une grille, un score et un numéro qui lui est affecté
+ * @author Killian Rattier
+ * @version 1.0
  */
 public class Niveau {
 
