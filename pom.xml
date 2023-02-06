@@ -4,40 +4,67 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Projet -->
   <groupId>com.l3infogrp5.nurikabe</groupId>
   <artifactId>nurikabe</artifactId>
   <version>1.0-SNAPSHOT</version>
-
   <name>nurikabe</name>
 
+
+
+  <!-- #### Variables #### -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Version Java -->
     <maven.compiler.source>16</maven.compiler.source>
     <maven.compiler.target>16</maven.compiler.target>
+
+    <!-- Version JFX -->
+    <openjfx.version>17</openjfx.version>
+
+    <!-- Version JUnit -->
+    <junit.version>5.9.2</junit.version>
+
+    <!-- Classe de lancement du programme -->
+    <project.mainClass>com.l3infogrp5.nurikabe.Main</project.mainClass>
+
   </properties>
   
+
+
   <dependencies>
+    <!-- Import JavaFX -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17</version>
+      <version>${openjfx.version}</version>
     </dependency>
+    <!-- Import FXML pour Scene Builder -->
     <dependency>
       <groupId>org.openjfx</groupId>
         <artifactId>javafx-fxml</artifactId>
-      <version>17</version>
+      <version>${openjfx.version}</version>
+    </dependency>
+    <!-- Import JUnit (mvn test uniquement) -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
-
   <build>
     <plugins>
+      <!-- Plugin JavaFX -->
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-            <mainClass>com.l3infogrp5.nurikabe.Main</mainClass>
+            <!-- Classe de lancement du programme -->
+            <mainClass>${project.mainClass}</mainClass>
         </configuration>
       </plugin>
 
@@ -65,7 +92,8 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.l3infogrp5.nurikabe.Main</mainClass>
+              <!-- Classe de lancement du programme -->
+              <mainClass>${project.mainClass}</mainClass>
             </manifest>
           </archive>
         </configuration>
