@@ -31,33 +31,36 @@ public class Sauvegarder {
      * @return vrai si la sauvegarde existe, faux sinon
      */
     private boolean RechercherSauvegarde(String player) {
+        // Vérifier si le nom du joueur est nul
         if (player == null)
             return false;
 
         File repertoire_Temp = new File(repertoire.toString() + "/save/lvl/");
 
         // Récupère tous les fichiers dans le répertoire
-        File[] fichiers = repertoire_Temp.listFiles();
-        if (!dossierExistants(repertoire_Temp) || fichiers.length == 0) {
+        // Vérifier si le répertoire existe et s'il contient des fichiers
+        if (!dossierExistants(repertoire_Temp) || repertoire_Temp.listFiles().length == 0) {
             System.out.println("Il n'y pas de fichiers ou dossiers");
             return false;
         }
+
         // Parcourt tous les fichiers pour voir s'il y a une sauvegarde pour le joueur
-        for (File fichier : fichiers) {
+        for (File fichier : repertoire_Temp.listFiles()) {
             if (fichier.isDirectory() && fichier.getName().equals(player)) {
                 System.out.println("La sauvegarde du joueur existe");
                 return true;
-            } else
-                System.out.println("Erreur, ce pseudo n'est pas associé à une sauvegarde");
+            }
         }
+
+        System.out.println("Erreur, ce pseudo n'est pas associé à une sauvegarde");
         return false;
     }
 
     // Affiche tous les fichiers dans le répertoire
     public void afficherFichiers() {
-        File[] fichiers = repertoire.listFiles();
+
         if (dossierExistants(repertoire)) {
-            for (File fichier : fichiers) {
+            for (File fichier : repertoire.listFiles()) {
                 if (fichier.isFile())
                     System.out.println("Fichier : " + fichier.getName());
                 else if (fichier.isDirectory())
@@ -94,59 +97,35 @@ public class Sauvegarder {
 
         try {
             // Vérifier si le dossier "save" existe déjà
-            if (!fichiers.contains("save")) {
+            boolean saveExists = fichiers.contains("save");
+            if (!saveExists) {
                 // Créer le dossier "save" si il n'existe pas
                 Files.createDirectories(Paths.get(this.repertoire.toString() + "/save"));
                 System.out.println("Dossier save créé");
 
                 repertoire = new File(repertoire.toString() + "/save/");
-
-                Files.createDirectories(Paths.get(this.repertoire.toString() + "/lvl"));
-                System.out.println("Dossier lvl créé");
-
-                Files.createDirectories(Paths.get(this.repertoire.toString() + "/score"));
-                System.out.println("Dossier score créé");
-
-                Files.createDirectories(Paths.get(this.repertoire.toString() + "/lvl/" + joueur));
-                System.out.println("Dossier du joueur créé");
             } else {
                 // Se déplacer dans le nouveau dossier "save"
                 repertoire = new File(repertoire.toString() + "/save");
-
-                // Vider la liste de fichiers
-                fichiers.clear();
-                fichiers = ajoutFichiers(this.repertoire);
-
-                // Vérifier si le dossier "lvl" existe déjà dans "save"
-                if (!fichiers.contains("lvl")) {
-                    // Créer le dossier "lvl" si il n'existe pas
-                    Files.createDirectories(Paths.get(this.repertoire.toString() + "/lvl"));
-                    Files.createDirectories(Paths.get(this.repertoire.toString() + "/lvl/" + joueur));
-                    System.out.println("Dossier lvl et joueur créés");
-                }
-                // Vérifier si le dossier "score" existe déjà dans "save"
-                if (!fichiers.contains("score")) {
-                    // Créer le dossier "score" si il n'existe pas
-                    Files.createDirectories(Paths.get(this.repertoire.toString() + "/score"));
-                    System.out.println("Dossier score créé");
-                }
-
-                // Se déplacer dans le nouveau dossier "save"
-                repertoire = new File(repertoire.toString() + "/lvl");
-
-                // Vider la liste de fichiers
-                fichiers.clear();
-                fichiers = ajoutFichiers(this.repertoire);
-                // Vérifier si le dossier du joueur existe déjà dans "lvl"
-                if (!fichiers.contains(joueur)) {
-                    // Créer le dossier du joueur si il n'existe pas
-                    Files.createDirectories(Paths.get(this.repertoire.toString() + "/" + joueur));
-                    System.out.println("Dossier lvl et joueur créés");
-                }
-
-                System.out.println("Repertoires essentiels créés");
             }
 
+            // Vérifier si le dossier "lvl" existe déjà dans "save"
+            boolean lvlExists = fichiers.contains("lvl");
+            if (!lvlExists) {
+                // Créer le dossier "lvl" si il n'existe pas
+                Files.createDirectories(Paths.get(this.repertoire.toString() + "/lvl"));
+            }
+            Files.createDirectories(Paths.get(this.repertoire.toString() + "/lvl/" + joueur));
+
+            // Vérifier si le dossier "score" existe déjà dans "save"
+            boolean scoreExists = fichiers.contains("score");
+            if (!scoreExists) {
+                // Créer le dossier "score" si il n'existe pas
+                Files.createDirectories(Paths.get(this.repertoire.toString() + "/score"));
+                System.out.println("Dossier score créé");
+            }
+
+            System.out.println("Repertoires essentiels créés");
         } catch (IOException e) {
             System.err.println("Erreur lors de la création des répertoires nécessaires au jeu");
         }
