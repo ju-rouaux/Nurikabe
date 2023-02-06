@@ -2,15 +2,15 @@
  * Classe implémentant un niveau.
  * Un niveau à une grille, un score et un numéro qui lui est affecté
  */
-public class NiveauImpl {
+public class Niveau {
 
-    GrilleImpl niveau;
+    Grille niveau;
     ScoreInterface score;
     private int numero = 0;
 
-    public NiveauImpl(GrilleImpl niveau) {
+    public Niveau(Grille niveau) {
         this.niveau = niveau;
-        this.score = new ScoreZenImpl();
+        this.score = new ScoreZen();
         this.numero = numero++;
     }
 

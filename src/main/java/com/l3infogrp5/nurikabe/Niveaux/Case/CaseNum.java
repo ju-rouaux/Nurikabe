@@ -1,7 +1,7 @@
 /**
  * Classe héritant d'une case implémentant une case numérique
  */
-public class CaseNumImpl extends CaseImpl {
+public class CaseNum extends Case {
 
     /**
      * Le nombre affecté à notre case numérique
@@ -12,7 +12,7 @@ public class CaseNumImpl extends CaseImpl {
      * @param position la position dans la grille de notre case 
      * @param valeur la valeur numérique de notre case
      */
-    public CaseNumImpl(Position position, int valeur) {
+    public CaseNum(Position position, int valeur) {
         super(position);
         this.valeur = valeur;
     }

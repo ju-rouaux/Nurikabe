@@ -1,7 +1,7 @@
 public class ScoreZenImpl implements ScoreInterface {
     float etoiles;
 
-    public ScoreZenImpl(float etoiles) {
+    public ScoreZen(float etoiles) {
         this.etoiles = etoiles;
     }
 

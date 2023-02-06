@@ -1,10 +1,10 @@
 import java.util.Timer;
 
-abstract public class ScoreChronoImpl implements ScoreInterface{
+abstract public class ScoreChrono implements ScoreInterface{
 
     Timer tps;
 
-    public ScoreChronoImpl(Timer tps) {
+    public ScoreChrono(Timer tps) {
         this.tps = tps;
     }
 

@@ -1,8 +1,8 @@
 import java.util.Timer;
 
-public class ScoreCLMImpl extends ScoreChronoImpl {
+public class ScoreCLM extends ScoreChrono {
 
-    public ScoreCLMImpl(Timer tps) {
+    public ScoreCLM(Timer tps) {
         super(tps);
         //TODO Auto-generated constructor stub
     }

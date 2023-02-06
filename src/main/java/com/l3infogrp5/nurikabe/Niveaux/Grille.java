@@ -4,45 +4,45 @@ import java.util.*;
  * Classe implémentant une grille contenant un ensemble de cases et stockant les mouvements
  * effectués sur celle-ci
  */
-public class GrilleImpl {
+public class Grille {
 
 
     /**
      * La liste des mouvements effectués sur la grille sous forme de liste
      */
-    LinkedList<MouvementImpl> mouvements = new LinkedList<MouvementImpl>();
+    LinkedList<Mouvement> mouvements = new LinkedList<Mouvement>();
 
     /**
      * Le plateau contenant toutes les cases de la grille
      */
-    CaseImpl[][] plateau;
+    Case[][] plateau;
 
     /**
      * Tailles en x et y de la matrice
      */
     int tx, ty;
 
-    public GrilleImpl() {
+    public Grille() {
        this.plateau = fillGrid(this.plateau, "fic");
     }
 
     /**
      * Méthode remplissant un plateau à l'aide d'un fichier.
      */
-    private CaseImpl[][] fillGrid(CaseImpl[][] plateau, String fichier) {
+    private Case[][] fillGrid(Case[][] plateau, String fichier) {
         int nb = 0;
         int temp = 10;
         for(int i = 0; i < tx; i++){
             for(int j = 0; j < ty; j++){
                 Position pos = new Position(i,j);
                 if(nb == 0){
-                    plateau[i][j] = new CaseNumImpl(pos,temp);
+                    plateau[i][j] = new CaseNum(pos,temp);
                 } else if(nb == 1){
-                    plateau[i][j] = new CaseVideImpl(pos,Etat.VIDE);
+                    plateau[i][j] = new CaseVide(pos,Etat.VIDE);
                 } else if(nb == 2){
-                    plateau[i][j] = new CaseVideImpl(pos,Etat.POINT);
+                    plateau[i][j] = new CaseVide(pos,Etat.POINT);
                 } else if(nb == 3){
-                    plateau[i][j] = new CaseVideImpl(pos,Etat.PLEIN);
+                    plateau[i][j] = new CaseVide(pos,Etat.PLEIN);
                 }
             }
         }
@@ -58,16 +58,16 @@ public class GrilleImpl {
      * @param plateau la grille de jeu
      * @return la matrice d'entier comportant les informations converties
      */
-    public int[][] toIntMat(CaseImpl[][] plateau){
+    public int[][] toIntMat(Case[][] plateau){
 
         int[][] mat = new int[tx][ty];
         
         for(int i = 0; i < tx; i++){
             for(int j = 0; j < ty; j++){
-                if(plateau[i][j] instanceof CaseNumImpl){
+                if(plateau[i][j] instanceof CaseNum){
                     mat[i][j] = 0;
-                } else if(plateau[i][j] instanceof CaseVideImpl){
-                    CaseVideImpl temp = (CaseVideImpl) plateau[i][j];
+                } else if(plateau[i][j] instanceof CaseVide){
+                    CaseVide temp = (CaseVide) plateau[i][j];
                     if(temp.etat_case.equals(Etat.VIDE)){
                         mat[i][j] = 1;
                     } else if(temp.etat_case.equals(Etat.POINT)){

@@ -1,7 +1,7 @@
 /**
  * Classe abstraite implémentant une case d'une grille
  */
-abstract public class CaseImpl {
+abstract public class Case {
 
     /**
      * La position en x,y d'une case sous forme de vecteur
@@ -11,7 +11,7 @@ abstract public class CaseImpl {
     /**
      * @param position la position de la case
      */
-    public CaseImpl(Position position) {
+    public Case(Position position) {
         this.position = position;
     }
 

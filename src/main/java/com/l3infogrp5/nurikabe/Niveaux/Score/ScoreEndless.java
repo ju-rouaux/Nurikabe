@@ -1,8 +1,8 @@
 import java.util.Timer;
 
-public class ScoreEndlessImpl extends ScoreChronoImpl{ 
+public class ScoreEndless extends ScoreChrono{ 
 
-    public ScoreEndlessImpl(Timer tps) {
+    public ScoreEndless(Timer tps) {
         super(tps); 
     }
 
