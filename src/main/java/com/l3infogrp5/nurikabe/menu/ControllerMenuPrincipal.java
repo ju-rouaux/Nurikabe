@@ -4,27 +4,38 @@
  * @author 
  */
 
-package com.l3infogrp5.nurikabe.menus;
+package com.l3infogrp5.nurikabe.menu;
 
-
-import java.io.IOException;
-
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 public class ControllerMenuPrincipal {
 
     private FXMLLoader loader;
     private Scene scene;
+    private Stage stage;
     
-    public ControllerMenuPrincipal() throws Exception {
+
+    @FXML
+    private Button jouer;
+
+    @FXML
+    private Button profils;
+
+    @FXML
+    private Button quitter;
+
+    @FXML
+    private Button regles;
+    
+    public ControllerMenuPrincipal(Stage stage) throws Exception {
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_principal.fxml"));
         
-
         loader.setController(this);
 
         scene = loader.load();
@@ -32,57 +43,24 @@ public class ControllerMenuPrincipal {
 
     public Scene getScene() { return scene; }
 
-    /**
-     * Méthode qui creer le menu principal
-     * 
-     * 
-     */
-    public static void creationMenuPrincipal() {
+
+    @FXML
+    void chargeModeJeu(ActionEvent event) {
+        
+    }
+
+    @FXML
+    void chargeProfils(ActionEvent event) {
 
     }
 
-    /**
-     * Méthode qui charge le menu principal
-     * 
-     * 
-     */
-    public void chargeMenuPrincipal() {
+    @FXML
+    void chargeRegles(ActionEvent event) {
 
     }
 
-    /**
-     * Méthode renvoie au menu des profils
-     * 
-     * 
-     */
-    public void chargeProfils() {
-
-    }
-
-    /**
-     * Méthode qui renvoie au menu des mode de jeu
-     * 
-     * 
-     */
-    public void chargeModeJeu() {
-
-    }
-
-    /**
-     * Méthode qui renvoie au menu des regles du jeu
-     * 
-     * 
-     */
-    public void chargeRegles() {
-
-    }
-
-    /**
-     * Méthode qui ferme le jeu
-     * 
-     * 
-     */
-    public void quitter() {
+    @FXML
+    void quitter(ActionEvent event) {
 
     }
 

@@ -1,13 +1,8 @@
 package com.l3infogrp5.nurikabe;
 
-import java.util.concurrent.ExecutionException;
-
-import com.l3infogrp5.nurikabe.menus.ControllerMenuPrincipal;
+import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -16,6 +11,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         ControllerMenuPrincipal menu = new ControllerMenuPrincipal();
         
+        //TODO : ajouter une fermeture du programme propre qui s'assure de la sauvegarde de la partie.
+
         stage.setScene(menu.getScene());
         stage.show();
     }
