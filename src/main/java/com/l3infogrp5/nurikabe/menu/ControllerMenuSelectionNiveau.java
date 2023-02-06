@@ -4,40 +4,38 @@
  * @author 
  */
 
-package com.l3infogrp5.nurikabe.menus;
+package com.l3infogrp5.nurikabe.menu;
 
-import java.io.IOException;
-
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-public class MenuSelectionNiveau extends Application{
+public class ControllerMenuSelectionNiveau  {
     /**
      * Le boutton pour revenir au menu précédant
      */
     BouttonRetour retour;
 
+    private FXMLLoader loader;
+    private Scene scene;
+
 
     /**
      * Constructeur du Menue de selection de niveau
      */
-    MenuSelectionNiveau(int nb_niveaux) {
+    public ControllerMenuSelectionNiveau() throws Exception {
+        loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXML/menu_selection_niv.fxml"));
+        
+
+        loader.setController(this);
+
+        scene = loader.load();
+
         // retour = new Boutton_retour();
     }
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../../../FXML/menu_selection_niv.fxml"));
+    public Scene getScene() { return scene; }
 
-        Scene scene = new Scene(root);
-
-        stage.setTitle("Modes de Jeux");
-        stage.setScene(scene);
-        stage.show();
-    }
 
     /**
      * Méthode qui permet de revenir a l'ancienne affichage
