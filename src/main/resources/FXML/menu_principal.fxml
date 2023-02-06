@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<Stage xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Stage xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <scene>
       <Scene>
          <root>
@@ -32,7 +32,7 @@
                <children>
                   <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Jouer">
+                        <Button fx:id="jouer" mnemonicParsing="false" onAction="#chargeModeJeu" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Jouer">
                            <font>
                               <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                            </font>
@@ -53,7 +53,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Profils">
+                        <Button fx:id="profils" mnemonicParsing="false" onAction="#chargeProfils" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Profils">
                            <font>
                               <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                            </font>
@@ -62,7 +62,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Règles">
+                        <Button fx:id="regles" mnemonicParsing="false" onAction="#chargeRegles" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Règles">
                            <font>
                               <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                            </font>
@@ -71,7 +71,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Quitter">
+                        <Button fx:id="quitter" mnemonicParsing="false" onAction="#quitter" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Quitter">
                            <font>
                               <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                            </font>
