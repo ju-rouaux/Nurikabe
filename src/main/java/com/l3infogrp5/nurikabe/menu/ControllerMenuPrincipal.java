@@ -15,26 +15,22 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MenuPrincipal extends Application{
+public class ControllerMenuPrincipal {
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../../../../FXML/menu_principal.fxml"));
+    private FXMLLoader loader;
+    private Scene scene;
+    
+    public ControllerMenuPrincipal() throws Exception {
+        loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/FXML/menu_principal.fxml"));
         
 
         loader.setController(this);
 
-        Scene scene = loader.load();
-
-        stage.setTitle("Modes de Jeux");
-        stage.setScene(scene);
-        stage.show();
+        scene = loader.load();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public Scene getScene() { return scene; }
 
     /**
      * Méthode qui creer le menu principal
