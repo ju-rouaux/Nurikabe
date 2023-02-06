@@ -1,4 +1,6 @@
 // Java Program to create a button and add it to the stage
+package com.l3infogrp5.nurikabe.menu;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
