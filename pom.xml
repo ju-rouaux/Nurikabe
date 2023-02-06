@@ -21,7 +21,7 @@
     <maven.compiler.target>16</maven.compiler.target>
 
     <!-- Version JFX -->
-    <openjfx.version>17</openjfx.version>
+    <openjfx.version>19</openjfx.version>
 
     <!-- Version JUnit -->
     <junit.version>5.9.2</junit.version>
