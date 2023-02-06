@@ -5,7 +5,7 @@
  */
 
 
-package com.l3infogrp5.nurikabe.menus;
+package com.l3infogrp5.nurikabe.menu;
 
 public class BouttonRetour {
 
@@ -20,6 +20,6 @@ public class BouttonRetour {
      * 
      */
     public void chargeRetour() {
-
+        
     }
 }
