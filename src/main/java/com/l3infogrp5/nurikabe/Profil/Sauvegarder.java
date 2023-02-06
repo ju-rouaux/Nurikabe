@@ -56,7 +56,9 @@ public class Sauvegarder {
         return false;
     }
 
-    // Affiche tous les fichiers dans le répertoire
+    /**
+     * Affiche tous les fichiers dans le répertoire
+     */
     public void afficherFichiers() {
 
         if (dossierExistants(repertoire)) {
@@ -90,6 +92,8 @@ public class Sauvegarder {
 
     /**
      * Création des dossiers necessaires a la sauvegarde
+     *
+     * @param joueur le nom du joueur/profil
      */
     private void creerDossiers(String joueur) {
 
@@ -131,6 +135,12 @@ public class Sauvegarder {
         }
     }
 
+    /**
+     * Verifie s'il y a des dossiers dans le répertoire
+     *
+     * @param repert le repertoire
+     * @return boolean, true s'il y a des dossiers dans le répertoire sinon false
+     */
     private boolean dossierExistants(File repert) {
         File[] fichiers = repert.listFiles();
         if (fichiers == null)
@@ -139,12 +149,16 @@ public class Sauvegarder {
             return true;
     }
 
-    public int sauvegarderProfil(String joueur) {
+    /**
+     * Sauvegarde le profil
+     *
+     * @param joueur le nom du joueur/profil
+     */
+    public void sauvegarderProfil(String joueur) {
         if (RechercherSauvegarde(joueur) != true) {
             creerDossiers(joueur);
         }
 
-        return 0;
     }
 
 }
