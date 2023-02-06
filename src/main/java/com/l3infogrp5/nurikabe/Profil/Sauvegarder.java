@@ -30,9 +30,9 @@ public class Sauvegarder {
      *
      * @return vrai si la sauvegarde existe, faux sinon
      */
-    private boolean RechercherSauvegarde(String player) {
+    private boolean RechercherSauvegarde(String joueur) {
         // Vérifier si le nom du joueur est nul
-        if (player == null)
+        if (joueur == null)
             return false;
 
         File repertoire_Temp = new File(repertoire.toString() + "/save/lvl/");
@@ -46,7 +46,7 @@ public class Sauvegarder {
 
         // Parcourt tous les fichiers pour voir s'il y a une sauvegarde pour le joueur
         for (File fichier : repertoire_Temp.listFiles()) {
-            if (fichier.isDirectory() && fichier.getName().equals(player)) {
+            if (fichier.isDirectory() && fichier.getName().equals(joueur)) {
                 System.out.println("La sauvegarde du joueur existe");
                 return true;
             }
@@ -59,10 +59,9 @@ public class Sauvegarder {
     /**
      * Affiche tous les fichiers dans le répertoire
      */
-    public void afficherFichiers() {
-
-        if (dossierExistants(repertoire)) {
-            for (File fichier : repertoire.listFiles()) {
+    public void  afficherFichiers(File repert) {
+        if (dossierExistants(repert)) {
+            for (File fichier : repert.listFiles()) {
                 if (fichier.isFile())
                     System.out.println("Fichier : " + fichier.getName());
                 else if (fichier.isDirectory())
@@ -78,7 +77,7 @@ public class Sauvegarder {
      * @param répertoire le répertoire à scanner
      * @return une liste de noms de fichiers/répertoires
      */
-    private ArrayList<String> ajoutFichiers(File repertoire) {
+    private static ArrayList<String> ajoutFichiers(File repertoire) {
         ArrayList<String> fichiers = new ArrayList<String>();
         if (dossierExistants(repertoire)) {
             for (File fichier : repertoire.listFiles()) {
@@ -141,7 +140,7 @@ public class Sauvegarder {
      * @param repert le repertoire
      * @return boolean, true s'il y a des dossiers dans le répertoire sinon false
      */
-    private boolean dossierExistants(File repert) {
+    public static boolean dossierExistants(File repert) {
         File[] fichiers = repert.listFiles();
         if (fichiers == null)
             return false;
