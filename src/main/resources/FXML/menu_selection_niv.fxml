@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,644 +11,653 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="954.0" style="-fx-background-color: #BEBEBE;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
-  <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <HBox>
-         <children>
-            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="&lt;&lt;">
-               <font>
-                  <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="17.0" />
-               </font>
-            </Button>
-         </children>
-         <padding>
-            <Insets left="10.0" top="10.0" />
-         </padding>
-      </HBox>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+<Stage xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <scene>
+      <Scene>
+         <root>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="954.0" style="-fx-background-color: #BEBEBE;">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 1">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  <HBox>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="&lt;&lt;">
+                           <font>
+                              <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="17.0" />
+                           </font>
                         </Button>
                      </children>
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
                   </HBox>
-               </children>
-            </VBox>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 16">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 1">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 15">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 16">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 14">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 15">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 13">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 14">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 12">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 13">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 11">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 12">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 10">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 11">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 9">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 10">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 8">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 9">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 7">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 8">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 6">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 7">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 5">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 6">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 4">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 5">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 3">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 4">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </GridPane>
-      <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
-            <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 2">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="TOP_RIGHT">
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                      <children>
-                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../trophee.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 3">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </HBox>
+                  </GridPane>
+                  <GridPane prefHeight="37.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="20.944820383545927" minHeight="0.9947375123248356" prefHeight="4.984239465449836" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.921175402983497" minHeight="10.0" prefHeight="24.931673449858497" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="47.873867742485146" minHeight="10.0" prefHeight="47.873867742485146" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1" />
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="2">
+                           <children>
+                              <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="44.0" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="Niveau 2">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="11.0" />
+                                 </font>
+                              </Button>
+                              <HBox alignment="TOP_RIGHT">
+                                 <children>
+                                    <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 3;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../trophee.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </GridPane>
                </children>
-            </VBox>
-         </children>
-      </GridPane>
-   </children>
-</GridPane>
+            </GridPane>
+         </root>
+      </Scene>
+   </scene>
+</Stage>
