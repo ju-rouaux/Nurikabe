@@ -38,7 +38,7 @@ public class Grille {
         int nb = 0;
         int temp = 10;
         for(int i = 0; i < tx; i++){
-            for(int j = 0; j < ty; j++){
+            for(int j = 0; j < ty; j++jk,jkkjju){
                 Position pos = new Position(i,j);
                 if(nb == 0){
                     plateau[i][j] = new CaseNum(pos,temp);
@@ -87,4 +87,49 @@ public class Grille {
 
         return mat;
     }
-}
+
+    /**
+     * Stocke les chemins possibles et cases accessibles à partir d'une case donnée
+     * @param plateau la grille de jeu entre autre genre le jeu quoi feur enfin la matrice notament 
+     * @param current la case à prendre comme référence
+     * @author Killian Rattier
+     */
+    public LinkedList access(Case [][] plateau, CaseNum current){
+
+        LinkedList<CaseVide> cases = new LinkedList<>();
+        
+        // Appel récursif à acces
+        check(plateau, current, cases);
+        
+
+
+
+        return chemins;
+    }
+
+    /**
+     * Vérifie les cases adjacentes et les stocke dans la liste
+     * @param plateau la grille de jeu
+     * @param current la case à vérifier
+     * @param list la liste où sont stockées les cases sur lesquelles on peut se rendre
+     * @return la liste de cases
+     * @author Killian Rattier
+     */
+    public LinkedList check(Case[][] plateau, CaseNum current, LinkedList<CaseVide> list) {
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int x = current.position.x + i;
+                int y = current.position.y + j;
+                if (x >= 0 && x < plateau.length && y >= 0 && y < plateau[0].length) {
+                    if (plateau[x][y] instanceof CaseVide) {
+                        CaseVide tmp = (CaseVide) plateau[x][y];
+                        if (tmp.etat_case == Etat.VIDE) {
+                            list.add(tmp);
+                        }
+                    }
+                }
+            }
+        }
+        return list;
+    }
+    
