@@ -47,8 +47,8 @@ public class ControllerMenuPrincipal {
 
 
     @FXML
-    void chargeModeJeu(ActionEvent event) {
-        
+    void chargeModeJeu(ActionEvent event) throws Exception {
+        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
     }
 
     @FXML
@@ -63,7 +63,7 @@ public class ControllerMenuPrincipal {
 
     @FXML
     void quitter(ActionEvent event) {
-
+        stage.close();
     }
 
 }

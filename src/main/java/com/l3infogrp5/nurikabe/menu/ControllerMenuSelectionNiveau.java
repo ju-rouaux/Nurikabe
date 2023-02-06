@@ -7,22 +7,30 @@
 package com.l3infogrp5.nurikabe.menu;
 
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
 
 public class ControllerMenuSelectionNiveau  {
     /**
      * Le boutton pour revenir au menu précédant
      */
-    BouttonRetour retour;
+    @FXML
+    private Button retour;
 
     private FXMLLoader loader;
     private Scene scene;
+    private Stage stage;
 
 
     /**
      * Constructeur du Menue de selection de niveau
      */
-    public ControllerMenuSelectionNiveau() throws Exception {
+    public ControllerMenuSelectionNiveau(Stage stage) throws Exception {
+        this.stage = stage;
+
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_selection_niv.fxml"));
         
@@ -39,11 +47,12 @@ public class ControllerMenuSelectionNiveau  {
 
     /**
      * Méthode qui permet de revenir a l'ancienne affichage
+     * @throws Exception
      * 
      * 
      */
-    public void chargeRetour() {
-        retour.chargeRetour();
+    public void chargerRetour() throws Exception {
+        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
     }
 
     /**
@@ -70,24 +79,6 @@ public class ControllerMenuSelectionNiveau  {
      * 
      */
     public void chargeMenuScore() {
-
-    }
-
-    /**
-     * Méthode qui charge la page des sélections de niveaux
-     * 
-     * 
-     */
-    public void chargeSelectMenu() {
-
-    }
-
-    /**
-     * Méthode qui creer la page des sélections de niveaux
-     * 
-     * 
-     */
-    public void creationSelectMenu() {
 
     }
 }

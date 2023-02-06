@@ -33,7 +33,7 @@
          <children>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="&lt;&lt;">
+                  <Button fx:id="retour" mnemonicParsing="false" onAction="#chargerRetour" prefHeight="41.0" prefWidth="42.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="&lt;&lt;">
                      <font>
                         <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="17.0" />
                      </font>

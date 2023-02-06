@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BEBEBE;">
@@ -46,7 +45,7 @@
             </Button>
             <HBox GridPane.rowIndex="1" GridPane.valignment="BASELINE">
                <children>
-                  <Button fx:id="retour" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="&lt;&lt;">
+                  <Button fx:id="retour" mnemonicParsing="false" onAction="#chargerRetour" prefHeight="41.0" prefWidth="42.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="&lt;&lt;">
                      <font>
                         <Font size="14.0" />
                      </font>
