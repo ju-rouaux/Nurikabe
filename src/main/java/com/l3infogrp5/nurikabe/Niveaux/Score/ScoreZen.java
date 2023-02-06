@@ -1,3 +1,5 @@
+package com.l3infogrp5.nurikabe.Niveaux.Score;
+
 /**
  * Implémentation du score pour le mode zen
  * On calcule via un système d'étoiles allant de 1 à 5
