@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Sauvegarder sauv = new Sauvegarder();
         sauv.afficherFichiers();
-        sauv.creerDossiers();
-        // sauv.sauvegarderProfil("Dakire");
+        sauv.sauvegarderProfil("Julien");
     }
 }
