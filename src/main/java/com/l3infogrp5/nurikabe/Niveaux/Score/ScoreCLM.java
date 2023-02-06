@@ -2,7 +2,9 @@ package com.l3infogrp5.nurikabe.Niveaux.Score;
 import java.lang.Thread;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
 
 /**
  * Implémentation du calcul d'un score pour le mode Contre La Montre
@@ -17,11 +19,12 @@ public class ScoreCLM extends ScoreChrono {
         super(sec, min);
     }
 
+    
+    /* 
+    *Méthode de calcul du chrono pour le mode Contre la montre, ce chrono s'incrémente. 
+     */
     public void calcul(){
-
-
         KeyFrame kf = new KeyFrame(Duration.millis(1000), e -> {
-            //Thread.sleep(1000);
             
             sec++;
 
@@ -36,28 +39,24 @@ public class ScoreCLM extends ScoreChrono {
 
         });
 
+        System.out.println(min+":"+sec);
         Timeline timeline = new Timeline(kf);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
 
+    /*
+     * @{inheritedDoc}
+     */
     @Override
-    public void aideUtilise() {
+    public void aideUtilise(int aide) {
 
-        sec += 20;
-    }  
-
-    public static void main(String[] args) {
-        ScoreChrono score = new ScoreCLM(0,0);
-        try {
-            score.calcul();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if(sec+aide > 60){
+            min++;
+            sec += (aide-60);
         }
-        
-        score.aideUtilise();
-    }
+
+    }  
 }
 
 

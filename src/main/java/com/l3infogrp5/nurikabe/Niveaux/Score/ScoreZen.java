@@ -18,10 +18,16 @@ public class ScoreZen implements ScoreInterface {
      *Réduction du nombre d'étoiles si une aide est utilisée
      */
     @Override
-    public void aideUtilise() {
+    public void aideUtilise(int aide) {
         
         if(etoiles > 1)
             this.etoiles--;
+        
+    }
+
+    @Override
+    public void grilleComplete() {
+        // TODO Auto-generated method stub
         
     }
 

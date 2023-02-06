@@ -1,24 +1,33 @@
 package com.l3infogrp5.nurikabe;
+import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreCLM;
+import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreChrono;
+import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreEndless;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+
+public class Main extends Application{
 
     @Override
-    public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(l), 640, 480);
-        stage.setScene(scene);
-        stage.show();
-    }
+    public
+    void start(Stage primaryStage){
+        ScoreChrono score = new ScoreCLM(10,0);
+        score.calcul();
 
-    public static void main(String[] args) {
-        launch();
+        System.out.println("test");
+        score.aideUtilise(105);
     }
+/*
+    @Override
+    public
+    void start(Stage primaryStage){
+        ScoreChrono score = new ScoreEndless(40,0);
+        score.calcul();
+
+        System.out.println("test");
+        score.aideUtilise(35);
+        //score.grilleComplete();
+    }
+*/
 }

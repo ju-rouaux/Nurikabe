@@ -1,7 +1,7 @@
 package com.l3infogrp5.nurikabe.Niveaux.Score;
 
 /**
-* Implémentatio, du calcul du score selon le chronomètre
+* Implémentation du calcul du score selon le chronomètre
 * @author Antoine Couapel, Killian Rattier
 * @version 1.0
 */
@@ -16,12 +16,18 @@ abstract public class ScoreChrono implements ScoreInterface{
         this.min = min;
     }
 
-    public void calcul() throws InterruptedException{
+    public void calcul(){
 
     }
 
     @Override
-    public void aideUtilise() {}
+    /**
+     * blabla
+     */
+    public void aideUtilise(int aide) {}
+
+    @Override
+    public void grilleComplete(){}
 } 
 
 
