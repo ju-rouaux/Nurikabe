@@ -2,7 +2,6 @@
  * Classe implémentant le menu d'aafichage des règles du Nurikabe
  * 
  * @author 
- * @version 1.0
  */
 
 package com.l3infogrp5.nurikabe.menus;
@@ -15,17 +14,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Menu_regles extends Application{
+public class MenuRegles extends Application{
     /**
      * Le boutton pour revenir au menu précédant
      */
-    Boutton_retour retour;
+    BouttonRetour retour;
 
-   
     /**
      * Constructeur des relges
      */
-    Menu_regles() {
+    MenuRegles() {
         // retour = new Boutton_retour();
     }
 
@@ -44,10 +42,9 @@ public class Menu_regles extends Application{
      * Méthode qui permet de revenir a l'ancienne affichage
      * 
      * 
-     * @return void
      */
-    public void Charge_Retour() {
-        retour.charge_retour();
+    public void ChargeRetour() {
+        retour.chargeRetour();
     }
 
 }

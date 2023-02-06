@@ -2,7 +2,6 @@
  * Classe implémentant le menu principal du Nurikabe
  * 
  * @author 
- * @version 1.0
  */
 
 package com.l3infogrp5.nurikabe.menus;
@@ -16,7 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Menu_principal extends Application{
+public class MenuPrincipal extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,9 +32,8 @@ public class Menu_principal extends Application{
      * Méthode qui creer le menu principal
      * 
      * 
-     * @return void
      */
-    public static void creation_menu_principal() {
+    public static void creationMenuPrincipal() {
 
     }
 
@@ -43,9 +41,8 @@ public class Menu_principal extends Application{
      * Méthode qui charge le menu principal
      * 
      * 
-     * @return void
      */
-    public void charge_menu_principal() {
+    public void chargeMenuPrincipal() {
 
     }
 
@@ -53,9 +50,8 @@ public class Menu_principal extends Application{
      * Méthode renvoie au menu des profils
      * 
      * 
-     * @return void
      */
-    public void charge_profils() {
+    public void chargeProfils() {
 
     }
 
@@ -63,9 +59,8 @@ public class Menu_principal extends Application{
      * Méthode qui renvoie au menu des mode de jeu
      * 
      * 
-     * @return void
      */
-    public void charge_mode_jeu() {
+    public void chargeModeJeu() {
 
     }
 
@@ -73,9 +68,8 @@ public class Menu_principal extends Application{
      * Méthode qui renvoie au menu des regles du jeu
      * 
      * 
-     * @return void
      */
-    public void charge_regles() {
+    public void chargeRegles() {
 
     }
 
@@ -83,7 +77,6 @@ public class Menu_principal extends Application{
      * Méthode qui ferme le jeu
      * 
      * 
-     * @return void
      */
     public void quitter() {
 
