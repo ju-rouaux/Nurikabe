@@ -30,6 +30,9 @@ public class Grille {
 
     /**
      * Méthode remplissant un plateau à l'aide d'un fichier.
+     * @param plateau la grille à remplir
+     * @param fichier le nom du fichier txt à ouvrir
+     * @author Killian Rattier
      */
     private Case[][] fillGrid(Case[][] plateau, String fichier) {
         int nb = 0;
@@ -58,7 +61,8 @@ public class Grille {
      * #2 : point
      * #3 : plein
      * @param plateau la grille de jeu
-     * @return la matrice d'entier comportant les informations converties
+     * @return la matrice d'entiers comportant les informations converties
+     * @author Killian Rattier
      */
     public int[][] toIntMat(Case[][] plateau){
 
