@@ -9,7 +9,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        ControllerMenuPrincipal menu = new ControllerMenuPrincipal();
+        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
         
         //TODO : ajouter une fermeture du programme propre qui s'assure de la sauvegarde de la partie.
 

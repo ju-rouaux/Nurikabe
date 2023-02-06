@@ -7,22 +7,25 @@
 package com.l3infogrp5.nurikabe.menu;
 
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class ControllerMenuRegles {
-    /**
-     * Le boutton pour revenir au menu précédant
-     */
-    BouttonRetour retour;
+
+    @FXML
+    private Button retour;
+
 
     private FXMLLoader loader;
     private Scene scene;
+    private Stage stage;
 
 
-    /**
-     * Constructeur des relges
-     */
-    public ControllerMenuRegles() throws Exception {
+    public ControllerMenuRegles(Stage stage) throws Exception {
+        this.stage = stage;
+
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_regles.fxml"));
         
@@ -30,23 +33,14 @@ public class ControllerMenuRegles {
         loader.setController(this);
 
         scene = loader.load();
-
-        // retour = new Boutton_retour();
     }
 
     public Scene getScene() { return scene; }
 
     
 
-
-    
-    /**
-     * Méthode qui permet de revenir a l'ancienne affichage
-     * 
-     * 
-     */
-    public void ChargeRetour() {
-        retour.chargeRetour();
+    public void chargerRetour() throws Exception {
+        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
     }
 
 }

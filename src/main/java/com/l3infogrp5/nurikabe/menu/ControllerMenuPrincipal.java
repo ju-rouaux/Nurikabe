@@ -33,6 +33,8 @@ public class ControllerMenuPrincipal {
     private Button regles;
     
     public ControllerMenuPrincipal(Stage stage) throws Exception {
+        this.stage = stage;
+
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_principal.fxml"));
         
@@ -55,8 +57,8 @@ public class ControllerMenuPrincipal {
     }
 
     @FXML
-    void chargeRegles(ActionEvent event) {
-
+    void chargeRegles(ActionEvent event) throws Exception {
+        stage.setScene(new ControllerMenuRegles(stage).getScene());
     }
 
     @FXML
