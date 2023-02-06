@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -19,13 +19,21 @@ public class MenuPrincipal extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../../../FXML/menu_principal.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../../../../FXML/menu_principal.fxml"));
+        
 
-        Scene scene = new Scene(root);
+        loader.setController(this);
+
+        Scene scene = loader.load();
 
         stage.setTitle("Modes de Jeux");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     /**
