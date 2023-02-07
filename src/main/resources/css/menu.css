@@ -36,3 +36,13 @@
     -fx-text-fill: #363684;
     -fx-font-weight: bold;
 }
+
+/* Style des grilles de selection de niveau */
+.grille{
+    -fx-background-color: #000;
+    -fx-background-image: url("../Nurikabe_grille.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: contain,stretch;/* à régler encore mais l'idée est là */
+
+}
