@@ -15,7 +15,6 @@ public class Sauvegarder {
 
     // Gson gson = new Gson();
 
-    private File repertoire;
 
     // // Constructeur pour initialiser le répertoire
     public Sauvegarder() {
@@ -107,7 +106,6 @@ public class Sauvegarder {
             } else {
                 // Se déplacer dans le nouveau dossier "save"
             }
-            repertoire = new File(Path.repertoire_Save.toString());
 
             // Vérifier si le dossier "lvl" existe déjà dans "save"
             boolean lvlExists = fichiers.contains("lvl");
@@ -159,15 +157,15 @@ public class Sauvegarder {
     }
 
     public void sauvegarderScore(String joueur, String mode_De_Jeu) {
-        File endless = new File(repertoire.toString() + "save/score/endless.json");
-        File detente = new File(repertoire.toString() + "save/score/détente.json");
+        File endless = new File(Path.repertoire_Score.toString() + "/endless.json");
+        File detente = new File(Path.repertoire_Score.toString() + "/détente.json");
 
         if (dossierExistants(endless)) {
             System.out.println("Json endless deja existant");
 
         } else {
             try {
-                Files.createDirectories(Paths.get(endless.toString()));
+                Files.createFile(Paths.get(endless.toString()));
             } catch (IOException e) {
                 System.err.println("Erreur lors de la création du fichier" + endless.toString());
                 e.printStackTrace();
@@ -178,7 +176,7 @@ public class Sauvegarder {
             System.out.println("Json détente deja existant");
         } else {
             try {
-                Files.createDirectories(Paths.get(detente.toString()));
+                Files.createFile(Paths.get(detente.toString()));
             } catch (IOException e) {
                 System.err.println("Erreur lors de la création du fichier" + detente.toString());
                 e.printStackTrace();
