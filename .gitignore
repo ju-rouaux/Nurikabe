@@ -7,3 +7,5 @@ apidocs/
 
 *.log
 *.pdf
+
+.DS_Store
