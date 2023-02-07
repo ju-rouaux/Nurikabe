@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
@@ -13,7 +14,7 @@
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BEBEBE;">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="panneau-fond">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="85.03677756814113" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.3325691941177" minWidth="10.0" prefWidth="314.4324227097427" />
@@ -28,24 +29,24 @@
             <RowConstraints maxHeight="108.79238096873621" minHeight="10.0" prefHeight="41.834424767466146" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="detente" mnemonicParsing="false" onAction="#chargeSelectNiveau" prefHeight="87.0" prefWidth="349.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Détente" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="btn_detente" mnemonicParsing="false" onAction="#detenteClique" prefHeight="87.0" prefWidth="349.0" styleClass="btn-principal" text="Détente" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                </font>
             </Button>
-            <Button fx:id="chrono" mnemonicParsing="false" onAction="#chargeSelectNiveau" prefHeight="87.0" prefWidth="349.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Contre la montre" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button fx:id="btn_contre_montre" mnemonicParsing="false" onAction="#contreMontreClique" prefHeight="87.0" prefWidth="349.0" styleClass="btn-principal" text="Contre la montre" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                </font>
             </Button>
-            <Button fx:id="sans_Fin" mnemonicParsing="false" onAction="#chargeSansFin" prefHeight="87.0" prefWidth="349.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Sans fin" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button fx:id="btn_sans_fin" mnemonicParsing="false" onAction="#sansFinClique" prefHeight="87.0" prefWidth="349.0" styleClass="btn-principal" text="Sans fin" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                </font>
             </Button>
             <HBox GridPane.rowIndex="1" GridPane.valignment="BASELINE">
                <children>
-                  <Button fx:id="retour" mnemonicParsing="false" onAction="#chargerRetour" prefHeight="41.0" prefWidth="42.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;" text="&lt;&lt;">
+                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" text="&lt;&lt;">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -57,7 +58,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <children>
-                  <Button fx:id="menu_Score" mnemonicParsing="false" onAction="#chargeMenuScore">
+                  <Button fx:id="btn_score" mnemonicParsing="false" onAction="#scoreClique" styleClass="btn-trophee">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -74,4 +75,8 @@
          </children>
       </GridPane>
    </root>
+   <stylesheets>
+      <URL value="@../css/menu.css" />
+      <URL value="@../css/global.css" />
+   </stylesheets>
 </Scene>

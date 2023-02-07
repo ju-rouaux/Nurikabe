@@ -10,31 +10,31 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 /**
- * Contrôleur du menu d'affichage des règles, et sa scène.
+ * Contrôleur du menu de sélection de niveau, et sa scène.
  * 
  * @author Julien Rouaux - Nicolas Gouget
  */
-public class ControllerMenuRegles {
+public class ControllerMenuNiveau {
 
     private FXMLLoader loader;
     private Stage stage;
     private Scene scene;
 
     @FXML
-    private Button retour;
+    private Button btn_retour;
 
     /**
-     * Initialise le menu de sélection d'affichage des règles et son contrôleur.
+     * Initialise le menu de sélection de niveau et son contrôleur.
      * 
      * @param stage la fenêtre contenant la scène.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuRegles(Stage stage) throws IOException {
+    public ControllerMenuNiveau(Stage stage) throws IOException {
         this.stage = stage;
 
         loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FXML/menu_regles.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/menu_niveau.fxml"));
         loader.setController(this);
 
         scene = loader.load();
@@ -54,7 +54,6 @@ public class ControllerMenuRegles {
      */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
+        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
     }
-
 }

@@ -1,84 +1,104 @@
-/**
- * Classe implémentant le menu de séléction des modes de jeu
- * 
- * @author 
- */
-
 package com.l3infogrp5.nurikabe.menu;
 
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 
+import java.io.IOException;
+
+/**
+ * Contrôleur du menu de sélection de mode de jeu, et sa scène.
+ * 
+ * @author Julien Rouaux - Nicolas Gouget
+ */
 public class ControllerMenuModeJeu {
 
-    /**
-     * Le boutton pour revenir au menu précédant
-     */
-    @FXML
-    private Button retour;
-
     private FXMLLoader loader;
-    private Scene scene;
     private Stage stage;
+    private Scene scene;
+
+    @FXML
+    private Button btn_detente;
+
+    @FXML
+    private Button btn_contre_montre;
+
+    @FXML
+    private Button btn_sans_fin;
+
+    @FXML
+    private Button btn_score;
+
+    @FXML
+    private Button btn_retour;
 
     /**
-     * Constructeur du menu des mode de jeu
+     * Initialise le menu de sélection de mode de jeu et son contrôleur.
+     * 
+     * @param stage la fenêtre contenant la scène.
+     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
+     *                     être lu.
      */
-    public ControllerMenuModeJeu(Stage stage) throws Exception {
+    public ControllerMenuModeJeu(Stage stage) throws IOException {
         this.stage = stage;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_mode.fxml"));
-
         loader.setController(this);
 
         scene = loader.load();
 
     }
 
+    /**
+     * Retourne la scène gérée par le contrôleur.
+     * 
+     * @return la scène gérée par le contrôleur.
+     */
     public Scene getScene() {
         return scene;
     }
 
     /**
-     * Méthode qui permet de revenir a l'ancienne affichage
-     * @throws Exception
-     * 
-     * 
+     * Change la scène par le menu de sélection de niveau du mode détente.
      */
-    public void chargerRetour() throws Exception {
+    @FXML
+    private void detenteClique(ActionEvent event) throws Exception {
+        stage.setScene(new ControllerMenuNiveau(stage).getScene());
+    }
+
+    /**
+     * Change la scène par le menu de sélection de niveau du mode contre la montre.
+     */
+    @FXML
+    private void contreMontreClique(ActionEvent event) throws Exception {
+        stage.setScene(new ControllerMenuNiveau(stage).getScene());
+    }
+
+    /**
+     * Change la scène par une partie du mode sans fin.
+     */
+    @FXML
+    private void sansFinClique(ActionEvent event) {
+
+    }
+
+    /**
+     * Change la scène par le menu de consultation des scores du mode sans fin.
+     */
+    @FXML
+    private void scoreClique(ActionEvent event) {
+
+    }
+
+    /*
+     * Retourne au menu précédent, le menu principal.
+     */
+    @FXML
+    private void retourClique() throws Exception {
         stage.setScene(new ControllerMenuPrincipal(stage).getScene());
     }
-
-    /**
-     * Méthode qui charge la grille de niveau selon le mode de jeu selectionner
-     * @throws Exception
-     * 
-     * 
-     */
-    public void chargeSelectNiveau() throws Exception {
-        stage.setScene(new ControllerMenuSelectionNiveau(stage).getScene());
-    }
-
-    /**
-     * Méthode qui revoie le menu des scores
-     * 
-     * 
-     */
-    public void chargeMenuScore() {
-
-    }
-
-    /**
-     * Méthode qui demarre un parti en mode sans fin
-     * 
-     * 
-     */
-    public void chargeSansFin() {
-
-    }
-
 }

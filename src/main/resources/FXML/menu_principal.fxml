@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
@@ -10,10 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BEBEBE;">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="panneau-fond">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="85.03677756814113" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.3325691941177" minWidth="10.0" prefWidth="314.4324227097427" />
@@ -30,7 +30,7 @@
          <children>
             <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="jouer" mnemonicParsing="false" onAction="#chargeModeJeu" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Jouer">
+                  <Button fx:id="btn_jouer" mnemonicParsing="false" onAction="#jouerClique" prefHeight="52.0" prefWidth="252.0" styleClass="btn-principal" text="Jouer">
                      <font>
                         <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                      </font>
@@ -39,19 +39,19 @@
             </HBox>
             <HBox alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label alignment="TOP_CENTER" prefHeight="59.0" prefWidth="358.0" text="NURIKABE">
-                     <font>
-                        <Font name="System Bold" size="66.0" />
-                     </font>
+                  <Label id="titre-nurikabe" alignment="TOP_CENTER" prefHeight="59.0" prefWidth="358.0" text="NURIKABE">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
+                     <font>
+                        <Font name="System Bold" size="66.0" />
+                     </font>
                   </Label>
                </children>
             </HBox>
             <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button fx:id="profils" mnemonicParsing="false" onAction="#chargeProfils" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Profils">
+                  <Button fx:id="btn_profils" mnemonicParsing="false" onAction="#profilsClique" prefHeight="52.0" prefWidth="252.0" styleClass="btn-principal" text="Profils">
                      <font>
                         <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                      </font>
@@ -60,7 +60,7 @@
             </HBox>
             <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <Button fx:id="regles" mnemonicParsing="false" onAction="#chargeRegles" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Règles">
+                  <Button fx:id="btn_regles" mnemonicParsing="false" onAction="#reglesClique" prefHeight="52.0" prefWidth="252.0" styleClass="btn-principal" text="Règles">
                      <font>
                         <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                      </font>
@@ -69,7 +69,7 @@
             </HBox>
             <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
-                  <Button fx:id="quitter" mnemonicParsing="false" onAction="#quitter" prefHeight="52.0" prefWidth="252.0" style="-fx-background-color: #FFFF; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 3;" text="Quitter">
+                  <Button fx:id="btn_quitter" mnemonicParsing="false" onAction="#quitterClique" prefHeight="52.0" prefWidth="252.0" styleClass="btn-principal" text="Quitter">
                      <font>
                         <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                      </font>
@@ -79,4 +79,8 @@
          </children>
       </GridPane>
    </root>
+   <stylesheets>
+      <URL value="@../css/menu.css" />
+      <URL value="@../css/global.css" />
+   </stylesheets>
 </Scene>
