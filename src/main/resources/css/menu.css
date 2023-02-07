@@ -1,3 +1,5 @@
+/* ==================== Classes ==================== */
+
 /* Gros boutons de sélection d'un menu */
 .btn-principal {
 
@@ -19,11 +21,24 @@
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 1), 60, 0, 0, 0);
 }
 
+/* Style du bouton lorsqu'il est survolé */
+.btn-principal:hover {
+    -fx-background-color: #c4c4c4;
+}
+
+/* Style du bouton lorsqu'il est pressé */
+.btn-principal:pressed {
+    -fx-background-color: #bfffa9;
+}
+
+
 /* Boutons de sélection de niveau */
 .btn-niveau {}
 
+
 /* Boutons d'accès aux scores (trophée) */
 .btn-trophee {}
+
 
 /* Boutons retour */
 .btn-retour {
@@ -31,18 +46,28 @@
     -fx-background-radius: 10;
 }
 
+
 /* Style du titre Nurikabe */
 #titre-nurikabe {
     -fx-text-fill: #363684;
     -fx-font-weight: bold;
 }
 
-/* Style des grilles de selection de niveau */
-.grille{
+
+/* Grilles de selection de niveau */
+.grille {
     -fx-background-color: #000;
     -fx-background-image: url("../Nurikabe_grille.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-size: contain,stretch;/* à régler encore mais l'idée est là */
+    -fx-background-size: contain, stretch;
+    /* à régler encore mais l'idée est là */
+}
 
+/* ==================== IDs ==================== */
+
+/* Style du titre Nurikabe */
+#titre-nurikabe {
+    -fx-text-fill: #363684;
+    -fx-font-weight: bold;
 }
