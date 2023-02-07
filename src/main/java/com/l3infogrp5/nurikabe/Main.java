@@ -14,12 +14,6 @@ import com.l3infogrp5.nurikabe.Profil.*;
 public class Main {
 
     public static void main(String[] args) {
-        // Sauvegarder sauv = new Sauvegarder();
-        // sauv.sauvegarderProfil("Juuuliennnnnnnnnnng");
-
-        Charger c = new Charger();
-        // c.RechercherSauvegarde("Juuuliennnnnnnnnnng");
-
         File jarPath = Path.repertoire_Jar;
         File currentPath = Path.repertoire_Courant;
         File savePath = Path.repertoire_Save;
@@ -31,6 +25,12 @@ public class Main {
         System.out.println("Save Path: " + (savePath != null ? savePath.toString() : "null"));
         System.out.println("Lvl Path: " + (lvlPath != null ? lvlPath.toString() : "null"));
         System.out.println("Score Path: " + (scorePath != null ? scorePath.toString() : "null"));
+
+        Sauvegarder sauv = new Sauvegarder();
+        sauv.sauvegarderProfil("Juuuliennnnnnnnnnng");
+
+        Charger c = new Charger();
+        c.RechercherSauvegarde("Juuuliennnnnnnnnnng");
 
     }
 }
