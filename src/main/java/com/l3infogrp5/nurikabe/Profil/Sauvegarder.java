@@ -4,11 +4,16 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
+import com.google.gson.Gson;
+
+
 /**
  *
  * Classe pour sauvegarder le profil d'un joueur
  */
 public class Sauvegarder {
+
+    Gson gson = new Gson();
 
     // Répertoire principal
     private File repertoire;
