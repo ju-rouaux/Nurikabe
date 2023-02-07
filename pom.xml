@@ -30,7 +30,7 @@
     <project.mainClass>com.l3infogrp5.nurikabe.Main</project.mainClass>
 
   </properties>
-  
+
 
 
   <dependencies>
@@ -53,6 +53,12 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    <!-- Import GSON pour sauvegarder scores/sauvegarde dans json  -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -67,7 +73,7 @@
             <mainClass>${project.mainClass}</mainClass>
         </configuration>
       </plugin>
-    
+
       <!-- Plugin Javadoc -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
