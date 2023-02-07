@@ -1,0 +1,38 @@
+/* Gros boutons de sélection d'un menu */
+.btn-principal {
+
+    /* OLD */
+    /* -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-width: 3; */
+
+    /* GRADIENT */
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-border-width: 4px;
+    -fx-border-color: black;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 1), 60, 0, 0, 0);
+}
+
+/* Boutons de sélection de niveau */
+.btn-niveau {}
+
+/* Boutons d'accès aux scores (trophée) */
+.btn-trophee {}
+
+/* Boutons retour */
+.btn-retour {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+}
+
+/* Style du titre Nurikabe */
+#titre-nurikabe {
+    -fx-text-fill: #363684;
+    -fx-font-weight: bold;
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <root>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="939.0" styleClass="panneau-fond">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="69.85807410620521" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="620.3655572913055" minWidth="10.0" prefWidth="620.3655572913055" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.75303275612941" minWidth="0.0" prefWidth="0.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="125.93956724803306" minHeight="0.2706499497161019" prefHeight="13.236500422166358" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="540.2116835810157" minHeight="10.0" prefHeight="540.2116835810157" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="263.93959776561127" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox>
+               <children>
+                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" text="&lt;&lt;">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" GridPane.columnIndex="1">
+               <children>
+                  <Label styleClass="titre" text="Règles">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="60.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </HBox>
+            <Slider orientation="VERTICAL" prefHeight="541.0" prefWidth="38.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </root>
+   <stylesheets>
+      <URL value="@../css/menu.css" />
+      <URL value="@../css/global.css" />
+   </stylesheets>
+</Scene>
