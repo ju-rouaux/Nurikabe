@@ -1,5 +1,9 @@
 *.class
-*.pdf
-.vscode
-/target/
 *.jar
+
+.vscode/
+target/
+apidocs/
+
+*.log
+*.pdf

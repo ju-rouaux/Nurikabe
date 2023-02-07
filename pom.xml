@@ -67,6 +67,17 @@
             <mainClass>${project.mainClass}</mainClass>
         </configuration>
       </plugin>
+    
+      <!-- Plugin Javadoc -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+          <outputDirectory>.</outputDirectory>
+          <reportOutputDirectory>.</reportOutputDirectory>
+        </configuration>
+      </plugin>
 
       <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
       <plugin>
