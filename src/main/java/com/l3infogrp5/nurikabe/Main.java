@@ -14,7 +14,10 @@ import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
  */
 public class Main extends Application {
 
-    private Main() {}
+    /**
+     * Nouvelle instance de l'application.
+     */
+    public Main() {}
 
     /**
      * Initialisation de la fenêtre de l'application.
@@ -48,6 +51,6 @@ public class Main extends Application {
      * @param args arguments de ligne de commande.
      */
     public static void main(String[] args) {
-        launch(args);
+        Application.launch(args);
     }
 }
