@@ -160,7 +160,7 @@ public class Sauvegarder {
         File endless = new File(Path.repertoire_Score.toString() + "/endless.json");
         File detente = new File(Path.repertoire_Score.toString() + "/détente.json");
 
-        if (dossierExistants(endless)) {
+        if (dossierExistants(endless.getParentFile())) {
             System.out.println("Json endless deja existant");
 
         } else {
@@ -172,7 +172,7 @@ public class Sauvegarder {
             }
         }
 
-        if (dossierExistants(detente)) {
+        if (dossierExistants(detente.getParentFile())) {
             System.out.println("Json détente deja existant");
         } else {
             try {
