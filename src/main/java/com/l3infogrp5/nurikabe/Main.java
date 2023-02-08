@@ -2,7 +2,7 @@ package com.l3infogrp5.nurikabe;
 
 import java.io.*;
 
-import com.l3infogrp5.nurikabe.Profil.*;
+import com.l3infogrp5.nurikabe.profil.*;
 
 /**
  * Jeu du Nurikabe.

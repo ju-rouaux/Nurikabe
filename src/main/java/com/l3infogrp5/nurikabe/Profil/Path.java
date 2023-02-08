@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.Profil;
+package com.l3infogrp5.nurikabe.profil;
 
 import java.io.*;
 import java.net.*;
@@ -14,6 +14,11 @@ public final class Path {
     public static final File repertoire_Lvl;
     // Répertoire des scores
     public static final File repertoire_Score;
+
+    private static final String DOSSIER_NURIKABE = "/nurikabe_data";
+    private static final String DOSSIER_SAVE = "/save";
+    private static final String DOSSIER_NIVEAUX = "/lvl";
+    private static final String DOSSIER_SCORE = "/score";
 
     static {
         try {
@@ -33,13 +38,13 @@ public final class Path {
             dernier_Indice = repertoire_Jar.toString().lastIndexOf(System.getProperty("file.separator"));
             if (dernier_Indice > 0) {
                 // Définit le répertoire courant
-                repertoire_Courant = new File(repertoire_Jar.toString().substring(0, dernier_Indice));
+                repertoire_Courant = new File(repertoire_Jar.toString().substring(0, dernier_Indice) + DOSSIER_NURIKABE);
                 // Définit le répertoire des sauvegardes
-                repertoire_Save = new File(repertoire_Courant.toString() + "/save");
+                repertoire_Save = new File(repertoire_Courant.toString() + DOSSIER_SAVE);
                 // Définit le répertoire des niveaux
-                repertoire_Lvl = new File(repertoire_Save.toString() + "/lvl");
+                repertoire_Lvl = new File(repertoire_Save.toString() + DOSSIER_NIVEAUX);
                 // Définit le répertoire des scores
-                repertoire_Score = new File(repertoire_Save.toString() + "/score");
+                repertoire_Score = new File(repertoire_Save.toString() + DOSSIER_SCORE);
             } else {
                 System.out.println("lastIndex < 0");
                 // Répertoire courant non défini
