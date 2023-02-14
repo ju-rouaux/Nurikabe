@@ -46,24 +46,6 @@
     -fx-background-radius: 10;
 }
 
-
-/* Style du titre Nurikabe */
-#titre-nurikabe {
-    -fx-text-fill: #363684;
-    -fx-font-weight: bold;
-}
-
-
-/* Grilles de selection de niveau */
-.grille {
-    -fx-background-color: #000;
-    -fx-background-image: url("../Nurikabe_grille.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-    -fx-background-size: contain, stretch;
-    /* à régler encore mais l'idée est là */
-}
-
 /* ==================== IDs ==================== */
 
 /* Style du titre Nurikabe */
