@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
@@ -20,9 +21,13 @@ public class ControllerMenuNiveau {
     private Stage stage;
     private Scene scene;
 
+    private Grille_niveau grille;
+
+
     @FXML
     private Button btn_retour;
-
+    @FXML
+    private BorderPane panneau;
     /**
      * Initialise le menu de sélection de niveau et son contrôleur.
      * 
@@ -32,6 +37,8 @@ public class ControllerMenuNiveau {
      */
     public ControllerMenuNiveau(Stage stage) throws IOException {
         this.stage = stage;
+        this.panneau= new BorderPane();
+        this.grille=new Grille_niveau();
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_niveau.fxml"));
@@ -47,6 +54,15 @@ public class ControllerMenuNiveau {
      */
     public Scene getScene() {
         return scene;
+    }
+
+    /**
+     * Initialise les éléments de l'interface après le préchargement du FXMLLoader.
+     */
+    @FXML
+    public void initialize() {
+        panneau.setCenter(this.grille.getGridPane());   //TODO charger la grille ici
+                                                                    //TODO charger les données de score
     }
 
     /*
