@@ -1,7 +1,11 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
 /**
- * Les différents états possibles d'une case interactive.
+ * Les différents états possibles d'une case.
+ * Une case intéractive peut être NOIR, BLANC ou POINT.
+ * Une case numérique sera NUMERIQUE.
+ * Il n'est pas possible d'obtenir la représentation numérique d'un état
+ * NUMERIQUE, car il est impossible de retrouver la vraie valeur de la case.
  * 
  * @author Julien Rouaux
  */
@@ -11,16 +15,17 @@ public enum Etat {
     /** Case blanche, représente une case non traitée ou une fraction d'île. */
     BLANC,
     /** Case point, représente une fraction d'île */
-    POINT;
+    POINT,
+    /** Case numérique */
+    NUMERIQUE;
 
     /**
      * Donne la représentation numérique de l'état.
-     * Cette représentation est utilisée pour traiter plus facilement les grilles de
-     * cases.
      * 
      * @return la représentation numérique de l'état.
+     * @throws IllegalArgumentException lancé lorsque la case est NUMERIQUE.
      */
-    public int toInt() {
+    public int toInt() throws IllegalArgumentException {
         switch (this) {
             case POINT:
                 return -2;
@@ -29,7 +34,7 @@ public enum Etat {
             case BLANC:
                 return 0;
             default:
-                return 0; // Ne devrait pas être atteint
+                throw new IllegalArgumentException("Impossible de convertir l'état " + this + " vers un entier.");
         }
     }
 
@@ -38,10 +43,8 @@ public enum Etat {
      * 
      * @param i représentation numérique d'un état.
      * @return l'état correspondant à la représentation numérique donnée.
-     * @throws IllegalArgumentException lancé lorsqu'aucun état n'est associé au
-     *                                  numéro.
      */
-    public static Etat fromInt(int i) throws IllegalArgumentException {
+    public static Etat fromInt(int i) {
         switch (i) {
             case -2:
                 return Etat.POINT;
@@ -50,7 +53,7 @@ public enum Etat {
             case 0:
                 return Etat.BLANC;
             default:
-                throw new IllegalArgumentException("Aucun état de case n'est associé au numéro " + i + ".");
+                return Etat.NUMERIQUE;
         }
     }
 
@@ -58,8 +61,9 @@ public enum Etat {
      * Retourne l'état suivant.
      * 
      * @return l'état suivant.
+     * @throws IllegalArgumentException lancé lorsque la case est NUMERIQUE.
      */
-    public Etat etatSuivant() {
+    public Etat etatSuivant() throws IllegalArgumentException {
         switch (this) {
             case BLANC:
                 return Etat.NOIR;
@@ -68,7 +72,7 @@ public enum Etat {
             case POINT:
                 return Etat.BLANC;
             default:
-                return Etat.BLANC; // Ne devrait pas être atteint
+                throw new IllegalArgumentException("L'état " + this + " n'a pas d'état suivant.");
         }
     }
 };

@@ -1,6 +1,6 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
-import com.l3infogrp5.utils.Position;
+import com.l3infogrp5.nurikabe.utils.Position;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -43,14 +43,59 @@ public class Grille {
 
         for (int i = 0; i < nb_lignes; i++) {
             for (int j = 0; j < nb_colonnes; j++) {
+
+                // Créer une IntegerProperty pour la case
                 this.matrice[i][j] = new SimpleIntegerProperty(matrice[i][j]);
 
-                if (matrice[i][j] > 0)
-                    case_courante = new CaseNumerique(new Position(i, j, i * nb_lignes + j), this.matrice[i][j]);
-                else
-                    case_courante = new CaseInteractive(new Position(i, j, i * nb_lignes + j), this.matrice[i][j]);
+                // Case numérique
+                if (matrice[i][j] > 0) {
+                    case_courante = new CaseNumerique(new Position(i, j, i * nb_lignes + j));
 
-                this.pane.add(case_courante, i, j);
+                    // Définition des événements de maintien
+                    // TODO ceci est une démo
+                    case_courante.setEventMaintienGauche(new EventClicMaintenu() {
+                        public void maintenu(Case c) {
+                            System.out.println("Maintien de : " + c.getPosition());
+                            for(Case[] ligne : cases)
+                                for(Case c_demo : ligne)
+                                    c_demo.surbrillance(true, 0);
+                        }
+
+                        public void relache(Case c) {
+                            System.out.println("Relachement de : " + c.getPosition());
+                            c.surbrillance(false, 0);
+                            for(Case[] ligne : cases)
+                                for(Case c_demo : ligne)
+                                    c_demo.surbrillance(false, 0);
+                        }
+                    });
+                }
+
+                // Case intéractive
+                else {
+                    case_courante = new CaseInteractive(new Position(i, j, i * nb_lignes + j));
+
+                    // Définition des événements de maintien
+                    // TODO ceci est une démo
+                    case_courante.setEventMaintienGauche(new EventClicMaintenu() {
+                        public void maintenu(Case c) {
+                            System.out.println("Maintien de : " + c.getPosition());
+                            c.surbrillance(true, 0);
+                        }
+
+                        public void relache(Case c) {
+                            System.out.println("Relachement de : " + c.getPosition());
+                            c.surbrillance(false, 0);
+                        }
+                    });
+
+                }
+
+                // Lier l'état de la case à celui de la matrice
+                case_courante.etatProperty().bindBidirectional(this.matrice[i][j]);
+
+                // Ajouter la case à l'interface
+                this.pane.add(case_courante, j, i);
                 cases[i][j] = case_courante;
             }
         }

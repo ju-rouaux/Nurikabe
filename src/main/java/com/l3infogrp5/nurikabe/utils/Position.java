@@ -1,4 +1,4 @@
-package com.l3infogrp5.utils;
+package com.l3infogrp5.nurikabe.utils;
 
 /**
  * Structure représentant des coordonnées.
