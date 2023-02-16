@@ -187,4 +187,20 @@ public class Sauvegarder {
 
     }
 
+
+    public void sauvegarderNiveau(String joueur, String mode_De_Jeu) {
+        File niveau = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + ".json");
+
+        if (dossierExistants(niveau.getParentFile())) {
+            System.out.println("Json niveau deja existant");
+        } else {
+            try {
+                Files.createFile(Paths.get(niveau.toString()));
+            } catch (IOException e) {
+                System.err.println("Erreur lors de la création du fichier" + niveau.toString());
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
