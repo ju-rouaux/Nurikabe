@@ -4,6 +4,8 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
+import com.l3infogrp5.nurikabe.utils.Path;
+
 // import com.google.gson.Gson;
 
 /**

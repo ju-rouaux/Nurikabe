@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.profil;
+package com.l3infogrp5.nurikabe.utils;
 
 import java.io.*;
 import java.net.*;

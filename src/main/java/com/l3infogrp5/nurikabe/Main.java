@@ -3,6 +3,7 @@ package com.l3infogrp5.nurikabe;
 import java.io.*;
 
 import com.l3infogrp5.nurikabe.profil.*;
+import com.l3infogrp5.nurikabe.utils.Path;
 
 /**
  * Jeu du Nurikabe.

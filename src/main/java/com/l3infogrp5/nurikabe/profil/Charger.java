@@ -2,6 +2,8 @@ package com.l3infogrp5.nurikabe.profil;
 
 import java.io.File;
 
+import com.l3infogrp5.nurikabe.utils.Path;
+
 public class Charger {
 
     public Charger() {
