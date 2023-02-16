@@ -188,8 +188,8 @@ public class Sauvegarder {
     }
 
 
-    public void sauvegarderNiveau(String joueur, String mode_De_Jeu) {
-        File niveau = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + ".json");
+    public void sauvegarderNiveau(String joueur, String mode_De_Jeu, int id_Niveau) {
+        File niveau = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + "/" + id_Niveau + ".json");
 
         if (dossierExistants(niveau.getParentFile())) {
             System.out.println("Json niveau deja existant");
