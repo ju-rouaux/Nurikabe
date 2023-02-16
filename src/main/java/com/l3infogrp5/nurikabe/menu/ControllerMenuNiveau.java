@@ -37,7 +37,6 @@ public class ControllerMenuNiveau {
      */
     public ControllerMenuNiveau(Stage stage) throws IOException {
         this.stage = stage;
-        this.panneau= new BorderPane();
         this.grille=new Grille_niveau();
 
         loader = new FXMLLoader();
@@ -62,7 +61,7 @@ public class ControllerMenuNiveau {
     @FXML
     public void initialize() {
         panneau.setCenter(this.grille.getGridPane());   //TODO charger la grille ici
-                                                                    //TODO charger les données de score
+                                                        //TODO charger les données de score
     }
 
     /*

@@ -6,7 +6,7 @@
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <BorderPane />
+      <BorderPane fx:id="panneau" />
    </root>
    <stylesheets>
       <URL value="@../css/menu.css" />

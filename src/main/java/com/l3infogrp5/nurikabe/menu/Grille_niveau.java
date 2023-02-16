@@ -28,8 +28,8 @@ public class Grille_niveau {
         /* TODO: méthode pour connaitre le nombre de niveaux */
 
         this.pane=new GridPane();
-        this.image= new ArrayList<ImageView>(20);
-        this.panneau= new ArrayList<AnchorPane>(20);
+        this.image= new ArrayList<ImageView>();
+        this.panneau= new ArrayList<AnchorPane>();
         int nb_colonnes=4;
         int nb_lignes=4;
         // TODO:
