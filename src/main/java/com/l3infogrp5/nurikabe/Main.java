@@ -2,7 +2,7 @@ package com.l3infogrp5.nurikabe;
 
 import java.io.*;
 
-import com.l3infogrp5.nurikabe.profil.*;
+import com.l3infogrp5.nurikabe.sauvegarde.*;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 /**
@@ -16,6 +16,8 @@ public class Main {
 
     public static void main(String[] args) {
         String joueur = "Juuuliennnnnnnnnnng";
+        String mode_De_Jeu = "détente";
+        int id_Niveau = 1;
         boolean debug = true;
         if (debug) {
             File jarPath = Path.repertoire_Jar;
@@ -33,10 +35,11 @@ public class Main {
 
         Sauvegarder sauv = new Sauvegarder();
         sauv.sauvegarderProfil(joueur);
-        sauv.sauvegarderScore(joueur, "détente");
+        sauv.sauvegarderScore(joueur, mode_De_Jeu);
+        sauv.sauvegarderNiveau(joueur, mode_De_Jeu, id_Niveau);
 
-        Charger c = new Charger();
-        c.RechercherSauvegarde(joueur);
+        // Charger c = new Charger();
+        // c.RechercherSauvegarde(joueur);
 
     }
 }

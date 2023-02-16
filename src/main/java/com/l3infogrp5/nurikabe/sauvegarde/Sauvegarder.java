@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.profil;
+package com.l3infogrp5.nurikabe.sauvegarde;
 
 import java.io.*;
 import java.nio.file.*;
@@ -16,7 +16,6 @@ public class Sauvegarder {
     // public class Sauvegarder implements Path {
 
     // Gson gson = new Gson();
-
 
     // // Constructeur pour initialiser le répertoire
     public Sauvegarder() {
@@ -187,20 +186,22 @@ public class Sauvegarder {
 
     }
 
-
     public void sauvegarderNiveau(String joueur, String mode_De_Jeu, int id_Niveau) {
-        File niveau = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + "/" + id_Niveau + ".json");
 
-        if (dossierExistants(niveau.getParentFile())) {
-            System.out.println("Json niveau deja existant");
+        File niveau = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + "/" + "Niveau_"
+                + id_Niveau + ".json");
+
+        if (dossierExistants(niveau)) {
+            System.out.println("Dossier du mode de jeu du joueur deja existant");
         } else {
             try {
-                Files.createFile(Paths.get(niveau.toString()));
+                Files.createDirectories(Paths.get(niveau.toString()));
             } catch (IOException e) {
                 System.err.println("Erreur lors de la création du fichier" + niveau.toString());
                 e.printStackTrace();
             }
         }
+
     }
 
 }
