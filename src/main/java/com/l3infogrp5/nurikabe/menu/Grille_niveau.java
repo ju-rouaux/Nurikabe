@@ -19,39 +19,24 @@ import javafx.scene.layout.GridPane;
 public class Grille_niveau {
 
     private GridPane pane;
-    private ArrayList<AnchorPane> panneau;
-    private ArrayList<ImageView> image;
 
 
 
-    public Grille_niveau(){
+    public Grille_niveau(int indice){
         /* TODO: méthode pour connaitre le nombre de niveaux */
 
         this.pane=new GridPane();
-        this.image= new ArrayList<ImageView>();
-        this.panneau= new ArrayList<AnchorPane>();
+        /* méthode pour que ce soit redimensionnable selon la tzaille de la fenetre */
         int nb_colonnes=4;
         int nb_lignes=4;
-        // TODO:
-        /* voir comment avoir le nombre de lignes ainsi que de colonnes */
 
         for (int i = 0; i < nb_lignes; i++) {
             for (int j = 0; j < nb_colonnes; j++) {
-                if(true){
-                    this.image.add(new ImageView(new Image("./Nurikabe_grille.png"))); // TODO: mettre l'emplacement précis 
-                    this.pane.add(this.getImage(i*nb_lignes+j),i,j);
-                    System.out.println("image ajouté avec succès");
+                Case_niveau c=new Case_niveau(indice+(i*nb_lignes)+j);
+                this.pane.add(c.getBorderPane(),i,j);
                 }
-                else if( this.getImage(i*nb_lignes +j).getImage().getUrl().equals("./Nurikabe_grille.png"/*emplacement de l'image d'un niveau commencé */)){ // TODO: mettre l'emplacement précis 
-                    this.image.add(new ImageView(new Image("./Nurikabe_grille.png"))/* emplacement de l'image */);
-                    this.pane.add(this.getImage(i*nb_lignes+j),i,j);
-                }
-                
-                //this.pane.add(this.getPanneau(i*nb_lignes+j), i, j);
-                System.out.println("panneau ajouté avec succès");
             }
         }
-    }
 
     /**
      * Retourne l'affichage de la grille.
@@ -60,18 +45,5 @@ public class Grille_niveau {
      */
     public GridPane getGridPane(){
         return this.pane;
-    }
-
-    /**
-     * Retourne une image selon son indice.
-     * 
-     * @return l'affichage de la grille.
-     */
-    private ImageView getImage(int i){
-        return this.image.get(i);
-    }
-
-    private AnchorPane getPanneau(int i){
-        return this.panneau.get(i);
     }
 }
