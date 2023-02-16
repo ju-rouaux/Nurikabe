@@ -75,7 +75,7 @@ public class ControllerNiveau {
      * Initialise les éléments de l'interface après le préchargement du FXMLLoader.
      */
     @FXML
-    public void initialize() {
+    private void initialize() {
 
         // Récupérer taille matrice
         int[][] matrice = niveau.getGrille().getMatrice(); // TODO TEMPORAIRE
@@ -117,7 +117,7 @@ public class ControllerNiveau {
      * Retourne au menu précédent, le menu principal.
      */
     @FXML
-    private void retourClique(ActionEvent event) throws Exception {
+    private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire

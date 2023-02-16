@@ -9,7 +9,7 @@ import javafx.scene.layout.Priority;
 
 /**
  * Génère une grille de {@link Case} à partir de la matrice donnée.
- * Il est possible de remplir une {@link GridPannel} de ces cases grâce à la
+ * Il est possible de remplir une {@link GridPane} de ces cases grâce à la
  * méthode {@link #remplirPanneau(GridPane)}.
  * Chaque modification faite sur la matrice sera répercutée automatiquement sur
  * l'affichage des cases, et vice-versa.
