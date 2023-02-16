@@ -28,6 +28,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
 
+        stage.setMinHeight(480);
+        stage.setMinWidth(640);
         stage.setScene(menu.getScene());
         stage.show();
     }

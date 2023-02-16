@@ -7,38 +7,36 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.GridPane;
 
 /**
- * Génère une grille à partir de la matrice donnée.
+ * Génère une grille de {@link Case} à partir de la matrice donnée.
+ * Il est possible de remplir une {@link GridPannel} de ces cases grâce à la
+ * méthode {@link #remplirPanneau(GridPane)}.
  * Chaque modification faite sur la matrice sera répercutée automatiquement sur
- * l'interface, et vice-versa.
+ * l'affichage des cases, et vice-versa.
  * 
  * @author Julien Rouaux
  */
 public class Grille {
 
-    private GridPane pane;
-    private Case[][] cases;
+    private Case[][] cases; // Cases affichées
 
-    private IntegerProperty[][] matrice;
+    private IntegerProperty[][] matrice; // Grille interne
 
     /**
      * Créer une grille.
-     * L'interface de la grille est accessible au travers de la méthode
-     * getGridPane().
+     * Utiliser {@link #remplirPanneau(GridPane)} pour afficher la grille dans le
+     * panneau donné.
      * 
      * @param matrice initialisation de la grille.
-     * @see Grille#getGridPane()
      */
     public Grille(int[][] matrice) {
-        this.pane = new GridPane();
-        this.pane.getStylesheets().add("/css/niveau.css");
 
-        this.cases = new Case[matrice.length][matrice[0].length]; // TODO à remplir
+        this.cases = new Case[matrice.length][matrice[0].length];
 
         Case case_courante;
         int nb_lignes = matrice.length;
         int nb_colonnes = matrice[0].length;
 
-        // Charger la matrice et l'interface.
+        // Charger la matrice  interne et ses cases
         this.matrice = new SimpleIntegerProperty[nb_lignes][nb_colonnes];
 
         for (int i = 0; i < nb_lignes; i++) {
@@ -56,16 +54,16 @@ public class Grille {
                     case_courante.setEventMaintienGauche(new EventClicMaintenu() {
                         public void maintenu(Case c) {
                             System.out.println("Maintien de : " + c.getPosition());
-                            for(Case[] ligne : cases)
-                                for(Case c_demo : ligne)
+                            for (Case[] ligne : cases)
+                                for (Case c_demo : ligne)
                                     c_demo.surbrillance(true, 0);
                         }
 
                         public void relache(Case c) {
                             System.out.println("Relachement de : " + c.getPosition());
                             c.surbrillance(false, 0);
-                            for(Case[] ligne : cases)
-                                for(Case c_demo : ligne)
+                            for (Case[] ligne : cases)
+                                for (Case c_demo : ligne)
                                     c_demo.surbrillance(false, 0);
                         }
                     });
@@ -94,20 +92,10 @@ public class Grille {
                 // Lier l'état de la case à celui de la matrice
                 case_courante.etatProperty().bindBidirectional(this.matrice[i][j]);
 
-                // Ajouter la case à l'interface
-                this.pane.add(case_courante, j, i);
+                // Ajouter la case à la liste des cases
                 cases[i][j] = case_courante;
             }
         }
-    }
-
-    /**
-     * Retourne l'affichage de la grille.
-     * 
-     * @return l'affichage de la grille.
-     */
-    public GridPane getGridPane() {
-        return this.pane;
     }
 
     /**
@@ -154,5 +142,17 @@ public class Grille {
                 copie[i][j] = this.matrice[i][j].get();
 
         return copie;
+    }
+
+    /**
+     * Remplir le panneau donné des cases générées par la grille, afin d'afficher
+     * cette dernière.
+     * 
+     * @param panneau le panneau qui accueille les cases.
+     */
+    public void remplirPanneau(GridPane panneau) {
+        for (int i = 0; i < this.matrice.length; i++)
+            for (int j = 0; j < this.matrice[i].length; j++)
+                panneau.add(this.cases[i][j], j, i);
     }
 }
