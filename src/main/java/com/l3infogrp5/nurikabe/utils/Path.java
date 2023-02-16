@@ -20,6 +20,8 @@ public final class Path {
     private static final String DOSSIER_NIVEAUX = "/lvl";
     private static final String DOSSIER_SCORE = "/score";
 
+    private static final String DOSSIER_GRILLES = "/grilles";
+
     static {
         try {
             // Récupère le répertoire du .jar

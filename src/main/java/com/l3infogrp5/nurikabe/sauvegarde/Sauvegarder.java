@@ -158,10 +158,10 @@ public class Sauvegarder {
     }
 
     public void sauvegarderScore(String joueur, String mode_De_Jeu) {
-        File endless = new File(Path.repertoire_Score.toString() + "/endless.json");
-        File detente = new File(Path.repertoire_Score.toString() + "/détente.json");
+        File endless = new File(Path.repertoire_Score.toString() + "/endless");
+        File detente = new File(Path.repertoire_Score.toString() + "/détente");
 
-        if (dossierExistants(endless.getParentFile())) {
+        if (dossierExistants(endless)) {
             System.out.println("Json endless deja existant");
 
         } else {
@@ -173,7 +173,7 @@ public class Sauvegarder {
             }
         }
 
-        if (dossierExistants(detente.getParentFile())) {
+        if (dossierExistants(detente)) {
             System.out.println("Json détente deja existant");
         } else {
             try {
@@ -189,15 +189,38 @@ public class Sauvegarder {
     public void sauvegarderNiveau(String joueur, String mode_De_Jeu, int id_Niveau) {
 
         File niveau = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + "/" + "Niveau_"
-                + id_Niveau + ".json");
+                + id_Niveau);
 
         if (dossierExistants(niveau)) {
-            System.out.println("Dossier du mode de jeu du joueur deja existant");
+            System.out.println("Fichier du niveau du niveau du joueur deja existant");
+
+            // TODO : Serialisation de la matrice du niveau en cours
+
         } else {
             try {
                 Files.createDirectories(Paths.get(niveau.toString()));
             } catch (IOException e) {
                 System.err.println("Erreur lors de la création du fichier" + niveau.toString());
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void sauvegarderMouvement(String joueur, String mode_De_Jeu, int id_Niveau, String mouvement) {
+        File mouvements = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + "/"
+                + "Mouvements_" + id_Niveau);
+
+        if (dossierExistants(mouvements)) {
+            System.out.println("Fichier des mouvements du niveau du joueur deja existant");
+
+            // TODO : Serialisation de l'historique des mouvements
+
+        } else {
+            try {
+                Files.createDirectories(Paths.get(mouvements.toString()));
+            } catch (IOException e) {
+                System.err.println("Erreur lors de la création du fichier" + mouvements.toString());
                 e.printStackTrace();
             }
         }

@@ -38,8 +38,8 @@ public class Main {
         sauv.sauvegarderScore(joueur, mode_De_Jeu);
         sauv.sauvegarderNiveau(joueur, mode_De_Jeu, id_Niveau);
 
-        // Charger c = new Charger();
-        // c.RechercherSauvegarde(joueur);
+        Charger c = new Charger();
+        c.RechercherSauvegarde(joueur);
 
     }
 }
