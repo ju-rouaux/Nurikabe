@@ -20,7 +20,7 @@ public class Niveau {
         // TODO vérifier s'il existe une sauvegarde
 
         // Matrice de démonstration (TODO : à supprimer)
-        int[][] matrice = new int[][] { { 0, 0, 3 }, { 0, 0, 0 }, { 0, 0, 0 } };
+        int[][] matrice = new int[][] { { 0, 0, 0, 0, 3, 0, 0}, { 0, 0, 0, 0, 0, 0, 0}, { 0, 0, 0, 0, 0, 0, 0} };
 
         this.grille = new Grille(matrice);
     }

@@ -116,7 +116,6 @@ public abstract class Case extends Button {
      */
     public Case(Position pos) {
         this.position = pos;
-        this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         this.etat = new SimpleIntegerProperty();
 
         // Style

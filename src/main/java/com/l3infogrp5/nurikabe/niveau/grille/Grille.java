@@ -5,6 +5,7 @@ import com.l3infogrp5.nurikabe.utils.Position;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 /**
  * Génère une grille de {@link Case} à partir de la matrice donnée.
@@ -152,7 +153,13 @@ public class Grille {
      */
     public void remplirPanneau(GridPane panneau) {
         for (int i = 0; i < this.matrice.length; i++)
-            for (int j = 0; j < this.matrice[i].length; j++)
+            for (int j = 0; j < this.matrice[i].length; j++) {
+                //Prendre l'espace de tout le conteneur
+                this.cases[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                //Ajouter 
                 panneau.add(this.cases[i][j], j, i);
+                GridPane.setHgrow(this.cases[i][j], Priority.ALWAYS);
+                GridPane.setVgrow(this.cases[i][j], Priority.ALWAYS);
+            }
     }
 }

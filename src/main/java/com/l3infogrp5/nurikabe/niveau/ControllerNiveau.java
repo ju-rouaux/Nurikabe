@@ -1,6 +1,7 @@
 package com.l3infogrp5.nurikabe.niveau;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +50,7 @@ public class ControllerNiveau {
     private BorderPane panneau_principal;
 
     @FXML
-    private GridPane panneau_grille;
+    private BorderPane panneau_central;
 
     /**
      * Initialise la vue du niveau.
@@ -75,16 +76,30 @@ public class ControllerNiveau {
      */
     @FXML
     public void initialize() {
-        // Lier la taille de la grille à la taille de la fenêtre
-        panneau_grille.prefWidthProperty()
-                .bind(Bindings.min(this.stage.widthProperty(), this.stage.heightProperty()).subtract(200));
-        panneau_grille.prefHeightProperty()
-                .bind(panneau_grille.prefWidthProperty());
 
-        panneau_grille.getStylesheets().add("/css/niveau.css");
+        // Récupérer taille matrice
+        int[][] matrice = niveau.getGrille().getMatrice(); // TODO TEMPORAIRE
+        int hauteur = matrice.length;
+        int largeur = matrice[0].length;
+
+        GridPane panneau_grille = new GridPane();
+
+        // Adapter la taille du panneau de la grille au panneau central
+        NumberBinding ratio = Bindings.min(
+                this.panneau_central.widthProperty().divide(largeur),
+                this.panneau_central.heightProperty().divide(hauteur));
+        panneau_grille.maxWidthProperty().bind(ratio.multiply(largeur));
+        panneau_grille.maxHeightProperty().bind(ratio.multiply(hauteur));
+
+        // Définir l'écart entre les cases
+        panneau_grille.setVgap(5);
+        panneau_grille.setHgap(5);
+
+        // Remplir le panneau grille de la grille du niveau
         this.niveau.getGrille().remplirPanneau(panneau_grille);
-    
-        panneau_principal.setCenter(panneau_grille);
+
+        // Mettre la grille dans le panneau central
+        this.panneau_central.setCenter(panneau_grille);
 
         // TODO charger les données de score
     }
