@@ -29,7 +29,7 @@ public class Grille_niveau {
         /* méthode pour que ce soit redimensionnable selon la tzaille de la fenetre */
         int nb_colonnes=4;
         int nb_lignes=4;
-
+        this.computePane();
         for (int i = 0; i < nb_lignes; i++) {
             for (int j = 0; j < nb_colonnes; j++) {
                 Case_niveau c=new Case_niveau(indice+(i*nb_lignes)+j);
@@ -45,5 +45,10 @@ public class Grille_niveau {
      */
     public GridPane getGridPane(){
         return this.pane;
+    }
+
+    private void computePane(){
+        this.pane.setPrefSize(this.pane.USE_COMPUTED_SIZE, this.pane.USE_COMPUTED_SIZE);
+        this.pane.setMaxSize(this.pane.USE_COMPUTED_SIZE, this.pane.USE_COMPUTED_SIZE);
     }
 }

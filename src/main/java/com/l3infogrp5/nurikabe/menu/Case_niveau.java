@@ -40,13 +40,17 @@ public class Case_niveau{
             this.pane.setCenter(this.image);
         }
         else if( this.image.getImage().getUrl().equals("/img/Nurikabe_grille"+(indice)+".png")){ // TODO: mettre l'emplacement précis 
-            this.box.getChildren().add(new Label("Niveau "+indice));
-            this.box.getChildren().add(new Button("2X",new ImageView(new Image("/img/trophee.png"))));
-            this.pane.setBottom(box);
             this.image=new ImageView(new Image("/img/Nurikabe_grille"+(indice)+".png"));
             this.pane.setCenter(this.image);
-            
         }
+        this.box.getChildren().add(new Label("Niveau "+indice));
+        ImageView img_trophee= new ImageView(new Image("/img/trophee.png"));
+        /* rendre les méthodes plus belles  */
+        img_trophee.setFitWidth(50);
+        img_trophee.setFitHeight(37.5);
+        //
+        this.box.getChildren().add(new Button("",img_trophee));
+        this.pane.setBottom(box);
     }
 
     /**
@@ -65,5 +69,10 @@ public class Case_niveau{
      */
     private ImageView getImage(){
         return this.image;
+    }
+
+    private void computePane(){
+        this.pane.setPrefSize(this.pane..setCenter().USE_COMPUTED_SIZE, this.pane.setCenter().USE_COMPUTED_SIZE);
+        this.pane.setMaxSize(this.pane.setCenter().USE_COMPUTED_SIZE, this.pane.setCenter().USE_COMPUTED_SIZE);
     }
 }
