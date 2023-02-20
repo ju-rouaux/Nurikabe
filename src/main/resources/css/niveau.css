@@ -1,0 +1,34 @@
+/* ==================== Classes ==================== */
+
+/* Style partagé par toutes les cases */
+.case {
+    
+}
+
+/* Case numérique */
+.case-numerique {
+    -fx-background-color: #F00FFF;
+}
+
+/* Case blanche */
+.case-blanche {
+    -fx-background-color: #FFFFFF;
+}
+
+/* Case noire */
+.case-noire {
+    -fx-background-color: #000000;
+}
+
+/* Case point */
+.case-point {
+    -fx-background-color: #8b8b8b;
+}
+
+/* Case mise en surbrillance */
+.surbrillance {
+    -fx-border-color: #FF0000;
+}
+
+
+/* ==================== IDs ==================== */

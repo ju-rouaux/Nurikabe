@@ -14,7 +14,7 @@
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="939.0" styleClass="panneau-fond">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="939.0" styleClass="panneau-principal">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="69.85807410620521" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="620.3655572913055" minWidth="10.0" prefWidth="620.3655572913055" />

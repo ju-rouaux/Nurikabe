@@ -1,24 +1,32 @@
+/* ==================== Classes ==================== */
+
 /* "Pane" principal de chacune des interfaces */
-.panneau-fond {
+.panneau-principal {
     -fx-background-color:  #BEBEBE;
 }
+
 
 /* Textes simples */
 .texte {
 
 }
 
+
 /* Textes importants */
 .texte {
     -fx-font-weight: bold;
 }
+
 
 /* Titres */
 .titre {
 
 }
 
+
 /* Sous titres */
 .sous-titre {
 
 }
+
+/* ==================== IDs ==================== */
