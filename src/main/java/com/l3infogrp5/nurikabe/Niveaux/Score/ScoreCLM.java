@@ -1,62 +1,63 @@
 package com.l3infogrp5.nurikabe.Niveaux.Score;
+
 import java.lang.Thread;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
 /**
  * Implémentation du calcul d'un score pour le mode Contre La Montre
+ * 
  * @author Antoine Couapel, Killian Rattier
  * @version 1.0
  */
 
 public class ScoreCLM extends ScoreChrono {
 
-
-    public ScoreCLM(int sec, int min) {
-        super(sec, min);
+    public ScoreCLM(int sec, int min, Text text) {
+        super(sec, min, text);
     }
 
-    
-    /* 
-    *Méthode de calcul du chrono pour le mode Contre la montre, ce chrono s'incrémente. 
+    /**
+     * Méthode de calcul pour l'incrémentation du chrono
      */
-    public void calcul(){
+    public void calcul() {
         KeyFrame kf = new KeyFrame(Duration.millis(1000), e -> {
-            
+
             sec++;
 
-            if(sec == 60){
+            if (sec == 60) {
                 min++;
                 sec = 0;
 
             }
-            
-            System.out.println(min+":"+sec);
-                
+
+            afficheChrono();
 
         });
 
-        System.out.println(min+":"+sec);
+        // System.out.println(min+":"+sec);
+        text.setText(min + ":" + sec);
         Timeline timeline = new Timeline(kf);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
 
-    /*
-     * @{inheritedDoc}
+    /**
+     * Méthode qui ajoute du temps en fonction de l'aide utilisée
+     * 
+     * @param aide valeur de la pénalité appliquée à l'utilisation d'une aide
      */
     @Override
     public void aideUtilise(int aide) {
 
-        if(sec+aide > 60){
+        if (sec + aide > 60) {
             min++;
-            sec += (aide-60);
-        }
+            sec += (aide - 60);
+        } else
+            sec += aide;
 
-    }  
+    }
 }
-
-
