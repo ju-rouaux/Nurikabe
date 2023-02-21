@@ -22,7 +22,7 @@ public class Niveau {
         // TODO vérifier s'il existe une sauvegarde
 
         // Matrice de démonstration (TODO : à supprimer)
-        int[][] matrice = new int[][] { { 0, 0, 0, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
+        int[][] matrice = new int[][] { { 0, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
         // Historique de démonstration
         this.histo = new Historique();
 
