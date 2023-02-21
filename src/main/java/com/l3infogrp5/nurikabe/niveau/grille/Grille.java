@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
 import com.l3infogrp5.nurikabe.utils.Position;
 
 import javafx.beans.property.IntegerProperty;
@@ -18,6 +19,9 @@ import javafx.scene.layout.Priority;
  */
 public class Grille {
 
+    /** Vrai si le suivi des mouvements doit être activé. */ 
+    private boolean suivre_mouvement;
+
     private int nb_lignes;
     private int nb_colonnes;
 
@@ -28,19 +32,26 @@ public class Grille {
      */
     private IntegerProperty[][] grille;
 
+    private Historique histo;
+
     /**
      * Créer une grille.
      * Utiliser {@link #remplirPanneau(GridPane)} pour afficher la grille dans le
      * panneau donné.
      * 
      * @param matrice initialisation de la grille.
+     * @param historique historique des mouvements réalisés sur cette grille.
      */
-    public Grille(int[][] matrice) {
+    public Grille(int[][] matrice, Historique historique) {
 
         Case case_courante;
 
-        nb_lignes = matrice.length;
-        nb_colonnes = matrice[0].length;
+        this.suivre_mouvement = false;
+
+        this.nb_lignes = matrice.length;
+        this.nb_colonnes = matrice[0].length;
+
+        this.histo = historique;
 
         // Charger la matrice interne et ses cases
         this.grille = new SimpleIntegerProperty[nb_lignes][nb_colonnes];
@@ -98,6 +109,16 @@ public class Grille {
 
                 // Assigner la valeur de la case
                 this.grille[i][j].set(matrice[i][j]);
+                
+                // Commencer le suivi des mouvements
+                this.suivre_mouvement = true;
+                
+                // Suivre chaque changement de la grille lorsque suivre_mouvement est vrai
+                this.grille[i][j].addListener((property, ancienEtat, nouvelEtat) -> {
+                    if (this.suivre_mouvement)
+                        this.histo.ajoutMouvement(new Mouvement(this.getCase((IntegerProperty) property).getPosition(),
+                                Etat.fromInt(ancienEtat.intValue()), Etat.fromInt(nouvelEtat.intValue())));
+                });
             }
         }
     }
@@ -111,7 +132,6 @@ public class Grille {
     private Case getCase(IntegerProperty i) {
         return ((Case) i.getBean());
     }
-
 
     /**
      * Changer l'état d'une case.
@@ -176,5 +196,33 @@ public class Grille {
                 GridPane.setHgrow(getCase(this.grille[i][j]), Priority.ALWAYS);
                 GridPane.setVgrow(getCase(this.grille[i][j]), Priority.ALWAYS);
             }
+    }
+
+    /**
+     * Annule le dernier mouvement du joueur.
+     * Cette méthode désactive le suivi des mouvements pour ne pas enregistrer des
+     * mouvements réalisés par cette dernière.
+     */
+    public void undo() {
+        if(histo.peutAnnuler()) {
+            this.suivre_mouvement = false; // Désactiver le suivi des mouvements
+            Mouvement m = histo.annuler();
+            this.grille[m.getPosition().getX()][m.getPosition().getY()].set(m.getAncienEtat().toInt());
+            this.suivre_mouvement = true; // Réactiver le suivi des mouvements
+        }
+    }
+
+    /**
+     * Rétabli le dernier mouvement du joueur.
+     * Cette méthode désactive le suivi des mouvements pour ne pas enregistrer des
+     * mouvements réalisés par cette dernière.
+     */
+    public void redo() {
+        if (histo.peutRetablir()) {
+            this.suivre_mouvement = false; // Désactiver le suivi des mouvements
+            Mouvement m = histo.retablir();
+            this.grille[m.getPosition().getX()][m.getPosition().getY()].set(m.getNouvelEtat().toInt());
+            this.suivre_mouvement = true; // Réactiver le suivi des mouvements
+        }
     }
 }

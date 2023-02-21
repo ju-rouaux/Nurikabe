@@ -102,6 +102,9 @@ public class ControllerNiveau {
         this.panneau_central.setCenter(panneau_grille);
 
         // TODO charger les données de score
+
+        // Lier les boutons Undo et Redo à l'historique
+        this.niveau.getHistorique().lierInterface(this.btn_undo.disableProperty(), this.btn_redo.disableProperty());
     }
 
     /**
@@ -121,5 +124,21 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
+    }
+
+    /**
+     * Annule le dernier mouvement de la grille.
+     */
+    @FXML
+    private void undoClique() {
+        this.niveau.getGrille().undo();
+    }
+
+    /**
+     * Rétabli le dernier mouvement de la grille.
+     */
+    @FXML
+    private void redoClique() {
+        this.niveau.getGrille().redo();
     }
 }

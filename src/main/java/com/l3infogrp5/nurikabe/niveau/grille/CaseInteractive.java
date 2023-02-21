@@ -33,9 +33,6 @@ class CaseInteractive extends Case {
             changerApparence(Etat.fromInt(ancien_etat.intValue()),
                     Etat.fromInt(nouvel_etat.intValue()));
         });
-
-        //Rafraichir l'apparence de la case
-        this.changerApparence(getEtat(), getEtat());
     }
 
     /**

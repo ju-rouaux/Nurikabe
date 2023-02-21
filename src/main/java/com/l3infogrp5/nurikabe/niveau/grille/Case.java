@@ -116,7 +116,8 @@ public abstract class Case extends Button {
      */
     public Case(Position pos) {
         this.position = pos;
-        this.etat = new SimpleIntegerProperty(this, "Case " + pos, 0);
+        // Valeur à 99 pour mettre en évidence un case qui a été mal chargée.
+        this.etat = new SimpleIntegerProperty(this, "Case " + pos, 99);
 
         // Style
         this.getStylesheets().add("/css/niveau.css");
