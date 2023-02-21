@@ -18,9 +18,15 @@ import javafx.scene.layout.Priority;
  */
 public class Grille {
 
-    private Case[][] cases; // Cases affichées
+    private int nb_lignes;
+    private int nb_colonnes;
 
-    private IntegerProperty[][] matrice; // Grille interne
+    /**
+     * Grille interne composée des Properties des cases.
+     * Pour récupérer la case liée à la Property, utiliser
+     * {@link #getCase(IntegerProperty)}
+     */
+    private IntegerProperty[][] grille;
 
     /**
      * Créer une grille.
@@ -31,20 +37,16 @@ public class Grille {
      */
     public Grille(int[][] matrice) {
 
-        this.cases = new Case[matrice.length][matrice[0].length];
-
         Case case_courante;
-        int nb_lignes = matrice.length;
-        int nb_colonnes = matrice[0].length;
 
-        // Charger la matrice  interne et ses cases
-        this.matrice = new SimpleIntegerProperty[nb_lignes][nb_colonnes];
+        nb_lignes = matrice.length;
+        nb_colonnes = matrice[0].length;
+
+        // Charger la matrice interne et ses cases
+        this.grille = new SimpleIntegerProperty[nb_lignes][nb_colonnes];
 
         for (int i = 0; i < nb_lignes; i++) {
             for (int j = 0; j < nb_colonnes; j++) {
-
-                // Créer une IntegerProperty pour la case
-                this.matrice[i][j] = new SimpleIntegerProperty(matrice[i][j]);
 
                 // Case numérique
                 if (matrice[i][j] > 0) {
@@ -55,17 +57,18 @@ public class Grille {
                     case_courante.setEventMaintienGauche(new EventClicMaintenu() {
                         public void maintenu(Case c) {
                             System.out.println("Maintien de : " + c.getPosition());
-                            for (Case[] ligne : cases)
-                                for (Case c_demo : ligne)
-                                    c_demo.surbrillance(true, 0);
+                            c.surbrillance(true, 0);
+                            for (IntegerProperty[] ligne : grille)
+                                for (IntegerProperty c_demo : ligne)
+                                    getCase(c_demo).surbrillance(true, 0);
                         }
 
                         public void relache(Case c) {
                             System.out.println("Relachement de : " + c.getPosition());
                             c.surbrillance(false, 0);
-                            for (Case[] ligne : cases)
-                                for (Case c_demo : ligne)
-                                    c_demo.surbrillance(false, 0);
+                            for (IntegerProperty[] ligne : grille)
+                                for (IntegerProperty c_demo : ligne)
+                                    getCase(c_demo).surbrillance(false, 0);
                         }
                     });
                 }
@@ -90,14 +93,25 @@ public class Grille {
 
                 }
 
-                // Lier l'état de la case à celui de la matrice
-                case_courante.etatProperty().bindBidirectional(this.matrice[i][j]);
+                // Ajouter la Property de la case à la matrice des Properties
+                this.grille[i][j] = case_courante.etatProperty();
 
-                // Ajouter la case à la liste des cases
-                cases[i][j] = case_courante;
+                // Assigner la valeur de la case
+                this.grille[i][j].set(matrice[i][j]);
             }
         }
     }
+
+    /**
+     * Retourne la case liée à la Property.
+     * 
+     * @param i la Property de la case à obtenir.
+     * @return la case liée à la Property.
+     */
+    private Case getCase(IntegerProperty i) {
+        return ((Case) i.getBean());
+    }
+
 
     /**
      * Changer l'état d'une case.
@@ -109,11 +123,11 @@ public class Grille {
      *                                  numérique.
      */
     public void set(int x, int y, Etat etat) throws IllegalArgumentException {
-        if (this.matrice[x][y].get() > 0)
+        if (this.grille[x][y].get() > 0)
             throw new IllegalArgumentException(
                     "Impossible de modifier l'état de la celulle à la position (" + x + ", " + y + ").");
 
-        this.matrice[x][y].set(etat.toInt());
+        this.grille[x][y].set(etat.toInt());
     }
 
     /**
@@ -124,7 +138,7 @@ public class Grille {
      * @return l'état ou la valeur de la case donnée.
      */
     public int get(int x, int y) {
-        return this.matrice[x][y].get();
+        return this.grille[x][y].get();
     }
 
     /**
@@ -136,11 +150,11 @@ public class Grille {
      * @see Grille#set(int, int, Etat)
      */
     public int[][] getMatrice() {
-        int[][] copie = new int[this.matrice.length][this.matrice[0].length];
+        int[][] copie = new int[this.grille.length][this.grille[0].length];
 
-        for (int i = 0; i < this.matrice.length; i++)
-            for (int j = 0; j < this.matrice[i].length; j++)
-                copie[i][j] = this.matrice[i][j].get();
+        for (int i = 0; i < this.grille.length; i++)
+            for (int j = 0; j < this.grille[i].length; j++)
+                copie[i][j] = this.grille[i][j].get();
 
         return copie;
     }
@@ -152,14 +166,15 @@ public class Grille {
      * @param panneau le panneau qui accueille les cases.
      */
     public void remplirPanneau(GridPane panneau) {
-        for (int i = 0; i < this.matrice.length; i++)
-            for (int j = 0; j < this.matrice[i].length; j++) {
-                //Prendre l'espace de tout le conteneur
-                this.cases[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                //Ajouter 
-                panneau.add(this.cases[i][j], j, i);
-                GridPane.setHgrow(this.cases[i][j], Priority.ALWAYS);
-                GridPane.setVgrow(this.cases[i][j], Priority.ALWAYS);
+        for (int i = 0; i < this.grille.length; i++)
+            for (int j = 0; j < this.grille[i].length; j++) {
+                // Prendre l'espace de tout le conteneur
+
+                getCase(this.grille[i][j]).setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                // Ajouter
+                panneau.add(getCase(this.grille[i][j]), j, i);
+                GridPane.setHgrow(getCase(this.grille[i][j]), Priority.ALWAYS);
+                GridPane.setVgrow(getCase(this.grille[i][j]), Priority.ALWAYS);
             }
     }
 }

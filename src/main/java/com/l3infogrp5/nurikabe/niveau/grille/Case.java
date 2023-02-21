@@ -116,7 +116,7 @@ public abstract class Case extends Button {
      */
     public Case(Position pos) {
         this.position = pos;
-        this.etat = new SimpleIntegerProperty();
+        this.etat = new SimpleIntegerProperty(this, "Case " + pos, 0);
 
         // Style
         this.getStylesheets().add("/css/niveau.css");
