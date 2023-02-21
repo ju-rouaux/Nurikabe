@@ -1,5 +1,7 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import java.io.Serializable;
+
 /**
  * Les différents états possibles d'une case.
  * Une case intéractive peut être NOIR, BLANC ou POINT.
@@ -9,7 +11,7 @@ package com.l3infogrp5.nurikabe.niveau.grille;
  * 
  * @author Julien Rouaux
  */
-public enum Etat {
+public enum Etat implements Serializable {
     /** Case noire, représente un fleuve. */
     NOIR,
     /** Case blanche, représente une case non traitée ou une fraction d'île. */

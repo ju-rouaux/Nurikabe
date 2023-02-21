@@ -1,11 +1,13 @@
 package com.l3infogrp5.nurikabe.utils;
 
+import java.io.Serializable;
+
 /**
  * Structure représentant des coordonnées.
  * 
  * @author Julien Rouaux
  */
-public class Position {
+public class Position implements Serializable {
     private int x, y;
     private int index;
 
@@ -48,7 +50,14 @@ public class Position {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String toString(){
         return "[Position ("+this.x+", "+this.y+") / Index "+this.index+"]";
+    }
+
+    @Override
+    public boolean equals(Object p) {
+        Position p2 = (Position) p;
+        return this.x == p2.x && this.y == p2.y && this.index == p2.index;
     }
 }
