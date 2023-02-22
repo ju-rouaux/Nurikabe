@@ -2,7 +2,6 @@ package com.l3infogrp5.nurikabe.niveau;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -102,6 +101,10 @@ public class ControllerNiveau {
         this.panneau_central.setCenter(panneau_grille);
 
         // TODO charger les données de score
+
+        // Lier les boutons Undo et Redo à l'historique
+        this.btn_undo.disableProperty().bind(this.niveau.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(this.niveau.getHistorique().peutRetablirProperty().not());
     }
 
     /**
@@ -121,5 +124,21 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
+    }
+
+    /**
+     * Annule le dernier mouvement de la grille.
+     */
+    @FXML
+    private void undoClique() {
+        this.niveau.getGrille().undo();
+    }
+
+    /**
+     * Rétabli le dernier mouvement de la grille.
+     */
+    @FXML
+    private void redoClique() {
+        this.niveau.getGrille().redo();
     }
 }

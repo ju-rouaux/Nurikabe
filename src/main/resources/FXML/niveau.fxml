@@ -16,8 +16,8 @@
          <ToolBar BorderPane.alignment="CENTER">
            <items>
              <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" text="X" textOverrun="CLIP" />
-               <Button fx:id="btn_undo" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Undo" textOverrun="CLIP" />
-               <Button fx:id="btn_redo" maxWidth="30.0" mnemonicParsing="false" prefHeight="30.0" text="Redo" textOverrun="CLIP" />
+               <Button fx:id="btn_undo" mnemonicParsing="false" onAction="#undoClique" prefHeight="30.0" prefWidth="30.0" text="Undo" textOverrun="CLIP" />
+               <Button fx:id="btn_redo" maxWidth="30.0" mnemonicParsing="false" onAction="#redoClique" prefHeight="30.0" text="Redo" textOverrun="CLIP" />
                <Region prefHeight="31.0" prefWidth="145.0" />
                <Label alignment="CENTER" prefWidth="100.0" text="00:00">
                   <font>

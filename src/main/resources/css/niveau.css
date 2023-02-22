@@ -2,17 +2,19 @@
 
 /* Style partagé par toutes les cases */
 .case {
-    
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0;
+    -fx-padding: -999; /* Retirer totalement le padding */
 }
 
 /* Case numérique */
 .case-numerique {
-    -fx-background-color: #F00FFF;
+
 }
 
 /* Case blanche */
 .case-blanche {
-    -fx-background-color: #FFFFFF;
+    
 }
 
 /* Case noire */
@@ -22,12 +24,12 @@
 
 /* Case point */
 .case-point {
-    -fx-background-color: #8b8b8b;
+
 }
 
 /* Case mise en surbrillance */
 .surbrillance {
-    -fx-border-color: #FF0000;
+    -fx-effect: innershadow(gaussian, rgb(255, 200, 0), 40, 0.1, 0, 0);
 }
 
 

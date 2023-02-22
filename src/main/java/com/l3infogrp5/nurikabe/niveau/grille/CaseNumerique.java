@@ -2,6 +2,7 @@ package com.l3infogrp5.nurikabe.niveau.grille;
 
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.beans.binding.Bindings;
 import javafx.util.converter.NumberStringConverter;
 
 /**
@@ -27,6 +28,9 @@ public class CaseNumerique extends Case {
 
         // Lier l'affichage du bouton à l'état de la case.
         this.textProperty().bindBidirectional(this.etatProperty(), new NumberStringConverter());
+
+        // Lier la taille du nombre à la taille de la case
+        this.styleProperty().bind(Bindings.concat("-fx-font-size: ", this.heightProperty().divide(2)));
     }
 
     /**
