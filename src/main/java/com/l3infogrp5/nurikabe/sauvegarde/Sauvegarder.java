@@ -156,6 +156,13 @@ public class Sauvegarder {
         }
     }
 
+    /**
+     * Créer un fichier et un dossier
+     *
+     * @param repert le répertoire
+     * @param fichier le fichier
+     * @return boolean, true si le fichier et le dossier ont été créés sinon false
+     */
     public void sauvegarderScore(String joueur, String mode_De_Jeu) {
         File endless = new File(Path.repertoire_Score.toString() + "/endless.save");
         File detente = new File(Path.repertoire_Score.toString() + "/détente.save");
@@ -172,6 +179,13 @@ public class Sauvegarder {
 
     }
 
+    /**
+     * Créer un fichier et un dossier
+     *
+     * @param repert le répertoire
+     * @param fichier le fichier
+     * @return boolean, true si le fichier et le dossier ont été créés sinon false
+     */
     public void sauvegarderNiveau(String joueur, String mode_De_Jeu, int id_Niveau) {
 
         File niveau_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
@@ -185,6 +199,14 @@ public class Sauvegarder {
         }
     }
 
+    /**
+     * Sauvegarde les mouvements
+     *
+     * @param joueur le nom du joueur/profil
+     * @param mode_De_Jeu le mode de jeu
+     * @param id_Niveau l'id du niveau
+     * @param historique l'historique des mouvements
+     */
     public static void sauvegarderMouvement(String joueur, String mode_De_Jeu, int id_Niveau, Historique historique) {
         File mouvements_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
         File mouvements_fichier = new File(mouvements_repert.toString() + "/Mouvements_" + id_Niveau);
@@ -198,6 +220,11 @@ public class Sauvegarder {
 
     }
 
+    /**
+     * Serialisation de l'historique des mouvements
+     * @param repert
+     * @param historique
+     */
     private static void serialisationMouvement(File repert, Historique historique) {
         try {
             FileOutputStream fileOut = new FileOutputStream(repert);
@@ -212,11 +239,11 @@ public class Sauvegarder {
     }
 
     /**
-     *
-     * @param dossier
-     * @param fichier
+     * Créer un fichier et un/ou plusieurs dossier(s) selon le chemin
+     * @param dossier les dossier à créer (selon le chemin)
+     * @param fichier le fichier à créer
      * @return true si creation(s) bien effectuée, false sinon
-     * @throws IOException
+     * @throws IOException si erreur lors de la création du fichier
      */
     private static boolean creerDossierFichier(File dossier, File fichier) {
         boolean statut = false;
