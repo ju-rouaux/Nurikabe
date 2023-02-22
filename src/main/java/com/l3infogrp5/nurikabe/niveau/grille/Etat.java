@@ -1,7 +1,5 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
-import java.io.Serializable;
-
 /**
  * Les différents états possibles d'une case.
  * Une case intéractive peut être NOIR, BLANC ou POINT.

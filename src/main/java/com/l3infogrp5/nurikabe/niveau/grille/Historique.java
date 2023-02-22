@@ -5,7 +5,8 @@ import java.util.Stack;
 
 import com.l3infogrp5.nurikabe.utils.Position;
 
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 
 /**
  * Classe enregistrant l'historique des mouvements du joueur.
@@ -20,6 +21,8 @@ public class Historique implements Serializable {
     /**
      * Représente un changement d'état d'une case.
      * On y trouve l'ancien état, le nouvel état, et la position de la case changée.
+     *
+     * @author Julien Rouaux
      */
     public static class Mouvement implements Serializable {
         /** Position de la case changée */
@@ -75,10 +78,10 @@ public class Historique implements Serializable {
     /** Mouvement courant (pour pouvoir redo après undo) */
     private int curseur;
 
-    /** Vrai si l'interface doit désactiver son bouton d'annulation */
-    private transient BooleanProperty desactiverAnnuler;
-    /** Vrai si l'interface doit désactiver son bouton de rétablissement */
-    private transient BooleanProperty desactiverRetablir;
+    /** Vrai si l'historique peut annuler un mouvement. */
+    private ReadOnlyBooleanWrapper peutAnnuler;
+    /** Vrai si l'historique peut rétablir un mouvement */
+    private ReadOnlyBooleanWrapper peutRetablir;
 
     /**
      * Instancie un nouvel historique vide.
@@ -86,23 +89,17 @@ public class Historique implements Serializable {
     public Historique() {
         this.pile = new Stack<Mouvement>();
         this.curseur = -1;
-        this.desactiverAnnuler = null;
-        this.desactiverRetablir = null;
+        this.peutAnnuler = new ReadOnlyBooleanWrapper(false);
+        this.peutRetablir = new ReadOnlyBooleanWrapper(false);
     }
 
     /**
-     * Lie les Properties aux méthodes correspondantes. Les valeurs des Properties
-     * sont rafraîchies à chaque insertion, annulation ou rétablissement.
-     *
-     * @param desactiverAnnuler  lie la Property à la méthode
-     *                           {@link #peutAnnuler()}.
-     * @param desactiverRetablir lie la Property à la méthode
-     *                           {@link #peutRetablir()}.
+     * A appeler à chaque changement effectué sur la pile.
+     * Actualise les états peutAnnuler et peutRetablir.
      */
-    public void lierInterface(BooleanProperty desactiverAnnuler, BooleanProperty desactiverRetablir) {
-        this.desactiverAnnuler = desactiverAnnuler;
-        this.desactiverRetablir = desactiverRetablir;
-        this.rafraichirInterface();
+    private void actualiserEtat() {
+        this.peutAnnuler.set(curseur >= 0);
+        this.peutRetablir.set(this.pile.size() - 1 > curseur);
     }
 
     /**
@@ -135,13 +132,13 @@ public class Historique implements Serializable {
 
         System.out.println("[Historique] Mouvement " + m.ancien + " vers " + m.nouveau + " : " + m.pos);
 
-        this.rafraichirInterface();
+        this.actualiserEtat();
     }
 
     /**
      * Retourne un mouvement pouvant être rétabli selon l'historique.
      * Toujous vérifier si un mouvement peut être rétabli avec
-     * {@link #peutRetablir()}
+     * {@link #peutRetablir()}.
      *
      * @return un mouvement pouvant être rétabli selon l'historique.
      * @throws IndexOutOfBoundsException lancé lorsqu'aucun mouvement n'est à
@@ -150,7 +147,7 @@ public class Historique implements Serializable {
     public Mouvement retablir() throws IndexOutOfBoundsException {
         if (this.peutRetablir()) {
             Mouvement retour = this.pile.get(++curseur);
-            this.rafraichirInterface();
+            this.actualiserEtat();
             return retour;
         }
 
@@ -158,18 +155,9 @@ public class Historique implements Serializable {
     }
 
     /**
-     * Retourne vrai si un mouvement peut être rétabli.
-     *
-     * @return vrai si un mouvement peut être rétabli.
-     */
-    public boolean peutRetablir() {
-        return this.pile.size() - 1 > curseur;
-    }
-
-    /**
      * Retourne un mouvement pouvant être annulé selon l'historique.
      * Toujous vérifier si un mouvement peut être annulé avec
-     * {@link #peutAnnuler()}
+     * {@link #peutAnnuler()}.
      *
      * @return un mouvement pouvant être annulé selon l'historique.
      * @throws IndexOutOfBoundsException lancé lorsqu'aucun mouvement n'est à
@@ -178,29 +166,10 @@ public class Historique implements Serializable {
     public Mouvement annuler() throws IndexOutOfBoundsException {
         if (this.peutAnnuler()) {
             Mouvement retour = this.pile.get(curseur--);
-            this.rafraichirInterface();
+            this.actualiserEtat();
             return retour;
         }
         throw new IndexOutOfBoundsException("Aucun mouvement n'est à annuler.");
-    }
-
-    /**
-     * Retourne vrai le dernier mouvement peut être annulé.
-     *
-     * @return vrai le dernier mouvement peut être annulé.
-     */
-    public boolean peutAnnuler() {
-        return curseur >= 0;
-    }
-
-    /**
-     * Actualise les valeurs des Properties liées à une interface si elles existent.
-     */
-    private void rafraichirInterface() {
-        if (desactiverAnnuler != null)
-            desactiverAnnuler.set(!this.peutAnnuler());
-        if (desactiverRetablir != null)
-            desactiverRetablir.set(!this.peutRetablir());
     }
 
     /**
@@ -210,5 +179,31 @@ public class Historique implements Serializable {
      */
     public boolean estVide() {
         return this.pile.empty();
+    }
+
+    /**
+     * Retourne vrai si un mouvement peut être annulé.
+     *
+     * @return vrai si un mouvement peut être annulé.
+     */
+    public boolean peutAnnuler() {
+        return this.peutAnnuler.get();
+    }
+
+    /**
+     * Retourne vrai si un mouvement peut être rétabli.
+     *
+     * @return vrai si un mouvement peut être rétabli.
+     */
+    public boolean peutRetablir() {
+        return this.peutRetablir.get();
+    }
+
+    public ReadOnlyBooleanProperty peutAnnulerProperty() {
+        return this.peutAnnuler.getReadOnlyProperty();
+    }
+
+    public ReadOnlyBooleanProperty peutRetablirProperty() {
+        return this.peutRetablir.getReadOnlyProperty();
     }
 }

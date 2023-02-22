@@ -105,7 +105,8 @@ public class ControllerNiveau {
         // TODO charger les données de score
 
         // Lier les boutons Undo et Redo à l'historique
-        this.niveau.getHistorique().lierInterface(this.btn_undo.disableProperty(), this.btn_redo.disableProperty());
+        this.btn_undo.disableProperty().bind(this.niveau.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(this.niveau.getHistorique().peutRetablirProperty().not());
     }
 
     /**
