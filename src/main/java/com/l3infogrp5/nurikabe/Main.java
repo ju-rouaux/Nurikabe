@@ -2,10 +2,12 @@ package com.l3infogrp5.nurikabe;
 
 import java.io.*;
 
+import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
 import com.l3infogrp5.nurikabe.sauvegarde.*;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Jeu du Nurikabe.
@@ -14,12 +16,17 @@ import javafx.application.Application;
  *
  * @author Julien Rouaux
  */
-public class Main {
+public class Main extends Application {
+
+    public static String joueur = "Juuuliennnnnnnnnnng";
+    public static String mode_De_Jeu = "détente";
+    public static int id_Niveau = 1;
 
     /**
      * Nouvelle instance de l'application.
      */
-    public Main() {}
+    public Main() {
+    }
 
     /**
      * Initialisation de la fenêtre de l'application.
@@ -56,11 +63,8 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        // Application.launch(args);
+        Application.launch(args);
 
-        String joueur = "Juuuliennnnnnnnnnng";
-        String mode_De_Jeu = "détente";
-        int id_Niveau = 1;
         boolean debug = true;
         if (debug) {
             File jarPath = Path.repertoire_Jar;
@@ -80,9 +84,5 @@ public class Main {
         sauv.sauvegarderProfil(joueur);
         sauv.sauvegarderScore(joueur, mode_De_Jeu);
         sauv.sauvegarderNiveau(joueur, mode_De_Jeu, id_Niveau);
-
-        Charger c = new Charger();
-        c.RechercherSauvegarde(joueur);
-
     }
 }

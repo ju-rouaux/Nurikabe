@@ -1,26 +1,25 @@
 package com.l3infogrp5.nurikabe.sauvegarde;
 
-import java.io.*;
-import java.nio.file.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
+import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.utils.Path;
-
-// import com.google.gson.Gson;
 
 /**
  *
  * Classe pour sauvegarder le profil d'un joueur
  */
 public class Sauvegarder {
-    // public class Sauvegarder implements Path {
 
-    // Gson gson = new Gson();
-
-    // // Constructeur pour initialiser le répertoire
+    // Constructeur pour initialiser le répertoire
     public Sauvegarder() {
-        System.out.println("repertoire = " + Path.repertoire_Courant.toString());
-        // repertoire = repertoire_Courant;
+
     }
 
     /**
@@ -158,73 +157,94 @@ public class Sauvegarder {
     }
 
     public void sauvegarderScore(String joueur, String mode_De_Jeu) {
-        File endless = new File(Path.repertoire_Score.toString() + "/endless");
-        File detente = new File(Path.repertoire_Score.toString() + "/détente");
+        File endless = new File(Path.repertoire_Score.toString() + "/endless.save");
+        File detente = new File(Path.repertoire_Score.toString() + "/détente.save");
 
-        if (dossierExistants(endless)) {
-            System.out.println("Json endless deja existant");
+        if (creerDossierFichier(Path.repertoire_Score, detente))
+            System.out.println("Fichier détente créé");
+        else
+            System.out.println("Erreur creation fichier detente pour les scores");
 
-        } else {
-            try {
-                Files.createFile(Paths.get(endless.toString()));
-            } catch (IOException e) {
-                System.err.println("Erreur lors de la création du fichier" + endless.toString());
-                e.printStackTrace();
-            }
-        }
-
-        if (dossierExistants(detente)) {
-            System.out.println("Json détente deja existant");
-        } else {
-            try {
-                Files.createFile(Paths.get(detente.toString()));
-            } catch (IOException e) {
-                System.err.println("Erreur lors de la création du fichier" + detente.toString());
-                e.printStackTrace();
-            }
-        }
+        if (creerDossierFichier(Path.repertoire_Score, endless))
+            System.out.println("Fichier endless créé");
+        else
+            System.out.println("Erreur creation fichier endless pour les scores");
 
     }
 
     public void sauvegarderNiveau(String joueur, String mode_De_Jeu, int id_Niveau) {
 
-        File niveau = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + "/" + "Niveau_"
-                + id_Niveau);
+        File niveau_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
+        File niveau_fichier = new File(niveau_repert.toString() + "/Niveau_" + id_Niveau);
 
-        if (dossierExistants(niveau)) {
-            System.out.println("Fichier du niveau du niveau du joueur deja existant");
-
-            // TODO : Serialisation de la matrice du niveau en cours
+        if (creerDossierFichier(niveau_repert, niveau_fichier)) {
 
         } else {
-            try {
-                Files.createDirectories(Paths.get(niveau.toString()));
-            } catch (IOException e) {
-                System.err.println("Erreur lors de la création du fichier" + niveau.toString());
-                e.printStackTrace();
-            }
+            System.out.println("Erreur lors de la création de fichier et/ou de dossier");
+            return;
+        }
+    }
+
+    public static void sauvegarderMouvement(String joueur, String mode_De_Jeu, int id_Niveau, Historique historique) {
+        File mouvements_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
+        File mouvements_fichier = new File(mouvements_repert.toString() + "/Mouvements_" + id_Niveau);
+
+        if (creerDossierFichier(mouvements_repert, mouvements_fichier)) {
+            serialisationMouvement(mouvements_fichier, historique);
+        } else {
+            System.out.println("Erreur lors de la création de fichier et/ou de dossier");
+            return;
         }
 
     }
 
-    public void sauvegarderMouvement(String joueur, String mode_De_Jeu, int id_Niveau, String mouvement) {
-        File mouvements = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + "/"
-                + "Mouvements_" + id_Niveau);
+    private static void serialisationMouvement(File repert, Historique historique) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(repert);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(historique);
+            out.close();
+            fileOut.close();
+            System.out.println("Historique des mouvements serialisé et sauvegardé dans Mouvements_<id_niveau>");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        if (dossierExistants(mouvements)) {
-            System.out.println("Fichier des mouvements du niveau du joueur deja existant");
-
-            // TODO : Serialisation de l'historique des mouvements
-
-        } else {
-            try {
-                Files.createDirectories(Paths.get(mouvements.toString()));
-            } catch (IOException e) {
-                System.err.println("Erreur lors de la création du fichier" + mouvements.toString());
-                e.printStackTrace();
+    /**
+     *
+     * @param dossier
+     * @param fichier
+     * @return true si creation(s) bien effectuée, false sinon
+     * @throws IOException
+     */
+    private static boolean creerDossierFichier(File dossier, File fichier) {
+        boolean statut = false;
+        if (!dossier.exists()) {
+            boolean result = dossier.mkdirs();
+            if (result) {
+                System.out.println("Directory created successfully.");
+                statut = true;
+            } else {
+                System.out.println("Directory creation failed.");
+                return false;
             }
         }
 
+        try {
+            if (fichier.createNewFile()) {
+                System.out.println("File created successfully.");
+                statut = true;
+            } else {
+                System.out.println("File creation failed.");
+                return false;
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            System.err.println("Erreur lors de la création du fichier" + fichier.toString());
+            e.printStackTrace();
+        }
+        return statut;
     }
 
 }

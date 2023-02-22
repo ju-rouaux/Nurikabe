@@ -12,11 +12,13 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 
+import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
+import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 
 /**
  * Contrôleur d'affichage d'un niveau
- * 
+ *
  * @author Julien Rouaux
  */
 public class ControllerNiveau {
@@ -53,7 +55,7 @@ public class ControllerNiveau {
 
     /**
      * Initialise la vue du niveau.
-     * 
+     *
      * @param stage  la fenêtre contenant la scène.
      * @param niveau le niveau à lancer.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
@@ -108,14 +110,14 @@ public class ControllerNiveau {
 
     /**
      * Retourne la scène gérée par le contrôleur.
-     * 
+     *
      * @return la scène gérée par le contrôleur.
      */
     public Scene getScene() {
         return scene;
     }
 
-    /*
+    /**
      * Retourne au menu précédent, le menu principal.
      */
     @FXML
@@ -123,6 +125,9 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
+        Sauvegarder.sauvegarderMouvement(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau.getHistorique());
+        System.out.println("Sauvegarde des mouvements en cours");
+
     }
 
     /**

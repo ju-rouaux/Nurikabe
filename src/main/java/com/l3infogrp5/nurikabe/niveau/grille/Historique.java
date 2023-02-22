@@ -12,7 +12,7 @@ import javafx.beans.property.BooleanProperty;
  * Il est possible de lier des éléments graphiques aux propriétés
  * {@link #peutAnnuler()} et {@link #peutRetablir()} grâce à la méthode
  * {@link #lierInterface(BooleanProperty, BooleanProperty)}.
- * 
+ *
  * @author Julien Rouaux
  */
 public class Historique implements Serializable {
@@ -31,8 +31,9 @@ public class Historique implements Serializable {
 
         /**
          * Nouveau mouvement immuable.
-         * @param pos position de la case changée.
-         * @param ancien ancien état de la case.
+         *
+         * @param pos     position de la case changée.
+         * @param ancien  ancien état de la case.
          * @param nouveau nouvel état de la case.
          */
         public Mouvement(Position pos, Etat ancien, Etat nouveau) {
@@ -43,6 +44,7 @@ public class Historique implements Serializable {
 
         /**
          * Retourne la position de la case changée.
+         *
          * @return la position de la case changée.
          */
         public Position getPosition() {
@@ -51,6 +53,7 @@ public class Historique implements Serializable {
 
         /**
          * Retourne l'ancien état de la case.
+         *
          * @return l'ancien état de la case.
          */
         public Etat getAncienEtat() {
@@ -59,6 +62,7 @@ public class Historique implements Serializable {
 
         /**
          * Retourne le nouvel état de la case.
+         *
          * @return le nouvel état de la case.
          */
         public Etat getNouvelEtat() {
@@ -72,9 +76,9 @@ public class Historique implements Serializable {
     private int curseur;
 
     /** Vrai si l'interface doit désactiver son bouton d'annulation */
-    private BooleanProperty desactiverAnnuler;
+    private transient BooleanProperty desactiverAnnuler;
     /** Vrai si l'interface doit désactiver son bouton de rétablissement */
-    private BooleanProperty desactiverRetablir;
+    private transient BooleanProperty desactiverRetablir;
 
     /**
      * Instancie un nouvel historique vide.
@@ -89,9 +93,11 @@ public class Historique implements Serializable {
     /**
      * Lie les Properties aux méthodes correspondantes. Les valeurs des Properties
      * sont rafraîchies à chaque insertion, annulation ou rétablissement.
-     * 
-     * @param desactiverAnnuler  lie la Property à la méthode {@link #peutAnnuler()}.
-     * @param desactiverRetablir lie la Property à la méthode {@link #peutRetablir()}.
+     *
+     * @param desactiverAnnuler  lie la Property à la méthode
+     *                           {@link #peutAnnuler()}.
+     * @param desactiverRetablir lie la Property à la méthode
+     *                           {@link #peutRetablir()}.
      */
     public void lierInterface(BooleanProperty desactiverAnnuler, BooleanProperty desactiverRetablir) {
         this.desactiverAnnuler = desactiverAnnuler;
@@ -103,7 +109,7 @@ public class Historique implements Serializable {
      * Ajoute le mouvement à l'historique. Si le mouvement est réalisé à la même
      * position que le dernier, le dernier mouvement est écrasé.
      * Tous les mouvements situés après le curseur sont oubliés.
-     * 
+     *
      * @param m le mouvement à enregistrer.
      */
     public void ajoutMouvement(Mouvement m) {
@@ -136,7 +142,7 @@ public class Historique implements Serializable {
      * Retourne un mouvement pouvant être rétabli selon l'historique.
      * Toujous vérifier si un mouvement peut être rétabli avec
      * {@link #peutRetablir()}
-     * 
+     *
      * @return un mouvement pouvant être rétabli selon l'historique.
      * @throws IndexOutOfBoundsException lancé lorsqu'aucun mouvement n'est à
      *                                   rétablir.
@@ -153,7 +159,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne vrai si un mouvement peut être rétabli.
-     * 
+     *
      * @return vrai si un mouvement peut être rétabli.
      */
     public boolean peutRetablir() {
@@ -164,7 +170,7 @@ public class Historique implements Serializable {
      * Retourne un mouvement pouvant être annulé selon l'historique.
      * Toujous vérifier si un mouvement peut être annulé avec
      * {@link #peutAnnuler()}
-     * 
+     *
      * @return un mouvement pouvant être annulé selon l'historique.
      * @throws IndexOutOfBoundsException lancé lorsqu'aucun mouvement n'est à
      *                                   annuler.
@@ -180,7 +186,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne vrai le dernier mouvement peut être annulé.
-     * 
+     *
      * @return vrai le dernier mouvement peut être annulé.
      */
     public boolean peutAnnuler() {
@@ -199,7 +205,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne vrai si l'historique est vide.
-     * 
+     *
      * @return vrai si l'historique est vide.
      */
     public boolean estVide() {
