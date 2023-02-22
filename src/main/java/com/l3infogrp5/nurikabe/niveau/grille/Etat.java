@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 
  * @author Julien Rouaux
  */
-public enum Etat implements Serializable {
+public enum Etat {
     /** Case noire, représente un fleuve. */
     NOIR,
     /** Case blanche, représente une case non traitée ou une fraction d'île. */

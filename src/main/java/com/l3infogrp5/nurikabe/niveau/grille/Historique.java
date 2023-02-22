@@ -88,7 +88,7 @@ public class Historique implements Serializable {
 
     /**
      * Lie les Properties aux méthodes correspondantes. Les valeurs des Properties
-     * sont rafraîchies à chaque intertion, annulation ou rétablissement.
+     * sont rafraîchies à chaque insertion, annulation ou rétablissement.
      * 
      * @param desactiverAnnuler  lie la Property à la méthode {@link #peutAnnuler()}.
      * @param desactiverRetablir lie la Property à la méthode {@link #peutRetablir()}.
