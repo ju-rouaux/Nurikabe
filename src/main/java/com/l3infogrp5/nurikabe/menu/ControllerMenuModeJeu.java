@@ -9,6 +9,10 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
+//TODO imports pour la démo de lancement de niveau
+import com.l3infogrp5.nurikabe.niveau.ControllerNiveau;
+import com.l3infogrp5.nurikabe.niveau.Niveau;
+
 /**
  * Contrôleur du menu de sélection de mode de jeu, et sa scène.
  * 
@@ -67,7 +71,8 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void detenteClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuNiveau(stage).getScene());
+        //stage.setScene(new ControllerMenuNiveau(stage).getScene()); //TODO rétablir le menu
+        stage.setScene(new ControllerNiveau(stage, new Niveau(0)).getScene());
     }
 
     /**
