@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import com.l3infogrp5.nurikabe.niveau.Niveau;
+import com.l3infogrp5.nurikabe.niveau.grille.Grille;
+import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 /**
@@ -301,50 +303,38 @@ public class Sauvegarder {
      * Sauvegarde le niveau
      */
 
-    // public static void sauvegarderNiveau(String joueur, String mode_De_Jeu, int id_Niveau, Niveau niveau) {
+    public static void sauvegarderNiveau(String joueur, String mode_De_Jeu, int id_Niveau, Niveau niveau) {
 
-    //     // File mouvements_repert = new File(Path.repertoire_Lvl.toString() + "/" +
-    //     // joueur + "/" + mode_De_Jeu);
-    //     // File mouvements_fichier = new File(mouvements_repert.toString() +
-    //     // "/Mouvements_" + id_Niveau);
+        // File mouvements_repert = new File(Path.repertoire_Lvl.toString() + "/" +
+        // joueur + "/" + mode_De_Jeu);
+        // File mouvements_fichier = new File(mouvements_repert.toString() +
+        // "/Mouvements_" + id_Niveau);
 
-    //     File niveau_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
-    //     File niveau_fichier = new File(niveau_repert.toString() + "/Niveau_" + id_Niveau);
+        File niveau_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
+        File niveau_fichier = new File(niveau_repert.toString() + "/Niveau_" + id_Niveau);
 
-    //     // sauvegarderGrille(joueur, mode_De_Jeu, id_Niveau, grille);
-    //     // sauvegarderMouvement(joueur, mode_De_Jeu, id_Niveau, historique);
+        // sauvegarderGrille(joueur, mode_De_Jeu, id_Niveau, grille);
+        // sauvegarderMouvement(joueur, mode_De_Jeu, id_Niveau, historique);
 
-    //     if (creerDossierFichier(niveau_repert, niveau_fichier)) {
-    //         serialiserNiveau(joueur, mode_De_Jeu, id_Niveau, niveau_fichier, niveau);
-    //     } else {
-    //         System.out.println("Erreur lors de la création de fichier et/ou de dossier");
-    //         return;
-    //     }
-    // }
+        if (creerDossierFichier(niveau_repert, niveau_fichier)) {
+            serialiserNiveau(joueur, mode_De_Jeu, id_Niveau, niveau_fichier, niveau);
+        } else {
+            System.out.println("Erreur lors de la création de fichier et/ou de dossier");
+            return;
+        }
+    }
 
-    // private static void serialiserNiveau(String joueur, String mode_De_Jeu, int id_Niveau, File fichier,
-    //         Niveau niveau) {
-    //     try {
-    //         // create a FileOutputStream and ObjectOutputStream to write the serialized
-    //         // objects to a file
-    //         FileOutputStream fileOut = new FileOutputStream(fichier);
-    //         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+    private static void serialiserNiveau(String joueur, String mode_De_Jeu, int id_Niveau, File fichier,
+            Niveau niveau) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier))) {
+            oos.writeObject((Niveau)niveau);
+            oos.writeObject((Grille)niveau.getGrille());
+            oos.writeObject((Historique)niveau.getHistorique());
 
-    //         // write the serialized Grille object to the file
-    //         out.writeObject(niveau.getGrille());
-
-    //         // write the serialized Historique object to the file
-    //         out.writeObject(niveau.getHistorique());
-
-    //         // close the output stream objects
-    //         out.close();
-    //         fileOut.close();
-
-    //         System.out.println("Serialized data is saved in niveau.ser");
-
-    //     } catch (IOException i) {
-    //         i.printStackTrace();
-    //     }
-    // }
+            System.out.println("Niveau serialisé et sauvegardé dans Niveau_<id_niveau>");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

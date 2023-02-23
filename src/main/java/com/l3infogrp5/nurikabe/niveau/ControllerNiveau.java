@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
+import com.l3infogrp5.nurikabe.sauvegarde.Charger;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 
 /**
@@ -27,7 +28,7 @@ public class ControllerNiveau {
     private Stage stage;
     private Scene scene;
 
-    private Niveau niveau;
+    private Niveau niveau_actuel;
 
     @FXML
     private Button btn_aide;
@@ -63,7 +64,40 @@ public class ControllerNiveau {
      */
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
-        this.niveau = niveau;
+        if (Charger.chargerNiveau(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau) != null) {
+            // System.out.println("Sauvegarde du niveau du joueur trouvée");
+            // System.out.println("Chargement du niveau du joueur...");
+            // this.niveau_actuel = Charger.chargerNiveau(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau);
+            // System.out.println("niveau :" + niveau_actuel);
+            // if (this.niveau_actuel != null) {
+            //     System.out.println("niveau not null");
+            //     if (this.niveau_actuel.getGrille() != null) {
+            //         System.out.println("grille not null");
+            //         System.out.println("Grille :" + this.niveau_actuel.getGrille().toString());
+            //         int [][] matrice = this.niveau_actuel.getGrille().getMatrice();
+            //         System.out.println("Matrice :");
+            //         for(int i = 0; i < matrice.length; i++) {
+            //             for(int j = 0; j < matrice[i].length; j++) {
+            //                 System.out.print(matrice[i][j] + " ");
+            //             }
+            //             System.out.println();
+            //         }
+            //         this.niveau_actuel.setGrille(this.niveau_actuel.getGrille());
+            //     }
+            //     if (this.niveau_actuel.getHistorique() != null) {
+            //         System.out.println("historique not null");
+            //         System.out.println("Historique :" + this.niveau_actuel.getHistorique().toString());
+            //         this.niveau_actuel.setHistorique(this.niveau_actuel.getHistorique());
+            //     }
+
+            // }
+            // System.out.println("Grille :" + niveau.getGrille().getMatrice());
+
+        } else {
+            System.out.println("Sauvegarde du niveau du joueur non trouvée");
+            System.out.println("Chargement du niveau par défaut...");
+            this.niveau_actuel = niveau;
+        }
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -78,8 +112,11 @@ public class ControllerNiveau {
     @FXML
     private void initialize() {
 
+        System.out.println("Grille :" + this.niveau_actuel.getGrille().getMatrice());
+        System.out.println("Initialisation de la vue du niveau...");
+
         // Récupérer taille matrice
-        int[][] matrice = niveau.getGrille().getMatrice(); // TODO TEMPORAIRE
+        int[][] matrice = niveau_actuel.getGrille().getMatrice(); // TODO TEMPORAIRE
         int hauteur = matrice.length;
         int largeur = matrice[0].length;
 
@@ -97,7 +134,7 @@ public class ControllerNiveau {
         panneau_grille.setHgap(5);
 
         // Remplir le panneau grille de la grille du niveau
-        this.niveau.getGrille().remplirPanneau(panneau_grille);
+        this.niveau_actuel.getGrille().remplirPanneau(panneau_grille);
 
         // Mettre la grille dans le panneau central
         this.panneau_central.setCenter(panneau_grille);
@@ -105,8 +142,8 @@ public class ControllerNiveau {
         // TODO charger les données de score
 
         // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.niveau.getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.niveau.getHistorique().peutRetablirProperty().not());
+        this.btn_undo.disableProperty().bind(this.niveau_actuel.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(this.niveau_actuel.getHistorique().peutRetablirProperty().not());
     }
 
     /**
@@ -126,8 +163,11 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
-        // Sauvegarder.sauvegarderMouvement(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau.getHistorique());
-        // System.out.println("Sauvegarde des mouvements en cours");
+        /**
+         * TODO : sauvegarder le niveau en cours
+         */
+        System.out.println("Sauvegarde du niveau en cours");
+        Sauvegarder.sauvegarderNiveau(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel);
 
     }
 
@@ -136,7 +176,7 @@ public class ControllerNiveau {
      */
     @FXML
     private void undoClique() {
-        this.niveau.getGrille().undo();
+        this.niveau_actuel.getGrille().undo();
     }
 
     /**
@@ -144,6 +184,7 @@ public class ControllerNiveau {
      */
     @FXML
     private void redoClique() {
-        this.niveau.getGrille().redo();
+        this.niveau_actuel.getGrille().redo();
     }
+
 }
