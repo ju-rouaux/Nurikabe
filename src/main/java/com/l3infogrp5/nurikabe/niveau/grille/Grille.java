@@ -1,5 +1,7 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import java.io.Serializable;
+
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
 import com.l3infogrp5.nurikabe.utils.Position;
 
@@ -14,12 +16,12 @@ import javafx.scene.layout.Priority;
  * méthode {@link #remplirPanneau(GridPane)}.
  * Chaque modification faite sur la matrice sera répercutée automatiquement sur
  * l'affichage des cases, et vice-versa.
- * 
+ *
  * @author Julien Rouaux
  */
-public class Grille {
+public class Grille implements Serializable{
 
-    /** Vrai si le suivi des mouvements doit être activé. */ 
+    /** Vrai si le suivi des mouvements doit être activé. */
     private boolean suivre_mouvement;
 
     private int nb_lignes;
@@ -30,7 +32,7 @@ public class Grille {
      * Pour récupérer la case liée à la Property, utiliser
      * {@link #getCase(IntegerProperty)}
      */
-    private IntegerProperty[][] grille;
+    private transient IntegerProperty[][] grille;
 
     private Historique histo;
 
@@ -38,7 +40,7 @@ public class Grille {
      * Créer une grille.
      * Utiliser {@link #remplirPanneau(GridPane)} pour afficher la grille dans le
      * panneau donné.
-     * 
+     *
      * @param matrice initialisation de la grille.
      * @param historique historique des mouvements réalisés sur cette grille.
      */
@@ -109,10 +111,10 @@ public class Grille {
 
                 // Assigner la valeur de la case
                 this.grille[i][j].set(matrice[i][j]);
-                
+
                 // Commencer le suivi des mouvements
                 this.suivre_mouvement = true;
-                
+
                 // Suivre chaque changement de la grille lorsque suivre_mouvement est vrai
                 this.grille[i][j].addListener((property, ancienEtat, nouvelEtat) -> {
                     if (this.suivre_mouvement)
@@ -125,7 +127,7 @@ public class Grille {
 
     /**
      * Retourne la case liée à la Property.
-     * 
+     *
      * @param i la Property de la case à obtenir.
      * @return la case liée à la Property.
      */
@@ -135,7 +137,7 @@ public class Grille {
 
     /**
      * Changer l'état d'une case.
-     * 
+     *
      * @param x    coordonnées en x de la case à changer.
      * @param y    coordonnées en y de la case à changer.
      * @param etat nouvel état de la case.
@@ -152,7 +154,7 @@ public class Grille {
 
     /**
      * Retourne l'état ou la valeur de la case ciblée.
-     * 
+     *
      * @param x coordonnées en x de la case à cibler.
      * @param y coordonnées en y de la case à cibler.
      * @return l'état ou la valeur de la case donnée.
@@ -165,7 +167,7 @@ public class Grille {
      * Retourne une copie de la matrice.
      * Aucune modification ne sera répercutée sur la vraie matrice.
      * Pour modifier la vraie matrice, utiliser la méthode set().
-     * 
+     *
      * @return une copie de la matrice.
      * @see Grille#set(int, int, Etat)
      */
@@ -182,7 +184,7 @@ public class Grille {
     /**
      * Remplir le panneau donné des cases générées par la grille, afin d'afficher
      * cette dernière.
-     * 
+     *
      * @param panneau le panneau qui accueille les cases.
      */
     public void remplirPanneau(GridPane panneau) {

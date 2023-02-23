@@ -79,9 +79,9 @@ public class Historique implements Serializable {
     private int curseur;
 
     /** Vrai si l'historique peut annuler un mouvement. */
-    private ReadOnlyBooleanWrapper peutAnnuler;
+    private transient ReadOnlyBooleanWrapper peutAnnuler;
     /** Vrai si l'historique peut rétablir un mouvement */
-    private ReadOnlyBooleanWrapper peutRetablir;
+    private transient ReadOnlyBooleanWrapper peutRetablir;
 
     /**
      * Instancie un nouvel historique vide.

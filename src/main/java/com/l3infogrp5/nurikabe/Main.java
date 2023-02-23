@@ -3,7 +3,6 @@ package com.l3infogrp5.nurikabe;
 import java.io.*;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
-import com.l3infogrp5.nurikabe.sauvegarde.*;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 import javafx.application.Application;
@@ -65,7 +64,7 @@ public class Main extends Application {
 
         Application.launch(args);
 
-        boolean debug = true;
+        boolean debug = false;
         if (debug) {
             File jarPath = Path.repertoire_Jar;
             File currentPath = Path.repertoire_Courant;
@@ -80,9 +79,9 @@ public class Main extends Application {
             System.out.println("Score Path: " + (scorePath != null ? scorePath.toString() : "null"));
         }
 
-        Sauvegarder sauv = new Sauvegarder();
-        sauv.sauvegarderProfil(joueur);
-        sauv.sauvegarderScore(joueur, mode_De_Jeu);
-        sauv.sauvegarderNiveau(joueur, mode_De_Jeu, id_Niveau);
+        // Sauvegarder sauv = new Sauvegarder();
+        // sauv.sauvegarderProfil(joueur);
+        // sauv.sauvegarderScore(joueur, mode_De_Jeu);
+        // sauv.sauvegarderNiveau(joueur, mode_De_Jeu, id_Niveau);
     }
 }

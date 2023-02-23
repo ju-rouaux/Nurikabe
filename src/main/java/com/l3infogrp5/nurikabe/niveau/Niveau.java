@@ -1,9 +1,7 @@
 package com.l3infogrp5.nurikabe.niveau;
 
-import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
-import com.l3infogrp5.nurikabe.sauvegarde.Charger;
 
 /**
  * Sert de gestionnaire de grille + score + mode de jeu
@@ -26,12 +24,6 @@ public class Niveau {
         // Matrice de démonstration (TODO : à supprimer)
         int[][] matrice = new int[][] { { 0, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
         // Historique de démonstration
-        System.out.println("Chargement de la sauvegarde");
-        this.histo = Charger.chargerMouvements(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau);
-        if (this.histo == null) {
-            System.out.println("Sauvegarde vide ou corrompue");
-            this.histo = new Historique();
-        }
 
         this.grille = new Grille(matrice, this.histo);
     }

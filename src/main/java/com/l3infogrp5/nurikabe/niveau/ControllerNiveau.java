@@ -126,8 +126,8 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
-        Sauvegarder.sauvegarderMouvement(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau.getHistorique());
-        System.out.println("Sauvegarde des mouvements en cours");
+        // Sauvegarder.sauvegarderMouvement(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau.getHistorique());
+        // System.out.println("Sauvegarde des mouvements en cours");
 
     }
 
