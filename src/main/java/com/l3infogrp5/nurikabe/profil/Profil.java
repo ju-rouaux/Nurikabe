@@ -8,28 +8,61 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import com.l3infogrp5.nurikabe.utils.Path;
+import com.l3infogrp5.nurikabe.niveau.Niveau;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 
+/**
+ * Classe représentant un profil de joueur.
+ *
+ * @author Guillaume Richard
+ */
 public class Profil {
 
+    /* Le nom du joueur */
     private String joueur;
+    /* Le mode de jeu */
     private String modeDeJeu;
+    /* L'identifiant du niveau représenté par un numero */
     private int idNiveau;
-    public Historique histo;
-    public Grille grille;
+    /* L'historique des mouvements */
+    private Historique histo;
+    /* La grille */
+    private Grille grille;
 
-    public Profil(String joueur, String modeDeJeu, int idNiveau) {
+    /**
+     * Création d'un profil.
+     *
+     * @param joueur    le nom du joueur
+     * @param modeDeJeu le mode de jeu
+     * @param idNiveau  l'id du niveau
+     * @throws IOException
+     */
+    public Profil(String joueur, String modeDeJeu, int idNiveau) throws IOException {
         this.joueur = joueur;
         this.modeDeJeu = modeDeJeu;
         this.idNiveau = idNiveau;
+
+        Sauvegarder.creerDossiers(joueur);
+        StockageNiveau.creationNiveauDetente();
     }
 
-    public void chargerNiveau(int idNiveau) {
+    /**
+     * Chargement d'un niveau, si une sauvegarde existe alors on la charge sinon on
+     * charge le niveau par défaut.
+     *
+     * @param idNiveau l'id du niveau
+     * @return le niveau chargé
+     */
+    public Niveau chargerNiveau(int idNiveau) {
 
-        int[][] solution = new int[][] { { -1, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
+        Niveau temp = null;
+        temp = new Niveau(this.idNiveau);
+
+        int[][] solution = new int[][] { { -1, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 },
+                { 0, -2, 0, 0, 0, 0, 0 } };
 
         // charger le niveau correspondant au profil
 
@@ -47,6 +80,10 @@ public class Profil {
             this.histo.initTransientBoolean();
             this.histo.actualiserEtat();
         }
+        System.out.println(histo.peutRetablirProperty());
+        System.out.println(histo.peutAnnulerProperty());
+
+        temp.setHistorique(this.histo);
 
         /*
          * Chargement de la grille du niveau
@@ -54,15 +91,23 @@ public class Profil {
         if (chargerMatrice(this.joueur, this.modeDeJeu, this.idNiveau) == null) {
             System.out.println("Aucune sauvegarde de la grille du niveau trouvée");
             System.out.println("Chargement de la grille du niveau par défaut...");
-            this.grille = new Grille(StockageNiveau.chargerGrille(this.idNiveau, this.modeDeJeu),solution, this.histo);
+            this.grille = new Grille(StockageNiveau.chargerGrille(this.idNiveau, this.modeDeJeu), solution, this.histo);
         } else {
-            this.grille = new Grille(chargerMatrice(this.joueur, this.modeDeJeu, this.idNiveau),solution, this.histo);
+            this.grille = new Grille(chargerMatrice(this.joueur, this.modeDeJeu, this.idNiveau), solution, this.histo);
             System.out.println("Sauvegarde de la grille du niveau trouvée");
             System.out.println("Chargement de la grille du niveau sauvegardée...");
         }
+        temp.setGrille(this.grille);
+
+        return temp;
 
     }
 
+    /**
+     * Sauvegarde le niveau deja commencé
+     * @param matrice la matrice du niveau
+     * @param historique l'historique des mouvements
+     */
     public void sauvegarderNiveau(int[][] matrice, Historique historique) {
         // sauvegarder le niveau correspondant au profil
         System.out.println("Sauvegarde du niveau en cours");
@@ -246,17 +291,31 @@ public class Profil {
         }
     }
 
+    /*
+     * Getters
+     */
+    /**
+     * getter pour le nom du joueur du profil
+     * @return le nom du joueur
+     */
     public String getJoueur() {
         return joueur;
     }
 
-    public int getIdNiveau(){
+    /**
+     * getter pour l'identifiant du niveau
+     * @return l'historique des mouvements
+     */
+    public int getIdNiveau() {
         return idNiveau;
     }
 
-    public String getModeDeJeu(){
+    /**
+     * getter pour l'id du niveau
+     * @return l'id du niveau
+     */
+    public String getModeDeJeu() {
         return modeDeJeu;
     }
-
 
 }

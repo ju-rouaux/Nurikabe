@@ -51,4 +51,18 @@ public class Niveau {
     public void setHistorique(Historique historique) {
         this.histo = historique;
     }
+
+
+    /**
+     * Définit la grille du niveau.
+     *
+     * @param grille la grille du niveau.
+     * @return la grille du niveau.
+     */
+    public Grille setGrille(Grille grille) {
+        this.grille = grille;
+        return this.grille;
+    }
+
+
 }

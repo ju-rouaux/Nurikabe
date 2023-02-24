@@ -3,9 +3,6 @@ package com.l3infogrp5.nurikabe;
 import java.io.*;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
-import com.l3infogrp5.nurikabe.profil.Profil;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
-import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 import javafx.application.Application;
@@ -20,8 +17,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    public static Profil joueur;
+    // public static Profil joueur;
 
+    /*
+     * Pas encore utilisé mais l'idée est là
+     */
     public enum mode_De_Jeu {
         DETENTE("detente"),
         CONTRE_LA_MONTRE("Contre la montre"),
@@ -45,9 +45,6 @@ public class Main extends Application {
      * @throws IOException
      */
     public Main() throws IOException {
-        joueur = new Profil("Julieng", "detente", 0);
-        Sauvegarder.creerDossiers(joueur.getJoueur());
-        StockageNiveau.creationNiveauDetente();
 
     }
 
@@ -89,16 +86,6 @@ public class Main extends Application {
 
         Application.launch(args);
 
-        Sauvegarder.creerDossiers(joueur.getJoueur());
-        StockageNiveau.creationNiveauDetente();
-        int[][] matrice = StockageNiveau.chargerGrille(joueur.getIdNiveau(), joueur.getModeDeJeu());
-
-        for (int i = 0; i < matrice.length; i++) {
-            for (int j = 0; j < matrice[0].length; j++) {
-                System.out.print(matrice[i][j] + " ");
-            }
-            System.out.println();
-        }
         boolean debug = false;
         if (debug) {
             File jarPath = Path.repertoire_Jar;

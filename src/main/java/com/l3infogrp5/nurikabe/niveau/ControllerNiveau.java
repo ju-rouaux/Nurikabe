@@ -64,13 +64,11 @@ public class ControllerNiveau {
      */
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
-        this.niveau = niveau;
+        // this.niveau = niveau;
 
         joueur = new Profil("Julieng", "detente", 0);
 
-        joueur.chargerNiveau(joueur.getIdNiveau());
-        this.niveau.setHistorique(Profil.chargerHistorique(joueur.getJoueur(), joueur.getModeDeJeu(), joueur.getIdNiveau()));
-
+        this.niveau = joueur.chargerNiveau(joueur.getIdNiveau());
 
 
         loader = new FXMLLoader();
