@@ -1,5 +1,7 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import java.util.ArrayList;
+
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
 import com.l3infogrp5.nurikabe.utils.Position;
 
@@ -16,10 +18,15 @@ import javafx.scene.layout.Priority;
  * Génère une grille de {@link Case} à partir de la matrice donnée.
  * Chaque modification faite sur la matrice sera répercutée automatiquement sur
  * l'affichage des cases, et vice-versa.
+ * Pour afficher la grille, utiliser {@link #getPanneau()}.
+ * Le panneau renvoyé contient la grille. Il est conseillé de ne pas modifier ce
+ * panneau.
+ * Il est possible d'ajouter du code qui sera exécuté lorsque la grille est
+ * complétée, grâce à la méthode {@link #addOnVictoire(Runnable)}.
  *
  * @author Julien Rouaux
  */
-public class Grille implements Serializable {
+public class Grille {
 
     /** Vrai si le suivi des mouvements doit être activé. */
     private boolean suivre_mouvement;
@@ -33,15 +40,20 @@ public class Grille implements Serializable {
      * {@link #getCase(IntegerProperty)}
      */
     private IntegerProperty[][] grille;
+    private int[][] solution;
+
+    private ArrayList<Runnable> onVictoire;
+
+    private BorderPane panneau; // Panneau contenant l'affichage de la grille
 
     private Historique histo;
 
     /**
      * Créer une grille.
-     * Utiliser {@link #remplirPanneau(GridPane)} pour afficher la grille dans le
-     * panneau donné.
+     * Utiliser {@link #getPanneau()} pour récupérer l'affichage de la grille
      *
-     * @param matrice initialisation de la grille.
+     * @param matrice    initialisation de la grille.
+     * @param solution   l'état final attendu de la grille qui marquera la victoire.
      * @param historique historique des mouvements réalisés sur cette grille.
      */
     public Grille(int[][] matrice, int[][] solution, Historique historique) {
@@ -128,7 +140,7 @@ public class Grille implements Serializable {
                 // Commencer le suivi des mouvements
                 this.suivre_mouvement = true;
 
-                // Suivre chaque changement de la grille lorsque suivre_mouvement est vrai
+                // A chaque modification effectuée sur la grille
                 this.grille[i][j].addListener((property, ancienEtat, nouvelEtat) -> {
                     // Ajouter la modification à l'historique si cela est autorisé.
                     if (this.suivre_mouvement)
@@ -216,17 +228,11 @@ public class Grille implements Serializable {
         return copie;
     }
 
-    public void setMatrice(int mat [][]){
-        for (int i = 0; i < this.grille.length; i++)
-            for (int j = 0; j < this.grille[i].length; j++)
-                this.grille[i][j].set(mat[i][j]);
-    }
-
     /**
-     * Remplir le panneau donné des cases générées par la grille, afin d'afficher
-     * cette dernière.
+     * Retourne le panneau contenant la grille.
+     * Il est conseillé de ne pas modifier ce panneau.
      *
-     * @param panneau le panneau qui accueille les cases.
+     * @return le paneau contenant la grille.
      */
     public Pane getPanneau() {
         return this.panneau;
@@ -258,5 +264,34 @@ public class Grille implements Serializable {
             this.grille[m.getPosition().getX()][m.getPosition().getY()].set(m.getNouvelEtat().toInt());
             this.suivre_mouvement = true; // Réactiver le suivi des mouvements
         }
+    }
+
+    /**
+     * Active ou désactive l'intéraction du joueur avec les cases.
+     *
+     * @param b vrai si les cases doivent être activées, faux si désactivées.
+     */
+    public void setActivation(boolean b) {
+        for (int i = 0; i < this.grille.length; i++)
+            for (int j = 0; j < this.grille[i].length; j++)
+                this.getCase(this.grille[i][j]).setDisable(!b);
+    }
+
+    /**
+     * Ajouter un événement à exécuter lorsque la grille est complétée.
+     *
+     * @param r événement à exécuter lorsque la grille est complétée.
+     */
+    public void addOnVictoire(Runnable r) {
+        this.onVictoire.add(r);
+    }
+
+    /**
+     * Retirer un événement exécuté lorsque la grille est complétée.
+     *
+     * @param r l'événement à retirer.
+     */
+    public void removenVictoire(Runnable r) {
+        this.onVictoire.remove(r);
     }
 }

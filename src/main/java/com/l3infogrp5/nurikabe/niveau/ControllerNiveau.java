@@ -11,9 +11,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -26,7 +24,7 @@ public class ControllerNiveau {
     private Stage stage;
     private Scene scene;
 
-    private Niveau niveau_actuel;
+    private Niveau niveau;
 
     @FXML
     private Button btn_aide;
@@ -59,8 +57,7 @@ public class ControllerNiveau {
      */
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
-
-        this.niveau_actuel = niveau;
+        this.niveau = niveau;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -83,8 +80,8 @@ public class ControllerNiveau {
         // TODO charger les données de score
 
         // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.niveau_actuel.getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.niveau_actuel.getHistorique().peutRetablirProperty().not());
+        this.btn_undo.disableProperty().bind(this.niveau.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(this.niveau.getHistorique().peutRetablirProperty().not());
     }
 
     /**
@@ -96,7 +93,7 @@ public class ControllerNiveau {
         return scene;
     }
 
-    /**
+    /*
      * Retourne au menu précédent, le menu principal.
      */
     @FXML
@@ -104,13 +101,6 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
-        /**
-         * TODO : sauvegarder le niveau en cours
-         */
-        System.out.println("Sauvegarde du niveau en cours");
-        Sauvegarder.sauvegardeMatrice(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getGrille().getMatrice());
-        Sauvegarder.sauvegarderHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getHistorique());
-
     }
 
     /**
@@ -118,7 +108,7 @@ public class ControllerNiveau {
      */
     @FXML
     private void undoClique() {
-        this.niveau_actuel.getGrille().undo();
+        this.niveau.getGrille().undo();
     }
 
     /**
@@ -126,7 +116,6 @@ public class ControllerNiveau {
      */
     @FXML
     private void redoClique() {
-        this.niveau_actuel.getGrille().redo();
+        this.niveau.getGrille().redo();
     }
-
 }
