@@ -123,10 +123,6 @@ public class Grille implements Serializable {
                 });
             }
         }
-
-        System.out.println("Display grille property");
-        displayGrilleProperty();
-        System.out.println("Fin display grille property");
     }
 
     /**
@@ -238,6 +234,10 @@ public class Grille implements Serializable {
         }
     }
 
+    /**
+     * Initialise la variable IntegerProperty[][] grille apres la deserialisation.
+     * @param matrice la matrice de la grille.
+     */
     public void initTransientGrille(int [][] matrice) {
         grille = new SimpleIntegerProperty[nb_lignes][nb_colonnes];
         Case case_courante;
@@ -305,15 +305,6 @@ public class Grille implements Serializable {
                                 Etat.fromInt(ancienEtat.intValue()), Etat.fromInt(nouvelEtat.intValue())));
                 });
             }
-        }
-    }
-
-    public void displayGrilleProperty() {
-        for (int i = 0; i < nb_lignes; i++) {
-            for (int j = 0; j < nb_colonnes; j++) {
-                System.out.print(this.grille[i][j].get() + " ");
-            }
-            System.out.println();
         }
     }
 

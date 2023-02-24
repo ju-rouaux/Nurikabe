@@ -16,7 +16,6 @@ import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.sauvegarde.Charger;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
-import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -66,7 +65,6 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
 
-        System.out.println("Coucou ici le controller niveau");
         /**
          * Chargement de l'historique des mouvements du joueur
          */
@@ -76,8 +74,7 @@ public class ControllerNiveau {
             System.out.println("Chargement de l'historique du joueur sauvegardé...");
             this.niveau_actuel.setHistorique(Charger.chargerHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau));
         } else {
-            System.out.println("\nSauvegarde de l'historique du joueur trouvée");
-            System.out.println("Chargement du niveau par défaut...");
+            System.out.println("<ControllerNiveau.ControllerNiveau:Historique> Chargement du niveau par défaut...");
             this.niveau_actuel.setHistorique(niveau.getHistorique());
         }
 
@@ -89,9 +86,7 @@ public class ControllerNiveau {
             System.out.println("Chargement de la grille sauvegardée...");
             this.niveau_actuel.setGrille(Charger.chargerGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau));
         } else {
-            System.out.println("\nSauvegarde de la grille du joueur non trouvée");
-            System.out.println("Chargement de la grille par défaut...");
-            int matrice[][] = StockageNiveau.chargerGrille(Main.id_Niveau, Main.mode_De_Jeu);
+            System.out.println("<ControllerNiveau.ControllerNiveau:Grille> Chargement du niveau par défaut...");
         }
 
         loader = new FXMLLoader();

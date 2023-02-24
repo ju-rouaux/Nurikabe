@@ -15,9 +15,12 @@ public class Charger {
     }
 
     /**
-     * Charge un niveau à partir d'un fichier.
+     * Charge l'historique des mouvements du joueur
+     * @param joueur le nom du joueur
+     * @param mode_De_Jeu le mode de jeu
+     * @param id_Niveau l'id du niveau
+     * @return l'historique des mouvements
      */
-
     public static Historique chargerHistorique(String joueur, String mode_De_Jeu, int id_Niveau) {
         File mouvements = new File(
                 Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu + "/Mouvements_" + id_Niveau);
@@ -32,6 +35,12 @@ public class Charger {
         return null;
     }
 
+    /**
+     * Deserialise l'historique des mouvements a partir d'un fichier.
+     *
+     * @param fichier le fichier serialisé des mouvements
+     * @return l'historique des mouvements
+     */
     private static Historique deserialisationHistorique(File fichier) {
         Historique historique_temp = null;
         try {
@@ -49,6 +58,14 @@ public class Charger {
         return historique_temp;
     }
 
+    /**
+     * Charge la grille à partir du fichier.
+     *
+     * @param joueur      le nom du joueur
+     * @param mode_De_Jeu le mode de jeu
+     * @param id_Niveau   l'id du niveau
+     * @return la grille
+     */
     public static Grille chargerGrille(String joueur, String mode_De_Jeu, int id_Niveau) {
         File grille_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
         File grille_fichier = new File(grille_repert.toString() + "/Grille_" + id_Niveau);
@@ -64,6 +81,12 @@ public class Charger {
         return null;
     }
 
+    /**
+     * Deserialise la grille à partir du fichier.
+     *
+     * @param fichier le fichier serialisé de la grille
+     * @return la grille
+     */
     private static Grille deserialisationGrille(File fichier) {
         Grille grille = null;
         int[][] matrice = null;
@@ -83,86 +106,5 @@ public class Charger {
 
         return grille;
     }
-
-    // public static Niveau chargerNiveau(String joueur, String mode_De_Jeu, int
-    // id_Niveau) {
-    // File niveau = new File(
-    // Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu +
-    // "/Niveau_" + id_Niveau);
-    // if (niveau.exists() && niveau.length() > 0) {
-    // System.out.println("La sauvegarde du niveau du joueur existe !");
-    // System.out.println("Chargement du niveau du joueur...");
-    // return deserialisationNiveau(niveau);
-    // } else {
-    // System.out.println("La sauvegarde du niveau du joueur n'existe pas !");
-    // }
-    // return null;
-    // }
-
-    // private static Niveau deserialisationNiveau(File fichier){
-    // try (ObjectInputStream ois = new ObjectInputStream(new
-    // FileInputStream(fichier))) {
-    // Niveau niveau = (Niveau) ois.readObject();
-    // Grille grille = (Grille) ois.readObject();
-    // Historique historique = (Historique) ois.readObject();
-    // niveau.setGrille(grille);
-    // niveau.setHistorique(historique);
-
-    // System.out.println("Grille :");
-    // int matrice [][] = niveau.getGrille().getMatrice();
-    // for (int i = 0; i < matrice.length; i++) {
-    // for (int j = 0; j < matrice[i].length; j++) {
-    // System.out.print(matrice[i][j] + " ");
-    // }
-    // System.out.println();
-    // }
-    // return niveau;
-    // } catch (IOException | ClassNotFoundException e) {
-    // e.printStackTrace();
-    // }
-    // return null;
-    // }
-
-    // private static Niveau deserialisationNiveau(File fichier) {
-    // try (ObjectInputStream ois = new ObjectInputStream(new
-    // FileInputStream(fichier))) {
-    // Niveau niveau = (Niveau) ois.readObject();
-    // Grille grille = (Grille) ois.readObject();
-    // Historique historique = (Historique) ois.readObject();
-    // niveau.setGrille(grille);
-    // niveau.setHistorique(historique);
-    // System.out.println("Chargement du niveau du joueur...");
-    // System.out.println("niveau :" + niveau);
-    // if (niveau != null) {
-    // System.out.println("niveau not null");
-    // if (niveau.getGrille() != null) {
-    // System.out.println("grille not null");
-    // System.out.println("Grille :" + niveau.getGrille().toString());
-    // int [][] matrice = niveau.getGrille().getMatrice();
-    // System.out.println("Matrice :");
-    // for(int i = 0; i < matrice.length; i++) {
-    // for(int j = 0; j < matrice[i].length; j++) {
-    // System.out.print(matrice[i][j] + " ");
-    // }
-    // System.out.println();
-    // }
-    // // niveau.setGrille(niveau.getGrille());
-    // }
-    // if (niveau.getHistorique() != null) {
-    // System.out.println("historique not null");
-    // System.out.println("Historique :" + niveau.getHistorique().toString());
-    // // niveau.setHistorique(niveau.getHistorique());
-    // }
-
-    // }else{
-    // System.out.println("niveau null");
-    // }
-    // System.out.println("Chargement du niveau du joueur terminé !");
-    // return niveau;
-    // } catch (IOException | ClassNotFoundException e) {
-    // e.printStackTrace();
-    // }
-    // return null;
-    // }
 
 }

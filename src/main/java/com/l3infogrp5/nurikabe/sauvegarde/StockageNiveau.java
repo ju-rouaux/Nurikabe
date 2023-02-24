@@ -60,10 +60,16 @@ public class StockageNiveau {
         }
     }
 
+    /**
+     * Crée les grilles pour le mode contre la montre et les stocke dans un fichier texte.
+     */
     public static void creationNiveauCLM(){
         //TODO
     }
 
+    /**
+     * Crée les grilles pour le mode sans fin et les stocke dans un fichier texte.
+     */
     public static void creationNiveauSansFin(){
         //TODO : a voir, peut etre niveau aleatoire des modes detente et CLM
     }

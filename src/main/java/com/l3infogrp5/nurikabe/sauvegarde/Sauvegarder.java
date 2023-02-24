@@ -226,6 +226,15 @@ public class Sauvegarder {
 
     }
 
+    /**
+     * Sauvegarde l'historique des mouvements
+     *
+     * @param joueur      le nom du joueur/profil
+     * @param mode_De_Jeu le mode de jeu
+     * @param id_Niveau   l'id du niveau
+     * @param historique  l'historique des mouvements
+     * @return l'historique des mouvements
+     */
     public static Historique sauvegarderHistorique(String joueur, String mode_De_Jeu, int id_Niveau,
             Historique historique) {
         File mouvements_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
@@ -244,8 +253,8 @@ public class Sauvegarder {
     /**
      * Serialisation de l'historique des mouvements
      *
-     * @param repert
-     * @param historique
+     * @param repert     le répertoire
+     * @param historique l'historique des mouvements
      */
     private static void serialisationHistorique(File repert, Historique historique) {
         try {
@@ -264,11 +273,11 @@ public class Sauvegarder {
     /**
      * Sauvegarde la grille
      *
-     * @param joueur
-     * @param mode_De_Jeu
-     * @param id_Niveau
-     * @param grille
-     * @return
+     * @param joueur      le nom du joueur/profil
+     * @param mode_De_Jeu le mode de jeu
+     * @param id_Niveau   l'id du niveau
+     * @param grille      la grille
+     * @return la grille
      */
     public static Grille sauvegarderGrille(String joueur, String mode_De_Jeu, int id_Niveau, Grille grille) {
         File grille_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
@@ -286,8 +295,8 @@ public class Sauvegarder {
     /**
      * Serialisation de la grille
      *
-     * @param repert
-     * @param grille
+     * @param repert le répertoire
+     * @param grille la grille
      */
     private static void serialisationGrille(File repert, Grille grille) {
         try {
