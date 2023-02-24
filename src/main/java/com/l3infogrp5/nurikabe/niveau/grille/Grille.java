@@ -1,19 +1,19 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
-import java.io.Serializable;
-
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 
 /**
  * Génère une grille de {@link Case} à partir de la matrice donnée.
- * Il est possible de remplir une {@link GridPane} de ces cases grâce à la
- * méthode {@link #remplirPanneau(GridPane)}.
  * Chaque modification faite sur la matrice sera répercutée automatiquement sur
  * l'affichage des cases, et vice-versa.
  *
@@ -32,7 +32,7 @@ public class Grille implements Serializable {
      * Pour récupérer la case liée à la Property, utiliser
      * {@link #getCase(IntegerProperty)}
      */
-    private transient IntegerProperty[][] grille;
+    private IntegerProperty[][] grille;
 
     private Historique histo;
 
@@ -41,19 +41,40 @@ public class Grille implements Serializable {
      * Utiliser {@link #remplirPanneau(GridPane)} pour afficher la grille dans le
      * panneau donné.
      *
-     * @param matrice    initialisation de la grille.
+     * @param matrice initialisation de la grille.
      * @param historique historique des mouvements réalisés sur cette grille.
      */
-    public Grille(int[][] matrice, Historique historique) {
+    public Grille(int[][] matrice, int[][] solution, Historique historique) {
 
         Case case_courante;
 
+        // Variables d'instance
         this.suivre_mouvement = false;
-
         this.nb_lignes = matrice.length;
         this.nb_colonnes = matrice[0].length;
-
+        this.solution = solution;
         this.histo = historique;
+        this.onVictoire = new ArrayList<>();
+
+        // Créer une GridPane qui contient les cases
+        GridPane panneau_grille = new GridPane();
+
+        // Adapter la taille de la GridPane à son panneau parent.
+        // Cela permet de concerver le ratio hauteur-largeur en occupant un maximum
+        // d'espace au sein du parent.
+        this.panneau = new BorderPane();
+        NumberBinding ratio = Bindings.min(
+                this.panneau.widthProperty().divide(nb_colonnes),
+                this.panneau.heightProperty().divide(nb_lignes));
+        panneau_grille.maxWidthProperty().bind(ratio.multiply(nb_colonnes));
+        panneau_grille.maxHeightProperty().bind(ratio.multiply(nb_lignes));
+
+        // Définir l'écart entre les cases
+        panneau_grille.setVgap(5);
+        panneau_grille.setHgap(5);
+
+        // Mettre la grille dans le panneau, les cases sont ajoutées un peu plus loin
+        this.panneau.setCenter(panneau_grille);
 
         // Charger la matrice interne et ses cases
         this.grille = new SimpleIntegerProperty[nb_lignes][nb_colonnes];
@@ -70,18 +91,10 @@ public class Grille implements Serializable {
                     case_courante.setEventMaintienGauche(new EventClicMaintenu() {
                         public void maintenu(Case c) {
                             System.out.println("Maintien de : " + c.getPosition());
-                            c.surbrillance(true, 0);
-                            for (IntegerProperty[] ligne : grille)
-                                for (IntegerProperty c_demo : ligne)
-                                    getCase(c_demo).surbrillance(true, 0);
                         }
 
                         public void relache(Case c) {
                             System.out.println("Relachement de : " + c.getPosition());
-                            c.surbrillance(false, 0);
-                            for (IntegerProperty[] ligne : grille)
-                                for (IntegerProperty c_demo : ligne)
-                                    getCase(c_demo).surbrillance(false, 0);
                         }
                     });
                 }
@@ -117,10 +130,32 @@ public class Grille implements Serializable {
 
                 // Suivre chaque changement de la grille lorsque suivre_mouvement est vrai
                 this.grille[i][j].addListener((property, ancienEtat, nouvelEtat) -> {
+                    // Ajouter la modification à l'historique si cela est autorisé.
                     if (this.suivre_mouvement)
                         this.histo.ajoutMouvement(new Mouvement(this.getCase((IntegerProperty) property).getPosition(),
                                 Etat.fromInt(ancienEtat.intValue()), Etat.fromInt(nouvelEtat.intValue())));
+
+                    // Vérifier si le mouvement ne mène pas à la victoire
+                    boolean victoire = true;
+
+                    for (int a = 0; a < this.solution.length; a++)
+                        for (int b = 0; b < this.solution[a].length; b++)
+                            if (this.solution[a][b] != this.grille[a][b].get()) {
+                                victoire = false;
+                                break;
+                            }
+                    if (victoire) {
+                        System.out.println("Grille complétée.");
+                        for (Runnable r : onVictoire)
+                            r.run();
+                    }
                 });
+
+                // Ajouter la case au panneau grille
+                case_courante.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                panneau_grille.add(case_courante, j, i);
+                GridPane.setHgrow(case_courante, Priority.ALWAYS);
+                GridPane.setVgrow(case_courante, Priority.ALWAYS);
             }
         }
     }
@@ -193,17 +228,8 @@ public class Grille implements Serializable {
      *
      * @param panneau le panneau qui accueille les cases.
      */
-    public void remplirPanneau(GridPane panneau) {
-        for (int i = 0; i < this.grille.length; i++)
-            for (int j = 0; j < this.grille[i].length; j++) {
-                // Prendre l'espace de tout le conteneur
-
-                getCase(this.grille[i][j]).setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                // Ajouter
-                panneau.add(getCase(this.grille[i][j]), j, i);
-                GridPane.setHgrow(getCase(this.grille[i][j]), Priority.ALWAYS);
-                GridPane.setVgrow(getCase(this.grille[i][j]), Priority.ALWAYS);
-            }
+    public Pane getPanneau() {
+        return this.panneau;
     }
 
     /**
@@ -233,5 +259,4 @@ public class Grille implements Serializable {
             this.suivre_mouvement = true; // Réactiver le suivi des mouvements
         }
     }
-
 }

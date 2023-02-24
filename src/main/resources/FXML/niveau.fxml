@@ -34,13 +34,6 @@
             </BorderPane.margin>
          </ToolBar>
       </top>
-      <center>
-         <BorderPane fx:id="panneau_central" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-            </BorderPane.margin>
-         </BorderPane>
-      </center>
    </BorderPane>
    <stylesheets>
       <URL value="@../css/niveau.css" />
