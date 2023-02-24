@@ -15,7 +15,7 @@ import com.l3infogrp5.nurikabe.niveau.Niveau;
 
 /**
  * Contrôleur du menu de sélection de mode de jeu, et sa scène.
- * 
+ *
  * @author Julien Rouaux - Nicolas Gouget
  */
 public class ControllerMenuModeJeu {
@@ -41,7 +41,7 @@ public class ControllerMenuModeJeu {
 
     /**
      * Initialise le menu de sélection de mode de jeu et son contrôleur.
-     * 
+     *
      * @param stage la fenêtre contenant la scène.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
@@ -59,7 +59,7 @@ public class ControllerMenuModeJeu {
 
     /**
      * Retourne la scène gérée par le contrôleur.
-     * 
+     *
      * @return la scène gérée par le contrôleur.
      */
     public Scene getScene() {

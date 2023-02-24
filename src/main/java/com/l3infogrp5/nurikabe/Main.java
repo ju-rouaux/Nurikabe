@@ -3,6 +3,8 @@ package com.l3infogrp5.nurikabe;
 import java.io.*;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
+import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
+import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 import javafx.application.Application;
@@ -18,13 +20,18 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static String joueur = "Juuuliennnnnnnnnnng";
-    public static String mode_De_Jeu = "détente";
-    public static int id_Niveau = 1;
+    public static String mode_De_Jeu = "detente";
+    public static int id_Niveau = 0;
 
     /**
      * Nouvelle instance de l'application.
+     *
+     * @throws IOException
      */
-    public Main() {
+    public Main() throws IOException {
+        Sauvegarder.creerDossiers(joueur);
+        StockageNiveau.creationNiveauDetente();
+
     }
 
     /**
@@ -59,11 +66,22 @@ public class Main extends Application {
      * Lancement de l'application.
      *
      * @param args arguments de ligne de commande.
+     * @throws IOException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Application.launch(args);
 
+        Sauvegarder.creerDossiers(joueur);
+        StockageNiveau.creationNiveauDetente();
+        int[][] matrice = StockageNiveau.chargerGrille(id_Niveau, mode_De_Jeu);
+
+        for (int i = 0; i < matrice.length; i++) {
+            for (int j = 0; j < matrice[0].length; j++) {
+                System.out.print(matrice[i][j] + " ");
+            }
+            System.out.println();
+        }
         boolean debug = false;
         if (debug) {
             File jarPath = Path.repertoire_Jar;

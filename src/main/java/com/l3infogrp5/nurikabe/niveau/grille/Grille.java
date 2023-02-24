@@ -19,7 +19,7 @@ import javafx.scene.layout.Priority;
  *
  * @author Julien Rouaux
  */
-public class Grille implements Serializable{
+public class Grille implements Serializable {
 
     /** Vrai si le suivi des mouvements doit être activé. */
     private boolean suivre_mouvement;
@@ -41,7 +41,7 @@ public class Grille implements Serializable{
      * Utiliser {@link #remplirPanneau(GridPane)} pour afficher la grille dans le
      * panneau donné.
      *
-     * @param matrice initialisation de la grille.
+     * @param matrice    initialisation de la grille.
      * @param historique historique des mouvements réalisés sur cette grille.
      */
     public Grille(int[][] matrice, Historique historique) {
@@ -123,6 +123,10 @@ public class Grille implements Serializable{
                 });
             }
         }
+
+        System.out.println("Display grille property");
+        displayGrilleProperty();
+        System.out.println("Fin display grille property");
     }
 
     /**
@@ -181,6 +185,12 @@ public class Grille implements Serializable{
         return copie;
     }
 
+    public void setMatrice(int mat [][]){
+        for (int i = 0; i < this.grille.length; i++)
+            for (int j = 0; j < this.grille[i].length; j++)
+                this.grille[i][j].set(mat[i][j]);
+    }
+
     /**
      * Remplir le panneau donné des cases générées par la grille, afin d'afficher
      * cette dernière.
@@ -206,7 +216,7 @@ public class Grille implements Serializable{
      * mouvements réalisés par cette dernière.
      */
     public void undo() {
-        if(histo.peutAnnuler()) {
+        if (histo.peutAnnuler()) {
             this.suivre_mouvement = false; // Désactiver le suivi des mouvements
             Mouvement m = histo.annuler();
             this.grille[m.getPosition().getX()][m.getPosition().getY()].set(m.getAncienEtat().toInt());
@@ -227,4 +237,84 @@ public class Grille implements Serializable{
             this.suivre_mouvement = true; // Réactiver le suivi des mouvements
         }
     }
+
+    public void initTransientGrille(int [][] matrice) {
+        grille = new SimpleIntegerProperty[nb_lignes][nb_colonnes];
+        Case case_courante;
+        for (int i = 0; i < nb_lignes; i++) {
+            for (int j = 0; j < nb_colonnes; j++) {
+
+                // Case numérique
+                if (matrice[i][j] > 0) {
+                    case_courante = new CaseNumerique(new Position(i, j, i * nb_lignes + j));
+
+                    // Définition des événements de maintien
+                    // TODO ceci est une démo
+                    case_courante.setEventMaintienGauche(new EventClicMaintenu() {
+                        public void maintenu(Case c) {
+                            System.out.println("Maintien de : " + c.getPosition());
+                            c.surbrillance(true, 0);
+                            for (IntegerProperty[] ligne : grille)
+                                for (IntegerProperty c_demo : ligne)
+                                    getCase(c_demo).surbrillance(true, 0);
+                        }
+
+                        public void relache(Case c) {
+                            System.out.println("Relachement de : " + c.getPosition());
+                            c.surbrillance(false, 0);
+                            for (IntegerProperty[] ligne : grille)
+                                for (IntegerProperty c_demo : ligne)
+                                    getCase(c_demo).surbrillance(false, 0);
+                        }
+                    });
+                }
+
+                // Case intéractive
+                else {
+                    case_courante = new CaseInteractive(new Position(i, j, i * nb_lignes + j));
+
+                    // Définition des événements de maintien
+                    // TODO ceci est une démo
+                    case_courante.setEventMaintienGauche(new EventClicMaintenu() {
+                        public void maintenu(Case c) {
+                            System.out.println("Maintien de : " + c.getPosition());
+                            c.surbrillance(true, 0);
+                        }
+
+                        public void relache(Case c) {
+                            System.out.println("Relachement de : " + c.getPosition());
+                            c.surbrillance(false, 0);
+                        }
+                    });
+
+                }
+
+                // Ajouter la Property de la case à la matrice des Properties
+                this.grille[i][j] = case_courante.etatProperty();
+
+                // Assigner la valeur de la case
+                this.grille[i][j].set(matrice[i][j]);
+
+                // Commencer le suivi des mouvements
+                this.suivre_mouvement = true;
+
+                // Suivre chaque changement de la grille lorsque suivre_mouvement est vrai
+                this.grille[i][j].addListener((property, ancienEtat, nouvelEtat) -> {
+                    if (this.suivre_mouvement)
+                        this.histo.ajoutMouvement(new Mouvement(this.getCase((IntegerProperty) property).getPosition(),
+                                Etat.fromInt(ancienEtat.intValue()), Etat.fromInt(nouvelEtat.intValue())));
+                });
+            }
+        }
+    }
+
+    public void displayGrilleProperty() {
+        for (int i = 0; i < nb_lignes; i++) {
+            for (int j = 0; j < nb_colonnes; j++) {
+                System.out.print(this.grille[i][j].get() + " ");
+            }
+            System.out.println();
+        }
+    }
+
 }

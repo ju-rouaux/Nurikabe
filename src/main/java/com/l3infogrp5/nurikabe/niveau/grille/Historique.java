@@ -97,7 +97,7 @@ public class Historique implements Serializable {
      * A appeler à chaque changement effectué sur la pile.
      * Actualise les états peutAnnuler et peutRetablir.
      */
-    private void actualiserEtat() {
+    public void actualiserEtat() {
         this.peutAnnuler.set(curseur >= 0);
         this.peutRetablir.set(this.pile.size() - 1 > curseur);
     }
@@ -205,5 +205,10 @@ public class Historique implements Serializable {
 
     public ReadOnlyBooleanProperty peutRetablirProperty() {
         return this.peutRetablir.getReadOnlyProperty();
+    }
+
+    public void initTransientBoolean() {
+        this.peutAnnuler = new ReadOnlyBooleanWrapper(false);
+        this.peutRetablir = new ReadOnlyBooleanWrapper(false);
     }
 }

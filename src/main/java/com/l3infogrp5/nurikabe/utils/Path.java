@@ -14,12 +14,13 @@ public final class Path {
     public static final File repertoire_Lvl;
     // Répertoire des scores
     public static final File repertoire_Score;
+    // Répertoire des grilles
+    public static final File repertoire_Grilles;
 
     private static final String DOSSIER_NURIKABE = "/nurikabe_data";
     private static final String DOSSIER_SAVE = "/save";
     private static final String DOSSIER_NIVEAUX = "/lvl";
     private static final String DOSSIER_SCORE = "/score";
-
     private static final String DOSSIER_GRILLES = "/grilles";
 
     static {
@@ -47,6 +48,9 @@ public final class Path {
                 repertoire_Lvl = new File(repertoire_Save.toString() + DOSSIER_NIVEAUX);
                 // Définit le répertoire des scores
                 repertoire_Score = new File(repertoire_Save.toString() + DOSSIER_SCORE);
+                // Définit le répertoire des grilles
+                repertoire_Grilles = new File(repertoire_Courant.toString() + DOSSIER_GRILLES);
+
             } else {
                 System.out.println("lastIndex < 0");
                 // Répertoire courant non défini
@@ -57,6 +61,8 @@ public final class Path {
                 repertoire_Lvl = null;
                 // Répertoire des scores non défini
                 repertoire_Score = null;
+                // Répertoire des grilles non défini
+                repertoire_Grilles = null;
             }
         } else {
             System.out.println("<Erreur> : Probleme d'indexation de fichiers");
@@ -69,6 +75,8 @@ public final class Path {
             repertoire_Lvl = null;
             // Répertoire des scores non défini
             repertoire_Score = null;
+            // Répertoire des grilles non défini
+            repertoire_Grilles = null;
         }
     }
 }

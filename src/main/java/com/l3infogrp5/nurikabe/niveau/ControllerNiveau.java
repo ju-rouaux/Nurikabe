@@ -14,8 +14,10 @@ import java.io.IOException;
 
 import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
+import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.sauvegarde.Charger;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
+import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -64,39 +66,44 @@ public class ControllerNiveau {
      */
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
-        if (Charger.chargerNiveau(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau) != null) {
-            // System.out.println("Sauvegarde du niveau du joueur trouvée");
-            // System.out.println("Chargement du niveau du joueur...");
-            // this.niveau_actuel = Charger.chargerNiveau(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau);
-            // System.out.println("niveau :" + niveau_actuel);
-            // if (this.niveau_actuel != null) {
-            //     System.out.println("niveau not null");
-            //     if (this.niveau_actuel.getGrille() != null) {
-            //         System.out.println("grille not null");
-            //         System.out.println("Grille :" + this.niveau_actuel.getGrille().toString());
-            //         int [][] matrice = this.niveau_actuel.getGrille().getMatrice();
-            //         System.out.println("Matrice :");
-            //         for(int i = 0; i < matrice.length; i++) {
-            //             for(int j = 0; j < matrice[i].length; j++) {
-            //                 System.out.print(matrice[i][j] + " ");
-            //             }
-            //             System.out.println();
-            //         }
-            //         this.niveau_actuel.setGrille(this.niveau_actuel.getGrille());
-            //     }
-            //     if (this.niveau_actuel.getHistorique() != null) {
-            //         System.out.println("historique not null");
-            //         System.out.println("Historique :" + this.niveau_actuel.getHistorique().toString());
-            //         this.niveau_actuel.setHistorique(this.niveau_actuel.getHistorique());
-            //     }
 
-            // }
-            // System.out.println("Grille :" + niveau.getGrille().getMatrice());
-
+        /**
+         * Chargement de l'historique des mouvements du joueur
+         */
+        this.niveau_actuel = niveau;
+        if ((Charger.chargerHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau) != null)) {
+            System.out.println("\nSauvegarde de l'historique du joueur trouvée");
+            System.out.println("Chargement de l'historique du joueur sauvegardé...");
+            this.niveau_actuel.setHistorique(Charger.chargerHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau));
+            // this.niveau_actuel.getHistorique().initTransientBoolean();
+            // this.niveau_actuel.getHistorique().actualiserEtat();
         } else {
-            System.out.println("Sauvegarde du niveau du joueur non trouvée");
+            System.out.println("\nSauvegarde de l'historique du joueur trouvée");
             System.out.println("Chargement du niveau par défaut...");
-            this.niveau_actuel = niveau;
+            this.niveau_actuel.setHistorique(niveau.getHistorique());
+        }
+
+        /**
+         * Chargement de la grille du niveau
+         */
+        if ((Charger.chargerGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau) != null)) {
+            System.out.println("\nSauvegarde de la grille du joueur trouvée");
+            System.out.println("Chargement de la grille sauvegardée...");
+            this.niveau_actuel.setGrille(Charger.chargerGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau));
+            System.out.println("Debut affciahge displayGrilleProperty");
+            this.niveau_actuel.getGrille().displayGrilleProperty();
+            System.out.println("Fin affciahge displayGrilleProperty");
+        } else {
+            System.out.println("\nSauvegarde de la grille du joueur non trouvée");
+            System.out.println("Chargement de la grille par défaut...");
+            // this.niveau_actuel.setGrille(new Grille(StockageNiveau.chargerGrille(Main.id_Niveau, Main.mode_De_Jeu), niveau.getHistorique()));
+            int matrice[][] = StockageNiveau.chargerGrille(Main.id_Niveau, Main.mode_De_Jeu);
+            for(int i = 0; i < matrice.length; i++) {
+                for(int j = 0; j < matrice[0].length; j++) {
+                    System.out.print(matrice[i][j] + " ");
+                }
+                System.out.println();
+            }
         }
 
         loader = new FXMLLoader();
@@ -111,9 +118,6 @@ public class ControllerNiveau {
      */
     @FXML
     private void initialize() {
-
-        System.out.println("Grille :" + this.niveau_actuel.getGrille().getMatrice());
-        System.out.println("Initialisation de la vue du niveau...");
 
         // Récupérer taille matrice
         int[][] matrice = niveau_actuel.getGrille().getMatrice(); // TODO TEMPORAIRE
@@ -166,8 +170,17 @@ public class ControllerNiveau {
         /**
          * TODO : sauvegarder le niveau en cours
          */
+        System.out.println("Grille :");
+        int matrice[][] = this.niveau_actuel.getGrille().getMatrice();
+        for (int i = 0; i < matrice.length; i++) {
+            for (int j = 0; j < matrice[i].length; j++) {
+                System.out.print(matrice[i][j] + " ");
+            }
+            System.out.println();
+        }
         System.out.println("Sauvegarde du niveau en cours");
-        Sauvegarder.sauvegarderNiveau(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel);
+        Sauvegarder.sauvegarderGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getGrille());
+        Sauvegarder.sauvegarderHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getHistorique());
 
     }
 

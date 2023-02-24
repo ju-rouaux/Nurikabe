@@ -2,8 +2,10 @@ package com.l3infogrp5.nurikabe.niveau;
 
 import java.io.Serializable;
 
+import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
+import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 
 /**
  * Sert de gestionnaire de grille + score + mode de jeu
@@ -24,8 +26,16 @@ public class Niveau implements Serializable {
         // TODO vérifier s'il existe une sauvegarde
 
         // Matrice de démonstration (TODO : à supprimer)
-        int[][] matrice = new int[][] { { 0, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
+        int[][] matrice = StockageNiveau.chargerGrille(index, Main.mode_De_Jeu);
         // Historique de démonstration
+
+        System.out.println("Affichage de la matrice chargée depuis le fichier txt:");
+        for(int i = 0; i < matrice.length; i++) {
+            for(int j = 0; j < matrice[i].length; j++) {
+                System.out.print(matrice[i][j] + " ");
+            }
+            System.out.println();
+        }
 
         this.histo = new Historique();
 
@@ -67,8 +77,9 @@ public class Niveau implements Serializable {
      * @param histo l'historique du niveau.
      * @return l'historique du niveau.
      */
-    public Historique setHistorique(Historique histo) {
-        this.histo = histo;
+    public Historique setHistorique(Historique historique) {
+        this.histo = historique;
+
         return this.histo;
     }
 }
