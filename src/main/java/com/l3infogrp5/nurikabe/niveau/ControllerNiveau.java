@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
+import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 
 /**
@@ -47,6 +48,12 @@ public class ControllerNiveau {
     @FXML
     private BorderPane panneau_principal;
 
+    /*
+     * temp
+     */
+
+     Profil joueur;
+
     /**
      * Initialise la vue du niveau.
      *
@@ -58,6 +65,13 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
         this.niveau = niveau;
+
+        joueur = new Profil("Julieng", "detente", 0);
+
+        joueur.chargerNiveau(joueur.getIdNiveau());
+        this.niveau.setHistorique(Profil.chargerHistorique(joueur.getJoueur(), joueur.getModeDeJeu(), joueur.getIdNiveau()));
+
+
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -101,6 +115,7 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
+        joueur.sauvegarderNiveau(this.niveau.getGrille().getMatrice(), this.niveau.getHistorique());
     }
 
     /**

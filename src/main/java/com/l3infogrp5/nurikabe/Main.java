@@ -46,7 +46,7 @@ public class Main extends Application {
      */
     public Main() throws IOException {
         joueur = new Profil("Julieng", "detente", 0);
-        Sauvegarder.creerDossiers(joueur.joueur);
+        Sauvegarder.creerDossiers(joueur.getJoueur());
         StockageNiveau.creationNiveauDetente();
 
     }
@@ -89,9 +89,9 @@ public class Main extends Application {
 
         Application.launch(args);
 
-        Sauvegarder.creerDossiers(joueur.joueur);
+        Sauvegarder.creerDossiers(joueur.getJoueur());
         StockageNiveau.creationNiveauDetente();
-        int[][] matrice = StockageNiveau.chargerGrille(joueur.idNiveau, joueur.modeDeJeu);
+        int[][] matrice = StockageNiveau.chargerGrille(joueur.getIdNiveau(), joueur.getModeDeJeu());
 
         for (int i = 0; i < matrice.length; i++) {
             for (int j = 0; j < matrice[0].length; j++) {

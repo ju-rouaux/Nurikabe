@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import com.l3infogrp5.nurikabe.utils.Path;
-import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
@@ -16,9 +15,9 @@ import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 
 public class Profil {
 
-    public String joueur;
-    public String modeDeJeu;
-    public int idNiveau;
+    private String joueur;
+    private String modeDeJeu;
+    private int idNiveau;
     public Historique histo;
     public Grille grille;
 
@@ -29,6 +28,9 @@ public class Profil {
     }
 
     public void chargerNiveau(int idNiveau) {
+
+        int[][] solution = new int[][] { { -1, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
+
         // charger le niveau correspondant au profil
 
         /*
@@ -52,9 +54,9 @@ public class Profil {
         if (chargerMatrice(this.joueur, this.modeDeJeu, this.idNiveau) == null) {
             System.out.println("Aucune sauvegarde de la grille du niveau trouvée");
             System.out.println("Chargement de la grille du niveau par défaut...");
-            this.grille = new Grille(StockageNiveau.chargerGrille(this.joueur, this.modeDeJeu), this.histo);
+            this.grille = new Grille(StockageNiveau.chargerGrille(this.idNiveau, this.modeDeJeu),solution, this.histo);
         } else {
-            this.grille = new Grille(chargerMatrice(this.joueur, this.modeDeJeu, this.idNiveau), this.histo);
+            this.grille = new Grille(chargerMatrice(this.joueur, this.modeDeJeu, this.idNiveau),solution, this.histo);
             System.out.println("Sauvegarde de la grille du niveau trouvée");
             System.out.println("Chargement de la grille du niveau sauvegardée...");
         }
@@ -64,8 +66,8 @@ public class Profil {
     public void sauvegarderNiveau(int[][] matrice, Historique historique) {
         // sauvegarder le niveau correspondant au profil
         System.out.println("Sauvegarde du niveau en cours");
-        Sauvegarder.sauvegardeMatrice(this.joueur, this.modeDeJeu, this.idNiveau, grille.getGrille().getMatrice());
-        Sauvegarder.sauvegarderHistorique(this.joueur, this.modeDeJeu, this.idNiveau, grille.getHistorique());
+        sauvegardeMatrice(this.joueur, this.modeDeJeu, this.idNiveau, grille.getMatrice());
+        sauvegarderHistorique(this.joueur, this.modeDeJeu, this.idNiveau, grille.getHistorique());
     }
 
     /**
@@ -247,5 +249,14 @@ public class Profil {
     public String getJoueur() {
         return joueur;
     }
+
+    public int getIdNiveau(){
+        return idNiveau;
+    }
+
+    public String getModeDeJeu(){
+        return modeDeJeu;
+    }
+
 
 }

@@ -294,4 +294,13 @@ public class Grille {
     public void removenVictoire(Runnable r) {
         this.onVictoire.remove(r);
     }
+
+    /**
+     * Retourne l'historique du niveau.
+     *
+     * @return l'historique du niveau.
+     */
+    public Historique getHistorique() {
+        return this.histo;
+    }
 }

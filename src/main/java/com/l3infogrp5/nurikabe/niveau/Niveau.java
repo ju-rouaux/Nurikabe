@@ -47,4 +47,8 @@ public class Niveau {
     public Historique getHistorique() {
         return this.histo;
     }
+
+    public void setHistorique(Historique historique) {
+        this.histo = historique;
+    }
 }
