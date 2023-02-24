@@ -4,13 +4,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import com.l3infogrp5.nurikabe.utils.Path;
 
 public class StockageNiveau {
 
+    private static void writeGridToFile(FileWriter writer, int[][] grille) throws IOException {
+        for (int i = 0; i < grille.length; i++) {
+            for (int j = 0; j < grille[0].length; j++) {
+                writer.write(grille[i][j] + " ");
+            }
+            writer.write("\n");
+        }
+    }
+
+    /**
+     * Crée les grilles pour le mode détente et les stocke dans un fichier texte.
+     * Les grilles sont stockées dans le répertoire "repertoire_Grilles" avec le nom
+     * "grilles_detente.txt".
+     *
+     * @throws IOException si une erreur se produit lors de la création ou de
+     *                     l'écriture dans le fichier.
+     */
     public static void creationNiveauDetente() throws IOException {
         int niveau_0[][] = new int[][] {
                 { 0, 0, 17, 0, 3, 0, 0 },
@@ -44,14 +60,17 @@ public class StockageNiveau {
         }
     }
 
-    private static void writeGridToFile(FileWriter writer, int[][] grille) throws IOException {
-        for (int i = 0; i < grille.length; i++) {
-            for (int j = 0; j < grille[0].length; j++) {
-                writer.write(grille[i][j] + " ");
-            }
-            writer.write("\n");
-        }
+    public static void creationNiveauCLM(){
+        //TODO
     }
+
+    public static void creationNiveauSansFin(){
+        //TODO : a voir, peut etre niveau aleatoire des modes detente et CLM
+    }
+
+
+
+
 
     public static int[][] chargerGrille(int numeroGrille, String modeDeJeu) {
         try {
@@ -69,25 +88,21 @@ public class StockageNiveau {
                     String[] dimensions = line.split("\\(")[1].split("\\)")[0].split(";");
                     lignes = Integer.parseInt(dimensions[0].trim());
                     colonnes = Integer.parseInt(dimensions[1].trim());
-                    System.out.println("Grille de " + lignes + " lignes et " + colonnes + " colonnes");
+                    // System.out.println("Grille de " + lignes + " lignes et " + colonnes + " colonnes");
                     grille = new int[lignes][colonnes];
                     isCurrentGrid = true;
                 } else if (line.startsWith("#")) {
                     // Skip separator line
-                    System.out.println("Ligne de séparation trouvée");
                     isCurrentGrid = false;
                 } else if (line.startsWith("Grille") && isCurrentGrid) {
-                    System.out.println("Fin de la grille");
                     isCurrentGrid = false;
                     break;
 
                 } else if (isCurrentGrid) {
                     // Load data into the current grid
-                    System.out.println("Chargement de la ligne " + (rowIndex + 1) + " de la grille du fichier...");
                     String[] values = line.split(" ");
                     for (int i = 0; i < values.length; i++) {
                         if (!values[i].equals("")) {
-                            System.out.println("grille[" + rowIndex + "][" + i + "] = " + Integer.parseInt(values[i]));
                             grille[rowIndex][i] = Integer.parseInt(values[i]);
                         }
                     }

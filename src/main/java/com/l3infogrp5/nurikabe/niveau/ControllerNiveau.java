@@ -14,7 +14,6 @@ import java.io.IOException;
 
 import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
-import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.sauvegarde.Charger;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
@@ -67,6 +66,7 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
 
+        System.out.println("Coucou ici le controller niveau");
         /**
          * Chargement de l'historique des mouvements du joueur
          */
@@ -75,8 +75,6 @@ public class ControllerNiveau {
             System.out.println("\nSauvegarde de l'historique du joueur trouvée");
             System.out.println("Chargement de l'historique du joueur sauvegardé...");
             this.niveau_actuel.setHistorique(Charger.chargerHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau));
-            // this.niveau_actuel.getHistorique().initTransientBoolean();
-            // this.niveau_actuel.getHistorique().actualiserEtat();
         } else {
             System.out.println("\nSauvegarde de l'historique du joueur trouvée");
             System.out.println("Chargement du niveau par défaut...");
@@ -90,20 +88,10 @@ public class ControllerNiveau {
             System.out.println("\nSauvegarde de la grille du joueur trouvée");
             System.out.println("Chargement de la grille sauvegardée...");
             this.niveau_actuel.setGrille(Charger.chargerGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau));
-            System.out.println("Debut affciahge displayGrilleProperty");
-            this.niveau_actuel.getGrille().displayGrilleProperty();
-            System.out.println("Fin affciahge displayGrilleProperty");
         } else {
             System.out.println("\nSauvegarde de la grille du joueur non trouvée");
             System.out.println("Chargement de la grille par défaut...");
-            // this.niveau_actuel.setGrille(new Grille(StockageNiveau.chargerGrille(Main.id_Niveau, Main.mode_De_Jeu), niveau.getHistorique()));
             int matrice[][] = StockageNiveau.chargerGrille(Main.id_Niveau, Main.mode_De_Jeu);
-            for(int i = 0; i < matrice.length; i++) {
-                for(int j = 0; j < matrice[0].length; j++) {
-                    System.out.print(matrice[i][j] + " ");
-                }
-                System.out.println();
-            }
         }
 
         loader = new FXMLLoader();
@@ -170,14 +158,6 @@ public class ControllerNiveau {
         /**
          * TODO : sauvegarder le niveau en cours
          */
-        System.out.println("Grille :");
-        int matrice[][] = this.niveau_actuel.getGrille().getMatrice();
-        for (int i = 0; i < matrice.length; i++) {
-            for (int j = 0; j < matrice[i].length; j++) {
-                System.out.print(matrice[i][j] + " ");
-            }
-            System.out.println();
-        }
         System.out.println("Sauvegarde du niveau en cours");
         Sauvegarder.sauvegarderGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getGrille());
         Sauvegarder.sauvegarderHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getHistorique());
