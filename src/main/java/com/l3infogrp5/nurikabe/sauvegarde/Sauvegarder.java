@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.utils.Path;
 
@@ -235,7 +234,7 @@ public class Sauvegarder {
      * @param historique  l'historique des mouvements
      * @return l'historique des mouvements
      */
-    public static Historique sauvegarderHistorique(String joueur, String mode_De_Jeu, int id_Niveau,
+    public static void sauvegarderHistorique(String joueur, String mode_De_Jeu, int id_Niveau,
             Historique historique) {
         File mouvements_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
         File mouvements_fichier = new File(mouvements_repert.toString() + "/Mouvements_" + id_Niveau);
@@ -245,9 +244,7 @@ public class Sauvegarder {
             serialisationHistorique(mouvements_fichier, historique);
         } else {
             System.out.println("Erreur lors de la création de fichier et/ou de dossier");
-            return null;
         }
-        return historique;
     }
 
     /**
@@ -279,17 +276,15 @@ public class Sauvegarder {
      * @param grille      la grille
      * @return la grille
      */
-    public static Grille sauvegarderGrille(String joueur, String mode_De_Jeu, int id_Niveau, Grille grille) {
-        File grille_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
-        File grille_fichier = new File(grille_repert.toString() + "/Grille_" + id_Niveau);
+    public static void sauvegardeMatrice(String joueur, String mode_De_Jeu, int id_Niveau, int [][] matrice) {
+        File matrice_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
+        File matrice_fichier = new File(matrice_repert.toString() + "/Matrice_" + id_Niveau);
 
-        if (creerDossierFichier(grille_repert, grille_fichier)) {
-            serialisationGrille(grille_fichier, grille);
+        if (creerDossierFichier(matrice_repert, matrice_fichier)) {
+            serialisationMatrice(matrice_fichier, matrice);
         } else {
             System.out.println("Erreur lors de la création de fichier et/ou de dossier");
-            return null;
         }
-        return grille;
     }
 
     /**
@@ -298,15 +293,14 @@ public class Sauvegarder {
      * @param repert le répertoire
      * @param grille la grille
      */
-    private static void serialisationGrille(File repert, Grille grille) {
+    private static void serialisationMatrice(File repert, int [][] matrice) {
         try {
             FileOutputStream fileOut = new FileOutputStream(repert, false);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(grille);
-            out.writeObject(grille.getMatrice());
+            out.writeObject(matrice);
             out.close();
             fileOut.close();
-            System.out.println("Grille serialisé et sauvegardé dans Grille_<id_niveau>");
+            System.out.println("Matrice serialisé et sauvegardé dans Matrice_<id_niveau>");
         } catch (IOException e) {
             e.printStackTrace();
         }

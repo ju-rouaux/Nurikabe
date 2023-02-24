@@ -208,11 +208,8 @@ public class Historique implements Serializable {
     }
 
     public void initTransientBoolean() {
-        peutAnnuler = new ReadOnlyBooleanWrapper(false);
-        peutRetablir = new ReadOnlyBooleanWrapper(false);
+        this.peutAnnuler = new ReadOnlyBooleanWrapper(false);
+        this.peutRetablir = new ReadOnlyBooleanWrapper(false);
     }
 
-    public int getcurseur(){
-        return this.curseur;
-    }
 }

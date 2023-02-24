@@ -5,14 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 public class Charger {
-
-    public Charger() {
-    }
 
     /**
      * Charge l'historique des mouvements du joueur
@@ -42,20 +38,20 @@ public class Charger {
      * @return l'historique des mouvements
      */
     private static Historique deserialisationHistorique(File fichier) {
-        Historique historique_temp = null;
+        Historique historique = null;
         try {
             FileInputStream fileIn = new FileInputStream(fichier);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            historique_temp = (Historique) in.readObject();
-            historique_temp.initTransientBoolean();
-            historique_temp.actualiserEtat();
+            historique = (Historique) in.readObject();
+            // historique.initTransientBoolean();
+            // historique.actualiserEtat();
             in.close();
             fileIn.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return historique_temp;
+        return historique;
     }
 
     /**
@@ -66,13 +62,13 @@ public class Charger {
      * @param id_Niveau   l'id du niveau
      * @return la grille
      */
-    public static Grille chargerGrille(String joueur, String mode_De_Jeu, int id_Niveau) {
+    public static int [][] chargerMatrice(String joueur, String mode_De_Jeu, int id_Niveau) {
         File grille_repert = new File(Path.repertoire_Lvl.toString() + "/" + joueur + "/" + mode_De_Jeu);
-        File grille_fichier = new File(grille_repert.toString() + "/Grille_" + id_Niveau);
+        File grille_fichier = new File(grille_repert.toString() + "/Matrice_" + id_Niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println("Chargement de la grille du niveau du joueur ...");
             StockageNiveau.chargerGrille(id_Niveau, mode_De_Jeu);
-            return deserialisationGrille(grille_fichier);
+            return deserialisationMatrice(grille_fichier);
         } else {
             System.out.println("Erreur de chargement du fichier de la grille du niveau du joueur !");
         }
@@ -87,24 +83,21 @@ public class Charger {
      * @param fichier le fichier serialisé de la grille
      * @return la grille
      */
-    private static Grille deserialisationGrille(File fichier) {
-        Grille grille = null;
+    private static int [][] deserialisationMatrice(File fichier) {
         int[][] matrice = null;
         try {
             FileInputStream fileIn = new FileInputStream(fichier);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            grille = (Grille) in.readObject();
             matrice = (int[][]) in.readObject();
             in.close();
             fileIn.close();
-            grille.initTransientGrille(matrice);
 
             System.out.println("Grille chargée");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return grille;
+        return matrice;
     }
 
 }

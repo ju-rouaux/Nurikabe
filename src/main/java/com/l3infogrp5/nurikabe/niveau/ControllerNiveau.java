@@ -14,7 +14,6 @@ import java.io.IOException;
 
 import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
-import com.l3infogrp5.nurikabe.sauvegarde.Charger;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 
 /**
@@ -65,29 +64,7 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
 
-        /**
-         * Chargement de l'historique des mouvements du joueur
-         */
         this.niveau_actuel = niveau;
-        if ((Charger.chargerHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau) != null)) {
-            System.out.println("\nSauvegarde de l'historique du joueur trouvée");
-            System.out.println("Chargement de l'historique du joueur sauvegardé...");
-            this.niveau_actuel.setHistorique(Charger.chargerHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau));
-        } else {
-            System.out.println("<ControllerNiveau.ControllerNiveau:Historique> Chargement du niveau par défaut...");
-            this.niveau_actuel.setHistorique(niveau.getHistorique());
-        }
-
-        /**
-         * Chargement de la grille du niveau
-         */
-        if ((Charger.chargerGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau) != null)) {
-            System.out.println("\nSauvegarde de la grille du joueur trouvée");
-            System.out.println("Chargement de la grille sauvegardée...");
-            this.niveau_actuel.setGrille(Charger.chargerGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau));
-        } else {
-            System.out.println("<ControllerNiveau.ControllerNiveau:Grille> Chargement du niveau par défaut...");
-        }
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -154,7 +131,7 @@ public class ControllerNiveau {
          * TODO : sauvegarder le niveau en cours
          */
         System.out.println("Sauvegarde du niveau en cours");
-        Sauvegarder.sauvegarderGrille(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getGrille());
+        Sauvegarder.sauvegardeMatrice(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getGrille().getMatrice());
         Sauvegarder.sauvegarderHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau, niveau_actuel.getHistorique());
 
     }

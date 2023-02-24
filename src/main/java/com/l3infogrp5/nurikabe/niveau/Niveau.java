@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.l3infogrp5.nurikabe.Main;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
+import com.l3infogrp5.nurikabe.sauvegarde.Charger;
 import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 
 /**
@@ -30,16 +31,40 @@ public class Niveau implements Serializable {
         // Historique de démonstration
 
         System.out.println("Affichage de la matrice chargée depuis le fichier txt:");
-        for(int i = 0; i < matrice.length; i++) {
-            for(int j = 0; j < matrice[i].length; j++) {
+        for (int i = 0; i < matrice.length; i++) {
+            for (int j = 0; j < matrice[i].length; j++) {
                 System.out.print(matrice[i][j] + " ");
             }
             System.out.println();
         }
 
-        this.histo = new Historique();
+        /*
+         * Chargement de l'historique des mouvements du joueur
+         */
+        this.histo = Charger.chargerHistorique(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau);
+        if (this.histo == null) {
+            System.out.println("Aucune sauvegarde de l'historique des mouvements du joueur trouvée");
+            System.out.println("Chargement de l'historique des mouvements du joueur par défaut...");
+            this.histo = new Historique();
+        } else {
+            System.out.println("Sauvegarde de l'historique des mouvements du joueur trouvée");
+            System.out.println("Chargement de l'historique des mouvements du joueur sauvegardé...");
+            this.histo.initTransientBoolean();
+            this.histo.actualiserEtat();
+        }
 
-        this.grille = new Grille(matrice, this.histo);
+        /*
+         * Chargement de la grille du niveau
+         */
+        if (Charger.chargerMatrice(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau) == null) {
+            System.out.println("Aucune sauvegarde de la grille du niveau trouvée");
+            System.out.println("Chargement de la grille du niveau par défaut...");
+            this.grille = new Grille(StockageNiveau.chargerGrille(Main.id_Niveau, Main.mode_De_Jeu), this.histo);
+        } else {
+            this.grille = new Grille(Charger.chargerMatrice(Main.joueur, Main.mode_De_Jeu, Main.id_Niveau), this.histo);
+            System.out.println("Sauvegarde de la grille du niveau trouvée");
+            System.out.println("Chargement de la grille du niveau sauvegardée...");
+        }
     }
 
     /**
