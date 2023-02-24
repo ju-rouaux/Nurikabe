@@ -23,10 +23,11 @@ public class Niveau {
 
         // Matrice de démonstration (TODO : à supprimer)
         int[][] matrice = new int[][] { { 0, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
+        int[][] solution = new int[][] { { -1, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
         // Historique de démonstration
         this.histo = new Historique();
 
-        this.grille = new Grille(matrice, this.histo);
+        this.grille = new Grille(matrice, solution, this.histo);
     }
 
     /**
