@@ -60,6 +60,12 @@ public class StockageNiveau {
         }
     }
 
+    public static void creationSolutionDetente() throws IOException{
+        int niveau_0[][] = new int [][]{
+
+        };
+    }
+
     /**
      * Crée les grilles pour le mode contre la montre et les stocke dans un fichier texte.
      */

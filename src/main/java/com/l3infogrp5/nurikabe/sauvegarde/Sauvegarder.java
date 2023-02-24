@@ -147,7 +147,7 @@ public class Sauvegarder {
      * @return true si creation(s) bien effectuée, false sinon
      * @throws IOException si erreur lors de la création du fichier
      */
-    private static boolean creerDossierFichier(File dossier, File fichier) {
+    public static boolean creerDossierFichier(File dossier, File fichier) {
         boolean statut = false;
         if (!dossier.exists()) {
             boolean result = dossier.mkdirs();
