@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -48,6 +49,12 @@ public class ControllerNiveau {
     @FXML
     private BorderPane panneau_principal;
 
+    @FXML
+    private BorderPane panneau_score;
+
+    @FXML
+    private HBox barre;
+
     /*
      * temp
      */
@@ -83,6 +90,9 @@ public class ControllerNiveau {
      */
     @FXML
     private void initialize() {
+
+        // Adapter la largeur de la barre à l'écran
+        this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(15));
 
         // Mettre la grille au centre (et ajouter une marge)
         Pane grille =  this.niveau.getGrille().getPanneau();
