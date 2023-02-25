@@ -13,7 +13,7 @@ public class Niveau {
 
     /**
      * TODO
-     * 
+     *
      * @param index -
      */
     public Niveau(int index /* Score mode, Profil profil */) {
@@ -32,7 +32,7 @@ public class Niveau {
 
     /**
      * Retourne la grille du niveau.
-     * 
+     *
      * @return la grille du niveau.
      */
     public Grille getGrille() {
@@ -41,10 +41,28 @@ public class Niveau {
 
     /**
      * Retourne l'historique du niveau.
-     * 
+     *
      * @return l'historique du niveau.
      */
     public Historique getHistorique() {
         return this.histo;
     }
+
+    public void setHistorique(Historique historique) {
+        this.histo = historique;
+    }
+
+
+    /**
+     * Définit la grille du niveau.
+     *
+     * @param grille la grille du niveau.
+     * @return la grille du niveau.
+     */
+    public Grille setGrille(Grille grille) {
+        this.grille = grille;
+        return this.grille;
+    }
+
+
 }

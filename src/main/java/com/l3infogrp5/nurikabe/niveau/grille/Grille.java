@@ -23,7 +23,7 @@ import javafx.scene.layout.Priority;
  * panneau.
  * Il est possible d'ajouter du code qui sera exécuté lorsque la grille est
  * complétée, grâce à la méthode {@link #addOnVictoire(Runnable)}.
- * 
+ *
  * @author Julien Rouaux
  */
 public class Grille {
@@ -51,7 +51,7 @@ public class Grille {
     /**
      * Créer une grille.
      * Utiliser {@link #getPanneau()} pour récupérer l'affichage de la grille
-     * 
+     *
      * @param matrice    initialisation de la grille.
      * @param solution   l'état final attendu de la grille qui marquera la victoire.
      * @param historique historique des mouvements réalisés sur cette grille.
@@ -174,7 +174,7 @@ public class Grille {
 
     /**
      * Retourne la case liée à la Property.
-     * 
+     *
      * @param i la Property de la case à obtenir.
      * @return la case liée à la Property.
      */
@@ -184,7 +184,7 @@ public class Grille {
 
     /**
      * Changer l'état d'une case.
-     * 
+     *
      * @param x    coordonnées en x de la case à changer.
      * @param y    coordonnées en y de la case à changer.
      * @param etat nouvel état de la case.
@@ -201,7 +201,7 @@ public class Grille {
 
     /**
      * Retourne l'état ou la valeur de la case ciblée.
-     * 
+     *
      * @param x coordonnées en x de la case à cibler.
      * @param y coordonnées en y de la case à cibler.
      * @return l'état ou la valeur de la case donnée.
@@ -214,7 +214,7 @@ public class Grille {
      * Retourne une copie de la matrice.
      * Aucune modification ne sera répercutée sur la vraie matrice.
      * Pour modifier la vraie matrice, utiliser la méthode set().
-     * 
+     *
      * @return une copie de la matrice.
      * @see Grille#set(int, int, Etat)
      */
@@ -231,7 +231,7 @@ public class Grille {
     /**
      * Retourne le panneau contenant la grille.
      * Il est conseillé de ne pas modifier ce panneau.
-     * 
+     *
      * @return le paneau contenant la grille.
      */
     public Pane getPanneau() {
@@ -268,7 +268,7 @@ public class Grille {
 
     /**
      * Active ou désactive l'intéraction du joueur avec les cases.
-     * 
+     *
      * @param b vrai si les cases doivent être activées, faux si désactivées.
      */
     public void setActivation(boolean b) {
@@ -279,7 +279,7 @@ public class Grille {
 
     /**
      * Ajouter un événement à exécuter lorsque la grille est complétée.
-     * 
+     *
      * @param r événement à exécuter lorsque la grille est complétée.
      */
     public void addOnVictoire(Runnable r) {
@@ -288,10 +288,19 @@ public class Grille {
 
     /**
      * Retirer un événement exécuté lorsque la grille est complétée.
-     * 
+     *
      * @param r l'événement à retirer.
      */
     public void removenVictoire(Runnable r) {
         this.onVictoire.remove(r);
+    }
+
+    /**
+     * Retourne l'historique du niveau.
+     *
+     * @return l'historique du niveau.
+     */
+    public Historique getHistorique() {
+        return this.histo;
     }
 }

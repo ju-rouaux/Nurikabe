@@ -10,10 +10,10 @@ import javafx.beans.property.ReadOnlyBooleanWrapper;
 
 /**
  * Classe enregistrant l'historique des mouvements du joueur.
- * Il est possible d'écouter les Properties {@link #peutAnnulerProperty()} et
- * {@link #peutRetablirProperty()}, notamment pour y lier des éléments
- * graphiques.
- * 
+ * Il est possible de lier des éléments graphiques aux propriétés
+ * {@link #peutAnnuler()} et {@link #peutRetablir()} grâce à la méthode
+ * {@link #lierInterface(BooleanProperty, BooleanProperty)}.
+ *
  * @author Julien Rouaux
  */
 public class Historique implements Serializable {
@@ -21,7 +21,7 @@ public class Historique implements Serializable {
     /**
      * Représente un changement d'état d'une case.
      * On y trouve l'ancien état, le nouvel état, et la position de la case changée.
-     * 
+     *
      * @author Julien Rouaux
      */
     public static class Mouvement implements Serializable {
@@ -34,7 +34,7 @@ public class Historique implements Serializable {
 
         /**
          * Nouveau mouvement immuable.
-         * 
+         *
          * @param pos     position de la case changée.
          * @param ancien  ancien état de la case.
          * @param nouveau nouvel état de la case.
@@ -47,7 +47,7 @@ public class Historique implements Serializable {
 
         /**
          * Retourne la position de la case changée.
-         * 
+         *
          * @return la position de la case changée.
          */
         public Position getPosition() {
@@ -56,7 +56,7 @@ public class Historique implements Serializable {
 
         /**
          * Retourne l'ancien état de la case.
-         * 
+         *
          * @return l'ancien état de la case.
          */
         public Etat getAncienEtat() {
@@ -65,7 +65,7 @@ public class Historique implements Serializable {
 
         /**
          * Retourne le nouvel état de la case.
-         * 
+         *
          * @return le nouvel état de la case.
          */
         public Etat getNouvelEtat() {
@@ -79,9 +79,9 @@ public class Historique implements Serializable {
     private int curseur;
 
     /** Vrai si l'historique peut annuler un mouvement. */
-    private ReadOnlyBooleanWrapper peutAnnuler;
+    private transient ReadOnlyBooleanWrapper peutAnnuler;
     /** Vrai si l'historique peut rétablir un mouvement */
-    private ReadOnlyBooleanWrapper peutRetablir;
+    private transient ReadOnlyBooleanWrapper peutRetablir;
 
     /**
      * Instancie un nouvel historique vide.
@@ -97,7 +97,7 @@ public class Historique implements Serializable {
      * A appeler à chaque changement effectué sur la pile.
      * Actualise les états peutAnnuler et peutRetablir.
      */
-    private void actualiserEtat() {
+    public void actualiserEtat() {
         this.peutAnnuler.set(curseur >= 0);
         this.peutRetablir.set(this.pile.size() - 1 > curseur);
     }
@@ -106,7 +106,7 @@ public class Historique implements Serializable {
      * Ajoute le mouvement à l'historique. Si le mouvement est réalisé à la même
      * position que le dernier, le dernier mouvement est écrasé.
      * Tous les mouvements situés après le curseur sont oubliés.
-     * 
+     *
      * @param m le mouvement à enregistrer.
      */
     public void ajoutMouvement(Mouvement m) {
@@ -139,7 +139,7 @@ public class Historique implements Serializable {
      * Retourne un mouvement pouvant être rétabli selon l'historique.
      * Toujous vérifier si un mouvement peut être rétabli avec
      * {@link #peutRetablir()}.
-     * 
+     *
      * @return un mouvement pouvant être rétabli selon l'historique.
      * @throws IndexOutOfBoundsException lancé lorsqu'aucun mouvement n'est à
      *                                   rétablir.
@@ -158,7 +158,7 @@ public class Historique implements Serializable {
      * Retourne un mouvement pouvant être annulé selon l'historique.
      * Toujous vérifier si un mouvement peut être annulé avec
      * {@link #peutAnnuler()}.
-     * 
+     *
      * @return un mouvement pouvant être annulé selon l'historique.
      * @throws IndexOutOfBoundsException lancé lorsqu'aucun mouvement n'est à
      *                                   annuler.
@@ -174,7 +174,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne vrai si l'historique est vide.
-     * 
+     *
      * @return vrai si l'historique est vide.
      */
     public boolean estVide() {
@@ -183,7 +183,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne vrai si un mouvement peut être annulé.
-     * 
+     *
      * @return vrai si un mouvement peut être annulé.
      */
     public boolean peutAnnuler() {
@@ -192,7 +192,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne vrai si un mouvement peut être rétabli.
-     * 
+     *
      * @return vrai si un mouvement peut être rétabli.
      */
     public boolean peutRetablir() {
@@ -206,4 +206,10 @@ public class Historique implements Serializable {
     public ReadOnlyBooleanProperty peutRetablirProperty() {
         return this.peutRetablir.getReadOnlyProperty();
     }
+
+    public void initTransientBoolean() {
+        this.peutAnnuler = new ReadOnlyBooleanWrapper(false);
+        this.peutRetablir = new ReadOnlyBooleanWrapper(false);
+    }
+
 }
