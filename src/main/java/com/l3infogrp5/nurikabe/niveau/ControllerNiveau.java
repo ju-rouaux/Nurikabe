@@ -1,14 +1,14 @@
 package com.l3infogrp5.nurikabe.niveau;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.NumberBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
@@ -49,7 +49,10 @@ public class ControllerNiveau {
     private BorderPane panneau_principal;
 
     @FXML
-    private BorderPane panneau_central;
+    private BorderPane panneau_score;
+
+    @FXML
+    private HBox barre;
 
     /**
      * Initialise la vue du niveau.
@@ -76,29 +79,13 @@ public class ControllerNiveau {
     @FXML
     private void initialize() {
 
-        // Récupérer taille matrice
-        int[][] matrice = niveau.getGrille().getMatrice(); // TODO TEMPORAIRE
-        int hauteur = matrice.length;
-        int largeur = matrice[0].length;
+        // Adapter la largeur de la barre à l'écran
+        this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(15));
 
-        GridPane panneau_grille = new GridPane();
-
-        // Adapter la taille du panneau de la grille au panneau central
-        NumberBinding ratio = Bindings.min(
-                this.panneau_central.widthProperty().divide(largeur),
-                this.panneau_central.heightProperty().divide(hauteur));
-        panneau_grille.maxWidthProperty().bind(ratio.multiply(largeur));
-        panneau_grille.maxHeightProperty().bind(ratio.multiply(hauteur));
-
-        // Définir l'écart entre les cases
-        panneau_grille.setVgap(5);
-        panneau_grille.setHgap(5);
-
-        // Remplir le panneau grille de la grille du niveau
-        this.niveau.getGrille().remplirPanneau(panneau_grille);
-
-        // Mettre la grille dans le panneau central
-        this.panneau_central.setCenter(panneau_grille);
+        // Mettre la grille au centre (et ajouter une marge)
+        Pane grille =  this.niveau.getGrille().getPanneau();
+        BorderPane.setMargin(grille, new Insets(30, 30, 30, 30));
+        this.panneau_principal.setCenter(grille);
 
         // TODO charger les données de score
 
