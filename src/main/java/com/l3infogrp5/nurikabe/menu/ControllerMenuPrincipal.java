@@ -68,10 +68,11 @@ public class ControllerMenuPrincipal {
 
     /**
      * Change la scène par le menu de sélection de profil.
+     * @throws IOException
      */
     @FXML
-    private void profilsClique(ActionEvent event) {
-
+    private void profilsClique(ActionEvent event) throws IOException {
+        stage.setScene(new ControllerMenuProfils(stage).getScene());
     }
 
     /**
