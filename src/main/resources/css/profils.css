@@ -1,0 +1,27 @@
+*{
+    -fx-base: #636363;
+}
+
+/* ==================== Classes ==================== */
+
+.btn-profile{
+    -fx-background-color: white;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+}
+
+.btn-add{
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-background-color: grey;
+    -fx-border-color: white;
+}
+
+.name-profile{
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+
+/* ==================== IDs ==================== */

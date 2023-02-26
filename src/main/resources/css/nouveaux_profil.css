@@ -1,0 +1,17 @@
+*{
+    -fx-base: #636363;
+}
+
+/* ==================== Classes ==================== */
+
+.label{
+    -fx-font-size: 20px;
+}
+
+.button{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+}
+
+/* ==================== IDs ==================== */
