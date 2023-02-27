@@ -77,7 +77,7 @@ public class ControllerNiveau {
         Sauvegarder.creerDossiers(null);
         StockageNiveau.creationNiveauDetente();
         StockageNiveau.creationSolutionNiveauDetente();
-        joueur = new Profil("Julieng", "detente", 10);
+        joueur = new Profil("Julieng", "detente", 110);
 
         this.niveau = joueur.chargerNiveau(joueur.getId_niveau());
 
