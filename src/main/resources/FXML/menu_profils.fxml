@@ -62,7 +62,11 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" styleClass="btn-profile" textFill="#ff0e0e" />
+                        <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" textFill="#ff0e0e">
+                           <styleClass>
+                              <String fx:value="btn-profile" />
+                              <String fx:value="btn" />
+                           </styleClass></Button>
                         <Label styleClass="name-profile" text="Name 1">
                            <padding>
                               <Insets top="10.0" />
@@ -74,9 +78,8 @@
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e">
                            <styleClass>
                               <String fx:value="btn-add" />
-                              <String fx:value="btn-profile" />
-                           </styleClass>
-                        </Button>
+                              <String fx:value="btn" />
+                           </styleClass></Button>
                         <Label styleClass="name-profile">
                            <padding>
                               <Insets top="10.0" />
