@@ -96,7 +96,7 @@ public class Grille {
 
                 // Case numérique
                 if (matrice[i][j] > 0) {
-                    case_courante = new CaseNumerique(new Position(i, j, i * nb_lignes + j));
+                    case_courante = new CaseNumerique(new Position(i, j));
 
                     // Définition des événements de maintien
                     // TODO ceci est une démo
@@ -113,7 +113,7 @@ public class Grille {
 
                 // Case intéractive
                 else {
-                    case_courante = new CaseInteractive(new Position(i, j, i * nb_lignes + j));
+                    case_courante = new CaseInteractive(new Position(i, j));
 
                     // Définition des événements de maintien
                     // TODO ceci est une démo
@@ -291,7 +291,7 @@ public class Grille {
      *
      * @param r l'événement à retirer.
      */
-    public void removenVictoire(Runnable r) {
+    public void removeOnVictoire(Runnable r) {
         this.onVictoire.remove(r);
     }
 
