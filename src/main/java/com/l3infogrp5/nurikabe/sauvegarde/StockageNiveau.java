@@ -129,7 +129,8 @@ public class StockageNiveau {
                 { 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 4, 0, 0, 0, 2, 0 } };
 
-        int[][] niveau_9 = { { 0, 0, 0, 0, 0, 0, 0 },
+        int[][] niveau_9 = {
+                { 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 4, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 1, 0, 2, 0, 0 },
@@ -1011,11 +1012,12 @@ public class StockageNiveau {
                                 + "_solutions.txt"));
             }
             int[][] grille = null;
-            int lignes = 0;
+            int lignes = -1;
             int colonnes = 0;
             boolean grille_courante = false;
-            int index = 0; // add row index variable
-            while (scanner.hasNextLine()) {
+            int index = 0;
+            // A voir && index != ligne car seulement pour niveau 10
+            while (scanner.hasNextLine() && index != lignes) {
                 String line = scanner.nextLine();
                 if (line.startsWith("Grille " + id_niveau)) {
                     // Si une grille a été trouvée, on récupère ses dimensions
@@ -1038,7 +1040,7 @@ public class StockageNiveau {
                         }
                     }
                     index++; // increment row index
-                    System.out.println("index: " + index);
+                    afficherMatrice(grille);
                 }
             }
             scanner.close();
@@ -1052,6 +1054,16 @@ public class StockageNiveau {
                             + e.getMessage());
         }
         return null;
+    }
+
+    private static void afficherMatrice(int [][] matrice){
+        for (int i = 0; i < matrice.length; i++) {
+            for (int j = 0; j < matrice[i].length; j++) {
+                System.out.print(matrice[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("=======================");
     }
 
 }
