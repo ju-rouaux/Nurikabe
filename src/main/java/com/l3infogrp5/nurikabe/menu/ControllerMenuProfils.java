@@ -77,9 +77,9 @@ public class ControllerMenuProfils {
      * @throws Exception
      */
     @FXML
-    private void nouveauxProfil() throws Exception {
+    private void nouveauxProfil(int i) throws Exception {
         // TODO : Ecrire une methode pour creer un profil avec un pseudo
-        // (et potentiellement un avatar)
+        // (et potentiellement un avatar peux etre representre par une coleur differente pour le fond )
 
         Stage popup = new Stage();
 
@@ -89,8 +89,12 @@ public class ControllerMenuProfils {
 
         System.out.println(joueur);
 
-        Profil nouveaux_profil = new Profil(joueur, null, 0);
+        new Profil(joueur, null, 0);
 
+        ((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).setText(joueur);
+        ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).setText("");
+        ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getStyleClass().remove("btn-add");
+        ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getStyleClass().add("btn-profile");
     }
 
     /**
@@ -116,7 +120,7 @@ public class ControllerMenuProfils {
                     System.out.println("Profil " + joueur + " charger");
                 } else {
                     System.out.println("Creation du profils " + joueur);
-                    nouveauxProfil();
+                    nouveauxProfil(i);
                 }
 
             }
