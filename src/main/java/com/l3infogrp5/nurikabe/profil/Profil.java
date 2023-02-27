@@ -46,7 +46,6 @@ public class Profil {
         this.idNiveau = idNiveau;
 
         Sauvegarder.creerDossiers(joueur);
-        StockageNiveau.creationNiveauDetente();
     }
 
     /**
