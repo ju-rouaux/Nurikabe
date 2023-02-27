@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ControllerMenuNiveau {
 
     private FXMLLoader loader;
-    private Stage stage;
+    public Stage stage;
     private Scene scene;
 
     private ArrayList<Grille_niveau> grille;
@@ -51,7 +51,7 @@ public class ControllerMenuNiveau {
     public ControllerMenuNiveau(Stage stage) throws IOException {
         this.stage = stage;
         this.grille=new ArrayList<Grille_niveau>();
-        this.grille.add(new Grille_niveau(index));
+        this.grille.add(new Grille_niveau(stage,index));
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_niveau.fxml"));
         loader.setController(this);
