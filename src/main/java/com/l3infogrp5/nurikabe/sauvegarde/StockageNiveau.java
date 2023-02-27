@@ -10,10 +10,18 @@ import com.l3infogrp5.nurikabe.utils.Path;
 
 public class StockageNiveau {
 
-    private static void writeGridToFile(FileWriter writer, int[][] grille) throws IOException {
-        for (int i = 0; i < grille.length; i++) {
-            for (int j = 0; j < grille[0].length; j++) {
-                writer.write(grille[i][j] + " ");
+    /**
+     * Ecrit la matrice dans un fichier texte.
+     *
+     * @param writer  le writer du fichier
+     * @param matrice la matrice a ecrire
+     * @throws IOException si une erreur se produit lors de l'écriture dans le
+     *                     fichier.
+     */
+    private static void grilleVersFichier(FileWriter writer, int[][] matrice) throws IOException {
+        for (int i = 0; i < matrice.length; i++) {
+            for (int j = 0; j < matrice[0].length; j++) {
+                writer.write(matrice[i][j] + " ");
             }
             writer.write("\n");
         }
@@ -46,82 +54,85 @@ public class StockageNiveau {
         };
 
         try {
-            FileWriter writer = new FileWriter(Path.repertoire_Grilles.toString() + "/grilles_detente.txt");
+            FileWriter writer = new FileWriter(Path.repertoire_grilles.toString() + "/grilles_detente.txt");
             writer.write("Grille 0 (" + niveau_0.length + ";" + niveau_0[0].length + ") :\n");
-            writeGridToFile(writer, niveau_0);
+            grilleVersFichier(writer, niveau_0);
             writer.write("\nGrille 1 (" + niveau_0.length + ";" + niveau_0[0].length + ") :\n");
-            writeGridToFile(writer, niveau_1);
+            grilleVersFichier(writer, niveau_1);
             writer.write("\nGrille 2 (" + niveau_0.length + ";" + niveau_0[0].length + ") :\n");
-            writeGridToFile(writer, niveau_2);
+            grilleVersFichier(writer, niveau_2);
             writer.close();
-            System.out.println("Toutes les grilles ont été sauvegardées dans le fichier grilles_detente.txt");
+            System.out.println("[StockageNiveau] Toutes les grilles ont été sauvegardées dans le fichier grilles_detente.txt");
         } catch (IOException e) {
-            System.out.println("Une erreur s'est produite" + e.getMessage());
+            System.out.println("[StockageNiveau] Une erreur s'est produite" + e.getMessage());
         }
     }
 
     /**
-     * Crée les grilles pour le mode contre la montre et les stocke dans un fichier texte.
+     * Crée les grilles pour le mode contre la montre et les stocke dans un fichier
+     * texte.
      */
-    public static void creationNiveauCLM(){
-        //TODO
+    public static void creationNiveauCLM() {
+        // TODO
     }
 
     /**
      * Crée les grilles pour le mode sans fin et les stocke dans un fichier texte.
      */
-    public static void creationNiveauSansFin(){
-        //TODO : a voir, peut etre niveau aleatoire des modes detente et CLM
+    public static void creationNiveauSansFin() {
+        // TODO : a voir, peut etre niveau aleatoire des modes detente et CLM
     }
 
-
-
-
-
-    public static int[][] chargerGrille(int numeroGrille, String modeDeJeu) {
+    /**
+     * Charge une grille depuis un fichier texte selon le numero de la grille et le
+     * mode de jeu
+     *
+     * @param id_niveau   le numero de la grille
+     * @param mode_de_jeu le mode de jeu
+     * @return la matrice du niveau chargé
+     */
+    public static int[][] chargerGrille(int id_niveau, String mode_de_jeu) {
         try {
             Scanner scanner = new Scanner(
-                    new File(Path.repertoire_Grilles.toString() + "/grilles_" + modeDeJeu + ".txt"));
+                    new File(Path.repertoire_grilles.toString() + "/grilles_" + mode_de_jeu + ".txt"));
             int[][] grille = null;
             int lignes = 0;
             int colonnes = 0;
-            boolean isCurrentGrid = false;
-            int rowIndex = 0; // add row index variable
+            boolean grille_courante = false;
+            int index = 0; // add row index variable
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if (line.startsWith("Grille " + numeroGrille)) {
-                    // Found a new grid, initialize a new 2D array
+                if (line.startsWith("Grille " + id_niveau)) {
+                    // Si une grille a été trouvée, on récupère ses dimensions
                     String[] dimensions = line.split("\\(")[1].split("\\)")[0].split(";");
                     lignes = Integer.parseInt(dimensions[0].trim());
                     colonnes = Integer.parseInt(dimensions[1].trim());
-                    // System.out.println("Grille de " + lignes + " lignes et " + colonnes + " colonnes");
                     grille = new int[lignes][colonnes];
-                    isCurrentGrid = true;
+                    grille_courante = true;
                 } else if (line.startsWith("#")) {
-                    // Skip separator line
-                    isCurrentGrid = false;
-                } else if (line.startsWith("Grille") && isCurrentGrid) {
-                    isCurrentGrid = false;
+                    // Ignore les lignes commentées
+                    grille_courante = false;
+                } else if (line.startsWith("Grille") && grille_courante) {
+                    grille_courante = false;
                     break;
 
-                } else if (isCurrentGrid) {
-                    // Load data into the current grid
+                } else if (grille_courante) {
                     String[] values = line.split(" ");
                     for (int i = 0; i < values.length; i++) {
                         if (!values[i].equals("")) {
-                            grille[rowIndex][i] = Integer.parseInt(values[i]);
+                            grille[index][i] = Integer.parseInt(values[i]);
                         }
                     }
-                    rowIndex++; // increment row index
+                    index++; // increment row index
                 }
             }
             scanner.close();
             return grille;
         } catch (FileNotFoundException e) {
-            System.out.println("Le fichier 'grilles_detente.txt' est introuvable : " + e.getMessage());
+            System.out.println("[StockageNiveau] Le fichier 'grilles_detente.txt' est introuvable : " + e.getMessage());
         } catch (Exception e) {
             System.out.println(
-                    "Une erreur s'est produite lors de la lecture de la grille dans le fichier 'grilles_detente.txt'"
+                    "[StockageNiveau] Une erreur s'est produite lors de la lecture de la grille dans le fichier 'grilles_detente.txt'"
                             + e.getMessage());
         }
         return null;
