@@ -443,9 +443,11 @@ public class StockageNiveau {
 
         int niveauxfac[][][] = { niveau_0, niveau_1, niveau_2, niveau_3, niveau_4, niveau_5, niveau_6, niveau_7,
                 niveau_8, niveau_9, niveau_10 };
-        int niveauxmoy[][][] = { niveau_100, niveau_101, niveau_102, niveau_103, niveau_104, niveau_105, niveau_106,
+        int niveauxmoy[][][] = { niveau_100, niveau_101, niveau_102, niveau_103, niveau_104, niveau_105,
+                niveau_106,
                 niveau_107, niveau_108, niveau_109, niveau_110 };
-        int niveauxdiff[][][] = { niveau_200, niveau_201, niveau_202, niveau_203, niveau_204, niveau_205, niveau_206,
+        int niveauxdiff[][][] = { niveau_200, niveau_201, niveau_202, niveau_203, niveau_204, niveau_205,
+                niveau_206,
                 niveau_207, niveau_208, niveau_209, niveau_210 };
         int debut_niv_moy = 100;
         int debut_niv_diff = 200;
@@ -455,16 +457,17 @@ public class StockageNiveau {
             // for (int i = 0; i < 3; i++) {
             writer.write("#Niveaux faciles\n");
             for (int j = 0; j < niveauxfac.length; j++) {
-                writer.write("Grille " + j + " (" + niveauxfac[j].length + ";" + niveauxfac[j][0].length + ") :\n");
+                writer.write("Grille " + j + " (" + niveauxfac[j].length + ";" + niveauxfac[j][0].length
+                        + ") :\n");
                 grilleVersFichier(writer, niveauxfac[j]);
             }
-            writer.write("\n\n#Niveaux Moyens\n");
+            writer.write("#Niveaux Moyens\n");
             for (int j = 0 + debut_niv_moy; j < niveauxmoy.length + debut_niv_moy; j++) {
                 writer.write("Grille " + j + " (" + niveauxmoy[j - debut_niv_moy].length + ";"
-                        + niveauxfac[j - debut_niv_moy][0].length + ") :\n");
+                        + niveauxmoy[j - debut_niv_moy][0].length + ") :\n");
                 grilleVersFichier(writer, niveauxmoy[j - debut_niv_moy]);
             }
-            writer.write("\n\n#Niveaux Difficiles\n");
+            writer.write("#Niveaux Difficiles\n");
             for (int j = 0 + debut_niv_diff; j < niveauxdiff.length + debut_niv_diff; j++) {
                 writer.write("Grille " + j + " (" + niveauxdiff[j - debut_niv_diff].length + ";"
                         + niveauxdiff[j - debut_niv_diff][0].length + ") :\n");
@@ -575,39 +578,45 @@ public class StockageNiveau {
                 { 0, -1, -1, -1, 0, 4, 0, },
         };
 
+        int[][] niveau_7 = {
+                { -1, -1, -1, -1, -1, 6, 0, },
+                { -1, 0, -1, 0, 2, -1, 0, },
+                { -1, 2, -1, -1, -1, -1, 0, },
+                { 0, -1, -1, 2, -1, 0, 0, },
+                { 0, 3, -1, 0, -1, -1, -1, },
+                { -1, -1, -1, -1, 1, -1, 4, },
+                { -1, 0, 3, -1, -1, 0, 0, },
+                { -1, 0, -1, 2, -1, -1, 0, },
+                { -1, -1, -1, 0, -1, 1, -1, },
+                { 0, 0, 3, -1, -1, -1, -1, },
+        };
         // Jusqua la solutions ok
-        int[][] niveau_7 = { { 0, 0, 0, 0, 0, 6, 0 },
-                { 0, 0, 0, 0, 2, 0, 0 },
-                { 0, 2, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 2, 0, 0, 0 },
-                { 0, 3, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 0, 4 },
-                { 0, 0, 3, 0, 0, 0, 0 },
-                { 0, 0, 0, 2, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 1, 0 },
-                { 0, 0, 3, 0, 0, 0, 0 } };
 
-        int[][] niveau_8 = { { 0, 0, 2, 0, 0, 3, 0 },
-                { 3, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 0, 0 },
-                { 0, 0, 2, 0, 0, 0, 2 },
-                { 0, 0, 0, 0, 0, 0, 0 },
-                { 2, 0, 0, 4, 0, 0, 0 },
-                { 0, 0, 2, 0, 0, 0, 0 },
-                { 0, 0, 0, 3, 0, 0, 1 },
-                { 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 4, 0, 0, 0, 2, 0 } };
+        int[][] niveau_8 = {
+                { 0, -1, 2, -1, 0, 3, 0, },
+                { 3, -1, 0, -1, -1, -1, -1, },
+                { 0, -1, -1, -1, 1, -1, 0, },
+                { -1, -1, 2, -1, -1, -1, 2, },
+                { 0, -1, 0, -1, 0, -1, -1, },
+                { 2, -1, -1, 4, 0, 0, -1, },
+                { -1, 0, 2, -1, -1, -1, -1, },
+                { -1, -1, -1, 3, 0, -1, 1, },
+                { 0, 0, -1, 0, -1, -1, -1, },
+                { 0, 4, -1, -1, -1, 2, 0, },
+        };
 
-        int[][] niveau_9 = { { 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 4, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 1, 0, 2, 0, 0 },
-                { 0, 0, 0, 0, 0, 7, 0 },
-                { 2, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 6, 0, 0, 0, 2, 0 },
-                { 4, 0, 0, 0, 4, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0 } };
+        int[][] niveau_9 = {
+                { -1, -1, -1, -1, -1, 0, 0, },
+                { -1, 0, 0, 4, -1, -1, 0, },
+                { -1, 0, -1, -1, 0, -1, 0, },
+                { -1, -1, 1, -1, 2, -1, 0, },
+                { 0, -1, -1, -1, -1, 7, 0, },
+                { 2, -1, 0, 0, -1, -1, -1, },
+                { -1, -1, 0, 0, -1, 0, -1, },
+                { -1, 6, 0, -1, -1, 2, -1, },
+                { 4, -1, -1, -1, 4, -1, -1, },
+                { 0, 0, 0, -1, 0, 0, 0, },
+        };
 
         int[][] niveau_10 = { { 0, 0, 0, 0, 0, 0, 2 },
                 { 0, 0, 0, 0, 0, 0, 0 },
@@ -912,28 +921,32 @@ public class StockageNiveau {
 
         int niveauxfac[][][] = { niveau_0, niveau_1, niveau_2, niveau_3, niveau_4, niveau_5, niveau_6, niveau_7,
                 niveau_8, niveau_9, niveau_10 };
-        int niveauxmoy[][][] = { niveau_100, niveau_101, niveau_102, niveau_103, niveau_104, niveau_105, niveau_106,
+        int niveauxmoy[][][] = { niveau_100, niveau_101, niveau_102, niveau_103, niveau_104, niveau_105,
+                niveau_106,
                 niveau_107, niveau_108, niveau_109, niveau_110 };
-        int niveauxdiff[][][] = { niveau_200, niveau_201, niveau_202, niveau_203, niveau_204, niveau_205, niveau_206,
+        int niveauxdiff[][][] = { niveau_200, niveau_201, niveau_202, niveau_203, niveau_204, niveau_205,
+                niveau_206,
                 niveau_207, niveau_208, niveau_209, niveau_210 };
         int debut_niv_moy = 100;
         int debut_niv_diff = 200;
         try {
-            FileWriter writer = new FileWriter(Path.repertoire_grilles.toString() + "/grilles_detente_solutions.txt");
+            FileWriter writer = new FileWriter(
+                    Path.repertoire_grilles.toString() + "/grilles_detente_solutions.txt");
             // TODO faire une boucle for pour tout les niveaux
             // for (int i = 0; i < 3; i++) {
             writer.write("#Niveaux faciles\n");
             for (int j = 0; j < niveauxfac.length; j++) {
-                writer.write("Grille " + j + " (" + niveauxfac[j].length + ";" + niveauxfac[j][0].length + ") :\n");
+                writer.write("Grille " + j + " (" + niveauxfac[j].length + ";" + niveauxfac[j][0].length
+                        + ") :\n");
                 grilleVersFichier(writer, niveauxfac[j]);
             }
-            writer.write("\n\n#Niveaux Moyens\n");
+            writer.write("#Niveaux Moyens\n");
             for (int j = 0 + debut_niv_moy; j < niveauxmoy.length + debut_niv_moy; j++) {
                 writer.write("Grille " + j + " (" + niveauxmoy[j - debut_niv_moy].length + ";"
-                        + niveauxfac[j - debut_niv_moy][0].length + ") :\n");
+                        + niveauxmoy[j - debut_niv_moy][0].length + ") :\n");
                 grilleVersFichier(writer, niveauxmoy[j - debut_niv_moy]);
             }
-            writer.write("\n\n#Niveaux Difficiles\n");
+            writer.write("#Niveaux Difficiles\n");
             for (int j = 0 + debut_niv_diff; j < niveauxdiff.length + debut_niv_diff; j++) {
                 writer.write("Grille " + j + " (" + niveauxdiff[j - debut_niv_diff].length + ";"
                         + niveauxdiff[j - debut_niv_diff][0].length + ") :\n");
@@ -1015,15 +1028,15 @@ public class StockageNiveau {
                 } else if (line.startsWith("Grille") && grille_courante) {
                     grille_courante = false;
                     break;
-
                 } else if (grille_courante) {
                     String[] values = line.split(" ");
-                    for (int i = 0; i < values.length; i++) {
+                    for (int i = 0; i < colonnes; i++) {
                         if (!values[i].equals("")) {
                             grille[index][i] = Integer.parseInt(values[i]);
                         }
                     }
                     index++; // increment row index
+                    System.out.println("index: " + index);
                 }
             }
             scanner.close();
