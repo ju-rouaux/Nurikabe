@@ -61,9 +61,6 @@ public class Profil {
         Niveau niveau_temp = null;
         niveau_temp = new Niveau(this.id_niveau);
 
-        int[][] solution = new int[][] { { -1, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 },
-                { 0, -2, 0, 0, 0, 0, 0 } };
-
         /*
          * Chargement de l'historique des mouvements du joueur
          */
@@ -87,10 +84,12 @@ public class Profil {
         if (chargerMatrice(this.joueur, this.mode_de_jeu, this.id_niveau) == null) {
             System.out.println(
                     "[Profil] Aucune sauvegarde de la grille du niveau trouvée - Chargement de la grille par défaut");
-            this.grille = new Grille(StockageNiveau.chargerGrille(this.id_niveau, this.mode_de_jeu), solution,
+            this.grille = new Grille(StockageNiveau.chargerGrille(this.id_niveau, this.mode_de_jeu, false),
+                    StockageNiveau.chargerGrille(this.id_niveau, this.mode_de_jeu, true),
                     this.historique);
         } else {
-            this.grille = new Grille(chargerMatrice(this.joueur, this.mode_de_jeu, this.id_niveau), solution,
+            this.grille = new Grille(chargerMatrice(this.joueur, this.mode_de_jeu, this.id_niveau),
+                    StockageNiveau.chargerGrille(this.id_niveau, this.mode_de_jeu, true),
                     this.historique);
             System.out.println(
                     "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
@@ -165,7 +164,7 @@ public class Profil {
         File grille_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
         File grille_fichier = new File(grille_repertoire.toString() + "/Matrice_" + id_niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
-            StockageNiveau.chargerGrille(id_niveau, mode_de_jeu);
+            StockageNiveau.chargerGrille(id_niveau, mode_de_jeu, false);
             return deserialisationMatrice(grille_fichier);
         } else {
             System.out.println("[Profil] Aucune grille du niveau du joueur à charger !");
@@ -257,6 +256,19 @@ public class Profil {
             serialisationMatrice(matrice_fichier, matrice);
         } else {
             System.out.println("[Profil] Erreur lors de la création de fichier et/ou de dossier");
+        }
+        // Affichage de la matrice
+        boolean debug = true;
+        if (debug) {
+            System.out.println("{");
+            for (int i = 0; i < matrice.length; i++) {
+                System.out.print(" { ");
+                for (int j = 0; j < matrice[i].length; j++) {
+                    System.out.print(matrice[i][j] + ", ");
+                }
+                System.out.println("},");
+            }
+            System.out.println("};");
         }
     }
 
