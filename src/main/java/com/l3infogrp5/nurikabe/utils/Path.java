@@ -24,6 +24,17 @@ public final class Path {
     private static final String DOSSIER_GRILLES = "/grilles";
 
     static {
+        // boolean shade = true;
+        // if (shade) {
+        //     try {
+        //         URL jarUrl = Path.class.getProtectionDomain().getCodeSource().getLocation();
+        //         File jarFile = new File(jarUrl.toURI().getPath());
+        //         String jarPath = jarFile.getParentFile().getAbsolutePath();
+        //         System.out.println(jarPath);
+        //     } catch (Exception e) {
+        //         // TODO: handle exception
+        //     }
+        // }
         try {
             // Récupère le répertoire du .jar
             repertoire_jar = new File(
@@ -41,7 +52,8 @@ public final class Path {
             dernier_indice = repertoire_jar.toString().lastIndexOf(System.getProperty("file.separator"));
             if (dernier_indice > 0) {
                 // Définit le répertoire courant
-                repertoire_courant = new File(repertoire_jar.toString().substring(0, dernier_indice) + DOSSIER_NURIKABE);
+                repertoire_courant = new File(
+                        repertoire_jar.toString().substring(0, dernier_indice) + DOSSIER_NURIKABE);
                 // Définit le répertoire des sauvegardes
                 repertoire_save = new File(repertoire_courant.toString() + DOSSIER_SAVE);
                 // Définit le répertoire des niveaux

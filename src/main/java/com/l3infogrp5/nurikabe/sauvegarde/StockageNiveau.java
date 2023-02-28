@@ -987,7 +987,7 @@ public class StockageNiveau {
                         + ") :\n");
                 grilleVersFichier(writer, niveauxfac[j]);
             }
-            writer.write("#Niveaux Moyens\n");
+            writer.write("\n\n#Niveaux Moyens\n");
             for (int j = 0 + debut_niv_moy; j < niveauxmoy.length + debut_niv_moy; j++) {
                 writer.write("Grille " + j + " (" + niveauxmoy[j - debut_niv_moy].length + ";"
                         + niveauxmoy[j - debut_niv_moy][0].length + ") :\n");
@@ -999,17 +999,6 @@ public class StockageNiveau {
                         + niveauxdiff[j - debut_niv_diff][0].length + ") :\n");
                 grilleVersFichier(writer, niveauxdiff[j - debut_niv_diff]);
             }
-
-            // }
-            // writer.write("Grille 0 (" + niveau_0.length + ";" + niveau_0[0].length + ")
-            // :\n");
-            // grilleVersFichier(writer, niveau_0);
-            // writer.write("\nGrille 1 (" + niveau_0.length + ";" + niveau_0[0].length + ")
-            // :\n");
-            // grilleVersFichier(writer, niveau_1);
-            // writer.write("\nGrille 2 (" + niveau_0.length + ";" + niveau_0[0].length + ")
-            // :\n");
-            // grilleVersFichier(writer, niveau_2);
             writer.close();
             System.out.println(
                     "[StockageNiveau] Toutes les grilles ont été sauvegardées dans le fichier grilles_detente.txt");
