@@ -258,7 +258,7 @@ public class Profil {
             System.out.println("[Profil] Erreur lors de la création de fichier et/ou de dossier");
         }
         // Affichage de la matrice
-        boolean debug = true;
+        boolean debug = false;
         if (debug) {
             System.out.println("{");
             for (int i = 0; i < matrice.length; i++) {
