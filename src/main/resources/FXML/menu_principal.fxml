@@ -13,7 +13,7 @@
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="panneau-principal">
+      <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="panneau-principal">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="85.03677756814113" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.3325691941177" minWidth="10.0" prefWidth="314.4324227097427" />
@@ -37,14 +37,14 @@
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <Label id="titre-nurikabe" alignment="TOP_CENTER" prefHeight="59.0" prefWidth="358.0" text="NURIKABE">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
                      <font>
-                        <Font name="System Bold" size="66.0" />
+                        <Font name="System Bold" size="60.0" />
                      </font>
                   </Label>
                </children>
