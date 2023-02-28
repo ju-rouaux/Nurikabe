@@ -1,10 +1,6 @@
 package com.l3infogrp5.nurikabe;
 
 import java.io.*;
-
-import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
-import com.l3infogrp5.nurikabe.utils.Path;
-
 import javafx.application.Application;
 
 /**
