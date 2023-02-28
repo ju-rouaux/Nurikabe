@@ -27,7 +27,7 @@
     <junit.version>5.9.2</junit.version>
 
     <!-- Classe de lancement du programme -->
-    <project.mainClass>com.l3infogrp5.nurikabe.NewMain</project.mainClass>
+    <project.mainClass>com.l3infogrp5.nurikabe.Main</project.mainClass>
 
   </properties>
 
