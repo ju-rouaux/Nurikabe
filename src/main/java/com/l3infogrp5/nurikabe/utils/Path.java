@@ -24,21 +24,10 @@ public final class Path {
     private static final String DOSSIER_GRILLES = "/grilles";
 
     static {
-        // boolean shade = true;
-        // if (shade) {
-        //     try {
-        //         URL jarUrl = Path.class.getProtectionDomain().getCodeSource().getLocation();
-        //         File jarFile = new File(jarUrl.toURI().getPath());
-        //         String jarPath = jarFile.getParentFile().getAbsolutePath();
-        //         System.out.println(jarPath);
-        //     } catch (Exception e) {
-        //         // TODO: handle exception
-        //     }
-        // }
         try {
             // Récupère le répertoire du .jar
             repertoire_jar = new File(
-                    Path.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+                    Path.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
         } catch (URISyntaxException e) {
             // Affichage d'une erreur si impossible de récupérer le répertoire du .jar
             System.out.println("[Path] Erreur indexation fichiers : Impossible de récupérer le répertoire du .jar");
@@ -61,7 +50,7 @@ public final class Path {
                 // Définit le répertoire des scores
                 repertoire_score = new File(repertoire_save.toString() + DOSSIER_SCORE);
                 // Définit le répertoire des grilles
-                repertoire_grilles = new File(repertoire_courant.toString() + DOSSIER_GRILLES);
+                repertoire_grilles = new File(repertoire_jar + DOSSIER_GRILLES);
 
             } else {
                 System.out.println("[Path] erreur index < 0");

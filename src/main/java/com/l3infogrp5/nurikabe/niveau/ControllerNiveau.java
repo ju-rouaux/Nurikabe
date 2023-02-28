@@ -13,8 +13,6 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 import com.l3infogrp5.nurikabe.profil.Profil;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
-import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 
 /**
@@ -74,9 +72,6 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
         // this.niveau = niveau;
-        Sauvegarder.creerDossiers(null);
-        StockageNiveau.creationNiveauDetente();
-        StockageNiveau.creationSolutionNiveauDetente();
         joueur = new Profil("Julieng", "detente", 10);
 
         this.niveau = joueur.chargerNiveau(joueur.getId_niveau());
