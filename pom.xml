@@ -78,6 +78,8 @@
           <reportOutputDirectory>.</reportOutputDirectory>
         </configuration>
       </plugin>
+
+      <!-- Plugin pour packager avec JavaFX -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -91,6 +93,7 @@
           </execution>
         </executions>
       </plugin>
+
       <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
