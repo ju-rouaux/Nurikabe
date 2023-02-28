@@ -10,20 +10,16 @@ import java.io.Serializable;
 public class Position implements Serializable {
     /** Coordonnées x, y */
     private int x, y;
-    /** Index de la position si le tableau était unidimensionnel */
-    private int index;
 
     /**
      * Créer de nouvelles coordonnées
      * 
      * @param x     position en x.
      * @param y     position en y.
-     * @param index index dans la matrice (x*nb_colonne + y).
      */
-    public Position(int x, int y, int index) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
-        this.index = index;
     }
 
     /**
@@ -45,20 +41,11 @@ public class Position implements Serializable {
     }
 
     /**
-     * Retourne l'index.
-     * 
-     * @return l'index.
-     */
-    public int getIndex() {
-        return this.index;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return "[Position (" + this.x + ", " + this.y + ") / Index " + this.index + "]";
+        return "[Position (" + this.x + ", " + this.y + ")]";
     }
 
     @Override
@@ -66,6 +53,6 @@ public class Position implements Serializable {
         if (!(p instanceof Position))
             return false;
         Position p2 = (Position) p;
-        return this.x == p2.x && this.y == p2.y && this.index == p2.index;
+        return this.x == p2.x && this.y == p2.y;
     }
 }
