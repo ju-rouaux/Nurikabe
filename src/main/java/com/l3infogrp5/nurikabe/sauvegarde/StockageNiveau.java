@@ -1,9 +1,8 @@
 package com.l3infogrp5.nurikabe.sauvegarde;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import com.l3infogrp5.nurikabe.utils.Path;
@@ -1033,59 +1032,59 @@ public class StockageNiveau {
      * @return la matrice du niveau chargé
      */
     public static int[][] chargerGrille(int id_niveau, String mode_de_jeu, Boolean solution) {
-        try {
-            Scanner scanner;
-            if (!solution) {
-                scanner = new Scanner(
-                        new File(Path.repertoire_grilles.toString() + "/grilles_" + mode_de_jeu
-                                + ".txt"));
-            } else {
-                scanner = new Scanner(
-                        new File(Path.repertoire_grilles.toString() + "/grilles_" + mode_de_jeu
-                                + "_solutions.txt"));
-            }
-            int[][] grille = null;
-            int lignes = -1;
-            int colonnes = 0;
-            boolean grille_courante = false;
-            int index = 0;
-            // A voir && index != ligne car seulement pour corriger bug niveau 10
-            while (scanner.hasNextLine() && index != lignes) {
-                String line = scanner.nextLine();
-                if (line.startsWith("Grille " + id_niveau)) {
-                    // Si une grille a été trouvée, on récupère ses dimensions
-                    String[] dimensions = line.split("\\(")[1].split("\\)")[0].split(";");
-                    lignes = Integer.parseInt(dimensions[0].trim());
-                    colonnes = Integer.parseInt(dimensions[1].trim());
-                    grille = new int[lignes][colonnes];
-                    grille_courante = true;
-                } else if (line.startsWith("#")) {
-                    // Ignore les lignes commentées
-                    grille_courante = false;
-                } else if (line.startsWith("Grille") && grille_courante) {
-                    grille_courante = false;
-                    break;
-                } else if (grille_courante) {
-                    String[] values = line.split(" ");
-                    for (int i = 0; i < colonnes; i++) {
-                        if (!values[i].equals("")) {
-                            grille[index][i] = Integer.parseInt(values[i]);
-                        }
-                    }
-                    index++; // incremente indeice de la ligne
-                }
-            }
-            scanner.close();
-            return grille;
-        } catch (FileNotFoundException e) {
-            System.out.println("[StockageNiveau] Le fichier 'grilles_detente.txt' est introuvable : "
-                    + e.getMessage());
-        } catch (Exception e) {
-            System.out.println(
-                    "[StockageNiveau] Une erreur s'est produite lors de la lecture de la grille dans le fichier 'grilles_detente.txt'"
-                            + e.getMessage());
-        }
-        return null;
-    }
 
+        InputStream inputStream;
+        if (!solution) {
+            inputStream = StockageNiveau.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
+        } else {
+            inputStream = StockageNiveau.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + "_solutions.txt");
+        }
+
+        if (inputStream == null) {
+            System.out.println("[StockageNiveau] : Fichier inexistant");
+            return null;
+        }
+
+        Scanner scanner = new Scanner(inputStream);
+        int[][] grille = null;
+        int lignes = -1;
+        int colonnes = 0;
+        boolean grille_courante = false;
+        int index = 0;
+        // A voir && index != ligne car seulement pour corriger bug niveau 10
+        while (scanner.hasNextLine() && index != lignes) {
+            String line = scanner.nextLine();
+            if (line.startsWith("Grille " + id_niveau)) {
+                // Si une grille a été trouvée, on récupère ses dimensions
+                String[] dimensions = line.split("\\(")[1].split("\\)")[0].split(";");
+                lignes = Integer.parseInt(dimensions[0].trim());
+                colonnes = Integer.parseInt(dimensions[1].trim());
+                grille = new int[lignes][colonnes];
+                grille_courante = true;
+            } else if (line.startsWith("#")) {
+                // Ignore les lignes commentées
+                grille_courante = false;
+            } else if (line.startsWith("Grille") && grille_courante) {
+                grille_courante = false;
+                break;
+            } else if (grille_courante) {
+                String[] values = line.split(" ");
+                for (int i = 0; i < colonnes; i++) {
+                    if (!values[i].equals("")) {
+                        grille[index][i] = Integer.parseInt(values[i]);
+                    }
+                }
+                index++; // incremente indeice de la ligne
+            }
+        }
+        scanner.close();
+        return grille;
+        // } catch (Exception e) {
+        // System.out.println(
+        // "[StockageNiveau] Une erreur s'est produite lors de la lecture de la grille
+        // dans le fichier 'grilles_detente.txt'"
+        // + e.getMessage());
+        // }
+
+    }
 }

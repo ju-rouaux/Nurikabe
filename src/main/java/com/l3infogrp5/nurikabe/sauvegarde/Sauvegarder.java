@@ -127,12 +127,6 @@ public class Sauvegarder {
                 // System.out.println("Dossier score créé");
             }
 
-            boolean grille_existe = fichiers.contains("grilles");
-            if (!grille_existe) {
-                Files.createDirectories(Paths.get(Path.repertoire_grilles.toString()));
-                // System.out.println("Dossier grilles créé");
-            }
-
         } catch (IOException e) {
             System.err.println("[Sauvegarde] Erreur lors de la création des répertoires nécessaires au jeu");
             e.printStackTrace();
