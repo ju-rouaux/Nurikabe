@@ -51,7 +51,7 @@ public class ControllerMenuNiveau {
     public ControllerMenuNiveau(Stage stage) throws IOException {
         this.stage = stage;
         this.grille=new ArrayList<Grille_niveau>();
-        this.grille.add(new Grille_niveau(stage,index));
+        this.grille.add(new Grille_niveau(stage,0));
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_niveau.fxml"));
         loader.setController(this);
@@ -106,7 +106,7 @@ public class ControllerMenuNiveau {
         if(this.grille.size()>this.index){
             index+=1;
             num_page.setText(""+index);
-            this.grille.add(new Grille_niveau(index));
+            this.grille.add(new Grille_niveau(stage,index));
             panneau.setCenter(this.grille.get(index).getGridPane()); 
 
         }

@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.menu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -23,18 +24,19 @@ public class Grille_niveau {
 
 
 
-    public Grille_niveau(Stage stage,int indice){
+    public Grille_niveau(Stage stage,int indice) throws IOException{
         /* TODO: méthode pour connaitre le nombre de niveaux */
         this.stage=stage;
         this.pane=new GridPane();
         /* méthode pour que ce soit redimensionnable selon la tzaille de la fenetre */
         int nb_colonnes=4;
         int nb_lignes=4;
-        this.computePane();
         for (int i = 0; i < nb_lignes; i++) {
             for (int j = 0; j < nb_colonnes; j++) {
-                Case_niveau c=new Case_niveau(stage,(indice*16)+(i*nb_lignes)+j);
+                ControllerCaseNiveau c=new ControllerCaseNiveau(stage,indice);
+                //Case_niveau c = new Case_niveau(stage);
                 this.pane.add(c.getBorderPane(),i,j);
+                // (indice*16)+(i*nb_lignes)+j
                 }
             }
         }
