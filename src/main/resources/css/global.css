@@ -1,8 +1,12 @@
 /* ==================== Classes ==================== */
 
+.root {
+    /*-fx-background-color: radial-gradient(center 50% 50% , radius 100% , #ffebcd, #008080);*/
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 200%, repeat, rgb(139, 226, 0) 0%, rgb(255, 255, 255) 100%);
+}
 /* "Pane" principal de chacune des interfaces */
 .panneau-principal {
-    -fx-background-color:  #BEBEBE;
+    -fx-effect: dropshadow(three-pass-box, rgb(239, 248, 152),100, 0, 0, 0);
 }
 
 
