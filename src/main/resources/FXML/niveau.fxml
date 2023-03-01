@@ -1,13 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <BorderPane fx:id="panneau" prefHeight="200.0" prefWidth="200.0">
+   <BorderPane fx:id="panneau_principal" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0">
       <top>
-         <Label text="Barre d'outil ici" BorderPane.alignment="CENTER" />
+         <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="49.0" prefWidth="641.0" BorderPane.alignment="CENTER">
+            <items>
+               <HBox fx:id="barre" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="614.0" spacing="10.0">
+                  <children>
+                     <Button fx:id="btn_retour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" text="X" textOverrun="CLIP" />
+                     <Button fx:id="btn_undo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#undoClique" prefHeight="30.0" prefWidth="30.0" text="Undo" textOverrun="CLIP" />
+                     <Button fx:id="btn_redo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redoClique" prefHeight="30.0" prefWidth="30.0" text="Redo" textOverrun="CLIP" />
+                     <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                     <BorderPane fx:id="panneau_score" prefHeight="200.0" prefWidth="200.0">
+                        <center>
+                           <Label text="Label" BorderPane.alignment="CENTER" />
+                        </center>
+                     </BorderPane>
+                     <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                     <Button fx:id="btn_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Aide" textOverrun="CLIP" />
+                     <Button fx:id="btn_check" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Correction" textOverrun="CLIP" />
+                     <Button fx:id="btn_reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Recommencer" textOverrun="CLIP" />
+                  </children>
+               </HBox>
+            </items>
+         </ToolBar>
       </top>
    </BorderPane>
+   <stylesheets>
+      <URL value="@../css/niveau.css" />
+      <URL value="@../css/global.css" />
+   </stylesheets>
 </Scene>
