@@ -1,6 +1,5 @@
 package com.l3infogrp5.nurikabe.menu;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -49,7 +48,7 @@ public class ControllerNouveauxProfil {
     }
 
     @FXML
-    private void getPseudo(){
+    private void getPseudo() {
         this.profils.joueur = pseudo.getText();
     }
 
@@ -59,3 +58,6 @@ public class ControllerNouveauxProfil {
     }
 
 }
+
+// TODO : empecher cree profile nom vide
+// TODO : appyer sur entre pour cree nouveaux profile
