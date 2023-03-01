@@ -28,10 +28,10 @@ public class Grille_niveau {
         this.pane=new GridPane();
         /* méthode pour que ce soit redimensionnable selon la tzaille de la fenetre */
         int nb_colonnes=4;
-        int nb_lignes=4;
-        for (int i = 0; i < nb_lignes; i++) {
-            for (int j = 0; j < nb_colonnes; j++) {
-                ControllerCaseNiveau c=new ControllerCaseNiveau(stage,(indice*16)+(i*nb_lignes)+j);
+        int nb_lignes=2;
+        for (int i = 0; i < nb_colonnes; i++) {
+            for (int j = 0; j < nb_lignes; j++) {
+                ControllerCaseNiveau c=new ControllerCaseNiveau(stage,(indice*8)+(j*nb_lignes)+i);
                 //Case_niveau c = new Case_niveau(stage);
                 this.pane.add(c.getBorderPane(),i,j);
                 }
@@ -45,10 +45,5 @@ public class Grille_niveau {
      */
     public GridPane getGridPane(){
         return this.pane;
-    }
-
-    private void computePane(){
-        this.pane.setPrefSize(this.pane.USE_COMPUTED_SIZE, this.pane.USE_COMPUTED_SIZE);
-        this.pane.setMaxSize(this.pane.USE_COMPUTED_SIZE, this.pane.USE_COMPUTED_SIZE);
     }
 }
