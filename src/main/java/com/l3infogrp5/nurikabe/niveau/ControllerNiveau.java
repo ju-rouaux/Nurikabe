@@ -59,7 +59,7 @@ public class ControllerNiveau {
      * temp
      */
 
-     Profil joueur;
+    Profil joueur;
 
     /**
      * Initialise la vue du niveau.
@@ -71,12 +71,9 @@ public class ControllerNiveau {
      */
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
-        // this.niveau = niveau;
+        joueur = new Profil("Julieng", "detente", 1);
 
-        joueur = new Profil("Julieng", "detente", 0);
-
-        this.niveau = joueur.chargerNiveau(joueur.getIdNiveau());
-
+        this.niveau = joueur.chargerNiveau(joueur.getId_niveau());
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -95,7 +92,7 @@ public class ControllerNiveau {
         this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(15));
 
         // Mettre la grille au centre (et ajouter une marge)
-        Pane grille =  this.niveau.getGrille().getPanneau();
+        Pane grille = this.niveau.getGrille().getPanneau();
         BorderPane.setMargin(grille, new Insets(30, 30, 30, 30));
         this.panneau_principal.setCenter(grille);
 

@@ -5,17 +5,17 @@ import java.net.*;
 
 public final class Path {
     // Répertoire du fichier .jar
-    public static File repertoire_Jar;
+    public static File repertoire_jar;
     // Répertoire courant
-    public static final File repertoire_Courant;
+    public static final File repertoire_courant;
     // Répertoire des sauvegardes
-    public static final File repertoire_Save;
+    public static final File repertoire_save;
     // Répertoire des niveaux
-    public static final File repertoire_Lvl;
+    public static final File repertoire_lvl;
     // Répertoire des scores
-    public static final File repertoire_Score;
+    public static final File repertoire_score;
     // Répertoire des grilles
-    public static final File repertoire_Grilles;
+    public static final File repertoire_grilles;
 
     private static final String DOSSIER_NURIKABE = "/nurikabe_data";
     private static final String DOSSIER_SAVE = "/save";
@@ -26,57 +26,57 @@ public final class Path {
     static {
         try {
             // Récupère le répertoire du .jar
-            repertoire_Jar = new File(
-                    Path.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            repertoire_jar = new File(
+                    Path.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
         } catch (URISyntaxException e) {
             // Affichage d'une erreur si impossible de récupérer le répertoire du .jar
-            System.out.println("Erreur indexation fichiers : Impossible de récupérer le répertoire du .jar");
+            System.out.println("[Path] Erreur indexation fichiers : Impossible de récupérer le répertoire du .jar");
             e.printStackTrace();
         }
-        System.out.println(repertoire_Jar.toString());
-        if (repertoire_Jar != null && repertoire_Jar.toString().length() > 0) {
-            int dernier_Indice;
+        System.out.println(repertoire_jar.toString());
+        if (repertoire_jar != null && repertoire_jar.toString().length() > 0) {
+            int dernier_indice;
 
             // Récupère l'index du dernier séparateur de fichier
-            dernier_Indice = repertoire_Jar.toString().lastIndexOf(System.getProperty("file.separator"));
-            if (dernier_Indice > 0) {
+            dernier_indice = repertoire_jar.toString().lastIndexOf(System.getProperty("file.separator"));
+            if (dernier_indice > 0) {
                 // Définit le répertoire courant
-                repertoire_Courant = new File(repertoire_Jar.toString().substring(0, dernier_Indice) + DOSSIER_NURIKABE);
+                repertoire_courant = new File(
+                        repertoire_jar.toString().substring(0, dernier_indice) + DOSSIER_NURIKABE);
                 // Définit le répertoire des sauvegardes
-                repertoire_Save = new File(repertoire_Courant.toString() + DOSSIER_SAVE);
+                repertoire_save = new File(repertoire_courant.toString() + DOSSIER_SAVE);
                 // Définit le répertoire des niveaux
-                repertoire_Lvl = new File(repertoire_Save.toString() + DOSSIER_NIVEAUX);
+                repertoire_lvl = new File(repertoire_save.toString() + DOSSIER_NIVEAUX);
                 // Définit le répertoire des scores
-                repertoire_Score = new File(repertoire_Save.toString() + DOSSIER_SCORE);
+                repertoire_score = new File(repertoire_save.toString() + DOSSIER_SCORE);
                 // Définit le répertoire des grilles
-                repertoire_Grilles = new File(repertoire_Courant.toString() + DOSSIER_GRILLES);
+                repertoire_grilles = new File(repertoire_jar + DOSSIER_GRILLES);
 
             } else {
-                System.out.println("lastIndex < 0");
+                System.out.println("[Path] erreur index < 0");
                 // Répertoire courant non défini
-                repertoire_Courant = null;
+                repertoire_courant = null;
                 // Répertoire des sauvegardes non défini
-                repertoire_Save = null;
+                repertoire_save = null;
                 // Répertoire des niveaux non défini
-                repertoire_Lvl = null;
+                repertoire_lvl = null;
                 // Répertoire des scores non défini
-                repertoire_Score = null;
+                repertoire_score = null;
                 // Répertoire des grilles non défini
-                repertoire_Grilles = null;
+                repertoire_grilles = null;
             }
         } else {
-            System.out.println("<Erreur> : Probleme d'indexation de fichiers");
-            System.out.println("Path.enclosing_method()");
+            System.out.println("[Path] Probleme d'indexation de fichiers");
             // Répertoire courant non défini
-            repertoire_Courant = null;
+            repertoire_courant = null;
             // Répertoire des sauvegardes non défini
-            repertoire_Save = null;
+            repertoire_save = null;
             // Répertoire des niveaux non défini
-            repertoire_Lvl = null;
+            repertoire_lvl = null;
             // Répertoire des scores non défini
-            repertoire_Score = null;
+            repertoire_score = null;
             // Répertoire des grilles non défini
-            repertoire_Grilles = null;
+            repertoire_grilles = null;
         }
     }
 }

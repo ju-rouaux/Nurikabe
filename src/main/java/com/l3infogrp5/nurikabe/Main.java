@@ -1,6 +1,7 @@
 package com.l3infogrp5.nurikabe;
 
 import java.io.*;
+
 import javafx.application.Application;
 
 /**
