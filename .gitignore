@@ -1,5 +1,11 @@
 *.class
-*.pdf
-.vscode
-/target/
 *.jar
+
+.vscode/
+target/
+apidocs/
+
+*.log
+*.pdf
+
+.DS_Store

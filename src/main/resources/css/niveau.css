@@ -1,0 +1,36 @@
+/* ==================== Classes ==================== */
+
+/* Style partagé par toutes les cases */
+.case {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0;
+    -fx-padding: -999; /* Retirer totalement le padding */
+}
+
+/* Case numérique */
+.case-numerique {
+
+}
+
+/* Case blanche */
+.case-blanche {
+    
+}
+
+/* Case noire */
+.case-noire {
+    -fx-background-color: #000000;
+}
+
+/* Case point */
+.case-point {
+
+}
+
+/* Case mise en surbrillance */
+.surbrillance {
+    -fx-effect: innershadow(gaussian, rgb(255, 200, 0), 40, 0.1, 0, 0);
+}
+
+
+/* ==================== IDs ==================== */

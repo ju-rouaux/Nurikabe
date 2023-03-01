@@ -68,4 +68,39 @@ public class ScoreCLM extends ScoreChrono {
             sec += aide;
 
     }
+
+    @Override
+    public void checkUtilise() {
+
+    }
+
+    @Override
+    public void start() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'start'");
+    }
+
+    @Override
+    public void stop() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'stop'");
+    }
+
+    @Override
+    public void nouveauLance() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'nouveauLance'");
+    }
+
+    @Override
+    public void restart() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'restart'");
+    }
+
+    @Override
+    public void get_Pane() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'get_Pane'");
+    }
 }

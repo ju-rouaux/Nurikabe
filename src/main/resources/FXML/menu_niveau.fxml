@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <root>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="954.0" styleClass="panneau-principal">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox>
+               <children>
+                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" text="&lt;&lt;">
+                     <font>
+                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau1" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau3" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau4" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau6" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau7" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau9" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau10" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau11" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau13" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau14" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau15" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="4" GridPane.rowIndex="4">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="60.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="37.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau16" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" prefHeight="37.0" prefWidth="86.0" scaleShape="false" styleClass="grille" stylesheets="@../css/menu.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="46.0" minWidth="10.0" prefWidth="42.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="0.0" prefWidth="54.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="0.0" prefWidth="43.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="23.0" minHeight="0.9947375123248356" prefHeight="23.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="6.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Niveau12" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: #FFFFFF;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../trophee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </root>
+   <stylesheets>
+      <URL value="@../css/menu.css" />
+      <URL value="@../css/global.css" />
+   </stylesheets>
+</Scene>

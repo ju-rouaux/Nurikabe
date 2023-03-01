@@ -8,8 +8,20 @@ package com.l3infogrp5.nurikabe.Niveaux.Score;
  */
 public interface ScoreInterface {
 
+    public void start();
+
+    public void stop();
+
+    public void nouveauLance();
+
     public void aideUtilise();
 
+    public void restart();
+
     public void grilleComplete();
+
+    public void checkUtilise();
+
+    public void get_Pane();
 
 }

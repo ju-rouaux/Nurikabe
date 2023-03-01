@@ -5,43 +5,23 @@ import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreChrono;
 import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreEndless;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class Main extends Application {
-
-    @Override
-    public void start(Stage primaryStage) {
-
-        final Text text = new Text("00:00");
-        text.setLayoutX(100);
-        text.setLayoutY(100);
-        text.setFill(Color.BLUE);
-        final Pane root = new Pane();
-        root.getChildren().setAll(text);
-        final Scene scene = new Scene(root, 350, 300);
-
-        ScoreChrono score = new ScoreCLM(10, 0, text);
-        score.calcul();
-
-        System.out.println("test");
-        score.aideUtilise();
-
-        /*
-         * ScoreChrono score = new ScoreEndless(40,0, text);
-         * score.calcul();
-         * 
-         * System.out.println("test");
-         * //score.aideUtilise(35);
-         * score.grilleComplete();
-         */
-
-        primaryStage.setTitle("Test sur l'opacité");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+/**
+ * Point d'entrée de l'application.
+ * Projet étudiant de L3 Informatique.
+ * 
+ * @author Julien Rouaux
+ */
+public class Main {
+    private Main() {
     }
 
+    /**
+     * Lancement de l'application.
+     * 
+     * @param args arguments de ligne de commande.
+     */
+    public static void main(String[] args) {
+        Application.launch(Nurikabe.class, args);
+    }
 }

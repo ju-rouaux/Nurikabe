@@ -56,23 +56,23 @@ public class ScoreEndless extends ScoreChrono {
     }
 
     /**
-     * Méthode qui enlève du temps en fonction de l'aide utilisée
+     * Méthode qui enlève du temps en fonction de l'malus utilisée
      * 
-     * @param aide valeur de la pénalité appliquée à l'utilisation d'une aide
+     * @param malus valeur de la pénalité appliquée à l'utilisation d'une malus
      */
 
     @Override
     public void aideUtilise() {
 
-        int aide = 40;
+        int malus = 40;
 
-        if (sec - aide < 0) {
+        if (sec - malus < 0) {
             min--;
-            sec -= aide - 60;
-        } else if (min == 0 && sec - aide < 0) {
+            sec -= malus - 60;
+        } else if (min == 0 && sec - malus < 0) {
             calcStop();
         } else {
-            sec -= aide;
+            sec -= malus;
         }
 
     }
@@ -90,6 +90,52 @@ public class ScoreEndless extends ScoreChrono {
         } else
             sec += bonus;
 
+    }
+
+    @Override
+    public void checkUtilise() {
+        
+        int malus = 60;
+
+        if (sec - malus < 0) {
+            min--;
+            sec -= malus - 60;
+        } else if (min == 0 && sec - malus < 0) {
+            calcStop();
+        } else {
+            sec -= malus;
+        }
+
+    }
+
+    @Override
+    public void start() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'start'");
+    }
+
+    @Override
+    public void stop() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'stop'");
+    }
+
+    @Override
+    public void nouveauLance() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'nouveauLance'");
+    }
+
+    @Override
+    public void restart() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'restart'");
+    }
+
+    @Override
+    public void get_Pane() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'get_Pane'");
     }
 
 }
