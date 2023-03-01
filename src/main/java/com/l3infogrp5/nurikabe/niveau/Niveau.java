@@ -21,9 +21,14 @@ public class Niveau {
 
         // TODO vérifier s'il existe une sauvegarde
 
+        /**
+         * TODO Modifier code pour supprimer matrice et solution supprimer
+         */
+
         // Matrice de démonstration (TODO : à supprimer)
         int[][] matrice = new int[][] { { 0, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
-        int[][] solution = new int[][] { { -1, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 }, { 0, -2, 0, 0, 0, 0, 0 } };
+        int[][] solution = new int[][] { { -1, 0, 17, 0, 3, 0, 0 }, { 0, 0, 0, 0, -1, 0, 0 },
+                { 0, -2, 0, 0, 0, 0, 0 } };
         // Historique de démonstration
         this.histo = new Historique();
 
@@ -52,7 +57,6 @@ public class Niveau {
         this.histo = historique;
     }
 
-
     /**
      * Définit la grille du niveau.
      *
@@ -63,6 +67,5 @@ public class Niveau {
         this.grille = grille;
         return this.grille;
     }
-
 
 }

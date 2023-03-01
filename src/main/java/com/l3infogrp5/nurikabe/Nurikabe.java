@@ -19,7 +19,7 @@ public class Nurikabe extends Application {
      */
     public Nurikabe() {
         super();
-        Sauvegarder.creerDossiers(null);
+        Sauvegarder.creerArborescence();
     }
 
     /**

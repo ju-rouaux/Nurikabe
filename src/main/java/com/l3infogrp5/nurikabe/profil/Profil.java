@@ -45,7 +45,11 @@ public class Profil {
         this.mode_de_jeu = mode_de_jeu;
         this.id_niveau = id_niveau;
 
-        Sauvegarder.creerDossiers(joueur);
+        if (Sauvegarder.RechercherSauvegarde(joueur)) {
+            System.out.println("[Profil] Profil deja existant");
+        } else {
+            Sauvegarder.creerDossierJoueur(joueur);
+        }
 
     }
 

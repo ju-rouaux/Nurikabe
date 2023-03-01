@@ -32,31 +32,28 @@ public class Sauvegarder {
      *
      * @return vrai si la sauvegarde existe, faux sinon
      */
-    // private boolean RechercherSauvegarde(String joueur) {
-    // // Vérifier si le nom du joueur est nul
-    // if (joueur == null)
-    // return false;
+    public static boolean RechercherSauvegarde(String joueur) {
+        // Vérifier si le nom du joueur est nul
+        if (joueur == null)
+            return false;
 
-    // // Récupère tous les fichiers dans le répertoire
-    // // Vérifier si le répertoire existe et s'il contient des fichiers
-    // if (!dossierExistants(Path.repertoire_Lvl) ||
-    // Path.repertoire_Lvl.listFiles().length == 0) {
-    // System.out.println("Il n'y pas de fichiers ou dossiers");
-    // return false;
-    // }
+        // Récupère tous les fichiers dans le répertoire
+        // Vérifier si le répertoire existe et s'il contient des fichiers
+        if (!dossierExistants(Path.repertoire_lvl) ||
+                Path.repertoire_lvl.listFiles().length == 0) {
+            // System.out.println("Il n'y pas de fichiers ou dossiers");
+            return false;
+        }
 
-    // // Parcourt tous les fichiers pour voir s'il y a une sauvegarde pour le
-    // joueur
-    // for (File fichier : Path.repertoire_Lvl.listFiles()) {
-    // if (fichier.isDirectory() && fichier.getName().equals(joueur)) {
-    // System.out.println("La sauvegarde du joueur existe");
-    // return true;
-    // }
-    // }
-
-    // System.out.println("Erreur, ce pseudo n'est pas associé à une sauvegarde");
-    // return false;
-    // }
+        // Parcourt tous les fichiers pour voir s'il y a une sauvegarde pour le joueur
+        for (File fichier : Path.repertoire_lvl.listFiles()) {
+            if (fichier.isDirectory() && fichier.getName().equals(joueur)) {
+                // System.out.println("La sauvegarde du joueur existe");
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Affiche tous les fichiers dans le répertoire
@@ -91,12 +88,23 @@ public class Sauvegarder {
         return fichiers;
     }
 
+    public static void creerDossierJoueur(String nom_joueur) throws IOException {
+
+        // Vérifier si le dossier "lvl" existe déjà dans "save"
+        boolean niveau_existe = ajoutFichiers(Path.repertoire_courant).contains("lvl");
+        if (!niveau_existe) {
+            // Créer le dossier "lvl" si il n'existe pas
+            Files.createDirectories(Paths.get(Path.repertoire_lvl.toString()));
+        }
+        Files.createDirectories(Paths.get(Path.repertoire_lvl.toString() + "/" + nom_joueur));
+    }
+
     /**
      * Création des dossiers necessaires a la sauvegarde
      *
      * @param nom_joueur le nom du joueur/profil
      */
-    public static void creerDossiers(String nom_joueur) {
+    public static void creerArborescence() {
 
         ArrayList<String> fichiers = ajoutFichiers(Path.repertoire_courant);
 
@@ -107,17 +115,7 @@ public class Sauvegarder {
                 // Créer le dossier "save" si il n'existe pas
                 Files.createDirectories(Paths.get(Path.repertoire_save.toString()));
                 // System.out.println("Dossier save créé");
-            } else {
-                // Se déplacer dans le nouveau dossier "save"
             }
-
-            // Vérifier si le dossier "lvl" existe déjà dans "save"
-            boolean niveau_existe = fichiers.contains("lvl");
-            if (!niveau_existe) {
-                // Créer le dossier "lvl" si il n'existe pas
-                Files.createDirectories(Paths.get(Path.repertoire_lvl.toString()));
-            }
-            Files.createDirectories(Paths.get(Path.repertoire_lvl.toString() + "/" + nom_joueur));
 
             // Vérifier si le dossier "score" existe déjà dans "save"
             boolean score_existe = fichiers.contains("score");
@@ -222,7 +220,8 @@ public class Sauvegarder {
         File mouvements_fichier = new File(mouvements_repertoire.toString() + "/Mouvements_" + id_niveau);
 
         if (creerDossierFichier(mouvements_repertoire, mouvements_fichier)) {
-            System.out.println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
+            System.out
+                    .println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
             serialisationHistorique(mouvements_fichier, historique);
         } else {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
@@ -243,7 +242,8 @@ public class Sauvegarder {
             sortie.close();
             fichier_sortie.close();
 
-            System.out.println("[Sauvegarde] Historique des mouvements serialisé et sauvegardé dans Mouvements_<id_niveau>");
+            System.out.println(
+                    "[Sauvegarde] Historique des mouvements serialisé et sauvegardé dans Mouvements_<id_niveau>");
         } catch (IOException e) {
             e.printStackTrace();
         }
