@@ -53,6 +53,8 @@ public class ControllerMenuProfils {
         loader.setLocation(getClass().getResource("/FXML/menu_profils.fxml"));
         loader.setController(this);
         scene = loader.load();
+
+        new Profil(((Label) ((VBox) pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText(), null, 0);
     }
 
     /**

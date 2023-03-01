@@ -67,7 +67,7 @@
                               <String fx:value="btn-profile" />
                               <String fx:value="btn" />
                            </styleClass></Button>
-                        <Label styleClass="name-profile" text="Name 1">
+                        <Label styleClass="name-profile" text="Default">
                            <padding>
                               <Insets top="10.0" />
                            </padding></Label>
