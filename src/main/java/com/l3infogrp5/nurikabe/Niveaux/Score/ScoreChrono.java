@@ -45,7 +45,7 @@ abstract public class ScoreChrono implements ScoreInterface {
      * 
      * @param aide valeur de la pénalité appliquée à l'utilisation d'une aide
      */
-    public void aideUtilise(int aide) {
+    public void aideUtilise() {
     }
 
     @Override

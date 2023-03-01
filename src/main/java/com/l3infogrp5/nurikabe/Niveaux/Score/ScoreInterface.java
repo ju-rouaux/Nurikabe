@@ -8,7 +8,7 @@ package com.l3infogrp5.nurikabe.Niveaux.Score;
  */
 public interface ScoreInterface {
 
-    public void aideUtilise(int aide);
+    public void aideUtilise();
 
     public void grilleComplete();
 

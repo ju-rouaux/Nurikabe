@@ -62,7 +62,9 @@ public class ScoreEndless extends ScoreChrono {
      */
 
     @Override
-    public void aideUtilise(int aide) {
+    public void aideUtilise() {
+
+        int aide = 40;
 
         if (sec - aide < 0) {
             min--;

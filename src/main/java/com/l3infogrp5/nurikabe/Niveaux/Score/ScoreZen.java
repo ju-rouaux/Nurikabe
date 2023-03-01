@@ -21,7 +21,7 @@ public class ScoreZen implements ScoreInterface {
      * @param aide valeur de la pénalité appliquer à l'utilisation d'une aide
      */
     @Override
-    public void aideUtilise(int aide) {
+    public void aideUtilise() {
 
         if (etoiles > 1)
             this.etoiles--;
@@ -30,6 +30,7 @@ public class ScoreZen implements ScoreInterface {
 
     @Override
     public void grilleComplete() {
+        
 
     }
 

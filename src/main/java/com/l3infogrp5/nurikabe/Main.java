@@ -28,7 +28,7 @@ public class Main extends Application {
         score.calcul();
 
         System.out.println("test");
-        score.aideUtilise(105);
+        score.aideUtilise();
 
         /*
          * ScoreChrono score = new ScoreEndless(40,0, text);

@@ -16,6 +16,8 @@ import javafx.util.Duration;
 
 public class ScoreCLM extends ScoreChrono {
 
+    public Timeline timeline;
+
     public ScoreCLM(int sec, int min, Text text) {
         super(sec, min, text);
     }
@@ -45,13 +47,19 @@ public class ScoreCLM extends ScoreChrono {
         timeline.play();
     }
 
+    public void calcStop() {
+        timeline.stop();
+    }
+
     /**
      * Méthode qui ajoute du temps en fonction de l'aide utilisée
      * 
      * @param aide valeur de la pénalité appliquée à l'utilisation d'une aide
      */
     @Override
-    public void aideUtilise(int aide) {
+    public void aideUtilise() {
+
+        int aide = 40;
 
         if (sec + aide > 60) {
             min++;
