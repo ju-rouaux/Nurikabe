@@ -1,5 +1,7 @@
 package com.l3infogrp5.nurikabe.Niveaux.Score;
 
+import javafx.scene.layout.Pane;
+
 /**
  * Classe interface répertoriant les méthodes à invoquer pour calculer un score
  * 
@@ -12,8 +14,6 @@ public interface ScoreInterface {
 
     public void stop();
 
-    public void nouveauLance();
-
     public void aideUtilise();
 
     public void restart();
@@ -22,6 +22,8 @@ public interface ScoreInterface {
 
     public void checkUtilise();
 
-    public void get_Pane();
+    public Pane get_Pane();
+
+    public int getScore();
 
 }

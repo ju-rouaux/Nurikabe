@@ -6,6 +6,7 @@ import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreEndless;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -20,12 +21,11 @@ public class Nurikabe extends Application {
         text.setLayoutX(100);
         text.setLayoutY(100);
         text.setFill(Color.BLUE);
-        final Pane root = new Pane();
-        root.getChildren().setAll(text);
-        final Scene scene = new Scene(root, 350, 300);
 
-        ScoreChrono score = new ScoreCLM(10, 0, text);
-        score.calcul();
+
+        ScoreChrono score = new ScoreCLM(75, text);
+        final Scene scene = new Scene(score.get_Pane(), 350, 300);
+        score.start();
 
         System.out.println("test");
         score.aideUtilise();
