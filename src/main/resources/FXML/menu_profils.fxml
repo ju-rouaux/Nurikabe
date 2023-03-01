@@ -31,7 +31,7 @@
                <children>
                   <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" text="&lt;&lt;" textFill="#171717">
                      <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="17.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
                </children>
@@ -87,17 +87,14 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <Label styleClass="name-profile">
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
+                           <styleClass>
+                              <String fx:value="btn-add" />
+                              <String fx:value="btn" />
+                           </styleClass>
+                        </Button>
                         <Label styleClass="name-profile">
                            <padding>
                               <Insets top="10.0" />
@@ -107,6 +104,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
+                           <styleClass>
+                              <String fx:value="btn-add" />
+                              <String fx:value="btn" />
+                           </styleClass>
+                        </Button>
                         <Label styleClass="name-profile">
                            <padding>
                               <Insets top="10.0" />
@@ -116,6 +119,27 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
+                           <styleClass>
+                              <String fx:value="btn-add" />
+                              <String fx:value="btn" />
+                           </styleClass>
+                        </Button>
+                        <Label styleClass="name-profile">
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
+                           <styleClass>
+                              <String fx:value="btn-add" />
+                              <String fx:value="btn" />
+                           </styleClass>
+                        </Button>
                         <Label styleClass="name-profile">
                            <padding>
                               <Insets top="10.0" />
@@ -125,6 +149,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
+                           <styleClass>
+                              <String fx:value="btn-add" />
+                              <String fx:value="btn" />
+                           </styleClass>
+                        </Button>
                         <Label styleClass="name-profile">
                            <padding>
                               <Insets top="10.0" />
@@ -134,6 +164,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
+                           <styleClass>
+                              <String fx:value="btn-add" />
+                              <String fx:value="btn" />
+                           </styleClass>
+                        </Button>
                         <Label styleClass="name-profile">
                            <padding>
                               <Insets top="10.0" />
