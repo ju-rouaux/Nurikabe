@@ -38,7 +38,7 @@ public class Profil {
      * @param joueur      le nom du joueur
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   l'id du niveau
-     * @throws IOException si une erreur se produit lors de la création du dossier
+     * @throws IOException {@link IOException}
      */
     public Profil(String joueur, String mode_de_jeu, int id_niveau) throws IOException {
         this.joueur = joueur;

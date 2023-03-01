@@ -53,6 +53,11 @@ public class Niveau {
         return this.histo;
     }
 
+    /**
+     * Setter pour l'historique du niveau
+     *
+     * @param historique l'historique du niveau a charger
+     */
     public void setHistorique(Historique historique) {
         this.histo = historique;
     }

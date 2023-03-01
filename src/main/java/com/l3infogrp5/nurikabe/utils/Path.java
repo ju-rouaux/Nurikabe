@@ -3,25 +3,45 @@ package com.l3infogrp5.nurikabe.utils;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Classe constante qui definit tout les chemins des différents dossiers
+ *
+ * @author Guillaume Richard
+ */
 public final class Path {
-    // Répertoire du fichier .jar
+
+    /**
+     * Répertoire du fichier .jar
+     */
     public static File repertoire_jar;
-    // Répertoire courant
+    /** Répertoire courant */
     public static final File repertoire_courant;
-    // Répertoire des sauvegardes
+    /** Répertoire des sauvegardes */
     public static final File repertoire_save;
-    // Répertoire des niveaux
+    /** Répertoire des niveaux */
     public static final File repertoire_lvl;
-    // Répertoire des scores
+    /** Répertoire des scores */
     public static final File repertoire_score;
-    // Répertoire des grilles
+    /** Répertoire des grilles */
     public static final File repertoire_grilles;
 
+    /** Le nom du dossier a la racine des dossiers et fichiers de sauvegarde */
     private static final String DOSSIER_NURIKABE = "/nurikabe_data";
+    /** Le nom du dossier des sauvegardes */
     private static final String DOSSIER_SAVE = "/save";
+    /** Le nom du dossier pour la sauvegarde des niveaux */
     private static final String DOSSIER_NIVEAUX = "/lvl";
+    /** Le nom de dossier pour la sauvegarde des score */
     private static final String DOSSIER_SCORE = "/score";
+    /** Le nom de dosser pour la sauvegarde des grilles */
     private static final String DOSSIER_GRILLES = "/grilles";
+
+    /**
+     * Constructeur
+     */
+    Path() {
+
+    }
 
     static {
         try {

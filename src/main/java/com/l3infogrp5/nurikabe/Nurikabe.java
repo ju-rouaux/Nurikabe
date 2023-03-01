@@ -1,5 +1,8 @@
 package com.l3infogrp5.nurikabe;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 
@@ -19,7 +22,40 @@ public class Nurikabe extends Application {
      */
     public Nurikabe() {
         super();
+
         Sauvegarder.creerArborescence();
+        /**
+         * TEMP
+         */
+        HashMap<String, HashMap<String, HashMap<String, String>>> mapdetente = new HashMap<>();
+        HashMap<String, HashMap<String, HashMap<String, String>>> mapendless = new HashMap<>();
+
+
+        for (int i = 0; i < 3; i++) {
+            try {
+                Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless",1);
+                Sauvegarder.sauvegarderScore("sdqez", "endless",1);
+                Sauvegarder.sauvegarderScore("sdqsqdqez", "endless",12);
+                Sauvegarder.sauvegarderScore("sdqfgez", "endless",13);
+                Sauvegarder.sauvegarderScore("khkqsdqsds", "detente",1);
+                Sauvegarder.sauvegarderScore("khaedqdsks", "detente",1);
+                Sauvegarder.sauvegarderScore("khkqsdqsds", "detente",2);
+                Sauvegarder.sauvegarderScore("khaedqdsks", "detente",2);
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                mapdetente = Sauvegarder.chargerScore("detente");
+                mapendless = Sauvegarder.chargerScore("endless");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        System.out.println("hashmap detente : \n"+mapdetente);
+        System.out.println("hashmap endless : \n"+mapendless);
     }
 
     /**

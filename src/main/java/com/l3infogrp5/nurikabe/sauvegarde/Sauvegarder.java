@@ -1,12 +1,20 @@
 package com.l3infogrp5.nurikabe.sauvegarde;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Scanner;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.utils.Path;
@@ -19,16 +27,17 @@ import com.l3infogrp5.nurikabe.utils.Path;
  */
 public class Sauvegarder {
 
-    // Constructeur pour initialiser le répertoire
+    /**
+     * Constructeur
+     */
     public Sauvegarder() {
-
     }
 
     /**
      *
      * Recherche si la sauvegarde pour le joueur existe déjà
      *
-     * @param player nom du joueur
+     * @param joueur nom du joueur
      *
      * @return vrai si la sauvegarde existe, faux sinon
      */
@@ -76,9 +85,10 @@ public class Sauvegarder {
      * Scanne les fichiers et répertoires et les ajoutes dans une liste
      *
      * @param repertoire le répertoire à scanner
-     * @return une liste de noms de fichiers/répertoires
+     * @return une liste de noms de fichiers/répertoires du repertoire donné en
+     *         parametre
      */
-    private static ArrayList<String> ajoutFichiers(File repertoire) {
+    private static ArrayList<String> listeFichiers(File repertoire) {
         ArrayList<String> fichiers = new ArrayList<String>();
         if (dossierExistants(repertoire)) {
             for (File fichier : repertoire.listFiles()) {
@@ -88,10 +98,16 @@ public class Sauvegarder {
         return fichiers;
     }
 
+    /**
+     * Creer le dossier pour le joueur
+     *
+     * @param nom_joueur le nom du joueur
+     * @throws IOException {@link IOException}
+     */
     public static void creerDossierJoueur(String nom_joueur) throws IOException {
 
         // Vérifier si le dossier "lvl" existe déjà dans "save"
-        boolean niveau_existe = ajoutFichiers(Path.repertoire_courant).contains("lvl");
+        boolean niveau_existe = listeFichiers(Path.repertoire_courant).contains("lvl");
         if (!niveau_existe) {
             // Créer le dossier "lvl" si il n'existe pas
             Files.createDirectories(Paths.get(Path.repertoire_lvl.toString()));
@@ -101,12 +117,10 @@ public class Sauvegarder {
 
     /**
      * Création des dossiers necessaires a la sauvegarde
-     *
-     * @param nom_joueur le nom du joueur/profil
      */
     public static void creerArborescence() {
 
-        ArrayList<String> fichiers = ajoutFichiers(Path.repertoire_courant);
+        ArrayList<String> fichiers = listeFichiers(Path.repertoire_courant);
 
         try {
             // Vérifier si le dossier "save" existe déjà
@@ -125,6 +139,27 @@ public class Sauvegarder {
                 // System.out.println("Dossier score créé");
             }
 
+            // Verification des fichiers "endless" et "detente"
+            fichiers = listeFichiers(Path.repertoire_score);
+            boolean endless = fichiers.contains("endless.save");
+            if (!endless) {
+                if (!creerDossierFichier(Path.repertoire_score,
+                        new File(Path.repertoire_score.toString() + "/endless.save")))
+                    System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
+            }
+            boolean clm = fichiers.contains("clm.save");
+            if (!clm) {
+                if (!creerDossierFichier(Path.repertoire_score,
+                        new File(Path.repertoire_score.toString() + "/clm.save")))
+                    System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
+            }
+            boolean detente = fichiers.contains("detente.save");
+            if (!detente) {
+                if (!creerDossierFichier(Path.repertoire_score,
+                        new File(Path.repertoire_score.toString() + "/detente.save")))
+                    System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
+            }
+
         } catch (IOException e) {
             System.err.println("[Sauvegarde] Erreur lors de la création des répertoires nécessaires au jeu");
             e.printStackTrace();
@@ -138,7 +173,6 @@ public class Sauvegarder {
      * @param dossier les dossier à créer (selon le chemin)
      * @param fichier le fichier à créer
      * @return true si creation(s) bien effectuée, false sinon
-     * @throws IOException si erreur lors de la création du fichier
      */
     public static boolean creerDossierFichier(File dossier, File fichier) {
         boolean statut = false;
@@ -182,28 +216,6 @@ public class Sauvegarder {
             return false;
         else
             return true;
-    }
-
-    /**
-     * Créer un fichier et un dossier
-     *
-     * @param joueur      le nom du joueur/profil
-     * @param mode_de_jeu le mode de jeu
-     **/
-    public void sauvegarderScore(String joueur, String mode_de_jeu) {
-        File sans_fin = new File(Path.repertoire_score.toString() + "/endless.save");
-        File detente = new File(Path.repertoire_score.toString() + "/détente.save");
-
-        if (creerDossierFichier(Path.repertoire_score, detente))
-            System.out.println("[Sauvegarde] Fichier détente créé");
-        else
-            System.out.println("[Sauvegarde] Erreur creation fichier detente pour les scores");
-
-        if (creerDossierFichier(Path.repertoire_score, sans_fin))
-            System.out.println("[Sauvegarde] Fichier endless créé");
-        else
-            System.out.println("[Sauvegarde] Erreur creation fichier endless pour les scores");
-
     }
 
     /**
@@ -286,4 +298,90 @@ public class Sauvegarder {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Append le score dans le fichier adequat
+     *
+     * @param joueur      le nom du joueur/profil
+     * @param mode_de_jeu le mode de jeu
+     * @param id_niveau   le numero du niveau, -1 si en mode de jeu sans fin
+     * @throws IOException {@link IOException}
+     **/
+    public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau) throws IOException {
+
+        Date date = new Date();
+
+        // Create a SimpleDateFormat object with the desired format
+        SimpleDateFormat format_date = new SimpleDateFormat("dd/MM/yy");
+
+        // Format the date as a string using the SimpleDateFormat object
+        String date_formate = format_date.format(date);
+
+        FileWriter writer = new FileWriter(new File(Path.repertoire_score + "/" + mode_de_jeu + ".save"), true);
+        // BufferedWriter out = new BufferedWriter(
+        // new FileWriter(fileName, true));
+
+        if (mode_de_jeu.equals("endless"))
+            writer.write(joueur + " % " + getScore() + " % " + date_formate + "\n");
+        else
+            writer.write(joueur + " % " + getScore() + " % " + id_niveau + " % " + date_formate + "\n");
+
+        writer.close();
+
+    }
+
+    /**
+     * Methode de test en attendant le getscore du controller score
+     *
+     * @return un score bidon
+     */
+    private static String getScore() {
+        return "1:30";
+    }
+
+    /**
+     * Charge les scores d'un mode de jeu donné
+     *
+     * @param mode_de_jeu le nom du mode de jeu auquel il faut charger les scores
+     * @return un hashmap : Nom du joueur - le score, contenant tout les scores du
+     *         fichier
+     * @throws IOException    {@link IOException}
+     * @throws ParseException
+     */
+    public static HashMap<String, HashMap<String, HashMap<String, String>>> chargerScore(String mode_de_jeu)
+            throws IOException {
+        HashMap<String, HashMap<String, HashMap<String, String>>> scores = new HashMap<>();
+        InputStream inputStream = new FileInputStream(new File(Path.repertoire_score + "/" + mode_de_jeu + ".save"));
+        Scanner scanner = new Scanner(inputStream);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split("%");
+            String nom_joueur = parts[0].trim();
+            String score = parts[1].trim();
+            String niveau = parts[2].trim();
+            if (!mode_de_jeu.equals("endless")) {
+                String date = parts[3].trim();
+                HashMap<String, HashMap<String, String>> infos_niveau_date = scores.getOrDefault(niveau,
+                        new HashMap<>());
+                HashMap<String, String> infos_niveau = infos_niveau_date.getOrDefault(nom_joueur, new HashMap<>());
+                infos_niveau.put("score", score);
+                infos_niveau.put("date", date);
+                infos_niveau_date.put(nom_joueur, infos_niveau);
+                scores.put(niveau, infos_niveau_date);
+            } else {
+                HashMap<String, HashMap<String, String>> infos_niveau_date = scores.getOrDefault(mode_de_jeu,
+                        new HashMap<>());
+                HashMap<String, String> infos_niveau = infos_niveau_date.getOrDefault(nom_joueur, new HashMap<>());
+                String date = parts[2].trim();
+
+                infos_niveau.put("score", score);
+                infos_niveau.put("date", date);
+                infos_niveau_date.put(nom_joueur, infos_niveau);
+                scores.put(mode_de_jeu, infos_niveau_date);
+            }
+        }
+        scanner.close();
+        return scores;
+    }
+
 }

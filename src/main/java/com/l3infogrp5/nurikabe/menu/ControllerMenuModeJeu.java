@@ -71,7 +71,8 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void detenteClique(ActionEvent event) throws Exception {
-        //stage.setScene(new ControllerMenuNiveau(stage).getScene()); //TODO rétablir le menu
+        // stage.setScene(new ControllerMenuNiveau(stage).getScene()); //TODO rétablir
+        // le menu
         stage.setScene(new ControllerNiveau(stage, new Niveau(0)).getScene());
     }
 

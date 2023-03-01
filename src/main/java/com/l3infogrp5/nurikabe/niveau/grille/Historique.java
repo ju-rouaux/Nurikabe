@@ -12,7 +12,6 @@ import javafx.beans.property.ReadOnlyBooleanWrapper;
  * Classe enregistrant l'historique des mouvements du joueur.
  * Il est possible de lier des éléments graphiques aux propriétés
  * {@link #peutAnnuler()} et {@link #peutRetablir()} grâce à la méthode
- * {@link #lierInterface(BooleanProperty, BooleanProperty)}.
  *
  * @author Julien Rouaux
  */
@@ -207,6 +206,9 @@ public class Historique implements Serializable {
         return this.peutRetablir.getReadOnlyProperty();
     }
 
+    /**
+     * Initialise les boolean peutAnnuler et peutRetablir
+     */
     public void initTransientBoolean() {
         this.peutAnnuler = new ReadOnlyBooleanWrapper(false);
         this.peutRetablir = new ReadOnlyBooleanWrapper(false);
