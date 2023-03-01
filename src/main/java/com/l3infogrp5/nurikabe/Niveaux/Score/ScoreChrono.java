@@ -1,6 +1,5 @@
 package com.l3infogrp5.nurikabe.Niveaux.Score;
 
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -32,28 +31,28 @@ abstract public class ScoreChrono implements ScoreInterface {
      */
     public void afficheChrono() {
 
-
-        //endless
-        /* if (sec < 0) {
-            min--;
-            sec = 59;
-
-        }
-
-        //CLM
-        if (sec == 60) {
-            min++;
-            sec = 0;
-
-        }
-*/
-        min = totalSec/60;
-        sec = totalSec%60;
+        // endless
+        /*
+         * if (sec < 0) {
+         * min--;
+         * sec = 59;
+         * 
+         * }
+         * 
+         * //CLM
+         * if (sec == 60) {
+         * min++;
+         * sec = 0;
+         * 
+         * }
+         */
+        min = totalSec / 60;
+        sec = totalSec % 60;
 
         if (sec >= 10)
-            text.setText((int)min + ":" + (int)sec);
+            text.setText((int) min + ":" + (int) sec);
         else
-            text.setText((int)min + ":0" + (int)sec);
+            text.setText((int) min + ":0" + (int) sec);
 
     }
 
@@ -86,26 +85,29 @@ abstract public class ScoreChrono implements ScoreInterface {
 
     /**
      * Méthode qui retourne le score
+     * 
      * @return totalSec
      */
     @Override
-    public int getScore(){
+    public int getScore() {
 
         return totalSec;
     }
 
     /**
-     * Méthode abstraite à lancer quand une grille est recommencée 
+     * Méthode abstraite à lancer quand une grille est recommencée
      */
     @Override
-    public void restart(){}
+    public void restart() {
+    }
 
     /**
      * Méthode qui retourne l'affichage du score
+     * 
      * @return affichage
      */
     @Override
-    public Pane get_Pane(){
+    public Pane get_Pane() {
         return this.affichage;
     }
 }

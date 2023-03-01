@@ -1,11 +1,8 @@
 package com.l3infogrp5.nurikabe.Niveaux.Score;
 
-import java.lang.Thread;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -40,7 +37,7 @@ public class ScoreCLM extends ScoreChrono {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
-    
+
     /**
      * Méthode d'arrêt du chrono
      */

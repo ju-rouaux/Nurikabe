@@ -1,13 +1,9 @@
 package com.l3infogrp5.nurikabe.Niveaux.Score;
 
-import java.lang.Thread;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.io.*;
 
 /**
  * Implémentation du calcul du score pour le mode sans fin
@@ -33,7 +29,6 @@ public class ScoreEndless extends ScoreChrono {
         KeyFrame kf = new KeyFrame(Duration.millis(1000), e -> {
 
             totalSec--;
-
 
             if (totalSec <= 0) {
                 stop();
@@ -92,10 +87,10 @@ public class ScoreEndless extends ScoreChrono {
      */
     @Override
     public void checkUtilise() {
-        
+
         int malus = 60;
 
-        if(totalSec - malus < 0) {
+        if (totalSec - malus < 0) {
             stop();
         } else {
             totalSec -= malus;
@@ -106,9 +101,8 @@ public class ScoreEndless extends ScoreChrono {
     /**
      * {@inheritDoc}
      */
-    public int getScore(){
-        return nbGrilles;    
+    public int getScore() {
+        return nbGrilles;
     }
-
 
 }

@@ -32,7 +32,6 @@ public class ScoreZen implements ScoreInterface {
 
     @Override
     public void grilleComplete() {
-        
 
     }
 
