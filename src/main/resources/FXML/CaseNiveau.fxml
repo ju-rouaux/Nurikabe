@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#CliqueNiveau" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="pane" onMouseClicked="#CliqueNiveau" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <BorderPane onMouseClicked="#CliqueNiveau" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane onMouseClicked="#CliqueNiveau" BorderPane.alignment="CENTER">
          <center>
             <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#CliqueNiveau" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
@@ -25,7 +25,7 @@
             <Label fx:id="label" />
             <Button fx:id="bouton" mnemonicParsing="false">
                <graphic>
-                  <ImageView fx:id="img_trophee" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="img_trophee" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/trophee.png" />
                      </image>
