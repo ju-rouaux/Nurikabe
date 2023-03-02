@@ -30,17 +30,19 @@ public class Nurikabe extends Application {
         HashMap<String, HashMap<String, HashMap<String, String>>> mapdetente = new HashMap<>();
         HashMap<String, HashMap<String, HashMap<String, String>>> mapendless = new HashMap<>();
 
+        String id_niveau = "1";
+        String nom_joueur = "khkqsdqsds";
 
         for (int i = 0; i < 3; i++) {
             try {
-                Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless",1);
-                Sauvegarder.sauvegarderScore("sdqez", "endless",1);
-                Sauvegarder.sauvegarderScore("sdqsqdqez", "endless",12);
-                Sauvegarder.sauvegarderScore("sdqfgez", "endless",13);
-                Sauvegarder.sauvegarderScore("khkqsdqsds", "detente",1);
-                Sauvegarder.sauvegarderScore("khaedqdsks", "detente",1);
-                Sauvegarder.sauvegarderScore("khkqsdqsds", "detente",2);
-                Sauvegarder.sauvegarderScore("khaedqdsks", "detente",2);
+                Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless", 1);
+                Sauvegarder.sauvegarderScore("sdqez", "endless", 1);
+                Sauvegarder.sauvegarderScore("sdqsqdqez", "endless", 12);
+                Sauvegarder.sauvegarderScore("sdqfgez", "endless", 13);
+                Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 1);
+                Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 1);
+                Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 2);
+                Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 2);
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -54,8 +56,14 @@ public class Nurikabe extends Application {
                 e.printStackTrace();
             }
         }
-        System.out.println("hashmap detente : \n"+mapdetente);
-        System.out.println("hashmap endless : \n"+mapendless);
+        System.out.println("hashmap detente : " + mapdetente);
+        // Exemple recuperer informations mode detente / controle la montre
+        System.out.println("Informations niveau id_niveau : " + mapdetente.get(id_niveau));
+        // Recuperer infomrtaions d'un id_niveau et d'un nom_joueur
+        System.out.println("Informations d'un id_niveau <" + id_niveau + "> et d'un nom_joueur <" + nom_joueur + ">: "
+                + mapdetente.get(id_niveau).get(nom_joueur));
+        System.out.println("\nhashmap endless : " + mapendless);
+
     }
 
     /**

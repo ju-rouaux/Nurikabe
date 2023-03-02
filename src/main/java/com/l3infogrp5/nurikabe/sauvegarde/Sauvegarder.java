@@ -10,7 +10,6 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -343,10 +342,9 @@ public class Sauvegarder {
      * Charge les scores d'un mode de jeu donné
      *
      * @param mode_de_jeu le nom du mode de jeu auquel il faut charger les scores
-     * @return un hashmap : Nom du joueur - le score, contenant tout les scores du
+     * @return un hashmap : [id_niveau si detente / contre la contre sinon "endless"[Nom du joueur[ date - le score]]], contenant tout les scores du
      *         fichier
      * @throws IOException    {@link IOException}
-     * @throws ParseException
      */
     public static HashMap<String, HashMap<String, HashMap<String, String>>> chargerScore(String mode_de_jeu)
             throws IOException {
