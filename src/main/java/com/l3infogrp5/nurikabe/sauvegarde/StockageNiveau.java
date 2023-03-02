@@ -1066,7 +1066,6 @@ public class StockageNiveau {
                 int colonnes = 0;
                 boolean grille_courante = false;
                 int index = 0;
-                // A voir && index != ligne car seulement pour corriger bug niveau 10
                 while (scanner.hasNextLine() && index != lignes) {
                         String line = scanner.nextLine();
                         if (line.startsWith("Grille " + id_niveau)) {

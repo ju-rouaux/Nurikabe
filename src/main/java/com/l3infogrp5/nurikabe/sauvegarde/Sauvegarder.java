@@ -308,17 +308,17 @@ public class Sauvegarder {
      **/
     public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau) throws IOException {
 
+        // Récupérer la date courante
         Date date = new Date();
 
-        // Create a SimpleDateFormat object with the desired format
-        SimpleDateFormat format_date = new SimpleDateFormat("dd/MM/yy");
+        // Créer un objet SimpleDateFormat avec le format souhaité
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
 
-        // Format the date as a string using the SimpleDateFormat object
-        String date_formate = format_date.format(date);
+        // Formater la date en tant que chaîne de caractères en utilisant l'objet
+        // SimpleDateFormat
+        String date_formate = format.format(date);
 
         FileWriter writer = new FileWriter(new File(Path.repertoire_score + "/" + mode_de_jeu + ".save"), true);
-        // BufferedWriter out = new BufferedWriter(
-        // new FileWriter(fileName, true));
 
         if (mode_de_jeu.equals("endless"))
             writer.write(joueur + " % " + getScore() + " % " + date_formate + "\n");
@@ -339,47 +339,68 @@ public class Sauvegarder {
     }
 
     /**
-     * Charge les scores d'un mode de jeu donné
+     * Charge les scores d'un mode de jeu donné et selon l'indice du niveau
      *
-     * @param mode_de_jeu le nom du mode de jeu auquel il faut charger les scores
-     * @return un hashmap : [id_niveau si detente / contre la contre sinon "endless"[Nom du joueur[ date - le score]]], contenant tout les scores du
-     *         fichier
-     * @throws IOException    {@link IOException}
+     * @param mode_de_jeu le mode de jeu pour lequel les scores doivent être
+     *                    chargés.
+     * @param id_niveau   l'indice du niveau, negatif si en mode endless
+     * @return un hashmap : [Nom du joueur[ date - le score]]], contenant tout les
+     *         scores du fichier
+     * @throws IOException {@link IOException}
      */
-    public static HashMap<String, HashMap<String, HashMap<String, String>>> chargerScore(String mode_de_jeu)
+    public static HashMap<String, HashMap<String, String>> chargerScore(String mode_de_jeu, int id_niveau)
             throws IOException {
-        HashMap<String, HashMap<String, HashMap<String, String>>> scores = new HashMap<>();
+        HashMap<String, HashMap<String, String>> scores = new HashMap<>();
         InputStream inputStream = new FileInputStream(new File(Path.repertoire_score + "/" + mode_de_jeu + ".save"));
         Scanner scanner = new Scanner(inputStream);
+        boolean niveaux = false;
+
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] parts = line.split("%");
             String nom_joueur = parts[0].trim();
             String score = parts[1].trim();
-            String niveau = parts[2].trim();
-            if (!mode_de_jeu.equals("endless")) {
-                String date = parts[3].trim();
-                HashMap<String, HashMap<String, String>> infos_niveau_date = scores.getOrDefault(niveau,
-                        new HashMap<>());
-                HashMap<String, String> infos_niveau = infos_niveau_date.getOrDefault(nom_joueur, new HashMap<>());
-                infos_niveau.put("score", score);
-                infos_niveau.put("date", date);
-                infos_niveau_date.put(nom_joueur, infos_niveau);
-                scores.put(niveau, infos_niveau_date);
-            } else {
-                HashMap<String, HashMap<String, String>> infos_niveau_date = scores.getOrDefault(mode_de_jeu,
-                        new HashMap<>());
-                HashMap<String, String> infos_niveau = infos_niveau_date.getOrDefault(nom_joueur, new HashMap<>());
-                String date = parts[2].trim();
 
+            if (id_niveau >= 0 && parts[2].trim().equals(Integer.toString(id_niveau))) {
+                niveaux = true;
+                String date = parts[3].trim();
+                HashMap<String, String> infos_niveau = new HashMap<>();
                 infos_niveau.put("score", score);
                 infos_niveau.put("date", date);
-                infos_niveau_date.put(nom_joueur, infos_niveau);
-                scores.put(mode_de_jeu, infos_niveau_date);
+                scores.put(nom_joueur, infos_niveau);
+                System.out.println("Mode détente/contre la montre");
+            } else if (!niveaux) {
+                String date = parts[2].trim();
+                HashMap<String, String> infos_niveau = new HashMap<>();
+                infos_niveau.put("score", score);
+                infos_niveau.put("date", date);
+                scores.put(nom_joueur, infos_niveau);
+                System.out.println("Mode endless");
             }
         }
         scanner.close();
         return scores;
     }
 
+    public static int nbGrilles(String mode_de_jeu) {
+        int nb_grilles = 0;
+        InputStream inputStream;
+        inputStream = StockageNiveau.class
+                .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
+
+        if (inputStream == null) {
+            System.out.println("[StockageNiveau] : Fichier inexistant");
+            return -1;
+        }
+
+        Scanner scanner = new Scanner(inputStream);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.startsWith("Grille ")) {
+                nb_grilles++;
+            }
+        }
+        scanner.close();
+        return nb_grilles;
+    }
 }

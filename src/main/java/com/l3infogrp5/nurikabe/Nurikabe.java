@@ -27,42 +27,50 @@ public class Nurikabe extends Application {
         /**
          * TEMP
          */
-        HashMap<String, HashMap<String, HashMap<String, String>>> mapdetente = new HashMap<>();
-        HashMap<String, HashMap<String, HashMap<String, String>>> mapendless = new HashMap<>();
+        HashMap<String, HashMap<String, String>> mapdetente = new HashMap<>();
+        HashMap<String, HashMap<String, String>> mapendless = new HashMap<>();
 
-        String id_niveau = "1";
+        int id_niveau = 1;
         String nom_joueur = "khkqsdqsds";
 
-        for (int i = 0; i < 3; i++) {
-            try {
-                Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless", 1);
-                Sauvegarder.sauvegarderScore("sdqez", "endless", 1);
-                Sauvegarder.sauvegarderScore("sdqsqdqez", "endless", 12);
-                Sauvegarder.sauvegarderScore("sdqfgez", "endless", 13);
-                Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 1);
-                Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 1);
-                Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 2);
-                Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 2);
+        try {
+            Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless", 1);
+            Sauvegarder.sauvegarderScore("sdqez", "endless", 1);
+            Sauvegarder.sauvegarderScore("khkqsdqsds", "endless", 12);
+            Sauvegarder.sauvegarderScore("sdqfgez", "endless", 13);
+            Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 1);
+            Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 1);
+            Sauvegarder.sauvegarderScore("test", "detente", 2);
+            Sauvegarder.sauvegarderScore("jhkjs", "detente", 2);
 
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            try {
-                mapdetente = Sauvegarder.chargerScore("detente");
-                mapendless = Sauvegarder.chargerScore("endless");
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            System.out.println("Charger score detente niveau 1");
+            mapdetente = Sauvegarder.chargerScore("detente", id_niveau);
+            System.out.println("\n\nCharger score endless");
+            mapendless = Sauvegarder.chargerScore("endless", -1);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         System.out.println("hashmap detente : " + mapdetente);
         // Exemple recuperer informations mode detente / controle la montre
-        System.out.println("Informations niveau id_niveau : " + mapdetente.get(id_niveau));
         // Recuperer infomrtaions d'un id_niveau et d'un nom_joueur
         System.out.println("Informations d'un id_niveau <" + id_niveau + "> et d'un nom_joueur <" + nom_joueur + ">: "
-                + mapdetente.get(id_niveau).get(nom_joueur));
-        System.out.println("\nhashmap endless : " + mapendless);
+                + mapdetente.get(nom_joueur));
+        System.out.println("Score = " + mapdetente.get(nom_joueur).get("score"));
+        System.out.println("Date = " + mapdetente.get(nom_joueur).get("date"));
+
+        System.out.println("\nListe joueurs / score-date" + mapendless);
+        System.out.println(
+                "Infos joueur en mode endless ayant pour pseudo : " + nom_joueur + " = " + mapendless.get(nom_joueur));
+        System.out.println("Score = " + mapendless.get(nom_joueur).get("score"));
+        System.out.println("Date = " + mapendless.get(nom_joueur).get("date"));
+
+        System.out.println("Nb grilles = " + Sauvegarder.nbGrilles("detente"));
 
     }
 
