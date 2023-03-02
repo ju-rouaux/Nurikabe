@@ -292,6 +292,14 @@ public class Sauvegarder {
             sortie.writeObject(matrice);
             sortie.close();
             fichier_sortie.close();
+
+            for (int i = 0; i < matrice.length; i++) {
+                for (int j = 0; j < matrice[i].length; j++) {
+                    System.out.print(matrice[i][j] + " ");
+                }
+                System.out.println();
+            }
+
             System.out.println("[Sauvegarde] Matrice serialisé et sauvegardé dans Matrice_<id_niveau>");
         } catch (IOException e) {
             e.printStackTrace();
@@ -368,14 +376,12 @@ public class Sauvegarder {
                 infos_niveau.put("score", score);
                 infos_niveau.put("date", date);
                 scores.put(nom_joueur, infos_niveau);
-                System.out.println("Mode détente/contre la montre");
             } else if (!niveaux) {
                 String date = parts[2].trim();
                 HashMap<String, String> infos_niveau = new HashMap<>();
                 infos_niveau.put("score", score);
                 infos_niveau.put("date", date);
                 scores.put(nom_joueur, infos_niveau);
-                System.out.println("Mode endless");
             }
         }
         scanner.close();
