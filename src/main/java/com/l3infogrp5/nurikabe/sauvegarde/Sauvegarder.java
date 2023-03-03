@@ -293,13 +293,6 @@ public class Sauvegarder {
             sortie.close();
             fichier_sortie.close();
 
-            for (int i = 0; i < matrice.length; i++) {
-                for (int j = 0; j < matrice[i].length; j++) {
-                    System.out.print(matrice[i][j] + " ");
-                }
-                System.out.println();
-            }
-
             System.out.println("[Sauvegarde] Matrice serialisé et sauvegardé dans Matrice_<id_niveau>");
         } catch (IOException e) {
             e.printStackTrace();

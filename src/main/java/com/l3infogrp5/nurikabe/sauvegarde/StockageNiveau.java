@@ -1966,7 +1966,6 @@ public class StockageNiveau {
                                 { 2, -1, 0, -1, -1, -1, },
                                 { 0, -1, -1, -1, 2, 0, },
                 };
-
                 int niveau_2[][] = {
                                 { -1, -1, -1, 0, 7, 0, },
                                 { -1, 0, -1, -1, -1, 0, },
@@ -1984,7 +1983,7 @@ public class StockageNiveau {
                                 { -1, -1, -1, 0, -1, 0, },
                                 { 0, 3, -1, -1, -1, 0, },
                                 { 0, -1, 0, -1, 0, 0, },
-                                { 0, -1, 2, -1, -1, -1, },
+                                { -1, -1, 2, -1, -1, -1, },
                                 { -1, 1, -1, -1, 0, -1, },
                                 { -1, -1, -1, 3, 0, -1, },
                 };
@@ -2001,17 +2000,18 @@ public class StockageNiveau {
                 };
 
                 int[][] niveau_5 = {
-                                { 0, 6, -1, -1, 2, -1, 5, },
-                                { 0, -1, 1, -1, 0, -1, 0, },
-                                { 0, -1, -1, -1, -1, -1, 0, },
-                                { 0, 0, -1, 0, -1, 0, 0, },
-                                { -1, -1, -1, 0, -1, -1, -1, },
-                                { -1, 0, -1, 4, 0, -1, 0, },
-                                { -1, 0, 4, -1, -1, -1, 2, },
-                                { -1, 0, -1, 0, -1, 2, -1, },
+                        { 0, 6, -1, -1, 2, -1, 5, },
+                        { 0, -1, 1, -1, 0, -1, 0, },
+                        { 0, -1, -1, -1, -1, -1, 0, },
+                        { 0, 0, -1, 0, -1, 0, 0, },
+                        { -1, -1, -1, 0, -1, -1, -1, },
+                        { -1, 0, -1, 4, 0, -1, 0, },
+                        { -1, 0, 4, -1, -1, -1, 2, },
+                        { -1, 0, -1, 0, -1, 2, -1, },
                                 { -1, -1, -1, 2, -1, 0, -1, },
                                 { 0, 0, 3, -1, -1, -1, -1, },
-                };
+                        };
+                        // Sauvegarde juqu'à la OK
 
                 int[][] niveau_6 = {
                                 { 0, 4, -1, -1, -1, 0, 4, },
@@ -2653,17 +2653,6 @@ public class StockageNiveau {
          * Methode temporaire pour la sauvegarde des solutions des niveaux
          */
         public static void creationSolutionNiveauDetente() {
-                /*
-                 * Niveaux facile
-                 */
-
-                /*
-                 * Niveaux moyens
-                 */
-
-                /*
-                 * Niveaux difficiles
-                 */
 
                 try {
                         FileWriter writer = new FileWriter(
@@ -2671,7 +2660,6 @@ public class StockageNiveau {
 
                         writer.write("#Niveaux faciles\n");
                         sousCreationSolutionNiveauxFacileDetente(writer);
-
 
                         writer.write("#Niveaux Moyens\n");
                         sousCreationSolutionNiveauxMoyenDetente(writer);
