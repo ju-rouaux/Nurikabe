@@ -219,49 +219,6 @@ public class Sauvegarder {
     }
 
     /**
-     * Sauvegarde l'historique des mouvements
-     *
-     * @param joueur      le nom du joueur/profil
-     * @param mode_de_jeu le mode de jeu
-     * @param id_niveau   l'id du niveau
-     * @param historique  l'historique des mouvements
-     */
-    public static void sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau,
-            Historique historique) {
-        File mouvements_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
-        File mouvements_fichier = new File(mouvements_repertoire.toString() + "/Mouvements_" + id_niveau);
-
-        if (creerDossierFichier(mouvements_repertoire, mouvements_fichier)) {
-            System.out
-                    .println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
-            serialisationHistorique(mouvements_fichier, historique);
-        } else {
-            System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
-        }
-    }
-
-    /**
-     * Serialisation de l'historique des mouvements
-     *
-     * @param repertoire le répertoire
-     * @param historique l'historique des mouvements
-     */
-    private static void serialisationHistorique(File repertoire, Historique historique) {
-        try {
-            FileOutputStream fichier_sortie = new FileOutputStream(repertoire, false); // false ecrase le fichier
-            ObjectOutputStream sortie = new ObjectOutputStream(fichier_sortie);
-            sortie.writeObject(historique);
-            sortie.close();
-            fichier_sortie.close();
-
-            System.out.println(
-                    "[Sauvegarde] Historique des mouvements serialisé et sauvegardé dans Mouvements_<id_niveau>");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Sauvegarde la matrice de la grille
      *
      * @param joueur      le nom du joueur/profil
@@ -277,26 +234,6 @@ public class Sauvegarder {
             serialisationMatrice(matrice_fichier, matrice);
         } else {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
-        }
-    }
-
-    /**
-     * Serialisation de la matrice de la grille
-     *
-     * @param repertoire le répertoire
-     * @param matrice    la matrice de la grille
-     */
-    private static void serialisationMatrice(File repertoire, int[][] matrice) {
-        try {
-            FileOutputStream fichier_sortie = new FileOutputStream(repertoire, false);
-            ObjectOutputStream sortie = new ObjectOutputStream(fichier_sortie);
-            sortie.writeObject(matrice);
-            sortie.close();
-            fichier_sortie.close();
-
-            System.out.println("[Sauvegarde] Matrice serialisé et sauvegardé dans Matrice_<id_niveau>");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -382,10 +319,15 @@ public class Sauvegarder {
         return scores;
     }
 
+    /**
+     * Compte le nombre de niveaux implémentés
+     * @param mode_de_jeu le mode de jeu
+     * @return le nombre de niveaux
+     */
     public static int nbGrilles(String mode_de_jeu) {
         int nb_grilles = 0;
         InputStream inputStream;
-        inputStream = StockageNiveau.class
+        inputStream = Sauvegarder.class
                 .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
 
         if (inputStream == null) {
@@ -403,4 +345,171 @@ public class Sauvegarder {
         scanner.close();
         return nb_grilles;
     }
+
+    /**
+     * Charge une grille depuis un fichier texte selon le numero de la grille et le
+     * mode de jeu
+     *
+     * @param id_niveau   le numero de la grille
+     * @param mode_de_jeu le mode de jeu
+     * @param solution    boolean, vrai s'il faut charger la solution du niveau
+     *                    selon l'id
+     * @return la matrice du niveau chargé
+     */
+    public static int[][] chargerGrille(int id_niveau, String mode_de_jeu, Boolean solution) {
+
+        InputStream inputStream;
+        if (!solution) {
+            inputStream = // Creating a new instance of the class "Person" and assigning it to the
+                          // variable
+                    // "person".
+                    // Creating a new instance of the class "Person" and assigning it to the
+                    // variable
+                    // "person".
+                    Sauvegarder.class
+                            .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
+        } else {
+            inputStream = Sauvegarder.class
+                    .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + "_solutions.txt");
+        }
+
+        if (inputStream == null) {
+            System.out.println("[StockageNiveau] : Fichier inexistant");
+            return null;
+        }
+
+        Scanner scanner = new Scanner(inputStream);
+        int[][] grille = null;
+        int lignes = -1;
+        int colonnes = 0;
+        boolean grille_courante = false;
+        int index = 0;
+        while (scanner.hasNextLine() && index != lignes) {
+            String line = scanner.nextLine();
+            if (line.startsWith("Grille " + id_niveau)) {
+                // Si une grille a été trouvée, on récupère ses dimensions
+                String[] dimensions = line.split("\\(")[1].split("\\)")[0].split(";");
+                lignes = Integer.parseInt(dimensions[0].trim());
+                colonnes = Integer.parseInt(dimensions[1].trim());
+                grille = new int[lignes][colonnes];
+                grille_courante = true;
+            } else if (line.startsWith("#")) {
+                // Ignore les lignes commentées
+                grille_courante = false;
+            } else if (line.startsWith("Grille") && grille_courante) {
+                grille_courante = false;
+                break;
+            } else if (grille_courante) {
+                String[] values = line.split(" ");
+                for (int i = 0; i < colonnes; i++) {
+                    if (!values[i].equals("")) {
+                        grille[index][i] = Integer.parseInt(values[i]);
+                    }
+                }
+                index++; // incremente indice de la ligne
+            }
+        }
+        scanner.close();
+        return grille;
+    }
+
+    /*
+     * Sauvegarde
+     */
+
+    /**
+     * Sauvegarde l'historique des mouvements
+     *
+     * @param joueur      le nom du joueur/profil
+     * @param mode_de_jeu le mode de jeu
+     * @param id_niveau   l'id du niveau
+     * @param historique  l'historique des mouvements
+     */
+    public static void sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau,
+            Historique historique) {
+        File mouvements_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
+        File mouvements_fichier = new File(mouvements_repertoire.toString() + "/Mouvements_" + id_niveau);
+
+        if (creerDossierFichier(mouvements_repertoire, mouvements_fichier)) {
+            System.out
+                    .println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
+            serialisationHistorique(mouvements_fichier, historique);
+        } else {
+            System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
+        }
+    }
+
+    /**
+     * Serialisation de l'historique des mouvements
+     *
+     * @param repertoire le répertoire
+     * @param historique l'historique des mouvements
+     */
+    private static void serialisationHistorique(File repertoire, Historique historique) {
+        try {
+            FileOutputStream fichier_sortie = new FileOutputStream(repertoire, false); // false ecrase le fichier
+            ObjectOutputStream sortie = new ObjectOutputStream(fichier_sortie);
+            sortie.writeObject(historique);
+            sortie.close();
+            fichier_sortie.close();
+
+            System.out.println(
+                    "[Sauvegarde] Historique des mouvements serialisé et sauvegardé dans Mouvements_<id_niveau>");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Sauvegarde la grille
+     *
+     * @param joueur      le nom du joueur/profil associé a la grille
+     * @param mode_de_jeu le mode de jeu associé a la grille
+     * @param id_niveau   l'id du niveau associé a la grille
+     * @param matrice     la matrice du niveau a sauvegarder
+     */
+    public static void sauvegardeMatrice(String joueur, String mode_de_jeu, int id_niveau, int[][] matrice) {
+        File matrice_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
+        File matrice_fichier = new File(matrice_repertoire.toString() + "/Matrice_" + id_niveau);
+
+        if (Sauvegarder.creerDossierFichier(matrice_repertoire, matrice_fichier)) {
+            serialisationMatrice(matrice_fichier, matrice);
+        } else {
+            System.out.println("[Profil] Erreur lors de la création de fichier et/ou de dossier");
+        }
+        // Affichage de la matrice
+        boolean debug = false;
+        if (debug) {
+            System.out.println("{");
+            for (int i = 0; i < matrice.length; i++) {
+                System.out.print(" { ");
+                for (int j = 0; j < matrice[i].length; j++) {
+                    System.out.print(matrice[i][j] + ", ");
+                }
+                System.out.println("},");
+            }
+            System.out.println("};");
+        }
+    }
+
+    /**
+     * Serialisation de la matrice de la grille
+     *
+     * @param repertoire le répertoire
+     * @param matrice    la matrice de la grille
+     */
+    private static void serialisationMatrice(File repertoire, int[][] matrice) {
+        try {
+            FileOutputStream fichier_sortie = new FileOutputStream(repertoire, false);
+            ObjectOutputStream sortie = new ObjectOutputStream(fichier_sortie);
+            sortie.writeObject(matrice);
+            sortie.close();
+            fichier_sortie.close();
+
+            System.out.println("[Sauvegarde] Matrice serialisé et sauvegardé dans Matrice_<id_niveau>");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
-import com.l3infogrp5.nurikabe.sauvegarde.StockageNiveau;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -72,18 +71,6 @@ public class Nurikabe extends Application {
         System.out.println("Date = " + mapendless.get(nom_joueur).get("date"));
 
         System.out.println("Nb grilles = " + Sauvegarder.nbGrilles("detente"));
-
-        /**
-         * Creation niveaux dans fichier
-         */
-
-        try {
-        StockageNiveau.creationNiveauDetente();
-        StockageNiveau.creationSolutionNiveauDetente();
-        } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-        }
 
     }
 
