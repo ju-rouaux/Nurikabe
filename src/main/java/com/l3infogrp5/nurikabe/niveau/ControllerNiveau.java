@@ -71,7 +71,7 @@ public class ControllerNiveau {
      */
     public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
         this.stage = stage;
-        joueur = new Profil("Julieng", "detente", 5);
+        joueur = new Profil("Julieng", "detente", 13);
 
         this.niveau = joueur.chargerNiveau(joueur.getId_niveau());
 

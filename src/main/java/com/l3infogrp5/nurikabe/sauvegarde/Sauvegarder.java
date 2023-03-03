@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
@@ -87,8 +88,8 @@ public class Sauvegarder {
      * @return une liste de noms de fichiers/répertoires du repertoire donné en
      *         parametre
      */
-    private static ArrayList<String> listeFichiers(File repertoire) {
-        ArrayList<String> fichiers = new ArrayList<String>();
+    private static List<String> listeFichiers(File repertoire) {
+        List<String> fichiers = new ArrayList<String>();
         if (dossierExistants(repertoire)) {
             for (File fichier : repertoire.listFiles()) {
                 fichiers.add(fichier.getName());
@@ -119,7 +120,7 @@ public class Sauvegarder {
      */
     public static void creerArborescence() {
 
-        ArrayList<String> fichiers = listeFichiers(Path.repertoire_courant);
+        List<String> fichiers = listeFichiers(Path.repertoire_courant);
 
         try {
             // Vérifier si le dossier "save" existe déjà

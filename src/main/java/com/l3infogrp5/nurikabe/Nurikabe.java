@@ -77,12 +77,13 @@ public class Nurikabe extends Application {
          * Creation niveaux dans fichier
          */
 
-        // try {
-        // StockageNiveau.creationNiveauDetente();
-        // } catch (IOException e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // }
+        try {
+        StockageNiveau.creationNiveauDetente();
+        StockageNiveau.creationSolutionNiveauDetente();
+        } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
 
     }
 
