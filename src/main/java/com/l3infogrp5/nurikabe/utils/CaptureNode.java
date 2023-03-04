@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 /**
  * Classe permettant d'enregsiter l'image du nivea
  * @author Julien Rouaux
@@ -24,9 +23,9 @@ public class CaptureNode {
      * @param noeud composant a capturer (la grille)
      * @return vrai si bien passé, faux sinon
      */
-    public static boolean capturer(Node noeud) {
+    public static boolean capturer(Node noeud, int id_niveau) {
         //TODO : utiliser la classe Path pour localiser l'emplacement de stockage
-        File file = new FileChooser().showSaveDialog(null);
+        File file = new File(Path.repertoire_images + "/capture_niveau_" + id_niveau + ".png");
 
         ImageView img = new ImageView(noeud.snapshot(null, null));
 

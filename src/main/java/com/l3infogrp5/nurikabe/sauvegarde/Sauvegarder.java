@@ -139,6 +139,15 @@ public class Sauvegarder {
                 // System.out.println("Dossier score créé");
             }
 
+            boolean placeholder_images_existe = fichiers.contains("placeholder_images");
+            if (!placeholder_images_existe) {
+                // Créer le dossier "placeholder_images" si il n'existe pas
+                Files.createDirectories(Paths.get(Path.repertoire_images.toString()));
+                // System.out.println("Dossier placeholder_images créé");
+
+            }
+
+
             // Verification des fichiers "endless" et "detente"
             fichiers = listeFichiers(Path.repertoire_score);
             boolean endless = fichiers.contains("endless.save");
