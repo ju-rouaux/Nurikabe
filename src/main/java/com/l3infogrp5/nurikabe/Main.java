@@ -1,5 +1,9 @@
 package com.l3infogrp5.nurikabe;
 
+import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreCLM;
+import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreChrono;
+import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreEndless;
+
 import javafx.application.Application;
 
 /**

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <BorderPane fx:id="borderPane">
+      <top>
+         <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" text="&lt;&lt;" BorderPane.alignment="TOP_LEFT" />
+      </top>
+      <center>
+         <ScrollPane fx:id="scrollPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <content>
+               <TableView fx:id="tableau">
+                 <columns>
+                   <TableColumn fx:id="nom" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="nom profil" />
+                   <TableColumn fx:id="score" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Score" />
+                     <TableColumn fx:id="date" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Date" />
+                 </columns>
+               </TableView>
+            </content>
+         </ScrollPane>
+      </center>
+   </BorderPane>
+</Scene>
