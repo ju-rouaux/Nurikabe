@@ -8,18 +8,18 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <BorderPane>
+   <BorderPane fx:id="borderPane">
       <top>
-         <Button mnemonicParsing="false" text="&lt;&lt;" BorderPane.alignment="TOP_LEFT" />
+         <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" text="&lt;&lt;" BorderPane.alignment="TOP_LEFT" />
       </top>
       <center>
-         <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <ScrollPane fx:id="scrollPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <content>
-               <TableView>
+               <TableView fx:id="tableau">
                  <columns>
-                   <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="nom profil" />
-                   <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Score" />
-                     <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Date" />
+                   <TableColumn fx:id="nom" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="nom profil" />
+                   <TableColumn fx:id="score" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Score" />
+                     <TableColumn fx:id="date" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Date" />
                  </columns>
                </TableView>
             </content>
