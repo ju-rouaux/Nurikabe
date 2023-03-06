@@ -23,9 +23,9 @@ public class CaptureNode {
      * @param noeud composant a capturer (la grille)
      * @return vrai si bien passé, faux sinon
      */
-    public static boolean capturer(Node noeud, int id_niveau) {
+    public static boolean capturer(Node noeud, String joueur, String mode_de_jeu, int id_niveau) {
         //TODO : utiliser la classe Path pour localiser l'emplacement de stockage
-        File file = new File(Path.repertoire_images + "/capture_niveau_" + id_niveau + ".png");
+        File file = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/" + "capture_niveau_" + id_niveau+".png");
 
         ImageView img = new ImageView(noeud.snapshot(null, null));
 

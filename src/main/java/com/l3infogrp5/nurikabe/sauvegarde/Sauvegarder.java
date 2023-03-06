@@ -88,7 +88,7 @@ public class Sauvegarder {
      * @return une liste de noms de fichiers/répertoires du repertoire donné en
      *         parametre
      */
-    private static List<String> listeFichiers(File repertoire) {
+    public static List<String> listeFichiers(File repertoire) {
         List<String> fichiers = new ArrayList<String>();
         if (dossierExistants(repertoire)) {
             for (File fichier : repertoire.listFiles()) {
@@ -138,15 +138,6 @@ public class Sauvegarder {
                 Files.createDirectories(Paths.get(Path.repertoire_score.toString()));
                 // System.out.println("Dossier score créé");
             }
-
-            boolean placeholder_images_existe = fichiers.contains("placeholder_images");
-            if (!placeholder_images_existe) {
-                // Créer le dossier "placeholder_images" si il n'existe pas
-                Files.createDirectories(Paths.get(Path.repertoire_images.toString()));
-                // System.out.println("Dossier placeholder_images créé");
-
-            }
-
 
             // Verification des fichiers "endless" et "detente"
             fichiers = listeFichiers(Path.repertoire_score);
@@ -330,6 +321,7 @@ public class Sauvegarder {
 
     /**
      * Compte le nombre de niveaux implémentés
+     *
      * @param mode_de_jeu le mode de jeu
      * @return le nombre de niveaux
      */
@@ -369,14 +361,8 @@ public class Sauvegarder {
 
         InputStream inputStream;
         if (!solution) {
-            inputStream = // Creating a new instance of the class "Person" and assigning it to the
-                          // variable
-                    // "person".
-                    // Creating a new instance of the class "Person" and assigning it to the
-                    // variable
-                    // "person".
-                    Sauvegarder.class
-                            .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
+            inputStream = Sauvegarder.class
+                    .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
         } else {
             inputStream = Sauvegarder.class
                     .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + "_solutions.txt");
@@ -393,9 +379,10 @@ public class Sauvegarder {
         int colonnes = 0;
         boolean grille_courante = false;
         int index = 0;
+        int num_niveau = 0;
         while (scanner.hasNextLine() && index != lignes) {
             String line = scanner.nextLine();
-            if (line.startsWith("Grille " + id_niveau)) {
+            if (line.startsWith("Grille ") && num_niveau == id_niveau) {
                 // Si une grille a été trouvée, on récupère ses dimensions
                 String[] dimensions = line.split("\\(")[1].split("\\)")[0].split(";");
                 lignes = Integer.parseInt(dimensions[0].trim());
@@ -416,6 +403,8 @@ public class Sauvegarder {
                     }
                 }
                 index++; // incremente indice de la ligne
+            }else if(line.startsWith("Grille ") && num_niveau != id_niveau){
+                num_niveau ++;
             }
         }
         scanner.close();
@@ -520,5 +509,7 @@ public class Sauvegarder {
             e.printStackTrace();
         }
     }
+
+
 
 }

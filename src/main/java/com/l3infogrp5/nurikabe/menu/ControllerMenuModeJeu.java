@@ -12,6 +12,7 @@ import java.io.IOException;
 //TODO imports pour la démo de lancement de niveau
 import com.l3infogrp5.nurikabe.niveau.ControllerNiveau;
 import com.l3infogrp5.nurikabe.niveau.Niveau;
+import com.l3infogrp5.nurikabe.profil.Profil;
 
 /**
  * Contrôleur du menu de sélection de mode de jeu, et sa scène.
@@ -47,6 +48,12 @@ public class ControllerMenuModeJeu {
      *                     être lu.
      */
     public ControllerMenuModeJeu(Stage stage) throws IOException {
+        /**
+         * Test chargement des images
+         */
+        // TODO Changer parametres avec <nomProfil>.get()
+        System.out.println(Profil.chargerImageNiveau("Julieng", "detente"));
+
         this.stage = stage;
 
         loader = new FXMLLoader();

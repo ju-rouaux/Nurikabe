@@ -24,8 +24,6 @@ public final class Path {
     public static File repertoire_score = null;
     /** Répertoire des grilles */
     public static File repertoire_grilles = null;
-    /** Repertoire images grilles */
-    public static File repertoire_images = null;
 
     /** Le nom du dossier a la racine des dossiers et fichiers de sauvegarde */
     private static final String DOSSIER_NURIKABE = "/nurikabe_data";
@@ -37,8 +35,6 @@ public final class Path {
     private static final String DOSSIER_SCORE = "/score";
     /** Le nom de dossier pour la sauvegarde des grilles */
     private static final String DOSSIER_GRILLES = "/grilles";
-    /** Le nom de dossiers des images */
-    private static final String DOSSIER_IMAGES = "/placeholder_images";
 
     /**
      * Constructeur
@@ -67,7 +63,6 @@ public final class Path {
                 repertoire_lvl = new File(repertoire_save + "/" + DOSSIER_NIVEAUX);
                 repertoire_score = new File(repertoire_save + "/" + DOSSIER_SCORE);
                 repertoire_grilles = new File(baseDir + "/" + DOSSIER_GRILLES);
-                repertoire_images = new File(currentDir + "/" + DOSSIER_IMAGES);
             } else {
                 System.out.println("[Path] erreur index < 0");
             }

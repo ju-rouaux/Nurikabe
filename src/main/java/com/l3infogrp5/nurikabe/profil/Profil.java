@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.l3infogrp5.nurikabe.utils.Path;
 import com.l3infogrp5.nurikabe.niveau.Niveau;
@@ -194,6 +196,35 @@ public class Profil {
         return matrice;
     }
 
+     /**
+     * retourne une liste de chaines de caracteres de l'emplacement des images, s'il
+     * elle existe, sinon on charge celle par défaut
+     *
+     * @param joueur      le nom du joueur
+     * @param mode_de_jeu le nom du mode de jeu
+     * @return la liste des emplacements des images
+     *
+     */
+    public static List<String> chargerImageNiveau(String joueur, String mode_de_jeu) {
+        List<String> url_images = new ArrayList<String>();
+        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/"
+                + "capture_niveau_");
+        File placeholder_default = new File(Path.repertoire_jar.toString() + "/Nurikabe_grille.png");
+
+        List<String> liste_fichiers = Sauvegarder.listeFichiers(mouvements_fichier.getParentFile());
+
+        for (int i = 0; i < Sauvegarder.nbGrilles(mode_de_jeu); i++) {
+            if (liste_fichiers.contains("capture_niveau_" + i + ".png"))
+                url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/"
+                        + "capture_niveau_" + i + ".png").toString());
+            else
+                url_images.add(placeholder_default.toString());
+
+        }
+
+        return url_images;
+    }
+
     /*
      * Getters
      */
@@ -223,5 +254,19 @@ public class Profil {
     public String getMode_de_jeu() {
         return mode_de_jeu;
     }
+
+    /**
+     * getter pour l'historique des mouvements
+     * @return l'historique des mouvements
+     */
+    public Historique getHistorique(){
+        return historique;
+    }
+
+    public Grille getGrille(){
+        return grille;
+    }
+
+
 
 }

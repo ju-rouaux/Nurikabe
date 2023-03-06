@@ -121,7 +121,7 @@ public class ControllerNiveau {
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
         joueur.sauvegarderNiveau(this.niveau.getGrille().getMatrice(), this.niveau.getHistorique());
-        CaptureNode.capturer(panneau_grille, joueur.getId_niveau());
+        CaptureNode.capturer(panneau_grille,joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
     }
