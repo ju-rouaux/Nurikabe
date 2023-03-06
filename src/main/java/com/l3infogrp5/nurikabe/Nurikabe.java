@@ -24,7 +24,7 @@ public class Nurikabe extends Application {
         super();
 
         Sauvegarder.creerArborescence();
-        /**
+        /*
          * TEMP
          */
         HashMap<String, HashMap<String, String>> mapdetente = new HashMap<>();

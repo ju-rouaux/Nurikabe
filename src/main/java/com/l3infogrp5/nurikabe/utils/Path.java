@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- * Classe constante qui definit tout les chemins des différents dossiers
+ * Classe constante qui définit tous les chemins des différents dossiers
  *
  * @author Guillaume Richard
  */
@@ -31,7 +31,7 @@ public final class Path {
     private static final String DOSSIER_SAVE = "/save";
     /** Le nom du dossier pour la sauvegarde des niveaux */
     private static final String DOSSIER_NIVEAUX = "/lvl";
-    /** Le nom de dossier pour la sauvegarde des score */
+    /** Le nom de dossier pour la sauvegarde des scores */
     private static final String DOSSIER_SCORE = "/score";
     /** Le nom de dossier pour la sauvegarde des grilles */
     private static final String DOSSIER_GRILLES = "/grilles";
@@ -67,7 +67,7 @@ public final class Path {
                 System.out.println("[Path] erreur index < 0");
             }
         } else {
-            System.out.println("[Path] Probleme d'indexation de fichiers");
+            System.out.println("[Path] Problème d'indexation de fichiers");
         }
     }
 }

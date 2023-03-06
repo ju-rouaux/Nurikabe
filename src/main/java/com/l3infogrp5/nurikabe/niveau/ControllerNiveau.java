@@ -71,7 +71,7 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage) throws IOException {
         this.stage = stage;
         //TODO charger profil dans le menu de selection des profils
-        joueur = new Profil("Julieng", "detente", 13);
+        joueur = new Profil("Julieng", "detente", 0);
 
         this.joueur.chargerHistorique();
         this.joueur.chargerGrille();
@@ -120,7 +120,7 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
-        joueur.sauvegarderNiveau(this.joueur.getGrille().getMatrice(), this.joueur.getHistorique());
+        joueur.sauvegarderNiveau();
         CaptureNode.capturer(panneau_grille,joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
