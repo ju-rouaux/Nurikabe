@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.niveau;
 
+import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -121,6 +122,8 @@ public class ControllerNiveau {
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
         joueur.sauvegarderNiveau();
+        //TODO : remplacer null avec le getScore du niveau
+        Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau(), null);
         CaptureNode.capturer(panneau_grille,joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire

@@ -34,14 +34,14 @@ public class Nurikabe extends Application {
         String nom_joueur = "khkqsdqsds";
 
         try {
-            Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless", 1);
-            Sauvegarder.sauvegarderScore("sdqez", "endless", 1);
-            Sauvegarder.sauvegarderScore("khkqsdqsds", "endless", 12);
-            Sauvegarder.sauvegarderScore("sdqfgez", "endless", 13);
-            Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 1);
-            Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 1);
-            Sauvegarder.sauvegarderScore("test", "detente", 2);
-            Sauvegarder.sauvegarderScore("jhkjs", "detente", 2);
+            Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless", 1,2017);
+            Sauvegarder.sauvegarderScore("sdqez", "endless", 1,39);
+            Sauvegarder.sauvegarderScore("khkqsdqsds", "endless", 12,"3:30");
+            Sauvegarder.sauvegarderScore("sdqfgez", "endless", 13,"test");
+            Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 1,"test");
+            Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 1,"test");
+            Sauvegarder.sauvegarderScore("test", "detente", 2,"test");
+            Sauvegarder.sauvegarderScore("jhkjs", "detente", 2,"test");
 
         } catch (IOException e) {
             // TODO Auto-generated catch block

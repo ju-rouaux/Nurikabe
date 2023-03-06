@@ -1,16 +1,16 @@
 package com.l3infogrp5.nurikabe.profil;
 
+import com.l3infogrp5.nurikabe.niveau.grille.Grille;
+import com.l3infogrp5.nurikabe.niveau.grille.Historique;
+import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
+import com.l3infogrp5.nurikabe.utils.Path;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.l3infogrp5.nurikabe.utils.Path;
-import com.l3infogrp5.nurikabe.niveau.grille.Grille;
-import com.l3infogrp5.nurikabe.niveau.grille.Historique;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 
 /**
  * Classe représentant un profil de joueur.
@@ -20,11 +20,11 @@ import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 public class Profil {
 
     /* Le nom du joueur */
-    private String joueur;
+    private final String joueur;
     /* Le mode de jeu */
-    private String mode_de_jeu;
+    private final String mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
-    private int id_niveau;
+    private final int id_niveau;
     /* L'historique des mouvements */
     private Historique historique;
     /* La grille */
@@ -52,39 +52,6 @@ public class Profil {
     }
 
     /**
-     * Sauvegarde le niveau deja commencé
-     *
-     */
-    public void sauvegarderNiveau() {
-        // sauvegarder le niveau correspondant au profil
-        Sauvegarder.sauvegardeMatrice(this.joueur, this.mode_de_jeu, this.id_niveau, grille.getMatrice());
-        Sauvegarder.sauvegarderHistorique(this.joueur, this.mode_de_jeu, this.id_niveau, grille.getHistorique());
-    }
-
-    /**
-     * Charge l'historique des mouvements du joueur
-     * S'il n'y en a pas, création d'un historique vierge
-     */
-    public void chargerHistorique() {
-        Historique hist;
-        File fichier_mouvements = new File(
-                Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + id_niveau);
-        if (fichier_mouvements.exists() && fichier_mouvements.length() > 0) {
-            System.out.println(
-                    "[Profil] Sauvegarde de l'historique des mouvements du joueur trouvée - Chargement de l'historique des mouvements du joueur sauvegardé...");
-
-            hist = deserialisationHistorique(fichier_mouvements);
-            hist.initTransientBoolean();
-            hist.actualiserEtat();
-        } else {
-            System.out.println(
-                    "[Profil] Aucune sauvegarde de l'historique des mouvements du joueur trouvée - Création d'un historique vide");
-            hist = new Historique();
-        }
-        this.historique = hist;
-    }
-
-    /**
      * Désérialise l'historique des mouvements à partir d'un fichier.
      *
      * @param fichier le fichier sérialisé des mouvements
@@ -103,31 +70,6 @@ public class Profil {
         }
 
         return historique;
-    }
-
-    /**
-     * Charge la grille à partir du fichier.
-     * S'il n'y en a pas, chargement du niveau par défaut
-     */
-    public void chargerGrille() {
-        Grille g;
-        File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
-        File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau);
-        if (grille_fichier.exists() && grille_fichier.length() > 0) {
-            System.out.println(
-                    "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
-            Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
-            System.out
-                    .println("[Debug] deserialisationMatrice(grille_fichier)" + deserialisationMatrice(grille_fichier));
-            g = new Grille(deserialisationMatrice(grille_fichier),
-                    Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, true), this.historique);
-        } else {
-            System.out.println(
-                    "[Profil] Aucune sauvegarde de la grille du niveau trouvée - Chargement de la grille par défaut");
-            g = new Grille(Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false),
-                    Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, true), this.historique);
-        }
-        this.grille = g;
     }
 
     /**
@@ -159,12 +101,11 @@ public class Profil {
      * @param joueur      le nom du joueur
      * @param mode_de_jeu le nom du mode de jeu
      * @return la liste des emplacements des images
-     *
      */
     public static List<String> chargerImageNiveau(String joueur, String mode_de_jeu) {
         List<String> url_images = new ArrayList<>();
         File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/"
-                + "capture_niveau_");
+            + "capture_niveau_");
         File placeholder_default = new File(Path.repertoire_jar.toString() + "/Nurikabe_grille.png");
 
         List<String> liste_fichiers = Sauvegarder.listeFichiers(mouvements_fichier.getParentFile());
@@ -172,7 +113,7 @@ public class Profil {
         for (int i = 0; i < Sauvegarder.nbGrilles(mode_de_jeu); i++) {
             if (liste_fichiers.contains("capture_niveau_" + i + ".png"))
                 url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/"
-                        + "capture_niveau_" + i + ".png").toString());
+                    + "capture_niveau_" + i + ".png").toString());
             else
                 url_images.add(placeholder_default.toString());
 
@@ -181,9 +122,67 @@ public class Profil {
         return url_images;
     }
 
+    /**
+     * Sauvegarde le niveau deja commencé
+     */
+    public void sauvegarderNiveau() {
+        // sauvegarder le niveau correspondant au profil
+        Sauvegarder.sauvegardeMatrice(this.joueur, this.mode_de_jeu, this.id_niveau, grille.getMatrice());
+        Sauvegarder.sauvegarderHistorique(this.joueur, this.mode_de_jeu, this.id_niveau, grille.getHistorique());
+    }
+
+    /**
+     * Charge l'historique des mouvements du joueur
+     * S'il n'y en a pas, création d'un historique vierge
+     */
+    public void chargerHistorique() {
+        Historique hist;
+        File fichier_mouvements = new File(
+            Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + id_niveau);
+        if (fichier_mouvements.exists() && fichier_mouvements.length() > 0) {
+            System.out.println(
+                "[Profil] Sauvegarde de l'historique des mouvements du joueur trouvée - Chargement de l'historique des mouvements du joueur sauvegardé...");
+
+            hist = deserialisationHistorique(fichier_mouvements);
+            hist.initTransientBoolean();
+            hist.actualiserEtat();
+        } else {
+            System.out.println(
+                "[Profil] Aucune sauvegarde de l'historique des mouvements du joueur trouvée - Création d'un historique vide");
+            hist = new Historique();
+        }
+        this.historique = hist;
+    }
+
+    /**
+     * Charge la grille à partir du fichier.
+     * S'il n'y en a pas, chargement du niveau par défaut
+     */
+    public void chargerGrille() {
+        Grille g;
+        File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
+        File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau);
+        if (grille_fichier.exists() && grille_fichier.length() > 0) {
+            System.out.println(
+                "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
+            Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
+            System.out
+                .println("[Debug] deserialisationMatrice(grille_fichier)" + deserialisationMatrice(grille_fichier));
+            g = new Grille(deserialisationMatrice(grille_fichier),
+                Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, true), this.historique);
+        } else {
+            System.out.println(
+                "[Profil] Aucune sauvegarde de la grille du niveau trouvée - Chargement de la grille par défaut");
+            g = new Grille(Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false),
+                Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, true), this.historique);
+        }
+        this.grille = g;
+    }
+
     /*
      * Getters
      */
+
     /**
      * getter pour le nom du joueur du profil
      *
@@ -222,6 +221,7 @@ public class Profil {
 
     /**
      * Getter pour la grille du niveau
+     *
      * @return la grille du niveau
      */
     public Grille getGrille() {

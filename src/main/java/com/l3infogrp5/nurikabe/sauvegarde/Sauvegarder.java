@@ -1,26 +1,15 @@
 package com.l3infogrp5.nurikabe.sauvegarde;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.utils.Path;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 /**
- *
  * Classe pour sauvegarder le profil d'un joueur
  *
  * @author Guillaume Richard
@@ -34,24 +23,22 @@ public class Sauvegarder {
     }
 
     /**
-     *
      * Recherche si la sauvegarde pour le joueur existe déjà
      *
      * @param joueur nom du joueur
-     *
      * @return vrai si la sauvegarde existe, faux sinon
      */
     public static boolean RechercherSauvegarde(String joueur) {
         // Vérifier si le nom du joueur est nul
-        if (joueur == null)
-            return false;
+        if (joueur == null) return false;
 
         // Récupère tous les fichiers dans le répertoire
         // Vérifier si le répertoire existe et s'il contient des fichiers
-        if (!dossierExistants(Path.repertoire_lvl) ||
-                Path.repertoire_lvl.listFiles().length == 0) {
+        if (!dossierExistants(Path.repertoire_lvl)) {
             // System.out.println("Il n'y pas de fichiers ou dossiers");
             return false;
+        } else {
+            Path.repertoire_lvl.listFiles();
         }
 
         // Parcourt tous les fichiers pour voir s'il y a une sauvegarde pour le joueur
@@ -65,12 +52,11 @@ public class Sauvegarder {
     }
 
     /**
-     *
      * Scanne les fichiers et répertoires et les ajoutés dans une liste
      *
      * @param repertoire le répertoire à scanner
      * @return une liste de noms de fichiers/répertoires du repertoire donné en
-     *         paramètre
+     * paramètre
      */
     public static List<String> listeFichiers(File repertoire) {
         List<String> fichiers = new ArrayList<>();
@@ -127,20 +113,17 @@ public class Sauvegarder {
             fichiers = listeFichiers(Path.repertoire_score);
             boolean endless = fichiers.contains("endless.save");
             if (!endless) {
-                if (!creerDossierFichier(Path.repertoire_score,
-                        new File(Path.repertoire_score + "/endless.save")))
+                if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/endless.save")))
                     System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
             }
             boolean clm = fichiers.contains("clm.save");
             if (!clm) {
-                if (!creerDossierFichier(Path.repertoire_score,
-                        new File(Path.repertoire_score + "/clm.save")))
+                if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/clm.save")))
                     System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
             }
             boolean detente = fichiers.contains("detente.save");
             if (!detente) {
-                if (!creerDossierFichier(Path.repertoire_score,
-                        new File(Path.repertoire_score + "/detente.save")))
+                if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/detente.save")))
                     System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
             }
 
@@ -191,7 +174,7 @@ public class Sauvegarder {
      */
     public static boolean dossierExistants(File repertoire) {
         File[] fichiers = repertoire.listFiles();
-      return fichiers != null;
+        return fichiers != null;
     }
 
     /**
@@ -202,7 +185,8 @@ public class Sauvegarder {
      * @param id_niveau   le numéro du niveau, -1 si en mode de jeu sans fin
      * @throws IOException {@link IOException}
      **/
-    public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau) throws IOException {
+    public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau, Object o) throws IOException {
+        FileWriter writer = null;
 
         // Récupérer la date courante
         Date date = new Date();
@@ -214,24 +198,17 @@ public class Sauvegarder {
         // SimpleDateFormat
         String date_formate = format.format(date);
 
-        FileWriter writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
 
-        if (mode_de_jeu.equals("endless"))
-            writer.write(joueur + " % " + getScore() + " % " + date_formate + "\n");
-        else
-            writer.write(joueur + " % " + getScore() + " % " + id_niveau + " % " + date_formate + "\n");
+        if (!mode_de_jeu.equals("detente"))
+            writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
+        else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
+
+
+        if (mode_de_jeu.equals("endless")) writer.write(joueur + " % " + o + " % " + date_formate + "\n");
+        else writer.write(joueur + " % " + o + " % " + id_niveau + " % " + date_formate + "\n");
 
         writer.close();
 
-    }
-
-    /**
-     * Methode de test en attendant le getScore du controller score
-     *
-     * @return un score bidon
-     */
-    private static String getScore() {
-        return "1:30";
     }
 
     /**
@@ -241,13 +218,15 @@ public class Sauvegarder {
      *                    chargés.
      * @param id_niveau   l'indice du niveau, négatif si en mode endless
      * @return un hashmap : [Nom du joueur[ date - le score]]], contenant tout les
-     *         scores du fichier
+     * scores du fichier
      * @throws IOException {@link IOException}
      */
-    public static HashMap<String, HashMap<String, String>> chargerScore(String mode_de_jeu, int id_niveau)
-            throws IOException {
+    public static HashMap<String, HashMap<String, String>> chargerScore(String mode_de_jeu, int id_niveau) throws IOException {
         HashMap<String, HashMap<String, String>> scores = new HashMap<>();
-        InputStream inputStream = new FileInputStream(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+        InputStream inputStream = null;
+        if (!mode_de_jeu.equals("detente"))
+            inputStream = new FileInputStream(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+        else inputStream = new FileInputStream(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
         Scanner scanner = new Scanner(inputStream);
         boolean niveaux = false;
 
@@ -285,8 +264,7 @@ public class Sauvegarder {
     public static int nbGrilles(String mode_de_jeu) {
         int nb_grilles = 0;
         InputStream inputStream;
-        inputStream = Sauvegarder.class
-                .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
+        inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
 
         if (inputStream == null) {
             System.out.println("[StockageNiveau] : Fichier inexistant");
@@ -318,11 +296,9 @@ public class Sauvegarder {
 
         InputStream inputStream;
         if (!solution) {
-            inputStream = Sauvegarder.class
-                    .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
+            inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
         } else {
-            inputStream = Sauvegarder.class
-                    .getResourceAsStream("/grilles/grilles_" + mode_de_jeu + "_solutions.txt");
+            inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + "_solutions.txt");
         }
 
         if (inputStream == null) {
@@ -350,7 +326,7 @@ public class Sauvegarder {
                 // Ignore les lignes commentées
                 grille_courante = false;
             } else if (line.startsWith("Grille") && grille_courante) {
-              break;
+                break;
             } else if (grille_courante) {
                 String[] values = line.split(" ");
                 for (int i = 0; i < colonnes; i++) {
@@ -379,14 +355,12 @@ public class Sauvegarder {
      * @param id_niveau   l'id du niveau
      * @param historique  l'historique des mouvements
      */
-    public static void sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau,
-            Historique historique) {
+    public static void sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau, Historique historique) {
         File mouvements_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
-        File mouvements_fichier = new File(mouvements_repertoire+ "/Mouvements_" + id_niveau);
+        File mouvements_fichier = new File(mouvements_repertoire + "/Mouvements_" + id_niveau);
 
         if (creerDossierFichier(mouvements_repertoire, mouvements_fichier)) {
-            System.out
-                    .println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
+            System.out.println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
             serialisationHistorique(mouvements_fichier, historique);
         } else {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
@@ -407,8 +381,7 @@ public class Sauvegarder {
             sortie.close();
             fichier_sortie.close();
 
-            System.out.println(
-                    "[Sauvegarde] Historique des mouvements sérialisé et sauvegardé dans Mouvements_<id_niveau>");
+            System.out.println("[Sauvegarde] Historique des mouvements sérialisé et sauvegardé dans Mouvements_<id_niveau>");
         } catch (IOException e) {
             e.printStackTrace();
         }
