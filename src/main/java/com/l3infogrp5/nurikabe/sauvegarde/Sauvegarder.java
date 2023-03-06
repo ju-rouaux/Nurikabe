@@ -357,7 +357,7 @@ public class Sauvegarder {
      *                    selon l'id
      * @return la matrice du niveau chargé
      */
-    public static int[][] chargerGrille(int id_niveau, String mode_de_jeu, Boolean solution) {
+    public static int[][] chargerGrilleFichier(int id_niveau, String mode_de_jeu, Boolean solution) {
 
         InputStream inputStream;
         if (!solution) {
@@ -403,8 +403,8 @@ public class Sauvegarder {
                     }
                 }
                 index++; // incremente indice de la ligne
-            }else if(line.startsWith("Grille ") && num_niveau != id_niveau){
-                num_niveau ++;
+            } else if (line.startsWith("Grille ") && num_niveau != id_niveau) {
+                num_niveau++;
             }
         }
         scanner.close();
@@ -509,7 +509,5 @@ public class Sauvegarder {
             e.printStackTrace();
         }
     }
-
-
 
 }

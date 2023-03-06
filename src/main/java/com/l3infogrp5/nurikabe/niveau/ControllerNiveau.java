@@ -28,8 +28,6 @@ public class ControllerNiveau {
     private Scene scene;
     private Pane panneau_grille;
 
-    private Niveau niveau;
-
     @FXML
     private Button btn_aide;
 
@@ -67,15 +65,17 @@ public class ControllerNiveau {
      * Initialise la vue du niveau.
      *
      * @param stage  la fenêtre contenant la scène.
-     * @param niveau le niveau à lancer.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
+    public ControllerNiveau(Stage stage) throws IOException {
         this.stage = stage;
+        //TODO charger profil dans le menu de selection des profils
         joueur = new Profil("Julieng", "detente", 13);
 
-        this.niveau = joueur.chargerNiveau(joueur.getId_niveau());
+        this.joueur.chargerHistorique();
+        this.joueur.chargerGrille();
+
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -94,15 +94,15 @@ public class ControllerNiveau {
         this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(15));
 
         // Mettre la grille au centre (et ajouter une marge)
-        this.panneau_grille = this.niveau.getGrille().getPanneau();
+        this.panneau_grille = this.joueur.getGrille().getPanneau();
         BorderPane.setMargin(panneau_grille, new Insets(30, 30, 30, 30));
         this.panneau_principal.setCenter(panneau_grille);
 
         // TODO charger les données de score
 
         // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.niveau.getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.niveau.getHistorique().peutRetablirProperty().not());
+        this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
     }
 
     /**
@@ -120,7 +120,7 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
-        joueur.sauvegarderNiveau(this.niveau.getGrille().getMatrice(), this.niveau.getHistorique());
+        joueur.sauvegarderNiveau(this.joueur.getGrille().getMatrice(), this.joueur.getHistorique());
         CaptureNode.capturer(panneau_grille,joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
@@ -131,7 +131,7 @@ public class ControllerNiveau {
      */
     @FXML
     private void undoClique() {
-        this.niveau.getGrille().undo();
+        this.joueur.getGrille().undo();
     }
 
     /**
@@ -139,6 +139,6 @@ public class ControllerNiveau {
      */
     @FXML
     private void redoClique() {
-        this.niveau.getGrille().redo();
+        this.joueur.getGrille().redo();
     }
 }

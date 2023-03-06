@@ -21,6 +21,9 @@ public class CaptureNode {
     /**
      * Enregsitre sous forme d'une image la grille
      * @param noeud composant a capturer (la grille)
+     * @param joueur le nom du joueur
+     * @param mode_de_jeu le mode de jeu
+     * @param id_niveau l'identifiant du niveau
      * @return vrai si bien passé, faux sinon
      */
     public static boolean capturer(Node noeud, String joueur, String mode_de_jeu, int id_niveau) {
