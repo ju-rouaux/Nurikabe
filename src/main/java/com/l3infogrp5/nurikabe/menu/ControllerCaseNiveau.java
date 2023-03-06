@@ -44,10 +44,6 @@ public class ControllerCaseNiveau {
     @FXML
     private ImageView img_trophee;
 
-    @FXML
-    private void CliqueNiveau() throws Exception {  
-       stage.setScene(new ControllerNiveau(this.stage,(new Niveau(this.indice))).getScene());
-    }
     /**
      * Initialise le menu de sélection de niveau et son contrôleur.
      * 
@@ -118,5 +114,14 @@ public class ControllerCaseNiveau {
      * Lance le niveau sur lequel on a cliqué.
      *
      */
-   
+    @FXML
+    private void CliqueNiveau() throws Exception {  
+       stage.setScene(new ControllerNiveau(this.stage,(new Niveau(this.indice))).getScene());
+    }
+
+    @FXML
+    private void CliqueLeaderBoard() throws Exception {
+        stage.setScene(new ControllerLeaderBoard(this.stage,this.indice)).getScene();
+
+    }
 }

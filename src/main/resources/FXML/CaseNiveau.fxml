@@ -23,7 +23,7 @@
       <HBox fx:id="box" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="label" />
-            <Button fx:id="bouton" mnemonicParsing="false">
+            <Button fx:id="bouton" mnemonicParsing="false" onAction="#CliqueLeaderBoard">
                <graphic>
                   <ImageView fx:id="img_trophee" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
