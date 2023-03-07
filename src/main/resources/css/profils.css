@@ -31,4 +31,8 @@
   -fx-font-size: 20px;
 }
 
+.actif {
+  -fx-background-color: white;
+}
+
 /* ==================== IDs ==================== */

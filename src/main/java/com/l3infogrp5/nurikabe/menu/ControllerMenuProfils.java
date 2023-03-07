@@ -42,6 +42,8 @@ public class ControllerMenuProfils {
     @FXML
     private GridPane pseudo_grid;
 
+    private int profil_actif;
+
     public String joueur;
     private String[] profils_attributs = new String[7];
 
@@ -58,6 +60,8 @@ public class ControllerMenuProfils {
         loader.setLocation(getClass().getResource("/FXML/menu_profils.fxml"));
         loader.setController(this);
         scene = loader.load();
+
+        profil_actif = 0;
 
         Arrays.fill(profils_attributs, null);
 
@@ -157,8 +161,17 @@ public class ControllerMenuProfils {
                     System.out.println("Creation du profils " + joueur);
                     nouveauxProfil(i);
                 }
+
+                setActiveProfil(i);
             }
         }
+    }
+
+    private void setActiveProfil(int i) {
+        ((VBox) pseudo_grid.getChildren().get(profil_actif)).getStyleClass().remove("actif");
+        ((VBox) pseudo_grid.getChildren().get(i)).getStyleClass().add("actif");
+        
+        profil_actif = i;
     }
 
     /**
@@ -222,7 +235,6 @@ public class ControllerMenuProfils {
     }
 }
 
-// TODO : indiquer visuellement le profile en cour d'utilisation
 // TODO : Permetre de supprimer un profile
 // TODO : Essayer sans tableaux directement sauvegarde et chargement
 
