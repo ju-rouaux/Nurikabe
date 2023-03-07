@@ -22,9 +22,9 @@ public class Profil {
     /* Le nom du joueur */
     private final String joueur;
     /* Le mode de jeu */
-    private final String mode_de_jeu;
+    private String mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
-    private final int id_niveau;
+    private int id_niveau;
     /* L'historique des mouvements */
     private Historique historique;
     /* La grille */
@@ -38,10 +38,11 @@ public class Profil {
      * @param id_niveau   l'id du niveau
      * @throws IOException {@link IOException}
      */
-    public Profil(String joueur, String mode_de_jeu, int id_niveau) throws IOException {
+    public Profil(String joueur) throws IOException {
         this.joueur = joueur;
-        this.mode_de_jeu = mode_de_jeu;
-        this.id_niveau = id_niveau;
+        // Valeurs par défaut
+        this.mode_de_jeu = "detente";
+        this.id_niveau = 0;
 
         if (Sauvegarder.RechercherSauvegarde(joueur)) {
             System.out.println("[Profil] Profil deja existant");
@@ -138,7 +139,7 @@ public class Profil {
     public void chargerHistorique() {
         Historique hist;
         File fichier_mouvements = new File(
-            Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + id_niveau);
+            Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + this.id_niveau);
         if (fichier_mouvements.exists() && fichier_mouvements.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de l'historique des mouvements du joueur trouvée - Chargement de l'historique des mouvements du joueur sauvegardé...");
@@ -160,21 +161,21 @@ public class Profil {
      */
     public void chargerGrille() {
         Grille g;
-        File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
-        File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau);
+        File grille_repertoire = new File(Path.repertoire_lvl + "/" + this.joueur + "/" + this.mode_de_jeu);
+        File grille_fichier = new File(grille_repertoire + "/Matrice_" + this.id_niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
-            Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
+            Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
             System.out
                 .println("[Debug] deserialisationMatrice(grille_fichier)" + deserialisationMatrice(grille_fichier));
             g = new Grille(deserialisationMatrice(grille_fichier),
-                Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, true), this.historique);
+                Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true), this.historique);
         } else {
             System.out.println(
                 "[Profil] Aucune sauvegarde de la grille du niveau trouvée - Chargement de la grille par défaut");
-            g = new Grille(Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false),
-                Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, true), this.historique);
+            g = new Grille(Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false),
+                Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true), this.historique);
         }
         this.grille = g;
     }
@@ -202,6 +203,15 @@ public class Profil {
     }
 
     /**
+     * Setter pour l'identifiant du niveau
+     *
+     * @param id l'identifiant du niveau
+     */
+    public void setId_niveau(int id) {
+        this.id_niveau = id;
+    }
+
+    /**
      * getter pour l'id du niveau
      *
      * @return l'id du niveau
@@ -209,6 +219,16 @@ public class Profil {
     public String getMode_de_jeu() {
         return mode_de_jeu;
     }
+
+    /**
+     * Setter pour le mode de jeu
+     *
+     * @param mdj le mode de jeu courant
+     */
+    public void setMode_de_jeu(String mdj) {
+        this.mode_de_jeu = mdj;
+    }
+
 
     /**
      * getter pour l'historique des mouvements

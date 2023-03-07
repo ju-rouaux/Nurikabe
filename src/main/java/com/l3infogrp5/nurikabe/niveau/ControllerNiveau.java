@@ -72,7 +72,9 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage) throws IOException {
         this.stage = stage;
         //TODO charger profil dans le menu de selection des profils
-        joueur = new Profil("Julieng", "detente", 0);
+        joueur = new Profil("Julieng");
+        joueur.setId_niveau(0);
+        joueur.setMode_de_jeu("detente");
 
         this.joueur.chargerHistorique();
         this.joueur.chargerGrille();
