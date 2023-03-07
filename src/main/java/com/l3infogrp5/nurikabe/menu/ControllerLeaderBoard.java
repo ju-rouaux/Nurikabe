@@ -49,7 +49,7 @@ public class ControllerLeaderBoard {
     public void initialize() { 
         
         // ajout des valeurs
-        this.nom.setText("caca"); 
+        this.nom.getColumns().add; 
         this.score.setText("12");
         this.date.setText("12.12.2023");
 
