@@ -2,9 +2,17 @@ package com.l3infogrp5.nurikabe.menu;
 
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
+import com.l3infogrp5.nurikabe.utils.Path;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,24 +43,23 @@ public class ControllerMenuProfils {
     private GridPane pseudo_grid;
 
     public String joueur;
-
-    ControllerMenuPrincipal main_menu;
+    private String[] profils_attributs = new String[7];
 
     /**
      * Initialise le menu de sélection d'affichage des règles et son contrôleur.
      *
      * @param stage la fenêtre contenant la scène.
-     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
-     *                     être lu.
+     * @throws IOException
      */
-    public ControllerMenuProfils(Stage stage, ControllerMenuPrincipal main_menu) throws IOException {
+    public ControllerMenuProfils(Stage stage) throws IOException {
         this.stage = stage;
-        this.main_menu = main_menu;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_profils.fxml"));
         loader.setController(this);
         scene = loader.load();
+
+        Arrays.fill(profils_attributs, null);
 
         new Profil(((Label) ((VBox) pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText(), null, 0);
     }
@@ -70,8 +77,9 @@ public class ControllerMenuProfils {
      * Retourne au menu précédent, le menu principal.
      */
     @FXML
-    private void retourClique(ActionEvent event) throws Exception {
-        stage.setScene(main_menu.getScene());
+    private void retourClique(ActionEvent event) throws IOException {
+        sauvegarderProfils();
+        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
     }
 
     /**
@@ -80,10 +88,9 @@ public class ControllerMenuProfils {
      * 
      * @param i l'indice de la grille a modifier
      * 
-     * @throws Exception
      */
     @FXML
-    private void afficherNouveauxProfil(int i) throws Exception {
+    private void afficherNouveauxProfil(int i) {
         // affiche le nom du nouveaux profil
         ((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).setText(joueur);
 
@@ -106,11 +113,12 @@ public class ControllerMenuProfils {
      * Méthode pour créer un nouveaux profils avec un pseudo
      * 
      * @param i l'indice de la grille a modifier
+     * @throws IOException
      *
-     * @throws Exception
+     * @throws IOException
      */
     @FXML
-    private void nouveauxProfil(int i) throws Exception {
+    private void nouveauxProfil(int i) throws IOException {
         // creation de la popup pour cree un nouveaux profil
         Stage popup = new Stage();
 
@@ -122,19 +130,19 @@ public class ControllerMenuProfils {
 
         // modification de l'affichage
         afficherNouveauxProfil(i);
+
+        ajoutProfils(joueur);
     }
 
     /**
      * Méthode pour charger un profils
+     * 
+     * @throws IOException
      *
-     * @throws Exception
+     * @throws IOException
      */
     @FXML
-    private void chargerProfil(ActionEvent event) throws Exception {
-
-        File f = new File("target/classes/FXML/menu_profils.fxml"); // en construction pour sauvegarder les modif (phase
-                                                                    // de tests)
-
+    private void chargerProfil(ActionEvent event) throws IOException {
         // on parcour la grid des profil pour savoir lequel est appuiyer
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
             // recuperation du boutton appuiyer
@@ -152,9 +160,68 @@ public class ControllerMenuProfils {
             }
         }
     }
+
+    /**
+     * Methode pour recuperer les joeur creer
+     * 
+     * @throws FileNotFoundException
+     */
+    public void chargerTableau() throws FileNotFoundException {
+        File file = new File(Path.repertoire_courant.toString() + "/Profil_interface" + "/liste_profils");
+        if (file.exists()) {
+            Scanner reader = new Scanner(file);
+            for (int i = 0; reader.hasNextLine(); i++) {
+                joueur = reader.nextLine();
+                profils_attributs[i] = joueur;
+                afficherNouveauxProfil(i + 1);
+            }
+
+            reader.close();
+        }
+    }
+
+    /**
+     * Methode pour ajouter un joueur au tableau des joueur
+     * 
+     * @param joueur le nom du joueur a ajouter
+     */
+    private void ajoutProfils(String joueur) {
+        for (int i = 0; i < profils_attributs.length; i++) {
+            if (profils_attributs[i] == null) {
+                profils_attributs[i] = joueur;
+                return;
+            }
+        }
+    }
+
+    /**
+     * Methode pour sauvegarder l'affichage des profils creer
+     * 
+     * @throws IOException
+     */
+    private void sauvegarderProfils() throws IOException {
+        if (!Sauvegarder.dossierExistants(new File(Path.repertoire_courant.toString() + "/Profil_interface"))) {
+            Files.createDirectories(Paths.get(Path.repertoire_courant.toString() + "/Profil_interface"));
+            System.out.println("Repertoire interface profil creer");
+        } else {
+            System.out.println("Repertoire interface profil deja existant");
+        }
+
+        BufferedWriter writer = new BufferedWriter(
+                new FileWriter(Path.repertoire_courant.toString() + "/Profil_interface" + "/liste_profils"));
+
+        // recopie du tableau dans un fichier
+        for (String str : profils_attributs) {
+            if (str != null) {
+                writer.write(str);
+                writer.newLine();
+            }
+        }
+
+        writer.close();
+    }
 }
 
-// TODO : creer un profile par default (Default)
 // TODO : modifier fxml pour sauvagarder modif visuel des nouveaux profil
 // TODO : indiquer visuellement le profile en cour d'utilisation
 // TODO : Permetre de supprimer un profile
