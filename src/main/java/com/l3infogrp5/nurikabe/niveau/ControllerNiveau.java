@@ -61,6 +61,8 @@ public class ControllerNiveau {
 
     Profil joueur;
 
+    ControllerMenuModeJeu mode_jeu;
+
     /**
      * Initialise la vue du niveau.
      *
@@ -69,9 +71,10 @@ public class ControllerNiveau {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
+    public ControllerNiveau(Stage stage, Niveau niveau, ControllerMenuModeJeu mode_jeu) throws IOException {
         this.stage = stage;
         joueur = new Profil("Julieng", "detente", 1);
+        this.mode_jeu = mode_jeu;
 
         this.niveau = joueur.chargerNiveau(joueur.getId_niveau());
 
@@ -119,7 +122,7 @@ public class ControllerNiveau {
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
-        stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
+        stage.setScene(mode_jeu.getScene()); // temporaire
         joueur.sauvegarderNiveau(this.niveau.getGrille().getMatrice(), this.niveau.getHistorique());
     }
 

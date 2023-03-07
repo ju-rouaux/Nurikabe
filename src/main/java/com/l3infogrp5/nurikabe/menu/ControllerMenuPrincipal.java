@@ -33,18 +33,15 @@ public class ControllerMenuPrincipal {
     @FXML
     private Button btn_quitter;
 
-    ControllerMenuProfils profils;
-
     /**
      * Initialise le menu principal et son contrôleur.
      * 
      * @param stage la fenêtre contenant la scène.
-     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
-     *                     être lu.
+     * @throws IOException
+     * @throws Exception
      */
-    public ControllerMenuPrincipal(Stage stage) throws IOException {
+    public ControllerMenuPrincipal(Stage stage) throws IOException  {
         this.stage = stage;
-        profils = new ControllerMenuProfils(stage, this);
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_principal.fxml"));
@@ -77,7 +74,9 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void profilsClique(ActionEvent event) throws IOException {
+        ControllerMenuProfils profils = new ControllerMenuProfils(stage);
         stage.setScene(profils.getScene());
+        profils.chargerTableau();
     }
 
     /**
