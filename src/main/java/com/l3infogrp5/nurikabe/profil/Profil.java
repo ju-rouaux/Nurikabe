@@ -33,9 +33,7 @@ public class Profil {
     /**
      * Création d'un profil.
      *
-     * @param joueur      le nom du joueur
-     * @param mode_de_jeu le mode de jeu
-     * @param id_niveau   l'id du niveau
+     * @param joueur le nom du joueur
      * @throws IOException {@link IOException}
      */
     public Profil(String joueur) throws IOException {

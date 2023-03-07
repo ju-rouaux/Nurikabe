@@ -1,21 +1,20 @@
 package com.l3infogrp5.nurikabe.niveau;
 
+import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
+import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
+import com.l3infogrp5.nurikabe.utils.CaptureNode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import com.l3infogrp5.nurikabe.profil.Profil;
-import com.l3infogrp5.nurikabe.utils.CaptureNode;
-import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -24,48 +23,35 @@ import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
  */
 public class ControllerNiveau {
 
-    private FXMLLoader loader;
-    private Stage stage;
-    private Scene scene;
+    Profil joueur;
+    private final FXMLLoader loader;
+    private final Stage stage;
+    private final Scene scene;
     private Pane panneau_grille;
-
     @FXML
     private Button btn_aide;
-
     @FXML
     private Button btn_check;
-
     @FXML
     private Button btn_redo;
-
     @FXML
     private Button btn_reset;
-
     @FXML
     private Button btn_retour;
-
     @FXML
     private Button btn_undo;
-
     @FXML
     private BorderPane panneau_principal;
-
     @FXML
     private BorderPane panneau_score;
 
     @FXML
     private HBox barre;
 
-    /*
-     * temp
-     */
-
-    Profil joueur;
-
     /**
      * Initialise la vue du niveau.
      *
-     * @param stage  la fenêtre contenant la scène.
+     * @param stage la fenêtre contenant la scène.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
@@ -126,7 +112,7 @@ public class ControllerNiveau {
         joueur.sauvegarderNiveau();
         //TODO : remplacer null avec le getScore du niveau
         Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau(), null);
-        CaptureNode.capturer(panneau_grille,joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
+        CaptureNode.capturer(panneau_grille, joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
     }
