@@ -27,7 +27,7 @@
                   <Insets bottom="50.0" />
                </VBox.margin>
             </ImageView>
-            <TextField fx:id="pseudo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#getPseudo" prefHeight="40.0" prefWidth="406.0" promptText="Pseudo" styleClass="label" />
+            <TextField fx:id="pseudo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#isEnter" onKeyTyped="#getPseudo" prefHeight="40.0" prefWidth="406.0" promptText="Pseudo" styleClass="label" />
             <Button mnemonicParsing="false" onAction="#close" styleClass="label" text="Créer le profil">
                <VBox.margin>
                   <Insets top="30.0" />
