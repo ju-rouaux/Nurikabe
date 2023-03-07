@@ -18,6 +18,13 @@
   -fx-background-repeat: no-repeat;
 }
 
+.btn-del {
+  -fx-background-image: url("../trash.png");
+  -fx-background-size: 30;
+  -fx-background-position: center;
+  -fx-background-repeat: no-repeat;
+}
+
 .btn-add {
   -fx-text-fill: black;
   -fx-font-weight: bold;

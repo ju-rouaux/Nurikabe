@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -65,7 +66,7 @@ public class ControllerMenuProfils {
 
         Arrays.fill(profils_attributs, null);
 
-        new Profil(((Label) ((VBox) pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText(), null, 0);
+        new Profil(((Label) ((VBox) pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText());
     }
 
     /**
@@ -118,7 +119,6 @@ public class ControllerMenuProfils {
      * @param i l'indice de la grille a modifier
      * @throws IOException
      *
-     * @throws IOException
      */
     @FXML
     private void nouveauxProfil(int i) throws IOException {
@@ -129,13 +129,13 @@ public class ControllerMenuProfils {
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.showAndWait();
 
-        new Profil(joueur, null, 0);
+        new Profil(joueur);
 
         // modification de l'affichage
         afficherNouveauxProfil(i);
 
         ajoutProfils(joueur);
-        sauvegarderProfils();        
+        sauvegarderProfils();
     }
 
     /**
@@ -143,7 +143,6 @@ public class ControllerMenuProfils {
      * 
      * @throws IOException
      *
-     * @throws IOException
      */
     @FXML
     private void chargerProfil(ActionEvent event) throws IOException {
@@ -170,7 +169,7 @@ public class ControllerMenuProfils {
     private void setActiveProfil(int i) {
         ((VBox) pseudo_grid.getChildren().get(profil_actif)).getStyleClass().remove("actif");
         ((VBox) pseudo_grid.getChildren().get(i)).getStyleClass().add("actif");
-        
+
         profil_actif = i;
     }
 
@@ -232,6 +231,24 @@ public class ControllerMenuProfils {
         }
 
         writer.close();
+    }
+
+    // TODO: empecher affichage corbeille sur profile non creer
+    @FXML
+    private void viewDel(MouseEvent event) {
+        for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
+            if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)))) {
+                if (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0).isVisible())
+                    ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2).setVisible(true);
+            }
+        }
+    }
+
+    @FXML
+    private void hideDel(MouseEvent event) {
+        for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
+            ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2).setVisible(false);
+        }
     }
 }
 

@@ -60,7 +60,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="actif">
+                  <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" styleClass="actif">
                      <children>
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" textFill="#ff0e0e">
                            <styleClass>
@@ -71,9 +71,14 @@
                            <padding>
                               <Insets top="10.0" />
                            </padding></Label>
+                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                  <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e">
                            <styleClass>
@@ -85,9 +90,10 @@
                               <Insets top="10.0" />
                            </padding>
                         </Label>
+                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                  <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                      <children>
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
                            <styleClass>
@@ -100,9 +106,10 @@
                               <Insets top="10.0" />
                            </padding>
                         </Label>
+                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                  <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
                      <children>
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
                            <styleClass>
@@ -115,9 +122,10 @@
                               <Insets top="10.0" />
                            </padding>
                         </Label>
+                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                  <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                      <children>
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
                            <styleClass>
@@ -130,9 +138,10 @@
                               <Insets top="10.0" />
                            </padding>
                         </Label>
+                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
                            <styleClass>
@@ -145,9 +154,10 @@
                               <Insets top="10.0" />
                            </padding>
                         </Label>
+                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
                            <styleClass>
@@ -160,9 +170,10 @@
                               <Insets top="10.0" />
                            </padding>
                         </Label>
+                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <children>
                         <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" text="+" textFill="#ff0e0e" visible="false">
                            <styleClass>
@@ -175,6 +186,7 @@
                               <Insets top="10.0" />
                            </padding>
                         </Label>
+                        <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false" />
                      </children>
                   </VBox>
                </children>
