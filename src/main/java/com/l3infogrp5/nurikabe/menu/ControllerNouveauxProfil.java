@@ -49,15 +49,20 @@ public class ControllerNouveauxProfil {
 
     @FXML
     private void getPseudo() {
-        this.profils.joueur = pseudo.getText();
+        profils.joueur = pseudo.getText();
     }
 
     @FXML
     private void close() {
-        ((Stage) this.scene.getWindow()).close();
+        if(pseudo.getLength() == 0){
+            pseudo.setPromptText("Saisir un pseudo");
+        }
+        else{
+            ((Stage) this.scene.getWindow()).close();
+        }
+        
     }
 
 }
 
-// TODO : empecher cree profile nom vide
 // TODO : appyer sur entre pour cree nouveaux profile

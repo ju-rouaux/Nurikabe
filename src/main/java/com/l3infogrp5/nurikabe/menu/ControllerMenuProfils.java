@@ -78,7 +78,6 @@ public class ControllerMenuProfils {
      */
     @FXML
     private void retourClique(ActionEvent event) throws IOException {
-        sauvegarderProfils();
         stage.setScene(new ControllerMenuPrincipal(stage).getScene());
     }
 
@@ -132,6 +131,7 @@ public class ControllerMenuProfils {
         afficherNouveauxProfil(i);
 
         ajoutProfils(joueur);
+        sauvegarderProfils();        
     }
 
     /**
@@ -222,9 +222,9 @@ public class ControllerMenuProfils {
     }
 }
 
-// TODO : modifier fxml pour sauvagarder modif visuel des nouveaux profil
 // TODO : indiquer visuellement le profile en cour d'utilisation
 // TODO : Permetre de supprimer un profile
+// TODO : Essayer sans tableaux directement sauvegarde et chargement
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
