@@ -167,16 +167,12 @@ public class Profil {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
             Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
-            System.out
-                .println("[Debug] deserialisationMatrice(grille_fichier)" + deserialisationMatrice(grille_fichier));
             g = new Grille(deserialisationMatrice(grille_fichier),
                 Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true), this.historique);
-        } else {
-            System.out.println(
-                "[Profil] Aucune sauvegarde de la grille du niveau trouvée - Chargement de la grille par défaut");
+        } else
             g = new Grille(Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false),
                 Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true), this.historique);
-        }
+
         return g;
     }
 
