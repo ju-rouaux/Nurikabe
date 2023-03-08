@@ -1,8 +1,6 @@
 package com.l3infogrp5.nurikabe;
 
-import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreCLM;
-import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreChrono;
-import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreEndless;
+import com.l3infogrp5.nurikabe.menu.*;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,30 +15,12 @@ public class Nurikabe extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        final Text text = new Text("00:00");
-        text.setLayoutX(100);
-        text.setLayoutY(100);
-        text.setFill(Color.BLUE);
+        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
 
+        stage.setMinHeight(480);
+        stage.setMinWidth(640);
+        stage.setScene(menu.getScene());
+        stage.show();
 
-        ScoreChrono score = new ScoreCLM(75, text);
-        final Scene scene = new Scene(score.get_Pane(), 350, 300);
-        score.start();
-
-        System.out.println("test");
-        score.aideUtilise();
-
-        /*
-         * ScoreChrono score = new ScoreEndless(40,0, text);
-         * score.calcul();
-         * 
-         * System.out.println("test");
-         * //score.aideUtilise(35);
-         * score.grilleComplete();
-         */
-
-        primaryStage.setTitle("Test sur l'opacité");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 }
