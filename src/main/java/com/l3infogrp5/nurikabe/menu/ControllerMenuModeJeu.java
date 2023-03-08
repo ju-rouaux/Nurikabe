@@ -11,7 +11,7 @@ import java.io.IOException;
 
 //TODO imports pour la démo de lancement de niveau
 import com.l3infogrp5.nurikabe.niveau.ControllerNiveau;
-//TODO Charger images placheolder selon le profil dans le menu de selection des niveaux
+//TODO Charger images placeholder selon le profil dans le menu de selection des niveaux
 import com.l3infogrp5.nurikabe.profil.Profil;
 
 /**
@@ -48,11 +48,11 @@ public class ControllerMenuModeJeu {
      *                     être lu.
      */
     public ControllerMenuModeJeu(Stage stage) throws IOException {
-        /**
+        /*
          * Test chargement des images
          */
         // TODO Changer parametres avec <nomProfil>.get()
-        // System.out.println(Profil.chargerImageNiveau("Julieng", "detente"));
+//        Profil.chargerImageNiveau("Julieng", "detente");
 
         this.stage = stage;
 
