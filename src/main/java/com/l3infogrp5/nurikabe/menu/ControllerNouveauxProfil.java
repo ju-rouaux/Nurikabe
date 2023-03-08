@@ -50,7 +50,7 @@ public class ControllerNouveauxProfil {
     }
 
     @FXML
-    private void isEnter(KeyEvent event){
+    private void isEnter(KeyEvent event) {
         // si on appuie sur entrer
         if (event.getCode() == KeyCode.ENTER) {
             close();
@@ -64,13 +64,12 @@ public class ControllerNouveauxProfil {
 
     @FXML
     private void close() {
-        if(pseudo.getLength() == 0){
+        if (pseudo.getLength() == 0) {
             pseudo.setPromptText("Saisir un pseudo");
-        }
-        else{
+        } else {
             ((Stage) this.scene.getWindow()).close();
         }
-        
+
     }
 
 }

@@ -9,8 +9,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -93,7 +95,6 @@ public class ControllerMenuProfils {
      * @param i l'indice de la grille a modifier
      * 
      */
-    @FXML
     private void afficherNouveauxProfil(int i) {
         // affiche le nom du nouveaux profil
         ((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).setText(joueur);
@@ -120,7 +121,6 @@ public class ControllerMenuProfils {
      * @throws IOException
      *
      */
-    @FXML
     private void nouveauxProfil(int i) throws IOException {
         // creation de la popup pour cree un nouveaux profil
         Stage popup = new Stage();
@@ -233,12 +233,11 @@ public class ControllerMenuProfils {
         writer.close();
     }
 
-    // TODO: empecher affichage corbeille sur profile non creer
     @FXML
     private void viewDel(MouseEvent event) {
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)))) {
-                if (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0).isVisible())
+                if (((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getText() == "")
                     ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2).setVisible(true);
             }
         }
@@ -250,10 +249,35 @@ public class ControllerMenuProfils {
             ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2).setVisible(false);
         }
     }
-}
 
-// TODO : Permetre de supprimer un profile
-// TODO : Essayer sans tableaux directement sauvegarde et chargement
+    @FXML
+    private void suprProfil(ActionEvent event) throws IOException {
+        // on parcour la grid des profil pour savoir lequel est appuiyer
+        for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
+            // recuperation du boutton appuiyer
+            if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2))) {
+                // recuperation du pseudo
+                joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
+                        .get(1)).getText());
+            }
+        }
+
+        // suppression du nom dans le tableau et rearangement
+        for (int i = 0; i < profils_attributs.length; i++) {
+            if (profils_attributs[i] == joueur) {
+                for (int j = i; j < profils_attributs.length - 1; j++) {
+                    profils_attributs[j] = profils_attributs[j + 1];
+                }
+            }
+        }
+
+        sauvegarderProfils();
+
+        ControllerMenuProfils reload = new ControllerMenuProfils(stage);
+        stage.setScene(reload.getScene());
+        reload.chargerTableau();
+    }
+}
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
