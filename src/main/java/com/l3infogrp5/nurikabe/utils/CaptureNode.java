@@ -1,13 +1,12 @@
 package com.l3infogrp5.nurikabe.utils;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 /**
  * Classe permettant d'enregsiter l'image du nivea
  * @author Julien Rouaux

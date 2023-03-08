@@ -183,6 +183,7 @@ public class Sauvegarder {
      * @param joueur      le nom du joueur/profil
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   le numéro du niveau, -1 si en mode de jeu sans fin
+     * @param o le score
      * @throws IOException {@link IOException}
      **/
     public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau, Object o) throws IOException {

@@ -24,6 +24,40 @@ public class Nurikabe extends Application {
         super();
 
         Sauvegarder.creerArborescence();
+
+        testSauvegardeScoreProfil();
+
+    }
+
+    /**
+     * Initialisation de la fenêtre de l'application.
+     *
+     * @throws Exception {@inheritDoc}
+     */
+    @Override
+    public void start(Stage stage) throws Exception {
+        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
+
+        stage.setMinHeight(480);
+        stage.setMinWidth(640);
+        stage.setScene(menu.getScene());
+        stage.show();
+    }
+
+    /**
+     * Fonction appelée avant la fermeture du programme.
+     * Utiliser Platform.exit() au lieu de System.exit() pour s'assurer de
+     * l'exécution de cette méthode.
+     *
+     * @throws Exception {@inheritDoc}
+     */
+    @Override
+    public void stop() throws Exception {
+        // TODO : ajouter une fermeture du programme propre qui s'assure de la
+        // sauvegarde de la partie.
+    }
+
+    private void testSauvegardeScoreProfil(){
         /*
          * TEMP
          */
@@ -60,45 +94,16 @@ public class Nurikabe extends Application {
         // Exemple recuperer informations mode detente / controle la montre
         // Recuperer infomrtaions d'un id_niveau et d'un nom_joueur
         System.out.println("Informations d'un id_niveau <" + id_niveau + "> et d'un nom_joueur <" + nom_joueur + ">: "
-                + mapdetente.get(nom_joueur));
+            + mapdetente.get(nom_joueur));
         System.out.println("Score = " + mapdetente.get(nom_joueur).get("score"));
         System.out.println("Date = " + mapdetente.get(nom_joueur).get("date"));
 
         System.out.println("\nListe joueurs / score-date" + mapendless);
         System.out.println(
-                "Infos joueur en mode endless ayant pour pseudo : " + nom_joueur + " = " + mapendless.get(nom_joueur));
+            "Infos joueur en mode endless ayant pour pseudo : " + nom_joueur + " = " + mapendless.get(nom_joueur));
         System.out.println("Score = " + mapendless.get(nom_joueur).get("score"));
         System.out.println("Date = " + mapendless.get(nom_joueur).get("date"));
 
         System.out.println("Nb grilles = " + Sauvegarder.nbGrilles("detente"));
-
-    }
-
-    /**
-     * Initialisation de la fenêtre de l'application.
-     *
-     * @throws Exception {@inheritDoc}
-     */
-    @Override
-    public void start(Stage stage) throws Exception {
-        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
-
-        stage.setMinHeight(480);
-        stage.setMinWidth(640);
-        stage.setScene(menu.getScene());
-        stage.show();
-    }
-
-    /**
-     * Fonction appelée avant la fermeture du programme.
-     * Utiliser Platform.exit() au lieu de System.exit() pour s'assurer de
-     * l'exécution de cette méthode.
-     *
-     * @throws Exception {@inheritDoc}
-     */
-    @Override
-    public void stop() throws Exception {
-        // TODO : ajouter une fermeture du programme propre qui s'assure de la
-        // sauvegarde de la partie.
     }
 }
