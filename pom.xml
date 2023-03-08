@@ -53,6 +53,12 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    <!-- Import CortolsFX pour ratings -->
+    <dependency>
+      <groupId>org.controlsfx</groupId>
+      <artifactId>controlsfx</artifactId>
+      <version>11.1.2</version>
+    </dependency>
   </dependencies>
 
   <build>

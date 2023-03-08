@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.Niveaux.Score;
+package com.l3infogrp5.nurikabe.niveau.score;
 
 /**
  * Classe interface répertoriant les méthodes à invoquer pour calculer un score
