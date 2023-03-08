@@ -303,4 +303,8 @@ public class Grille {
     public Historique getHistorique() {
         return this.histo;
     }
+
+    public int [][] getSolution(){
+        return this.solution;
+    }
 }
