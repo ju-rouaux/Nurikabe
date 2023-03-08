@@ -273,6 +273,8 @@ public class ControllerMenuProfils {
 
         sauvegarderProfils();
 
+        // TODO: ajout method suppresion sauvegarde
+
         ControllerMenuProfils reload = new ControllerMenuProfils(stage);
         stage.setScene(reload.getScene());
         reload.chargerTableau();
