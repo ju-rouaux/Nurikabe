@@ -32,5 +32,10 @@
     -fx-effect: innershadow(gaussian, rgb(255, 200, 0), 40, 0.1, 0, 0);
 }
 
+.toolBar {
+    -fx-background-color: rgb(254, 236, 138);
+    -fx-effect: innershadow(gaussian, rgb(253, 198, 0), 40, 0.1, 0, 0);
+    /*-fx-border-color: rgb(226, 0, 0);*/
+}
 
 /* ==================== IDs ==================== */

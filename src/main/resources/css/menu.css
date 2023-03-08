@@ -41,13 +41,19 @@
 /* Boutons d'accès aux scores (trophée) */
 .btn-trophee {
     -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 0, 0), 4, 0.2, 0, 0);
 }
 
 
 /* Boutons retour */
 .btn-retour {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 10;
+    -fx-background-color: transparent;
+}
+
+/* Images boutons retour*/
+.img-retour{
+    -fx-effect: dropshadow(gaussian, rgb(255, 255, 255),3.1, 1, 0, 0);
+    
 }
 
 /* ==================== IDs ==================== */

@@ -20,10 +20,14 @@
          <children>
             <HBox>
                <children>
-                  <Button fx:id="btn_retour" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" text="&lt;&lt;">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
+                  <Button fx:id="btn_retour" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                           <image>
+                              <Image url="@../undo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <HBox prefHeight="658.0" prefWidth="150.0" spacing="10.0" />
                </children>

@@ -34,10 +34,14 @@
          <children>
             <HBox>
                <children>
-                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" text="&lt;&lt;">
-                     <font>
-                        <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="17.0" />
-                     </font>
+                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                           <image>
+                              <Image url="@../undo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
                <padding>
@@ -64,7 +68,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -100,7 +104,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -131,7 +135,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -162,7 +166,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -193,7 +197,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -224,7 +228,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -255,7 +259,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -286,7 +290,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -317,7 +321,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -348,7 +352,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -379,7 +383,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -410,7 +414,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -441,7 +445,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -472,7 +476,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -503,7 +507,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -534,7 +538,7 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" style="-fx-background-color: transparent;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="36.0" styleClass="btn-trophee" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
