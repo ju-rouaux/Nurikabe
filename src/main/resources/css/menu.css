@@ -8,17 +8,18 @@
     -fx-background-radius: 50px;
     -fx-border-radius: 50px;
     -fx-border-width: 4px;
-    -fx-border-color: rgb(226, 222, 0);
+    /*-fx-border-color: rgb(226, 222, 0);*/
+    -fx-border-color: rgb(226, 185, 0);
     -fx-effect: innershadow(gaussian, rgb(255, 227, 70), 28, 0.5, 0, 0);
     /*-fx-effect: dropshadow(three-pass-box, rgb(248, 255, 173),60, 0, 0, 0);*/
 }
 .btn-principal .text{
-    -fx-font-size: 25px;
+    -fx-font-size: 26px;
     -fx-font-weight: bold;
     -fx-fill: rgb(255, 255, 255);
-    -fx-stroke: #d1a000;
+    -fx-stroke: #85690e;
     -fx-stroke-width: 1px;
-    -fx-effect: dropshadow(three-pass-box, rgb(255, 218, 10), 2, 0.7, 2, 2);
+    -fx-effect: dropshadow(three-pass-box, rgb(233, 190, 0), 2, 0.7, 2, 2);
     
 
 }

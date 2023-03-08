@@ -18,10 +18,9 @@
             <items>
                <HBox fx:id="barre" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="614.0" spacing="10.0">
                   <children>
-                     <!--<Button fx:id="btn_retour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" text="X" textOverrun="CLIP" />-->
                      <Button fx:id="btn_retour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
                         <graphic>
-                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
                               <image>
                                  <Image url="@../undo.png" />
                               </image>
@@ -33,7 +32,7 @@
                      <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                      <BorderPane fx:id="panneau_score" prefHeight="200.0" prefWidth="200.0">
                         <center>
-                           <Label text="Label" BorderPane.alignment="CENTER" />
+                           <Label text="Score" BorderPane.alignment="CENTER" />
                         </center>
                      </BorderPane>
                      <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
