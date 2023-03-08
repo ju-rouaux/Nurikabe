@@ -63,7 +63,7 @@ public class ControllerNiveau {
         joueur = new Profil("hgksd");
         joueur.setId_niveau(100);
         joueur.setMode_de_jeu("detente");
-        grille = new Grille(joueur.chargerGrille().getMatrice(), joueur.chargerGrille().getSolution(), joueur.chargerHistorique());
+        grille = new Grille(joueur.chargerGrille().matrice_niveau, joueur.chargerGrille().matrice_solution, joueur.chargerHistorique());
 
 
         loader = new FXMLLoader();

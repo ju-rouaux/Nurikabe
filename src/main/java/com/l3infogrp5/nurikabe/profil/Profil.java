@@ -21,15 +21,24 @@ import java.util.List;
  */
 public class Profil {
 
+    public class DonneesNiveau {
+
+        private DonneesNiveau(){};
+
+        public Historique historique;
+        public int [][] matrice_niveau;
+        public int [][] matrice_solution;
+    }
+
     /* Le nom du joueur */
     private final String joueur;
     /* Le mode de jeu */
     private String mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
     private int id_niveau;
-    /* L'historique des mouvements */
-    private Historique historique;
-    /* La grille */
+
+    private static DonneesNiveau donneesNiveau;
+
 
     /**
      * Création d'un profil.
@@ -38,6 +47,7 @@ public class Profil {
      * @throws IOException {@link IOException}
      */
     public Profil(String joueur) throws IOException {
+        donneesNiveau = new DonneesNiveau();
         this.joueur = joueur;
         // Valeurs par défaut
         this.mode_de_jeu = "detente";
@@ -151,7 +161,7 @@ public class Profil {
                 "[Profil] Aucune sauvegarde de l'historique des mouvements du joueur trouvée - Création d'un historique vide");
             hist = new Historique();
         }
-        this.historique = hist;
+        donneesNiveau.historique= hist;
         return hist;
     }
 
@@ -159,21 +169,20 @@ public class Profil {
      * Charge la grille à partir du fichier.
      * S'il n'y en a pas, chargement du niveau par défaut
      */
-    public Grille chargerGrille() {
-        Grille g;
+    public DonneesNiveau chargerGrille() {
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + this.joueur + "/" + this.mode_de_jeu);
         File grille_fichier = new File(grille_repertoire + "/Matrice_" + this.id_niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
             Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
-            g = new Grille(deserialisationMatrice(grille_fichier),
-                Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true), this.historique);
-        } else
-            g = new Grille(Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false),
-                Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true), this.historique);
+            donneesNiveau.matrice_niveau = deserialisationMatrice(grille_fichier);
+        } else {
+            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
+        }
+        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true);
 
-        return g;
+        return donneesNiveau;
     }
 
     /*
@@ -232,8 +241,11 @@ public class Profil {
      * @return l'historique des mouvements
      */
     public Historique getHistorique() {
-        return historique;
+        return donneesNiveau.historique;
     }
+
+
+
 
 
 
