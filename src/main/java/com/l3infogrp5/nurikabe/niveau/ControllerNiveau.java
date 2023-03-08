@@ -61,9 +61,10 @@ public class ControllerNiveau {
         this.stage = stage;
         //TODO charger profil dans le menu de selection des profils
         joueur = new Profil("hgksd");
-        joueur.setId_niveau(100);
+        joueur.setId_niveau(1);
         joueur.setMode_de_jeu("detente");
-        grille = new Grille(joueur.chargerGrille().matrice_niveau, joueur.chargerGrille().matrice_solution, joueur.chargerHistorique());
+        Profil.DonneesNiveau donnees = joueur.chargerGrille();
+        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
 
 
         loader = new FXMLLoader();
