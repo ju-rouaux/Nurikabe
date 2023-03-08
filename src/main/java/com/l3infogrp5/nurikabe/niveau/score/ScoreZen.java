@@ -67,10 +67,8 @@ public class ScoreZen implements ScoreInterface {
 
     @Override
     public void get_Pane() {
-        if(!rating.isPartialRating())
-            rating.setPartialRating(true);
-        if(rating.getRating() >= 0.0)
-            rating.setRating(this.etoiles);     
+        rating.setUpdateOnHover(false);
+        rating.setPartialRating(true);
+        rating.setRating(etoiles);
     }
-
 }
