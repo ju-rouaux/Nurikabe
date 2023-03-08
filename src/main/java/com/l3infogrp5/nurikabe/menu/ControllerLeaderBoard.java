@@ -1,7 +1,12 @@
 package com.l3infogrp5.nurikabe.menu;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.collections.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.sql.Date;
 
 public class ControllerLeaderBoard {
 
@@ -19,20 +25,21 @@ public class ControllerLeaderBoard {
     private FXMLLoader loader;
     private Scene scene;
 
+
     @FXML
     private BorderPane borderPane;
     @FXML
     private Button btn_retour;
     @FXML
-    private TableColumn<?, ?> date;
+    private TableColumn<String, String> date;
     @FXML
-    private TableColumn<?, ?> nom;
+    private TableColumn<String, String> nom;
     @FXML
-    private TableColumn<?, ?> score;
+    private TableColumn<String, String> score;
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private TableView<?> tableau;
+    private TableView<String> tableau;
 
 
 
@@ -47,19 +54,51 @@ public class ControllerLeaderBoard {
     }
 
     public void initialize() { 
-        
         // ajout des valeurs
-        this.nom.getColumns(); 
-        this.score.setText("12");
-        this.date.setText("12.12.2023");
+      
 
+        this.nom.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
+        
+        Scoring c= new Scoring(null,null,null){
+                private String nom;
+                private double score;
+                private int date;
+
+                public Scoring(String nom, double score,int date){
+                    this.nom=nom;
+                    this.score=score;
+                    this.date=date;
+                }
+    
+                public String getNom(){
+                    return this.nom;
+                }
+        };
+
+        ObservableList<Scoring> items = FXCollections.observableArrayList(new Scoring("é",22.1,12),new Scoring("ze",13.0,23)); // créer une classe pour chaque type
+        this.tableau.setItems(items);
+        System.out.println(this.tableau.getItems());
+
+        
+        
         // rendre les colonnes triables
     }
 
-
+    /*
+     * Retourne au menu précédent, le menu principal.
+     */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
         stage.setScene(new ControllerMenuNiveau(stage).getScene());
+    }
+
+    /**
+     * Retourne la scène gérée par le contrôleur.
+     * 
+     * @return la scène gérée par le contrôleur.
+     */
+    public Scene getScene() {
+        return scene;
     }
 }
 

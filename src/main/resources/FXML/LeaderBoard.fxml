@@ -17,9 +17,9 @@
             <content>
                <TableView fx:id="tableau">
                  <columns>
-                   <TableColumn fx:id="nom" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="nom profil" />
-                   <TableColumn fx:id="score" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Score" />
-                     <TableColumn fx:id="date" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="Date" />
+                   <TableColumn fx:id="nom" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" text="nom profil" />
+                   <TableColumn fx:id="score" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" text="Score" />
+                     <TableColumn fx:id="date" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" text="Date" />
                  </columns>
                </TableView>
             </content>

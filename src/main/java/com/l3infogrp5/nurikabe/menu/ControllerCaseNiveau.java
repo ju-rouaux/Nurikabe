@@ -121,7 +121,7 @@ public class ControllerCaseNiveau {
 
     @FXML
     private void CliqueLeaderBoard() throws Exception {
-        stage.setScene(new ControllerLeaderBoard(this.stage,this.indice)).getScene();
+        stage.setScene(new ControllerLeaderBoard(this.stage,this.indice).getScene());
 
     }
 }
