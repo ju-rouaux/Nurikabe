@@ -21,12 +21,26 @@ import java.util.List;
  */
 public class Profil {
 
-    public class DonneesNiveau {
+    /**
+     * Classe interne permettant de stocker les données d'un niveau.
+     */
+    public static class DonneesNiveau {
+        /**
+         * Constructeur privé.
+         */
+        private DonneesNiveau(){}
 
-        private DonneesNiveau(){};
-
+        /**
+         * L'historique du niveau.
+         */
         public Historique historique;
+        /**
+         * La grille du niveau.
+         */
         public int [][] matrice_niveau;
+        /**
+         * La grille de solution du niveau.
+         */
         public int [][] matrice_solution;
     }
 
@@ -105,7 +119,7 @@ public class Profil {
 
     /**
      * //TODO a utiliser
-     * retourne une liste de chaines de caracteres de l'emplacement des images, s'il
+     * retourne une liste de chaines de caractères de l'emplacement des images, s'il
      * elle existe, sinon on charge celle par défaut
      *
      * @param joueur      le nom du joueur
@@ -134,6 +148,7 @@ public class Profil {
 
     /**
      * Sauvegarde le niveau deja commencé
+     * @param niveau la grille du niveau a sauvegarder
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
@@ -144,6 +159,7 @@ public class Profil {
     /**
      * Charge l'historique des mouvements du joueur
      * S'il n'y en a pas, création d'un historique vierge
+     * @return l'historique des mouvements du joueur
      */
     public Historique chargerHistorique() {
         Historique hist;
@@ -168,6 +184,7 @@ public class Profil {
     /**
      * Charge la grille à partir du fichier.
      * S'il n'y en a pas, chargement du niveau par défaut
+     * @return les données du niveau
      */
     public DonneesNiveau chargerGrille() {
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + this.joueur + "/" + this.mode_de_jeu);

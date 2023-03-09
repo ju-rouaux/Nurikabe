@@ -304,6 +304,10 @@ public class Grille {
         return this.histo;
     }
 
+    /**
+     * Retourne la solution du niveau.
+     * @return la solution du niveau.
+     */
     public int [][] getSolution(){
         return this.solution;
     }
