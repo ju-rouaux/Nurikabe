@@ -1,6 +1,7 @@
 package com.l3infogrp5.nurikabe.niveau;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
+import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.CaptureNode;
@@ -23,10 +24,11 @@ import java.io.IOException;
  */
 public class ControllerNiveau {
 
-    Profil joueur;
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
+    Profil joueur;
+    private final Grille grille;
     private Pane panneau_grille;
     @FXML
     private Button btn_aide;
@@ -58,12 +60,11 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage) throws IOException {
         this.stage = stage;
         //TODO charger profil dans le menu de selection des profils
-        joueur = new Profil("Julieng");
-        joueur.setId_niveau(0);
+        joueur = new Profil("hgksd");
+        joueur.setId_niveau(110);
         joueur.setMode_de_jeu("detente");
-
-        this.joueur.chargerHistorique();
-        this.joueur.chargerGrille();
+        Profil.DonneesNiveau donnees = joueur.chargerGrille();
+        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
 
 
         loader = new FXMLLoader();
@@ -83,7 +84,7 @@ public class ControllerNiveau {
         this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(15));
 
         // Mettre la grille au centre (et ajouter une marge)
-        this.panneau_grille = this.joueur.getGrille().getPanneau();
+        this.panneau_grille = grille.getPanneau();
         BorderPane.setMargin(panneau_grille, new Insets(30, 30, 30, 30));
         this.panneau_principal.setCenter(panneau_grille);
 
@@ -109,7 +110,7 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
-        joueur.sauvegarderNiveau();
+        joueur.sauvegarderNiveau(grille);
         //TODO : remplacer null avec le getScore du niveau
         Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau(), null);
         CaptureNode.capturer(panneau_grille, joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
@@ -122,7 +123,7 @@ public class ControllerNiveau {
      */
     @FXML
     private void undoClique() {
-        this.joueur.getGrille().undo();
+        grille.undo();
     }
 
     /**
@@ -130,6 +131,6 @@ public class ControllerNiveau {
      */
     @FXML
     private void redoClique() {
-        this.joueur.getGrille().redo();
+        grille.redo();
     }
 }
