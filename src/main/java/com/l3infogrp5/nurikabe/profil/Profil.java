@@ -58,7 +58,7 @@ public class Profil {
      * Création d'un profil.
      *
      * @param joueur le nom du joueur
-     * @throws IOException {@link IOException}
+     * @throws IOException {@link IOException} -
      */
     public Profil(String joueur) throws IOException {
         donneesNiveau = new DonneesNiveau();
@@ -148,7 +148,7 @@ public class Profil {
 
     /**
      * Sauvegarde le niveau deja commencé
-     * @param niveau la grille du niveau a sauvegarder
+     * @param niveau la grille du niveau à sauvegarder
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
@@ -207,7 +207,7 @@ public class Profil {
      */
 
     /**
-     * getter pour le nom du joueur du profil
+     * Getter pour le nom du joueur du profil
      *
      * @return le nom du joueur
      */
@@ -216,7 +216,7 @@ public class Profil {
     }
 
     /**
-     * getter pour l'identifiant du niveau
+     * Getter pour l'identifiant du niveau
      *
      * @return l'historique des mouvements
      */
@@ -234,7 +234,7 @@ public class Profil {
     }
 
     /**
-     * getter pour l'id du niveau
+     * Getter pour l'id du niveau
      *
      * @return l'id du niveau
      */
@@ -253,7 +253,7 @@ public class Profil {
 
 
     /**
-     * getter pour l'historique des mouvements
+     * Getter pour l'historique des mouvements
      *
      * @return l'historique des mouvements
      */
