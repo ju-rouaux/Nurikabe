@@ -70,6 +70,7 @@ public class ControllerNiveau {
     @FXML
     private BorderPane panneau_principal;
 
+
     @FXML
     private BorderPane panneau_score;
     @FXML
