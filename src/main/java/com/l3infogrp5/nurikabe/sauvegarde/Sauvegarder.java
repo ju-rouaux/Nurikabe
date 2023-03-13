@@ -7,7 +7,10 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Classe pour sauvegarder le profil d'un joueur
@@ -37,9 +40,7 @@ public class Sauvegarder {
         if (!dossierExistants(Path.repertoire_lvl)) {
             // System.out.println("Il n'y pas de fichiers ou dossiers");
             return false;
-        } else {
-            Path.repertoire_lvl.listFiles();
-        }
+        } else Path.repertoire_lvl.listFiles();
 
         // Parcourt tous les fichiers pour voir s'il y a une sauvegarde pour le joueur
         for (File fichier : Path.repertoire_lvl.listFiles()) {
@@ -183,11 +184,11 @@ public class Sauvegarder {
      * @param joueur      le nom du joueur/profil
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   le numéro du niveau, -1 si en mode de jeu sans fin
-     * @param o le score
+     * @param o           le score
      * @throws IOException {@link IOException}
      **/
     public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau, Object o) throws IOException {
-        FileWriter writer = null;
+        FileWriter writer;
 
         // Récupérer la date courante
         Date date = new Date();
@@ -224,37 +225,36 @@ public class Sauvegarder {
      */
     public static HashMap<String, HashMap<String, String>> chargerScore(String mode_de_jeu, int id_niveau) throws IOException {
         HashMap<String, HashMap<String, String>> scores = new HashMap<>();
-        InputStream inputStream = null;
-        if (!mode_de_jeu.equals("detente"))
-            inputStream = new FileInputStream(Path.repertoire_score + "/" + mode_de_jeu + ".save");
-        else inputStream = new FileInputStream(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
-        Scanner scanner = new Scanner(inputStream);
-        boolean niveaux = false;
+        Reader file_reader;
+        if (!mode_de_jeu.equals("detente")) {
+            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+        } else {
+            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
+        }
 
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        BufferedReader bufferedReader = new BufferedReader(file_reader);
+
+        while (bufferedReader.ready()) {
+            String line = bufferedReader.readLine();
             String[] parts = line.split("%");
             String nom_joueur = parts[0].trim();
             String score = parts[1].trim();
 
+            String date;
+            HashMap<String, String> infos_niveau = new HashMap<>();
             if (id_niveau >= 0 && parts[2].trim().equals(Integer.toString(id_niveau))) {
-                niveaux = true;
-                String date = parts[3].trim();
-                HashMap<String, String> infos_niveau = new HashMap<>();
-                infos_niveau.put("score", score);
-                infos_niveau.put("date", date);
-                scores.put(nom_joueur, infos_niveau);
-            } else if (!niveaux) {
-                String date = parts[2].trim();
-                HashMap<String, String> infos_niveau = new HashMap<>();
-                infos_niveau.put("score", score);
-                infos_niveau.put("date", date);
-                scores.put(nom_joueur, infos_niveau);
+                date = parts[3].trim();
+            } else {
+                date = parts[2].trim();
             }
+            infos_niveau.put("score", score);
+            infos_niveau.put("date", date);
+            scores.put(nom_joueur, infos_niveau);
         }
-        scanner.close();
+        bufferedReader.close();
         return scores;
     }
+
 
     /**
      * Compte le nombre de niveaux implémentés
@@ -266,22 +266,33 @@ public class Sauvegarder {
         int nb_grilles = 0;
         InputStream inputStream;
         inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
-
         if (inputStream == null) {
             System.out.println("[StockageNiveau] : Fichier inexistant");
             return -1;
         }
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
-        Scanner scanner = new Scanner(inputStream);
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (line.startsWith("Grille ")) {
-                nb_grilles++;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(bufferedInputStream));
+        try {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Grille ")) {
+                    nb_grilles++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        scanner.close();
         return nb_grilles;
     }
+
 
     /**
      * Charge une grille depuis un fichier texte selon le numéro de la grille et le
@@ -307,42 +318,53 @@ public class Sauvegarder {
             return null;
         }
 
-        Scanner scanner = new Scanner(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
         int[][] grille = null;
         int lignes = -1;
         int colonnes = 0;
         boolean grille_courante = false;
         int index = 0;
         int num_niveau = 0;
-        while (scanner.hasNextLine() && index != lignes) {
-            String line = scanner.nextLine();
-            if (line.startsWith("Grille ") && num_niveau == id_niveau) {
-                // Si une grille a été trouvée, on récupère ses dimensions
-                String[] dimensions = line.split("\\(")[1].split("\\)")[0].split(";");
-                lignes = Integer.parseInt(dimensions[0].trim());
-                colonnes = Integer.parseInt(dimensions[1].trim());
-                grille = new int[lignes][colonnes];
-                grille_courante = true;
-            } else if (line.startsWith("#")) {
-                // Ignore les lignes commentées
-                grille_courante = false;
-            } else if (line.startsWith("Grille") && grille_courante) {
-                break;
-            } else if (grille_courante) {
-                String[] values = line.split(" ");
-                for (int i = 0; i < colonnes; i++) {
-                    if (!values[i].equals("")) {
-                        grille[index][i] = Integer.parseInt(values[i]);
+        try {
+            String ligne;
+            while ((ligne = bufferedReader.readLine()) != null && index != lignes) {
+                if (ligne.startsWith("Grille ") && num_niveau == id_niveau) {
+                    // Si une grille a été trouvée, on récupère ses dimensions
+                    String[] dimensions = ligne.split("\\(")[1].split("\\)")[0].split(";");
+                    lignes = Integer.parseInt(dimensions[0].trim());
+                    colonnes = Integer.parseInt(dimensions[1].trim());
+                    grille = new int[lignes][colonnes];
+                    grille_courante = true;
+                } else if (ligne.startsWith("#")) {
+                    // Ignore les lignes commentées
+                    grille_courante = false;
+                } else if (ligne.startsWith("Grille") && grille_courante) {
+                    break;
+                } else if (grille_courante) {
+                    String[] values = ligne.split(" ");
+                    for (int i = 0; i < colonnes; i++) {
+                        if (!values[i].equals("")) {
+                            grille[index][i] = Integer.parseInt(values[i]);
+                        }
                     }
+                    index++; // incrémente indice de la ligne
+                } else if (ligne.startsWith("Grille ") && num_niveau != id_niveau) {
+                    num_niveau++;
                 }
-                index++; // incrémente indice de la ligne
-            } else if (line.startsWith("Grille ") && num_niveau != id_niveau) {
-                num_niveau++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        scanner.close();
         return grille;
     }
+
 
     /*
      * Sauvegarde
