@@ -39,24 +39,37 @@ public class ControllerNiveau {
     private final Scene scene;
     Profil joueur;
     private final Grille grille;
+
     private BooleanProperty aide_affichee; //Vrai si l'aide est affichée sur l'écran.
 
     @FXML
     private Button btn_aide;
+
+
     @FXML
     private Button btn_check;
+
+
     @FXML
     private Button btn_redo;
+
+
     @FXML
     private Button btn_reset;
+
+
     @FXML
     private Button btn_retour;
+
+
     @FXML
     private Button btn_undo;
+
     @FXML
     private ToggleButton toggle_aide;
     @FXML
     private BorderPane panneau_principal;
+
     @FXML
     private BorderPane panneau_score;
     @FXML
@@ -78,12 +91,13 @@ public class ControllerNiveau {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
 
-        // TODO charger profil dans le menu de selection des profils
+        //  TODO charger profil dans le menu de selection des profils
         joueur = new Profil("hgksd");
         joueur.setId_niveau(110);
         joueur.setMode_de_jeu("detente");
-        Profil.DonneesNiveau donnees = joueur.chargerGrille();
-        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+
+        this.joueur.chargerHistorique();
+        this.joueur.chargerGrille();
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -151,7 +165,7 @@ public class ControllerNiveau {
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
         joueur.sauvegarderNiveau(grille);
-        // TODO : remplacer null avec le getScore du niveau
+        //  TODO : remplacer null avec le getScore du niveau
         Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau(), null);
         CaptureNode.capturer(this.grille.getPanneau(), joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
