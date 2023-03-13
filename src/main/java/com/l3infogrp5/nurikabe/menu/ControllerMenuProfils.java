@@ -161,6 +161,7 @@ public class ControllerMenuProfils {
                     nouveauxProfil(i);
                 }
 
+                Profil.chargerImageNiveau(joueur, null);
                 setActiveProfil(i);
             }
         }
@@ -273,13 +274,19 @@ public class ControllerMenuProfils {
 
         sauvegarderProfils();
 
-        // TODO: ajout method suppresion sauvegarde
+        // TODO : ajout method suppresion sauvegarde
 
+        // rechargement de la scene
         ControllerMenuProfils reload = new ControllerMenuProfils(stage);
         stage.setScene(reload.getScene());
         reload.chargerTableau();
     }
 }
 
+// TODO : passer bon parametre verifier grille charger
+// TODO : se rappeler du profil charger
+// TODO : essayer recuperer profil creer dans niveaux
+
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
+// IDEA : permettrre d'appuiyer dur + pour creer nouvo profil

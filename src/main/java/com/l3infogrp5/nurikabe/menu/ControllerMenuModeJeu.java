@@ -77,7 +77,7 @@ public class ControllerMenuModeJeu {
      * Change la scène par le menu de sélection de niveau du mode détente.
      */
     @FXML
-    private void detenteClique(ActionEvent event) throws Exception {
+    private void detenteClique() throws Exception {
         // stage.setScene(new ControllerMenuNiveau(stage).getScene()); //TODO rétablir
         // le menu
         stage.setScene(new ControllerNiveau(stage).getScene());
@@ -87,7 +87,7 @@ public class ControllerMenuModeJeu {
      * Change la scène par le menu de sélection de niveau du mode contre la montre.
      */
     @FXML
-    private void contreMontreClique(ActionEvent event) throws Exception {
+    private void contreMontreClique() throws Exception {
         stage.setScene(new ControllerMenuNiveau(stage).getScene());
     }
 
@@ -95,7 +95,7 @@ public class ControllerMenuModeJeu {
      * Change la scène par une partie du mode sans fin.
      */
     @FXML
-    private void sansFinClique(ActionEvent event) {
+    private void sansFinClique() {
 
     }
 
@@ -103,7 +103,7 @@ public class ControllerMenuModeJeu {
      * Change la scène par le menu de consultation des scores du mode sans fin.
      */
     @FXML
-    private void scoreClique(ActionEvent event) {
+    private void scoreClique() {
 
     }
 
