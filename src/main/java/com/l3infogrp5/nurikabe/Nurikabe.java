@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
+import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 
 import javafx.application.Application;
@@ -36,7 +37,7 @@ public class Nurikabe extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
+        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage, new Profil("Default"));
 
         stage.setMinHeight(480);
         stage.setMinWidth(640);

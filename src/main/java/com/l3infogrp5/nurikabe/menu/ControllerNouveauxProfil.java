@@ -59,7 +59,7 @@ public class ControllerNouveauxProfil {
 
     @FXML
     private void getPseudo() {
-        profils.joueur = pseudo.getText();
+        profils.nom_joueur = pseudo.getText();
     }
 
     @FXML

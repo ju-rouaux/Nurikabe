@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
+import com.l3infogrp5.nurikabe.profil.Profil;
+
 /**
  * Contrôleur du menu de sélection de niveau, et sa scène.
  *
@@ -19,6 +21,7 @@ public class ControllerMenuNiveau {
     private FXMLLoader loader;
     private Stage stage;
     private Scene scene;
+    Profil joueur;
 
     @FXML
     private Button btn_retour;
@@ -30,7 +33,9 @@ public class ControllerMenuNiveau {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuNiveau(Stage stage) throws IOException {
+    public ControllerMenuNiveau(Stage stage, Profil joueur) throws IOException {
+        this.joueur = joueur;
+
         this.stage = stage;
 
         loader = new FXMLLoader();
@@ -54,6 +59,6 @@ public class ControllerMenuNiveau {
      */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
+        stage.setScene(new ControllerMenuModeJeu(stage, joueur).getScene());
     }
 }

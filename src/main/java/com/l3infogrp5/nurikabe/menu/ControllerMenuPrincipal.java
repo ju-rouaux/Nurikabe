@@ -10,6 +10,8 @@ import javafx.application.Platform;
 
 import java.io.IOException;
 
+import com.l3infogrp5.nurikabe.profil.Profil;
+
 /**
  * Contrôleur du menu principal, et sa scène.
  * 
@@ -20,6 +22,7 @@ public class ControllerMenuPrincipal {
     private FXMLLoader loader;
     private Stage stage;
     private Scene scene;
+    Profil joueur;
 
     @FXML
     private Button btn_jouer;
@@ -40,7 +43,9 @@ public class ControllerMenuPrincipal {
      * @throws IOException
      * @throws Exception
      */
-    public ControllerMenuPrincipal(Stage stage) throws IOException  {
+    public ControllerMenuPrincipal(Stage stage, Profil joueur) throws IOException  {
+        this.joueur = joueur;
+
         this.stage = stage;
 
         loader = new FXMLLoader();
@@ -64,7 +69,7 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void jouerClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
+        stage.setScene(new ControllerMenuModeJeu(stage, joueur).getScene());
     }
 
     /**
@@ -74,7 +79,7 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void profilsClique(ActionEvent event) throws IOException {
-        ControllerMenuProfils profils = new ControllerMenuProfils(stage);
+        ControllerMenuProfils profils = new ControllerMenuProfils(stage, joueur);
         stage.setScene(profils.getScene());
         profils.chargerTableau();
     }
@@ -84,7 +89,7 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void reglesClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuRegles(stage).getScene());
+        stage.setScene(new ControllerMenuRegles(stage, joueur).getScene());
     }
 
     /**

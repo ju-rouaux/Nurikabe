@@ -74,16 +74,16 @@ public class ControllerNiveau {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerNiveau(Stage stage) throws IOException {
+    public ControllerNiveau(Stage stage, Profil joueur) throws IOException {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
 
         // TODO charger profil dans le menu de selection des profils
-        joueur = new Profil("hgksd");
-        joueur.setId_niveau(110);
-        joueur.setMode_de_jeu("detente");
-        Profil.DonneesNiveau donnees = joueur.chargerGrille();
-        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+        this.joueur = joueur;
+        this.joueur.setId_niveau(110);
+        this.joueur.setMode_de_jeu("detente");
+        Profil.DonneesNiveau donnees = this.joueur.chargerGrille();
+        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, this.joueur.chargerHistorique());
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -155,7 +155,7 @@ public class ControllerNiveau {
         Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau(), null);
         CaptureNode.capturer(this.grille.getPanneau(), joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
-        stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
+        stage.setScene(new ControllerMenuModeJeu(stage, joueur).getScene()); // temporaire
     }
 
     /**

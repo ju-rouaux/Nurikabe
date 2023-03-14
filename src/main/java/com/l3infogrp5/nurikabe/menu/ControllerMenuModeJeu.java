@@ -24,6 +24,7 @@ public class ControllerMenuModeJeu {
     private FXMLLoader loader;
     private Stage stage;
     private Scene scene;
+    Profil joueur;
 
     @FXML
     private Button btn_detente;
@@ -47,12 +48,14 @@ public class ControllerMenuModeJeu {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuModeJeu(Stage stage) throws IOException {
+    public ControllerMenuModeJeu(Stage stage, Profil joueur) throws IOException {
         /*
          * Test chargement des images
          */
         // TODO Changer parametres avec <nomProfil>.get()
 //        Profil.chargerImageNiveau("Julieng", "detente");
+
+        this.joueur = joueur;
 
         this.stage = stage;
 
@@ -80,7 +83,7 @@ public class ControllerMenuModeJeu {
     private void detenteClique() throws Exception {
         // stage.setScene(new ControllerMenuNiveau(stage).getScene()); //TODO rétablir
         // le menu
-        stage.setScene(new ControllerNiveau(stage).getScene());
+        stage.setScene(new ControllerNiveau(stage, joueur).getScene());
     }
 
     /**
@@ -88,7 +91,7 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void contreMontreClique() throws Exception {
-        stage.setScene(new ControllerMenuNiveau(stage).getScene());
+        stage.setScene(new ControllerMenuNiveau(stage, joueur).getScene());
     }
 
     /**
@@ -112,6 +115,6 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void retourClique() throws Exception {
-        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
+        stage.setScene(new ControllerMenuPrincipal(stage, joueur).getScene());
     }
 }

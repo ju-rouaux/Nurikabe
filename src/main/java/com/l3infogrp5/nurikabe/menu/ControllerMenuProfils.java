@@ -38,6 +38,7 @@ public class ControllerMenuProfils {
     private FXMLLoader loader;
     private Stage stage;
     private Scene scene;
+    Profil joueur;
 
     @FXML
     private Button btn_retour;
@@ -47,7 +48,7 @@ public class ControllerMenuProfils {
 
     private int profil_actif;
 
-    public String joueur;
+    public String nom_joueur;
     private String[] profils_attributs = new String[7];
 
     /**
@@ -56,7 +57,9 @@ public class ControllerMenuProfils {
      * @param stage la fenêtre contenant la scène.
      * @throws IOException
      */
-    public ControllerMenuProfils(Stage stage) throws IOException {
+    public ControllerMenuProfils(Stage stage, Profil joueur) throws IOException {
+        this.joueur = joueur;
+
         this.stage = stage;
 
         loader = new FXMLLoader();
@@ -68,7 +71,7 @@ public class ControllerMenuProfils {
 
         Arrays.fill(profils_attributs, null);
 
-        new Profil(((Label) ((VBox) pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText());
+        //new Profil(((Label) ((VBox) pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText());
     }
 
     /**
@@ -85,7 +88,7 @@ public class ControllerMenuProfils {
      */
     @FXML
     private void retourClique(ActionEvent event) throws IOException {
-        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
+        stage.setScene(new ControllerMenuPrincipal(stage, joueur).getScene());
     }
 
     /**
@@ -97,7 +100,7 @@ public class ControllerMenuProfils {
      */
     private void afficherNouveauxProfil(int i) {
         // affiche le nom du nouveaux profil
-        ((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).setText(joueur);
+        ((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).setText(nom_joueur);
 
         // supprime le text du boutton
         ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).setText("");
@@ -129,12 +132,12 @@ public class ControllerMenuProfils {
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.showAndWait();
 
-        new Profil(joueur);
+        new Profil(nom_joueur);
 
         // modification de l'affichage
         afficherNouveauxProfil(i);
 
-        ajoutProfils(joueur);
+        ajoutProfils(nom_joueur);
         sauvegarderProfils();
     }
 
@@ -151,17 +154,17 @@ public class ControllerMenuProfils {
             // recuperation du boutton appuiyer
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0))) {
                 // recuperation du pseudo
-                joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
+                nom_joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
                         .get(1)).getText());
 
-                if (Sauvegarder.RechercherSauvegarde(joueur)) {
-                    System.out.println("Profil " + joueur + " charger");
+                if (Sauvegarder.RechercherSauvegarde(nom_joueur)) {
+                    System.out.println("Profil " + nom_joueur + " charger");
                 } else {
-                    System.out.println("Creation du profils " + joueur);
+                    System.out.println("Creation du profils " + nom_joueur);
                     nouveauxProfil(i);
                 }
 
-                Profil.chargerImageNiveau(joueur, null);
+                joueur = new Profil(nom_joueur);
                 setActiveProfil(i);
             }
         }
@@ -184,8 +187,8 @@ public class ControllerMenuProfils {
         if (file.exists()) {
             Scanner reader = new Scanner(file);
             for (int i = 0; reader.hasNextLine(); i++) {
-                joueur = reader.nextLine();
-                profils_attributs[i] = joueur;
+                nom_joueur = reader.nextLine();
+                profils_attributs[i] = nom_joueur;
                 afficherNouveauxProfil(i + 1);
             }
 
@@ -196,12 +199,12 @@ public class ControllerMenuProfils {
     /**
      * Methode pour ajouter un joueur au tableau des joueur
      * 
-     * @param joueur le nom du joueur a ajouter
+     * @param nom_joueur le nom du joueur a ajouter
      */
-    private void ajoutProfils(String joueur) {
+    private void ajoutProfils(String nom_joueur) {
         for (int i = 0; i < profils_attributs.length; i++) {
             if (profils_attributs[i] == null) {
-                profils_attributs[i] = joueur;
+                profils_attributs[i] = nom_joueur;
                 return;
             }
         }
@@ -258,14 +261,14 @@ public class ControllerMenuProfils {
             // recuperation du boutton appuiyer
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2))) {
                 // recuperation du pseudo
-                joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
+                nom_joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
                         .get(1)).getText());
             }
         }
 
         // suppression du nom dans le tableau et rearangement
         for (int i = 0; i < profils_attributs.length; i++) {
-            if (profils_attributs[i] == joueur) {
+            if (profils_attributs[i] == nom_joueur) {
                 for (int j = i; j < profils_attributs.length - 1; j++) {
                     profils_attributs[j] = profils_attributs[j + 1];
                 }
@@ -277,7 +280,7 @@ public class ControllerMenuProfils {
         // TODO : ajout method suppresion sauvegarde
 
         // rechargement de la scene
-        ControllerMenuProfils reload = new ControllerMenuProfils(stage);
+        ControllerMenuProfils reload = new ControllerMenuProfils(stage, joueur);
         stage.setScene(reload.getScene());
         reload.chargerTableau();
     }
