@@ -41,9 +41,8 @@ public class ControllerMenuPrincipal {
      * 
      * @param stage la fenêtre contenant la scène.
      * @throws IOException
-     * @throws Exception
      */
-    public ControllerMenuPrincipal(Stage stage, Profil joueur) throws IOException  {
+    public ControllerMenuPrincipal(Stage stage, Profil joueur) throws IOException {
         this.joueur = joueur;
 
         this.stage = stage;
