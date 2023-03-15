@@ -171,8 +171,8 @@ public class ControllerMenuProfils {
     }
 
     private void setActiveProfil(int i) throws IOException {
-        ((VBox) pseudo_grid.getChildren().get(profil_actif)).getStyleClass().remove("actif");
-        ((VBox) pseudo_grid.getChildren().get(i)).getStyleClass().add("actif");
+        ((Button) ((VBox) pseudo_grid.getChildren().get(profil_actif)).getChildren().get(0)).getStyleClass().remove("actif");
+        ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getStyleClass().add("actif");
 
         profil_actif = i;
 
@@ -301,4 +301,4 @@ public class ControllerMenuProfils {
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
-// IDEA : permettrre d'appuiyer dur + pour creer nouvo profil
+// IDEA : permettrre d'appuiyer dur + pour creer nouveau profil

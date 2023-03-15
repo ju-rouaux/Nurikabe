@@ -69,11 +69,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="100.0" styleClass="actif">
+                        <VBox alignment="CENTER" onMouseEntered="#viewDel" onMouseExited="#hideDel" prefHeight="200.0" prefWidth="169.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#chargerProfil" prefHeight="75.0" prefWidth="75.0" textFill="#ff0e0e">
                                  <styleClass>
                                     <String fx:value="btn-profile" />
+                                    <String fx:value="actif" />
                                     <String fx:value="btn" />
                                  </styleClass>
                               </Button>
