@@ -171,20 +171,27 @@ public class ControllerMenuProfils {
     }
 
     private void setActiveProfil(int i) throws IOException {
-        ((Button) ((VBox) pseudo_grid.getChildren().get(profil_actif)).getChildren().get(0)).getStyleClass().remove("actif");
+        ((Button) ((VBox) pseudo_grid.getChildren().get(profil_actif)).getChildren().get(0)).getStyleClass()
+                .remove("actif");
         ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getStyleClass().add("actif");
 
         profil_actif = i;
 
+        creerDossierProfils();
+
         BufferedWriter writer = new BufferedWriter(
                 new FileWriter(Path.repertoire_courant.toString() + "/Profil_interface" + "/profil_actif"));
-        
+
         writer.write(String.valueOf(profil_actif));
+        writer.newLine();
+        writer.write(nom_joueur);
         writer.close();
+
     }
 
     /**
      * Methode pour recuperer les joeur creer
+     * 
      * @throws IOException
      * @throws NumberFormatException
      */
@@ -204,7 +211,16 @@ public class ControllerMenuProfils {
         file = new File(Path.repertoire_courant.toString() + "/Profil_interface" + "/profil_actif");
         if (file.exists()) {
             Scanner reader = new Scanner(file);
-            setActiveProfil( Integer.parseInt(reader.nextLine()));
+            int actif = Integer.parseInt(reader.nextLine());
+            String nom_actif = reader.nextLine();
+            Profil joueur_actif = new Profil(nom_actif);
+
+            if (joueur != joueur_actif) {
+                joueur = joueur_actif;
+            }
+
+            setActiveProfil(actif);
+
             reader.close();
         }
     }
@@ -223,18 +239,22 @@ public class ControllerMenuProfils {
         }
     }
 
-    /**
-     * Methode pour sauvegarder l'affichage des profils creer
-     * 
-     * @throws IOException
-     */
-    private void sauvegarderProfils() throws IOException {
+    private void creerDossierProfils() throws IOException {
         if (!Sauvegarder.dossierExistants(new File(Path.repertoire_courant.toString() + "/Profil_interface"))) {
             Files.createDirectories(Paths.get(Path.repertoire_courant.toString() + "/Profil_interface"));
             System.out.println("Repertoire interface profil creer");
         } else {
             System.out.println("Repertoire interface profil deja existant");
         }
+    }
+
+    /**
+     * Methode pour sauvegarder l'affichage des profils creer
+     * 
+     * @throws IOException
+     */
+    private void sauvegarderProfils() throws IOException {
+        creerDossierProfils();
 
         BufferedWriter writer = new BufferedWriter(
                 new FileWriter(Path.repertoire_courant.toString() + "/Profil_interface" + "/liste_profils"));
