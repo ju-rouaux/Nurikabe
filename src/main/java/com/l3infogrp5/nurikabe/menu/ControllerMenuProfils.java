@@ -6,7 +6,6 @@ import com.l3infogrp5.nurikabe.utils.Path;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -71,7 +70,8 @@ public class ControllerMenuProfils {
 
         Arrays.fill(profils_attributs, null);
 
-        //new Profil(((Label) ((VBox) pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText());
+        // new Profil(((Label) ((VBox)
+        // pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText());
     }
 
     /**
@@ -138,7 +138,6 @@ public class ControllerMenuProfils {
         afficherNouveauxProfil(i);
 
         ajoutProfils(nom_joueur);
-        sauvegarderProfils();
     }
 
     /**
@@ -166,23 +165,30 @@ public class ControllerMenuProfils {
 
                 joueur = new Profil(nom_joueur);
                 setActiveProfil(i);
+                sauvegarderProfils();
             }
         }
     }
 
-    private void setActiveProfil(int i) {
+    private void setActiveProfil(int i) throws IOException {
         ((VBox) pseudo_grid.getChildren().get(profil_actif)).getStyleClass().remove("actif");
         ((VBox) pseudo_grid.getChildren().get(i)).getStyleClass().add("actif");
 
         profil_actif = i;
+
+        BufferedWriter writer = new BufferedWriter(
+                new FileWriter(Path.repertoire_courant.toString() + "/Profil_interface" + "/profil_actif"));
+        
+        writer.write(String.valueOf(profil_actif));
+        writer.close();
     }
 
     /**
      * Methode pour recuperer les joeur creer
-     * 
-     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws NumberFormatException
      */
-    public void chargerTableau() throws FileNotFoundException {
+    public void chargerTableau() throws NumberFormatException, IOException {
         File file = new File(Path.repertoire_courant.toString() + "/Profil_interface" + "/liste_profils");
         if (file.exists()) {
             Scanner reader = new Scanner(file);
@@ -192,6 +198,13 @@ public class ControllerMenuProfils {
                 afficherNouveauxProfil(i + 1);
             }
 
+            reader.close();
+        }
+
+        file = new File(Path.repertoire_courant.toString() + "/Profil_interface" + "/profil_actif");
+        if (file.exists()) {
+            Scanner reader = new Scanner(file);
+            setActiveProfil( Integer.parseInt(reader.nextLine()));
             reader.close();
         }
     }
@@ -285,10 +298,6 @@ public class ControllerMenuProfils {
         reload.chargerTableau();
     }
 }
-
-// TODO : passer bon parametre verifier grille charger
-// TODO : se rappeler du profil charger
-// TODO : essayer recuperer profil creer dans niveaux
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
