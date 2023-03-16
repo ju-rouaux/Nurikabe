@@ -48,7 +48,7 @@ public class ControllerMenuProfils {
     private int profil_actif;
 
     public String nom_joueur;
-    private String[] profils_attributs = new String[7];
+    public String[] profils_attributs = new String[7];
 
     /**
      * Initialise le menu de sélection d'affichage des règles et son contrôleur.

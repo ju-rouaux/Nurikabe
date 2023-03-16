@@ -63,10 +63,20 @@ public class ControllerNouveauxProfil {
         }
     }
 
+    private boolean pseudoExist(){
+        for(String str : profils.profils_attributs){
+            if(str != null && str.equals(pseudo.getText())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @FXML
     private void getPseudo() {
         Pattern p = Pattern.compile("^[a-zA-Z0-9]{1,10}$");
         Matcher m = p.matcher(pseudo.getText());
+        
         if(m.matches()){
             profils.nom_joueur = pseudo.getText();
             pseudo_correct = true;
@@ -74,7 +84,11 @@ public class ControllerNouveauxProfil {
         else {
             pseudo_correct = false;
         }
-        System.out.println(m.matches());
+
+        if(pseudoExist()){
+            pseudo_correct = false;
+        }
+
     }
 
     @FXML
