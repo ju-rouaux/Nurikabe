@@ -24,7 +24,7 @@ public class ControllerNouveauxProfil {
 
     private ControllerMenuProfils profils;
 
-    boolean pseudo_correct ;
+    boolean pseudo_correct;
 
     @FXML
     private TextField pseudo;
@@ -55,6 +55,11 @@ public class ControllerNouveauxProfil {
         return scene;
     }
 
+    /**
+     * Test si la touche "Enter" est appuyer pour fermer la fenetre
+     * 
+     * @param event
+     */
     @FXML
     private void isEnter(KeyEvent event) {
         // si on appuie sur entrer
@@ -63,34 +68,45 @@ public class ControllerNouveauxProfil {
         }
     }
 
-    private boolean pseudoExist(){
-        for(String str : profils.profils_attributs){
-            if(str != null && str.equals(pseudo.getText())){
+    /**
+     * Test si un pseudo portant le meme nom existe deja pour empecher les doublons
+     * 
+     * @return boolean | true si un profil avec ce pseudo exist false sinon
+     */
+    private boolean pseudoExist() {
+        for (String str : profils.profils_attributs) {
+            if (str != null && str.equals(pseudo.getText())) {
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * Methode qui reteste le pseudo saisie a chaque nouvelle input du clavier et le
+     * stocke si il est correcte
+     */
     @FXML
     private void getPseudo() {
         Pattern p = Pattern.compile("^[a-zA-Z0-9]{1,10}$");
         Matcher m = p.matcher(pseudo.getText());
-        
-        if(m.matches()){
+
+        if (m.matches()) {
             profils.nom_joueur = pseudo.getText();
             pseudo_correct = true;
-        }
-        else {
+        } else {
             pseudo_correct = false;
         }
 
-        if(pseudoExist()){
+        if (pseudoExist()) {
             pseudo_correct = false;
         }
 
     }
 
+    /**
+     * methode pour fermer la fenetre si un pseudo correcte est rentrer
+     */
     @FXML
     private void close() {
         if (pseudo.getLength() == 0 || !pseudo_correct) {

@@ -170,6 +170,13 @@ public class ControllerMenuProfils {
         }
     }
 
+    /**
+     * Methode qui modifi le style pour le profil actif et sauvegarde l'indice et le
+     * nom de ce dernier pour le recharger plus tard
+     * 
+     * @param i l'indice du profil actif
+     * @throws IOException
+     */
     private void setActiveProfil(int i) throws IOException {
         ((Button) ((VBox) pseudo_grid.getChildren().get(profil_actif)).getChildren().get(0)).getStyleClass()
                 .remove("actif");
@@ -239,6 +246,12 @@ public class ControllerMenuProfils {
         }
     }
 
+    /**
+     * Methode pour creer si il n'existe pas déjà le dossier qui stocke les
+     * information relative au coter graphique du profil
+     * 
+     * @throws IOException
+     */
     private void creerDossierProfils() throws IOException {
         if (!Sauvegarder.dossierExistants(new File(Path.repertoire_courant.toString() + "/Profil_interface"))) {
             Files.createDirectories(Paths.get(Path.repertoire_courant.toString() + "/Profil_interface"));
@@ -270,6 +283,12 @@ public class ControllerMenuProfils {
         writer.close();
     }
 
+    /**
+     * Methode qui au passage de la souris sur un profil existant affiche l'icone
+     * d'une corbeille permetant sa suppression
+     * 
+     * @param event les action de la souris
+     */
     @FXML
     private void viewDel(MouseEvent event) {
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
@@ -280,6 +299,12 @@ public class ControllerMenuProfils {
         }
     }
 
+    /**
+     * Methode qui s'assure que l'icone de corbeille n'est pas afficher si la souri
+     * n'est pas sur le profils
+     * 
+     * @param event les action de la souris
+     */
     @FXML
     private void hideDel(MouseEvent event) {
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
@@ -287,6 +312,13 @@ public class ControllerMenuProfils {
         }
     }
 
+    /**
+     * Methode qui supprime un profil de la liste des profil et qui reorganise
+     * l'affichage
+     * 
+     * @param event le profil cliquer et a supprimer
+     * @throws IOException
+     */
     @FXML
     private void suprProfil(ActionEvent event) throws IOException {
         // on parcour la grid des profil pour savoir lequel est appuiyer
