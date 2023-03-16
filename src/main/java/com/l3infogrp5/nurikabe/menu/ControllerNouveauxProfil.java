@@ -9,6 +9,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Contrôleur du menu d'affichage des profils, et sa scène.
@@ -22,6 +24,8 @@ public class ControllerNouveauxProfil {
 
     private ControllerMenuProfils profils;
 
+    boolean pseudo_correct ;
+
     @FXML
     private TextField pseudo;
 
@@ -34,6 +38,8 @@ public class ControllerNouveauxProfil {
      */
     public ControllerNouveauxProfil(ControllerMenuProfils profils) throws IOException {
         this.profils = profils;
+        this.pseudo_correct = false;
+
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/nouveaux_profil.fxml"));
         loader.setController(this);
@@ -59,13 +65,22 @@ public class ControllerNouveauxProfil {
 
     @FXML
     private void getPseudo() {
-        profils.nom_joueur = pseudo.getText();
+        Pattern p = Pattern.compile("^[a-zA-Z0-9]{1,10}$");
+        Matcher m = p.matcher(pseudo.getText());
+        if(m.matches()){
+            profils.nom_joueur = pseudo.getText();
+            pseudo_correct = true;
+        }
+        else {
+            pseudo_correct = false;
+        }
+        System.out.println(m.matches());
     }
 
     @FXML
     private void close() {
-        if (pseudo.getLength() == 0) {
-            pseudo.setPromptText("Saisir un pseudo");
+        if (pseudo.getLength() == 0 || !pseudo_correct) {
+            pseudo.setPromptText("Saisir un pseudo !");
         } else {
             ((Stage) this.scene.getWindow()).close();
         }
