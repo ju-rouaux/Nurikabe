@@ -449,4 +449,17 @@ public class Sauvegarder {
         }
     }
 
+
+    /**
+     * Supprime le profil du joueur
+     * @param nom_joueur le nom du joueur
+     */
+    public static void supprimerProfil(String nom_joueur) {
+        File repertoire = new File(Path.repertoire_lvl + "/" + nom_joueur);
+        if (repertoire.exists()) {
+            repertoire.delete();
+            System.out.println("[Sauvegarde] Profil supprimé");
+        }
+    }
+
 }
