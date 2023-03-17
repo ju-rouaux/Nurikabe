@@ -14,8 +14,6 @@ public interface ScoreInterface {
 
     public void stop();
 
-    public void nouveauLance();
-
     public void aideUtilise();
 
     public void restart();
@@ -25,5 +23,7 @@ public interface ScoreInterface {
     public void checkUtilise();
 
     public Pane get_Pane();
+
+    public int getScore();
 
 }

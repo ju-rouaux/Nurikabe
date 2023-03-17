@@ -86,12 +86,6 @@ public class ScoreCLM extends ScoreChrono {
     }
 
     @Override
-    public void nouveauLance() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nouveauLance'");
-    }
-
-    @Override
     public void restart() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'restart'");
@@ -101,5 +95,9 @@ public class ScoreCLM extends ScoreChrono {
     public Pane get_Pane() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'get_Pane'");
+    }
+
+    public int getScore() {
+        return 0; //TODO
     }
 }

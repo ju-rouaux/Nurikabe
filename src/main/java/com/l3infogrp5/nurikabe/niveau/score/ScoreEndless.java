@@ -118,11 +118,6 @@ public class ScoreEndless extends ScoreChrono {
         throw new UnsupportedOperationException("Unimplemented method 'stop'");
     }
 
-    @Override
-    public void nouveauLance() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nouveauLance'");
-    }
 
     @Override
     public void restart() {
@@ -136,4 +131,7 @@ public class ScoreEndless extends ScoreChrono {
         throw new UnsupportedOperationException("Unimplemented method 'get_Pane'");
     }
 
+    public int getScore() {
+        return 0; //TODO
+    }
 }

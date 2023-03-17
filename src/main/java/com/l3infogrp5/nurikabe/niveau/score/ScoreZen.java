@@ -37,7 +37,6 @@ public class ScoreZen implements ScoreInterface {
 
     @Override
     public void grilleComplete() {
-        
 
     }
 
@@ -57,12 +56,6 @@ public class ScoreZen implements ScoreInterface {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'stop'");
     }
-    @Override
-    public void nouveauLance() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nouveauLance'");
-    }
-
     @Override
     public void restart() {
         // TODO Auto-generated method stub
@@ -84,5 +77,10 @@ public class ScoreZen implements ScoreInterface {
         Pane ratingPane = new Pane();
         ratingPane.getChildren().add(rating);
         return ratingPane;
+    }
+    
+    public int getScore() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getScore'");
     }
 }
