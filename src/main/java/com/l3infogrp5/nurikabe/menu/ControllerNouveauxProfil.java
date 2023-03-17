@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 /**
  * Contrôleur du menu d'affichage des profils, et sa scène.
- * 
+ *
  * @author Julien Rouaux - Nicolas Gouget
  */
 public class ControllerNouveauxProfil {
@@ -31,8 +31,7 @@ public class ControllerNouveauxProfil {
 
     /**
      * Initialise le menu de sélection d'affichage des règles et son contrôleur.
-     * 
-     * @param stage la fenêtre contenant la scène.
+     *
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
@@ -48,7 +47,7 @@ public class ControllerNouveauxProfil {
 
     /**
      * Retourne la scène gérée par le contrôleur.
-     * 
+     *
      * @return la scène gérée par le contrôleur.
      */
     public Scene getScene() {
@@ -57,7 +56,7 @@ public class ControllerNouveauxProfil {
 
     /**
      * Test si la touche "Enter" est appuyer pour fermer la fenetre
-     * 
+     *
      * @param event
      */
     @FXML
@@ -70,7 +69,7 @@ public class ControllerNouveauxProfil {
 
     /**
      * Test si un pseudo portant le meme nom existe deja pour empecher les doublons
-     * 
+     *
      * @return boolean | true si un profil avec ce pseudo exist false sinon
      */
     private boolean pseudoExist() {

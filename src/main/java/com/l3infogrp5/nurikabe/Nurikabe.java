@@ -37,7 +37,7 @@ public class Nurikabe extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage, new Profil("Default"));
+        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage, new Profil("default"));
 
         stage.setMinHeight(480);
         stage.setMinWidth(640);

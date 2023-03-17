@@ -7,10 +7,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Classe pour sauvegarder le profil d'un joueur
@@ -61,6 +58,7 @@ public class Sauvegarder {
      */
     public static List<String> listeFichiers(File repertoire) {
         List<String> fichiers = new ArrayList<>();
+
         if (dossierExistants(repertoire)) {
             for (File fichier : repertoire.listFiles()) {
                 fichiers.add(fichier.getName());

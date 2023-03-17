@@ -3,18 +3,6 @@ package com.l3infogrp5.nurikabe.menu;
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import java.util.Arrays;
-import java.util.Scanner;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +15,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  * Contrôleur du menu d'affichage des profils, et sa scène.
  *
@@ -34,21 +29,17 @@ import javafx.stage.Stage;
  */
 public class ControllerMenuProfils {
 
-    private FXMLLoader loader;
-    private Stage stage;
-    private Scene scene;
+    private final FXMLLoader loader;
+    private final Stage stage;
+    private final Scene scene;
+    public String nom_joueur;
     Profil joueur;
-
+    List<String> profils_attributs;
     @FXML
     private Button btn_retour;
-
     @FXML
     private GridPane pseudo_grid;
-
     private int profil_actif;
-
-    public String nom_joueur;
-    public String[] profils_attributs = new String[7];
 
     /**
      * Initialise le menu de sélection d'affichage des règles et son contrôleur.
@@ -65,13 +56,10 @@ public class ControllerMenuProfils {
         loader.setLocation(getClass().getResource("/FXML/menu_profils.fxml"));
         loader.setController(this);
         scene = loader.load();
-
         profil_actif = 0;
+        profils_attributs = Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString()));
+        System.out.println("joueur : " + profils_attributs);
 
-        Arrays.fill(profils_attributs, null);
-
-        // new Profil(((Label) ((VBox)
-        // pseudo_grid.getChildren().get(0)).getChildren().get(1)).getText());
     }
 
     /**
@@ -83,7 +71,7 @@ public class ControllerMenuProfils {
         return scene;
     }
 
-    /*
+    /**
      * Retourne au menu précédent, le menu principal.
      */
     @FXML
@@ -96,25 +84,25 @@ public class ControllerMenuProfils {
      * joueur
      *
      * @param i l'indice de la grille a modifier
-     *
      */
     private void afficherNouveauxProfil(int i) {
-        // affiche le nom du nouveaux profil
-        ((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).setText(nom_joueur);
+        VBox vbox = (VBox) pseudo_grid.getChildren().get(i);
+        Label label = (Label) vbox.getChildren().get(1);
+        Button bouton = (Button) vbox.getChildren().get(0);
 
-        // supprime le text du boutton
-        ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).setText("");
+        bouton.setText("");
 
-        // suppression du style d'ajout de profil pour le boutton et ajout du style de
-        // profil existant
-        ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getStyleClass()
-                .remove("btn-add");
-        ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getStyleClass()
-                .add("btn-profile");
+        label.setText(nom_joueur);
+        bouton.getStyleClass().remove("btn-add");
+        bouton.getStyleClass().add("btn-profile");
 
-        // si on a encore de la place on rend visible l'ajout de profile suivant
-        if (i + 1 < pseudo_grid.getChildren().size())
-            ((Button) ((VBox) pseudo_grid.getChildren().get(i + 1)).getChildren().get(0)).setVisible(true);
+        //Si on a encore de la place on rend visible le bouton pour ajouter un profil.
+        // OK
+        if (i + 1 < pseudo_grid.getChildren().size()) {
+            VBox prochain_vbox = (VBox) pseudo_grid.getChildren().get(i + 1);
+            Button prochain_bouton = (Button) prochain_vbox.getChildren().get(0);
+            prochain_bouton.setVisible(true);
+        }
     }
 
     /**
@@ -122,9 +110,9 @@ public class ControllerMenuProfils {
      *
      * @param i l'indice de la grille a modifier
      * @throws IOException
-     *
      */
     private void nouveauxProfil(int i) throws IOException {
+        System.out.println("test Nouveau profil");
         // creation de la popup pour cree un nouveaux profil
         Stage popup = new Stage();
 
@@ -144,24 +132,25 @@ public class ControllerMenuProfils {
      * Méthode pour charger un profils
      *
      * @throws IOException
-     *
      */
     @FXML
     private void chargerProfil(ActionEvent event) throws IOException {
         // on parcour la grid des profil pour savoir lequel est appuiyer
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
-            // recuperation du boutton appuiyer
-            if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0))) {
-                // recuperation du pseudo
-                nom_joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
-                        .get(1)).getText());
+            VBox vbox = (VBox) pseudo_grid.getChildren().get(i);
+            Button bouton = (Button) vbox.getChildren().get(0);
+            Label label = (Label) vbox.getChildren().get(1);
+            if (event.getSource() == bouton) {
+                // acces au pseudo
+                nom_joueur = label.getText();
 
-                if(Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur))
+                if (!Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur)) {
                     nouveauxProfil(i);
+                    System.out.println("Nouveau profil");
+                }
 
                 joueur = new Profil(nom_joueur);
                 setActiveProfil(i);
-                sauvegarderProfils();
             }
         }
     }
@@ -174,14 +163,17 @@ public class ControllerMenuProfils {
      * @throws IOException
      */
     private void setActiveProfil(int i) throws IOException {
-        ((Button) ((VBox) pseudo_grid.getChildren().get(profil_actif)).getChildren().get(0)).getStyleClass()
-                .remove("actif");
-        ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getStyleClass().add("actif");
+        if (profil_actif != -1) {
+            VBox vbox = (VBox) pseudo_grid.getChildren().get(profil_actif);
+            vbox.getChildren().get(0).getStyleClass().remove("actif");
+        }
 
+        VBox vbox = (VBox) pseudo_grid.getChildren().get(i);
+        vbox.getChildren().get(0).getStyleClass().add("actif");
         profil_actif = i;
 
         BufferedWriter writer = new BufferedWriter(
-                new FileWriter(Path.repertoire_profils.toString() + "/profil_actif"));
+            new FileWriter(Path.repertoire_profils.toString() + "/profil_actif"));
 
         writer.write(String.valueOf(profil_actif));
         writer.newLine();
@@ -198,33 +190,26 @@ public class ControllerMenuProfils {
      */
     public void chargerTableau() throws NumberFormatException, IOException {
 
-        //TODO : a voir optimiser
-        File file = new File(Path.repertoire_profils.toString() + "/liste");
-        if (file.exists()) {
-            Scanner reader = new Scanner(file);
-            for (int i = 0; reader.hasNextLine(); i++) {
-                nom_joueur = reader.nextLine();
-                profils_attributs[i] = nom_joueur;
-                afficherNouveauxProfil(i + 1);
-            }
-
-            reader.close();
+        /// Récupération des profils existants
+        System.out.println("Reload tableau profils :" + Sauvegarder.listeFichiers(Path.repertoire_lvl));
+        profils_attributs = Sauvegarder.listeFichiers(Path.repertoire_lvl);
+        for (int i = 0; i < profils_attributs.size(); i++) {
+            nom_joueur = profils_attributs.get(i);
+            afficherNouveauxProfil(i);
         }
 
-        file = new File(Path.repertoire_profils.toString() + "/actif");
+        // Récupération du profil actif
+        File file = new File(Path.repertoire_profils, "actif");
         if (file.exists()) {
-            Scanner reader = new Scanner(file);
-            int actif = Integer.parseInt(reader.nextLine());
-            String nom_actif = reader.nextLine();
-            Profil joueur_actif = new Profil(nom_actif);
-
-            if (joueur != joueur_actif) {
-                joueur = joueur_actif;
+            try (Scanner reader = new Scanner(file)) {
+                int actif = reader.nextInt();
+                String nom_actif = reader.nextLine().trim();
+                Profil joueur_actif = new Profil(nom_actif);
+                if (!joueur.equals(joueur_actif)) {
+                    joueur = joueur_actif;
+                }
+                setActiveProfil(actif);
             }
-
-            setActiveProfil(actif);
-
-            reader.close();
         }
     }
 
@@ -234,33 +219,12 @@ public class ControllerMenuProfils {
      * @param nom_joueur le nom du joueur a ajouter
      */
     private void ajoutProfils(String nom_joueur) {
-        for (int i = 0; i < profils_attributs.length; i++) {
-            if (profils_attributs[i] == null) {
-                profils_attributs[i] = nom_joueur;
+        for (int i = 0; i < profils_attributs.size(); i++) {
+            if (profils_attributs.get(i).isEmpty()) {
+                profils_attributs.set(i, nom_joueur);
                 return;
             }
         }
-    }
-
-    /**
-     * Methode pour sauvegarder l'affichage des profils creer
-     *
-     * @throws IOException
-     */
-    private void sauvegarderProfils() throws IOException {
-
-        BufferedWriter writer = new BufferedWriter(
-                new FileWriter(Path.repertoire_profils.toString() + "/liste_profils"));
-
-        // recopie du tableau dans un fichier
-        for (String str : profils_attributs) {
-            if (str != null) {
-                writer.write(str);
-                writer.newLine();
-            }
-        }
-
-        writer.close();
     }
 
     /**
@@ -271,8 +235,9 @@ public class ControllerMenuProfils {
      */
     @FXML
     private void viewDel(MouseEvent event) {
+
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
-            if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)))) {
+            if (!((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).getText().equals("default") && (event.getSource()) == pseudo_grid.getChildren().get(i)) {
                 if (((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getText() == "")
                     ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2).setVisible(true);
             }
@@ -307,20 +272,13 @@ public class ControllerMenuProfils {
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2))) {
                 // recuperation du pseudo
                 nom_joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
-                        .get(1)).getText());
+                    .get(1)).getText());
             }
         }
 
-        // suppression du nom dans le tableau et rearangement
-        for (int i = 0; i < profils_attributs.length; i++) {
-            if (profils_attributs[i] == nom_joueur) {
-                for (int j = i; j < profils_attributs.length - 1; j++) {
-                    profils_attributs[j] = profils_attributs[j + 1];
-                }
-            }
-        }
+        profils_attributs.remove(nom_joueur);
+        System.out.println(profils_attributs);
 
-        sauvegarderProfils();
 
         Sauvegarder.supprimerProfil(nom_joueur);
 
@@ -328,6 +286,14 @@ public class ControllerMenuProfils {
         ControllerMenuProfils reload = new ControllerMenuProfils(stage, joueur);
         stage.setScene(reload.getScene());
         reload.chargerTableau();
+    }
+
+
+    /**
+     * Getter
+     */
+    public List<String> getProfilsAttributs() {
+        return profils_attributs;
     }
 }
 
