@@ -92,7 +92,7 @@ public class ControllerNiveau {
     private void initialize() {
 
         // Adapter la largeur de la barre à l'écran
-        this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(15));
+        this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(40));
 
         // Mettre la grille au centre (et ajouter une marge)
         Pane grille =  this.niveau.getGrille().getPanneau();

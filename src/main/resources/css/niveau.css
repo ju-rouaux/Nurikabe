@@ -14,7 +14,7 @@
 
 /* Case blanche */
 .case-blanche {
-    
+
 }
 
 /* Case noire */
@@ -33,13 +33,13 @@
 }
 
 .toolBar{
-    -fx-background-color: #ffffff;
-    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 75% , #ffffff, #ffe2b7);
-    -fx-effect: innershadow(three-pass-box, rgb(255, 255, 255), 5, 1, 0, 0);
-    /*-fx-border-color: rgb(226, 0, 0);
+    /*-fx-background-color: #ffffff;*/
+    -fx-background-color: radial-gradient(focus-distance 0% , center 0% 0% , radius 0% , #fcec91,rgb(255, 213, 63)3);
+    -fx-effect: innershadow(three-pass-box, rgb(255, 234, 0), 5, 1, 0, 0);
+    -fx-border-color: linear-gradient(from 13px 38px to 52px 52px, reflect,  #ff832b, #ffba39 100%);
     -fx-border-style: solid inside;
-    -fx-border-width: 1px 1px 1px 1px;*/
-    -fx-cursor: hand;
+    -fx-border-width: 10px 10px 10px 10px;
+
 }
 .toolBar Button{
     -fx-background-color: #ffffff;
@@ -47,10 +47,20 @@
     -fx-border-radius: 50px;
     -fx-border-width: 2px;
     -fx-border-color: #ffae00;
-    -fx-effect: innershadow(gaussian, rgb(255, 0, 0) 28, 1, 0, 0);
-    
+    -fx-effect: innershadow(gaussian, rgb(255, 0, 0) 50, 1, 0, 0);
+
 
 }
 
+.score
+{
+    -fx-background-color: radial-gradient(focus-distance 0% , center 0% 0% , radius 0% , #ffffff,rgb(255, 255, 255)3);
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgb(246, 255, 0), 2, 1, 0, 0);
+    -fx-border-color: linear-gradient(from 13px 38px to 52px 52px, reflect,  #fff200, #ffd000 100%);
+    -fx-border-style: solid outside;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px 0px 2px 0px;
+}
 
 /* ==================== IDs ==================== */
