@@ -1,8 +1,8 @@
 package com.l3infogrp5.nurikabe;
 
-import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreCLM;
-import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreChrono;
-import com.l3infogrp5.nurikabe.Niveaux.Score.ScoreEndless;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreCLM;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreChrono;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreEndless;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -30,7 +30,7 @@ public class Nurikabe extends Application {
         System.out.println("test");
         score.aideUtilise();
 
-        /*
+        /* 
          * ScoreChrono score = new ScoreEndless(40,0, text);
          * score.calcul();
          * 
