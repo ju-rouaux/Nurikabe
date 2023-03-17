@@ -11,7 +11,7 @@ import java.io.IOException;
 
 /**
  * Contrôleur du menu de sélection de niveau, et sa scène.
- * 
+ *
  * @author Julien Rouaux - Nicolas Gouget
  */
 public class ControllerMenuNiveau {
@@ -25,7 +25,7 @@ public class ControllerMenuNiveau {
 
     /**
      * Initialise le menu de sélection de niveau et son contrôleur.
-     * 
+     *
      * @param stage la fenêtre contenant la scène.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
@@ -42,7 +42,7 @@ public class ControllerMenuNiveau {
 
     /**
      * Retourne la scène gérée par le contrôleur.
-     * 
+     *
      * @return la scène gérée par le contrôleur.
      */
     public Scene getScene() {
