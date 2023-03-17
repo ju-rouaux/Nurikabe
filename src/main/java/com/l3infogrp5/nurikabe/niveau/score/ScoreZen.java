@@ -2,6 +2,7 @@ package com.l3infogrp5.nurikabe.niveau.score;
 
 import org.controlsfx.control.Rating;
 
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.Pane;
 
 /**
@@ -74,6 +75,11 @@ public class ScoreZen implements ScoreInterface {
         rating.setDisable(true);
         rating.setPartialRating(true);
         rating.setRating(etoiles);
+
+        /* Augmente la saturation mais ça colore le fond en rose
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setSaturation(1);
+        rating.setEffect(colorAdjust);*/
 
         Pane ratingPane = new Pane();
         ratingPane.getChildren().add(rating);

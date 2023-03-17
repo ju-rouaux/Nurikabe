@@ -17,7 +17,11 @@ public class Nurikabe extends Application {
         ScoreZen score = new ScoreZen(5);
         score.aideUtilise();
         Pane scorePane = score.get_Pane();
- 
+        score.aideUtilise();
+        score.aideUtilise();
+        score.aideUtilise();
+        score.aideUtilise();
+        
         root.getChildren().add(scorePane);
 
         primaryStage.setTitle("Test sur l'opacité");
