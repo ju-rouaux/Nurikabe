@@ -1,24 +1,23 @@
 package com.l3infogrp5.nurikabe;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
-public class Main extends Application {
-
-    @Override
-    public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(l), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+/**
+ * Point d'entrée de l'application.
+ * Projet étudiant de L3 Informatique.
+ *
+ * @author Julien Rouaux
+ */
+public class Main {
+    private Main() {
     }
 
+    /**
+     * Lancement de l'application.
+     *
+     * @param args arguments de ligne de commande.
+     */
     public static void main(String[] args) {
-        launch();
+        Application.launch(Nurikabe.class, args);
     }
 }
