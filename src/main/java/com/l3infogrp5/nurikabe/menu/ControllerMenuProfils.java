@@ -180,10 +180,8 @@ public class ControllerMenuProfils {
 
         profil_actif = i;
 
-        creerDossierProfils();
-
         BufferedWriter writer = new BufferedWriter(
-                new FileWriter(Path.repertoire_courant.toString() + "/Profil_interface" + "/profil_actif"));
+                new FileWriter(Path.repertoire_profils.toString() + "/profil_actif"));
 
         writer.write(String.valueOf(profil_actif));
         writer.newLine();
@@ -199,7 +197,9 @@ public class ControllerMenuProfils {
      * @throws NumberFormatException
      */
     public void chargerTableau() throws NumberFormatException, IOException {
-        File file = new File(Path.repertoire_courant.toString() + "/Profil_interface" + "/liste_profils");
+
+        //TODO : a voir optimiser
+        File file = new File(Path.repertoire_profils.toString() + "/liste");
         if (file.exists()) {
             Scanner reader = new Scanner(file);
             for (int i = 0; reader.hasNextLine(); i++) {
@@ -211,7 +211,7 @@ public class ControllerMenuProfils {
             reader.close();
         }
 
-        file = new File(Path.repertoire_courant.toString() + "/Profil_interface" + "/profil_actif");
+        file = new File(Path.repertoire_profils.toString() + "/actif");
         if (file.exists()) {
             Scanner reader = new Scanner(file);
             int actif = Integer.parseInt(reader.nextLine());
@@ -243,30 +243,14 @@ public class ControllerMenuProfils {
     }
 
     /**
-     * Methode pour creer si il n'existe pas déjà le dossier qui stocke les
-     * information relative au coter graphique du profil
-     *
-     * @throws IOException
-     */
-    private void creerDossierProfils() throws IOException {
-        if (!Sauvegarder.dossierExistants(new File(Path.repertoire_courant.toString() + "/Profil_interface"))) {
-            Files.createDirectories(Paths.get(Path.repertoire_courant.toString() + "/Profil_interface"));
-            System.out.println("Repertoire interface profil creer");
-        } else {
-            System.out.println("Repertoire interface profil deja existant");
-        }
-    }
-
-    /**
      * Methode pour sauvegarder l'affichage des profils creer
      *
      * @throws IOException
      */
     private void sauvegarderProfils() throws IOException {
-        creerDossierProfils();
 
         BufferedWriter writer = new BufferedWriter(
-                new FileWriter(Path.repertoire_courant.toString() + "/Profil_interface" + "/liste_profils"));
+                new FileWriter(Path.repertoire_profils.toString() + "/liste_profils"));
 
         // recopie du tableau dans un fichier
         for (String str : profils_attributs) {

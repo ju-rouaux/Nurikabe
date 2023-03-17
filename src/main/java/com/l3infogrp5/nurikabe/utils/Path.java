@@ -31,6 +31,10 @@ public final class Path {
      */
     private static final String DOSSIER_GRILLES = "/grilles";
     /**
+     * Le nom de dossier pour la sauvegarde des profils
+     */
+    private static final String DOSSIER_PROFILS = "/profils";
+    /**
      * Répertoire du fichier .jar
      */
     public static File repertoire_jar;
@@ -55,6 +59,11 @@ public final class Path {
      */
     public static File repertoire_grilles = null;
 
+    /**
+     * Repertoire des profils
+     */
+    public static File repertoire_profils = null;
+
     static {
         try {
             // Récupère le répertoire du .jar
@@ -75,6 +84,7 @@ public final class Path {
                 repertoire_lvl = new File(repertoire_save + "/" + DOSSIER_NIVEAUX);
                 repertoire_score = new File(repertoire_save + "/" + DOSSIER_SCORE);
                 repertoire_grilles = new File(baseDir + "/" + DOSSIER_GRILLES);
+                repertoire_profils = new File(repertoire_courant + "/" + DOSSIER_PROFILS);
             } else {
                 System.out.println("[Path] erreur index < 0");
             }

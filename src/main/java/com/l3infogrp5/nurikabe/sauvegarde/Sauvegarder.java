@@ -94,6 +94,11 @@ public class Sauvegarder {
         List<String> fichiers = listeFichiers(Path.repertoire_courant);
 
         try {
+            boolean profil = fichiers.contains("profil");
+            if(!profil) {
+                Files.createDirectories(Paths.get(Path.repertoire_profils.toString()));
+            }
+
             // Vérifier si le dossier "save" existe déjà
             boolean sauvegarde_existe = fichiers.contains("save");
             if (!sauvegarde_existe) {
