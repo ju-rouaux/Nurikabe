@@ -78,9 +78,9 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void profilsClique(ActionEvent event) throws IOException {
-        ControllerMenuProfils profils = new ControllerMenuProfils(stage, joueur);
-        stage.setScene(profils.getScene());
-        profils.chargerTableau();
+        ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage, joueur);
+        stage.setScene(controller_profil.getScene());
+        controller_profil.chargerTableau();
     }
 
     /**
