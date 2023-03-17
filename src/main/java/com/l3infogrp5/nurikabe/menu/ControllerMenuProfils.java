@@ -94,9 +94,9 @@ public class ControllerMenuProfils {
     /**
      * Modfie l'affichage du menue profile pour afficher le profile du nouveaux
      * joueur
-     * 
+     *
      * @param i l'indice de la grille a modifier
-     * 
+     *
      */
     private void afficherNouveauxProfil(int i) {
         // affiche le nom du nouveaux profil
@@ -119,7 +119,7 @@ public class ControllerMenuProfils {
 
     /**
      * Méthode pour créer un nouveaux profils avec un pseudo
-     * 
+     *
      * @param i l'indice de la grille a modifier
      * @throws IOException
      *
@@ -142,7 +142,7 @@ public class ControllerMenuProfils {
 
     /**
      * Méthode pour charger un profils
-     * 
+     *
      * @throws IOException
      *
      */
@@ -158,7 +158,6 @@ public class ControllerMenuProfils {
 
                 if(Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur))
                     nouveauxProfil(i);
-                }
 
                 joueur = new Profil(nom_joueur);
                 setActiveProfil(i);
@@ -170,7 +169,7 @@ public class ControllerMenuProfils {
     /**
      * Methode qui modifi le style pour le profil actif et sauvegarde l'indice et le
      * nom de ce dernier pour le recharger plus tard
-     * 
+     *
      * @param i l'indice du profil actif
      * @throws IOException
      */
@@ -195,7 +194,7 @@ public class ControllerMenuProfils {
 
     /**
      * Methode pour recuperer les joeur creer
-     * 
+     *
      * @throws IOException
      * @throws NumberFormatException
      */
@@ -231,7 +230,7 @@ public class ControllerMenuProfils {
 
     /**
      * Methode pour ajouter un joueur au tableau des joueur
-     * 
+     *
      * @param nom_joueur le nom du joueur a ajouter
      */
     private void ajoutProfils(String nom_joueur) {
@@ -246,7 +245,7 @@ public class ControllerMenuProfils {
     /**
      * Methode pour creer si il n'existe pas déjà le dossier qui stocke les
      * information relative au coter graphique du profil
-     * 
+     *
      * @throws IOException
      */
     private void creerDossierProfils() throws IOException {
@@ -260,7 +259,7 @@ public class ControllerMenuProfils {
 
     /**
      * Methode pour sauvegarder l'affichage des profils creer
-     * 
+     *
      * @throws IOException
      */
     private void sauvegarderProfils() throws IOException {
@@ -283,7 +282,7 @@ public class ControllerMenuProfils {
     /**
      * Methode qui au passage de la souris sur un profil existant affiche l'icone
      * d'une corbeille permetant sa suppression
-     * 
+     *
      * @param event les action de la souris
      */
     @FXML
@@ -299,7 +298,7 @@ public class ControllerMenuProfils {
     /**
      * Methode qui s'assure que l'icone de corbeille n'est pas afficher si la souri
      * n'est pas sur le profils
-     * 
+     *
      * @param event les action de la souris
      */
     @FXML
@@ -312,7 +311,7 @@ public class ControllerMenuProfils {
     /**
      * Methode qui supprime un profil de la liste des profil et qui reorganise
      * l'affichage
-     * 
+     *
      * @param event le profil cliquer et a supprimer
      * @throws IOException
      */
