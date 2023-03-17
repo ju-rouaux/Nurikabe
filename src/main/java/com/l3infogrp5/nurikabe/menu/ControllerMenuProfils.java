@@ -156,10 +156,7 @@ public class ControllerMenuProfils {
                 nom_joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
                         .get(1)).getText());
 
-                if (Sauvegarder.RechercherSauvegarde(nom_joueur)) {
-                    System.out.println("Profil " + nom_joueur + " charger");
-                } else {
-                    System.out.println("Creation du profils " + nom_joueur);
+                if(Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur))
                     nouveauxProfil(i);
                 }
 
