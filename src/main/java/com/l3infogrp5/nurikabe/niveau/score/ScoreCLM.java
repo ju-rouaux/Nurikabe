@@ -2,6 +2,7 @@ package com.l3infogrp5.nurikabe.niveau.score;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -97,7 +98,7 @@ public class ScoreCLM extends ScoreChrono {
     }
 
     @Override
-    public void get_Pane() {
+    public Pane get_Pane() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'get_Pane'");
     }
