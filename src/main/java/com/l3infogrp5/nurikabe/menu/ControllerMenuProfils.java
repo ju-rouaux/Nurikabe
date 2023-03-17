@@ -33,8 +33,8 @@ public class ControllerMenuProfils {
     private final Stage stage;
     private final Scene scene;
     public String nom_joueur;
-    Profil joueur;
-    List<String> profils_attributs;
+    private Profil joueur;
+    private List<String> profils_attributs;
     @FXML
     private Button btn_retour;
     @FXML

@@ -73,7 +73,7 @@ public class ControllerNouveauxProfil {
      * @return boolean | true si un profil avec ce pseudo exist false sinon
      */
     private boolean pseudoExist() {
-        for (String str : profils.profils_attributs) {
+        for (String str : profils.getProfilsAttributs()) {
             if (str != null && str.equals(pseudo.getText())) {
                 return true;
             }
