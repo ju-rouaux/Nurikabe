@@ -2,6 +2,8 @@ package com.l3infogrp5.nurikabe.niveau.score;
 
 import org.controlsfx.control.Rating;
 
+import javafx.scene.layout.Pane;
+
 /**
  * Implémentation du score pour le mode zen
  * On calcule via un système d'étoiles allant de 0 à 5
@@ -12,7 +14,7 @@ import org.controlsfx.control.Rating;
 public class ScoreZen implements ScoreInterface {
 
     double etoiles;
-    final Rating rating = new Rating();
+    public final Rating rating = new Rating();
     
     public ScoreZen(double etoiles) {
         this.etoiles = etoiles;
@@ -26,9 +28,10 @@ public class ScoreZen implements ScoreInterface {
     @Override
     public void aideUtilise() {
 
-        if (etoiles >= 0)
+        if (etoiles >= 0) {
             this.etoiles -= 0.5;
-
+            rating.setRating(etoiles);
+        }
     }
 
     @Override
@@ -66,9 +69,14 @@ public class ScoreZen implements ScoreInterface {
     }
 
     @Override
-    public void get_Pane() {
+    public Pane get_Pane() {
         rating.setUpdateOnHover(false);
+        rating.setDisable(true);
         rating.setPartialRating(true);
         rating.setRating(etoiles);
+
+        Pane ratingPane = new Pane();
+        ratingPane.getChildren().add(rating);
+        return ratingPane;
     }
 }
