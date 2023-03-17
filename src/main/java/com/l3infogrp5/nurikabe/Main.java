@@ -9,7 +9,7 @@ import javafx.application.Application;
 /**
  * Point d'entrée de l'application.
  * Projet étudiant de L3 Informatique.
- * 
+ *
  * @author Julien Rouaux
  */
 public class Main {
@@ -18,7 +18,7 @@ public class Main {
 
     /**
      * Lancement de l'application.
-     * 
+     *
      * @param args arguments de ligne de commande.
      */
     public static void main(String[] args) {
