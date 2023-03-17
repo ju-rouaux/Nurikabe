@@ -76,6 +76,8 @@ public class ControllerNiveau {
      */
     public ControllerNiveau(Stage stage, Profil joueur) throws IOException {
         this.stage = stage;
+        //TODO charger profil dans le menu de selection des profils
+        
         this.aide_affichee = new SimpleBooleanProperty();
 
         // TODO charger profil dans le menu de selection des profils
