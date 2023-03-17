@@ -20,25 +20,65 @@
                  <children>
                     <Button fx:id="btn_retour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
                        <graphic>
+                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                             <image>
+                                <Image url="@../close.png" />
+                             </image>
+                          </ImageView>
+                       </graphic>
+                    </Button>
+                    <Button fx:id="btn_undo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#undoClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP" >
+                        <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
                              <image>
                                 <Image url="@../undo.png" />
                              </image>
                           </ImageView>
                        </graphic>
-                    </Button>
-                    <Button fx:id="btn_undo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#undoClique" prefHeight="30.0" prefWidth="30.0" text="Undo" textOverrun="CLIP" />
-                    <Button fx:id="btn_redo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redoClique" prefHeight="30.0" prefWidth="30.0" text="Redo" textOverrun="CLIP" />
+                     </Button>
+                    <Button fx:id="btn_redo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redoClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP" >
+                        <graphic>
+                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                             <image>
+                                <Image url="@../redo.png" />
+                             </image>
+                          </ImageView>
+                       </graphic>
+                        </Button>
                     <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                     <BorderPane fx:id="panneau_score" styleClass="score" prefHeight="300.0" prefWidth="250.0">
                        <center>
-                          <Label text="Score" BorderPane.alignment="CENTER" />
+                          <Label text="Score" BorderPane.alignment="CENTER" styleClass="score-text"/>
                        </center>
                     </BorderPane>
                     <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                    <Button fx:id="btn_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Aide" textOverrun="CLIP" />
-                    <Button fx:id="btn_check" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Correction" textOverrun="CLIP" />
-                    <Button fx:id="btn_reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Recommencer" textOverrun="CLIP" />
+                    <Button fx:id="btn_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
+                        <graphic>
+                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                             <image>
+                                <Image url="@../idea.png" />
+                             </image>
+                          </ImageView>
+                        </graphic>
+                     </Button>
+                    <Button fx:id="btn_check" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
+                        <graphic>
+                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                             <image>
+                                <Image url="@../check-mark.png" />
+                             </image>
+                          </ImageView>
+                        </graphic>
+                     </Button>
+                  <Button fx:id="btn_reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP" >
+                      <graphic>
+                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                             <image>
+                                <Image url="@../rotation.png" />
+                             </image>
+                          </ImageView>
+                        </graphic>
+                     </Button>
                  </children>
               </HBox>
            </items>

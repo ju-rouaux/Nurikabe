@@ -67,7 +67,7 @@
     -fx-stroke-width: 2px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 20, 0, 3, 3);
     */
-
+    
     -fx-fill: linear-gradient(from 13px 38px to 52px 52px, reflect,  #eb6f16, #ffc04b 100%);
     -fx-stroke: #ffee00;
     -fx-stroke-width: 3px;
