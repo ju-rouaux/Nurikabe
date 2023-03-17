@@ -17,8 +17,8 @@ import com.l3infogrp5.nurikabe.utils.Position;
  */
 public class Zone {
 
-    Matrice matrice;
-    List<Position> zone;
+    private Matrice matrice;
+    private List<Position> zone;
 
     /**
      * Crée une zone vide dans une matrice donnée.
@@ -36,7 +36,7 @@ public class Zone {
      * @param pos la position à tester.
      * 
      */
-    public void findZone(Position pos) {
+    public List<Position> findZone(Position pos) {
 
         List<Etat> etatInit = new ArrayList<>();
         etatInit.add(Etat.fromInt(matrice.get(pos)));
@@ -66,6 +66,8 @@ public class Zone {
 
             // System.out.println(i + " : " + checkVois.get(i));
         }
+
+        return this.zone;
     }
 
     /**

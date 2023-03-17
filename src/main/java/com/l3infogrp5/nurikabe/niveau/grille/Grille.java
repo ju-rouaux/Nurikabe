@@ -1,9 +1,13 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
+import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
+
+import com.l3infogrp5.nurikabe.aide.Zone;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
@@ -118,14 +122,23 @@ public class Grille {
                     // Définition des événements de maintien
                     // TODO ceci est une démo
                     case_courante.setEventMaintienGauche(new EventClicMaintenu() {
+                        List<Position> zone_pos;
+
                         public void maintenu(Case c) {
-                            System.out.println("Maintien de : " + c.getPosition());
-                            c.surbrillance(true, 0);
+                            Zone zone = new Zone(new Matrice(getMatrice()));
+                            zone_pos = zone.findZone(c.getPosition());
+
+                            for (Position pos : zone_pos) {
+                                getCase(Grille.this.grille[pos.getX()][pos.getY()]).surbrillance(true, zone_pos.size());
+                            }
                         }
 
                         public void relache(Case c) {
-                            System.out.println("Relachement de : " + c.getPosition());
-                            c.surbrillance(false, 0);
+                            if(zone_pos != null) {
+                                for (Position pos : zone_pos) {
+                                    getCase(Grille.this.grille[pos.getX()][pos.getY()]).surbrillance(false, zone_pos.size());
+                                }
+                            }
                         }
                     });
 
