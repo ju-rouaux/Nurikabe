@@ -342,7 +342,7 @@ public class ControllerMenuProfils {
 
         sauvegarderProfils();
 
-        // TODO : ajout method suppresion sauvegarde
+        Sauvegarder.supprimerProfil(nom_joueur);
 
         // rechargement de la scene
         ControllerMenuProfils reload = new ControllerMenuProfils(stage, joueur);
