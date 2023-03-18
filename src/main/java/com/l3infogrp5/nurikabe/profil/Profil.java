@@ -16,6 +16,8 @@ import java.util.List;
  * Classe représentant un profil de joueur.
  * Elle permet de charger et sauvegarder des grilles de jeu, ainsi que l'historique des mouvements effectués sur la grille.
  * Elle permet également de récupérer des informations sur le joueur et le niveau en cours.
+ *
+ * @author Guillaume Richard
  */
 public class Profil {
 
