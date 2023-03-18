@@ -12,7 +12,6 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Classe représentant un profil de joueur.
  *
@@ -20,9 +19,13 @@ import java.util.List;
  */
 public class Profil {
 
+    /* L'instance du profil */
+    private static Profil instance = null;
+
+    /* Les données du niveau */
     private static DonneesNiveau donneesNiveau;
     /* Le nom du joueur */
-    private final String joueur;
+    private String joueur;
     /* Le mode de jeu */
     private String mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
@@ -31,22 +34,22 @@ public class Profil {
     /**
      * Création d'un profil.
      *
-     * @param joueur le nom du joueur
      * @throws IOException {@link IOException}
      */
-    public Profil(String joueur) throws IOException {
-        donneesNiveau = new DonneesNiveau();
-        this.joueur = joueur;
-        // Valeurs par défaut
-        this.mode_de_jeu = "detente";
-        this.id_niveau = 0;
+    private Profil() throws IOException {
+    }
 
-        if (Sauvegarder.RechercherSauvegarde(joueur)) {
-            System.out.println("[Profil] Profil deja existant");
-        } else {
-            Sauvegarder.creerDossierJoueur(joueur);
+    /**
+     * Retourne l'instance du profil.
+     *
+     * @return l'instance du profil
+     * @throws IOException
+     */
+    public static Profil getInstance() throws IOException {
+        if (instance == null) {
+            instance = new Profil();
         }
-
+        return instance;
     }
 
     /**
@@ -120,6 +123,20 @@ public class Profil {
         return url_images;
     }
 
+    public void chargerProfil(String joueur, String mode_de_jeu) throws IOException {
+        donneesNiveau = new DonneesNiveau();
+        this.joueur = joueur;
+        // Valeurs par défaut
+        this.mode_de_jeu = "detente";
+        this.id_niveau = 0;
+
+        if (Sauvegarder.RechercherSauvegarde(joueur)) {
+            System.out.println("[Profil] Profil deja existant");
+        } else {
+            Sauvegarder.creerDossierJoueur(joueur);
+        }
+    }
+
     /**
      * Sauvegarde le niveau deja commencé
      *
@@ -181,18 +198,23 @@ public class Profil {
         return donneesNiveau;
     }
 
+//    /**
+//     * setter pour le nom du joueur du profil
+//     *
+//     * @return le nom du joueur
+//     */
+//    public void setJoueur(String j) {
+//        this.joueur = j;
+//    }
+
     /**
      * getter pour le nom du joueur du profil
      *
      * @return le nom du joueur
      */
     public String getJoueur() {
-        return joueur;
+        return this.joueur;
     }
-
-    /*
-     * Getters
-     */
 
     /**
      * getter pour l'identifiant du niveau
@@ -246,6 +268,7 @@ public class Profil {
          * La grille de solution du niveau.
          */
         public int[][] matrice_solution;
+
         /**
          * Constructeur privé.
          */
