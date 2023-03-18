@@ -71,7 +71,7 @@ public class ControllerMenuModeJeu {
     @FXML
     private void detenteClique(ActionEvent event) throws Exception {
         Profil.getInstance().setMode_de_jeu("detente"); // TODO pas ouf d'écrire en dur le mode
-        stage.setScene(new ControllerMenuNiveau(stage).getScene());
+        stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
     /**
@@ -80,7 +80,7 @@ public class ControllerMenuModeJeu {
     @FXML
     private void contreMontreClique(ActionEvent event) throws Exception {
         Profil.getInstance().setMode_de_jeu("clm"); // TODO pas ouf d'écrire en dur le mode
-        stage.setScene(new ControllerMenuNiveau(stage).getScene());
+        stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
     /**

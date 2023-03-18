@@ -27,10 +27,13 @@ import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
  *
  * @author Julien Rouaux
  */
-public class ControllerMenuNiveau {
+public class ControllerMenuSelection {
 
     /**
+     * Petite carte de sélection de niveau qui lance un niveau lorsqu'elle est
+     * cliquée.
      * 
+     * @author Julien Rouaux
      */
     private class ControllerSelection {
         private int id_niveau;
@@ -47,7 +50,7 @@ public class ControllerMenuNiveau {
 
         @FXML
         private void initialize() {
-            this.image.setImage(new Image(ControllerMenuNiveau.this.liens_images.get(id_niveau)));
+            this.image.setImage(new Image(ControllerMenuSelection.this.liens_images.get(id_niveau)));
             this.texte.setText("Niveau " + (id_niveau + 1));
         }
 
@@ -104,7 +107,7 @@ public class ControllerMenuNiveau {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuNiveau(Stage stage) throws IOException {
+    public ControllerMenuSelection(Stage stage) throws IOException {
         this.stage = stage;
         this.page_chargee = new SimpleIntegerProperty(1);
         this.nb_grilles = Sauvegarder.nbGrilles(Profil.getMode_de_jeu());
