@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.menu;
 
+import com.l3infogrp5.nurikabe.utils.Path;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class ControllerMenuSelection {
     /**
      * Petite carte de sélection de niveau qui lance un niveau lorsqu'elle est
      * cliquée.
-     * 
+     *
      * @author Julien Rouaux
      */
     private class ControllerSelection {
@@ -50,7 +52,8 @@ public class ControllerMenuSelection {
 
         @FXML
         private void initialize() {
-            this.image.setImage(new Image(ControllerMenuSelection.this.liens_images.get(id_niveau)));
+            File image = new File(ControllerMenuSelection.this.liens_images.get(id_niveau));
+            this.image.setImage(new Image(image.toURI().toString()));
             this.texte.setText("Niveau " + (id_niveau + 1));
         }
 
@@ -122,7 +125,7 @@ public class ControllerMenuSelection {
 
     /**
      * Initialise les éléments de l'interface après le préchargement du FXMLLoader.
-     * 
+     *
      * @throws IOException
      */
     @FXML
@@ -147,7 +150,7 @@ public class ControllerMenuSelection {
 
     /**
      * Charge la page donnée dans la grille de l'interface.
-     * 
+     *
      * @param p la page à charger (à partir de 1)
      * @throws IOException lancé lorsqu'une carte de niveau n'a pas pû être créée.
      */
