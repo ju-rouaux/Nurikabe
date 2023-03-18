@@ -28,7 +28,7 @@ public class Profil {
     /* Le mode de jeu */
     private static String mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
-    private int id_niveau;
+    private static int id_niveau;
 
     /**
      * Création d'un profil.
@@ -102,11 +102,11 @@ public class Profil {
         List<String> url_images = new ArrayList<>();
         String mdj = getMode_de_jeu();
         String joueur = getJoueur();
-        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
-            "capture_niveau_");
+        File image_grille = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
+            "capture_niveau_" + getIdNiveau() + ".png");
         File placeholder_default = new File(Path.repertoire_jar.toString() + "/Nurikabe_grille.png");
 
-        List<String> liste_fichiers = Sauvegarder.listeFichiers(mouvements_fichier.getParentFile());
+        List<String> liste_fichiers = Sauvegarder.listeFichiers(image_grille.getParentFile());
 
         for (int i = 0; i < Sauvegarder.nbGrilles(mdj); i++) {
             if (liste_fichiers.contains("capture_niveau_" + i + ".png"))
@@ -114,9 +114,7 @@ public class Profil {
                     "capture_niveau_" + i + ".png").toString());
             else
                 url_images.add(placeholder_default.toString());
-
         }
-
         return url_images;
     }
 
@@ -239,7 +237,7 @@ public class Profil {
      *
      * @return l'historique des mouvements
      */
-    public int getId_niveau() {
+    public static int getIdNiveau() {
         return id_niveau;
     }
 

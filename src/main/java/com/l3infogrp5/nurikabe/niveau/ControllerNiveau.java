@@ -84,6 +84,7 @@ public class ControllerNiveau {
         joueur.chargerProfil("Julieng");
         joueur.setMode_de_jeu("clm");
         int id_niveau = 1;
+        System.out.println(Profil.chargerImageNiveau());
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
 
@@ -155,8 +156,8 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         joueur.sauvegarderNiveau(grille);
         // TODO : remplacer null avec le getScore du niveau
-        Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau(), null);
-        CaptureNode.capturer(this.grille.getPanneau(), joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
+        Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), Profil.getIdNiveau(), null);
+        CaptureNode.capturer(this.grille.getPanneau(), joueur.getJoueur(), joueur.getMode_de_jeu(), Profil.getIdNiveau());
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
     }
