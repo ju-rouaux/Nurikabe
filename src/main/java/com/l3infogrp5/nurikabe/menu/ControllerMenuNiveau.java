@@ -8,13 +8,17 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.List;
 
+import com.l3infogrp5.nurikabe.niveau.ControllerNiveau;
+import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 
 /**
@@ -43,9 +47,8 @@ public class ControllerMenuNiveau {
 
         @FXML
         private void initialize() {
-            // TODO set l'image ici
-            //this.image.setImage(null);
-            this.texte.setText("Niveau " + id_niveau);
+            this.image.setImage(new Image(ControllerMenuNiveau.this.liens_images.get(id_niveau)));
+            this.texte.setText("Niveau " + (id_niveau + 1));
         }
 
         Pane getPanneau() {
@@ -61,12 +64,12 @@ public class ControllerMenuNiveau {
         @FXML
         private void scoreClique() {
             // TODO charger score ici
-            System.out.println("Lancement score " + id_niveau);
+            System.out.println("Lancement score " + (id_niveau));
         }
 
         @FXML
-        private void selectionClique() {
-            // TODO lancer niveau ici
+        private void selectionClique() throws IOException {
+            stage.setScene(new ControllerNiveau(stage, List.of(id_niveau)).getScene());
             System.out.println("Lancement niveau " + id_niveau);
         }
     }
@@ -75,8 +78,10 @@ public class ControllerMenuNiveau {
     private final int NOMBRE_ENTREE = 6;
     // Nombre de lignes de la grille affichée
     private final int NOMBRE_LIGNES = 2;
-    
+    // Numéro de la page chargée
     private IntegerProperty page_chargee;
+    // Lien des images
+    private List<String> liens_images;
 
     private FXMLLoader loader;
     private Stage stage;
@@ -85,8 +90,6 @@ public class ControllerMenuNiveau {
     // Nombre de niveaux totaux
     private int nb_grilles;
 
-    @FXML
-    private Button btn_retour;
     @FXML
     private GridPane grille;
     @FXML
@@ -104,7 +107,8 @@ public class ControllerMenuNiveau {
     public ControllerMenuNiveau(Stage stage) throws IOException {
         this.stage = stage;
         this.page_chargee = new SimpleIntegerProperty(1);
-        this.nb_grilles = Sauvegarder.nbGrilles("detente"); // TODO pas ouf d'écrire en dur le mode
+        this.nb_grilles = Sauvegarder.nbGrilles(Profil.getMode_de_jeu());
+        this.liens_images = Profil.chargerImageNiveau();
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_selection.fxml"));
@@ -129,6 +133,7 @@ public class ControllerMenuNiveau {
         this.btn_suivant.disableProperty()
                 .bind(this.page_chargee.greaterThanOrEqualTo(this.nb_grilles / NOMBRE_ENTREE));
 
+        // Appeler le chargement de page à chaque changement de page
         this.page_chargee.addListener((obj, o, n) -> {
             try {
                 chargerPage(page_chargee.get());
@@ -138,14 +143,17 @@ public class ControllerMenuNiveau {
     }
 
     /**
-     * Charge la page donnée.
+     * Charge la page donnée dans la grille de l'interface.
+     * 
+     * @param p la page à charger (à partir de 1)
+     * @throws IOException lancé lorsqu'une carte de niveau n'a pas pû être créée.
      */
     private void chargerPage(int p) throws IOException {
-        this.grille.getChildren().clear(); //Vider la grille
+        this.grille.getChildren().clear(); // Vider la grille
         for (int i = 0; i < NOMBRE_LIGNES; i++)
             for (int j = 0; j < NOMBRE_ENTREE / NOMBRE_LIGNES; j++) {
-                // id = [1..6] + quantité_de_niveau_par_page*(numero_de_page-1)
-                int id_niveau = (i*NOMBRE_ENTREE/NOMBRE_LIGNES + j + 1) + (this.page_chargee.get()-1)*NOMBRE_ENTREE; 
+                // id = [1..6] + quantité_de_niveau_par_page*(numéro_de_page-1)
+                int id_niveau = (i * NOMBRE_ENTREE / NOMBRE_LIGNES + j) + (this.page_chargee.get() - 1) * NOMBRE_ENTREE;
 
                 this.grille.add(new ControllerSelection(id_niveau).getPanneau(), j, i);
             }
@@ -169,7 +177,6 @@ public class ControllerMenuNiveau {
             this.page_chargee.set(this.page_chargee.get() + 1);
     }
 
-    
     /**
      * Décrémente la valeur page_chargee pour passer à la page précédente.
      */
