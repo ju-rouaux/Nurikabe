@@ -170,8 +170,6 @@ public class Profil {
                 "[Profil] Sauvegarde de l'historique des mouvements du joueur trouvée - Chargement de l'historique des mouvements du joueur sauvegardé...");
 
             hist = deserialisationHistorique(fichier_mouvements);
-            hist.initTransientBoolean();
-            hist.actualiserEtat();
         } else {
             System.out.println(
                 "[Profil] Aucune sauvegarde de l'historique des mouvements du joueur trouvée - Création d'un historique vide");

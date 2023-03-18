@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Stack;
 
@@ -96,7 +97,7 @@ public class Historique implements Serializable {
      * A appeler à chaque changement effectué sur la pile.
      * Actualise les états peutAnnuler et peutRetablir.
      */
-    public void actualiserEtat() {
+    private void actualiserEtat() {
         this.peutAnnuler.set(curseur >= 0);
         this.peutRetablir.set(this.pile.size() - 1 > curseur);
     }
@@ -207,11 +208,12 @@ public class Historique implements Serializable {
     }
 
     /**
-     * Initialise les boolean peutAnnuler et peutRetablir
+     * Méthode exécutée après la deserialization de l'objet.
      */
-    public void initTransientBoolean() {
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
         this.peutAnnuler = new ReadOnlyBooleanWrapper(false);
         this.peutRetablir = new ReadOnlyBooleanWrapper(false);
+        this.actualiserEtat();
     }
-
 }
