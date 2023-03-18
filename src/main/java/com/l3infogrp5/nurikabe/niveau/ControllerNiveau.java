@@ -79,12 +79,8 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, List<Integer> niveaux) throws IOException {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
-
-        // TODO charger profil dans le menu de selection des profils
         joueur = Profil.getInstance();
-        joueur.chargerProfil("jhvbsd");
-        joueur.chargerProfil("Julieng");
-        joueur.setMode_de_jeu("detente");
+
         // TODO : préparer le terrain pour enchainer plusieurs niveaux
         int id_niveau = niveaux.get(0);
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
