@@ -36,7 +36,7 @@ public class Profil {
     /**
      * Création d'un profil.
      */
-    private Profil(){
+    private Profil() {
     }
 
     /**
@@ -123,17 +123,45 @@ public class Profil {
     }
 
     /**
+     * Getter pour le nom du joueur du profil
+     *
+     * @return le nom du joueur
+     */
+    public static String getJoueur() {
+        return joueur;
+    }
+
+    /**
+     * Getter pour le nom du mode de jeu
+     *
+     * @return l'id du niveau
+     */
+    public static String getMode_de_jeu() {
+        return mode_de_jeu;
+    }
+
+    /**
+     * Setter pour le mode de jeu
+     *
+     * @param mdj le mode de jeu courant
+     */
+    public void setMode_de_jeu(String mdj) {
+        mode_de_jeu = mdj;
+    }
+
+    /**
      * Methode pour charger un profil
      * Attention, il faut ensuite initialiser le mode de jeu avec le setter {@link #setMode_de_jeu(String)}.
      * Et l'id du niveau en paramètre de la méthode chargerGrille {@link #chargerGrille(int)}.
+     *
      * @param joueur le nom du joueur
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du profil
      */
     public void chargerProfil(String joueur) throws IOException {
         donneesNiveau = new DonneesNiveau();
-        this.joueur = joueur;
+        Profil.joueur = joueur;
         // Valeurs par défaut
-        this.mode_de_jeu = "detente";
+        mode_de_jeu = "detente";
         this.id_niveau = 0;
 
         if (Sauvegarder.RechercherSauvegarde(joueur)) {
@@ -150,8 +178,8 @@ public class Profil {
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
-        Sauvegarder.sauvegardeMatrice(this.joueur, this.mode_de_jeu, this.id_niveau, niveau.getMatrice());
-        Sauvegarder.sauvegarderHistorique(this.joueur, this.mode_de_jeu, this.id_niveau, niveau.getHistorique());
+        Sauvegarder.sauvegardeMatrice(joueur, mode_de_jeu, this.id_niveau, niveau.getMatrice());
+        Sauvegarder.sauvegarderHistorique(joueur, mode_de_jeu, this.id_niveau, niveau.getHistorique());
     }
 
     /**
@@ -187,28 +215,24 @@ public class Profil {
      */
     public DonneesNiveau chargerGrille(int niv) {
         this.id_niveau = niv;
-        File grille_repertoire = new File(Path.repertoire_lvl + "/" + this.joueur + "/" + this.mode_de_jeu);
+        File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File grille_fichier = new File(grille_repertoire + "/Matrice_" + this.id_niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
-            Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
+            Sauvegarder.chargerGrilleFichier(this.id_niveau, mode_de_jeu, false);
             donneesNiveau.matrice_niveau = deserialisationMatrice(grille_fichier);
         } else {
-            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
+//            TODO : Temporaire -> lit les grilles dans le fichier detente
+//            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
+            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, "detente", false);
         }
-        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true);
+        //            TODO : Temporaire -> lit les grilles dans le fichier detente
+
+//        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true);
+        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, "detente", true);
 
         return donneesNiveau;
-    }
-
-    /**
-     * Getter pour le nom du joueur du profil
-     *
-     * @return le nom du joueur
-     */
-    public static String getJoueur() {
-        return joueur;
     }
 
     /**
@@ -218,26 +242,6 @@ public class Profil {
      */
     public int getId_niveau() {
         return id_niveau;
-    }
-
-    /**
-     * Getter pour le nom du mode de jeu
-     *
-     * @return l'id du niveau
-     */
-    public static String getMode_de_jeu() {
-        return mode_de_jeu;
-    }
-
-    /**
-     * Setter pour le mode de jeu
-     *
-     * @param mdj le mode de jeu courant
-     */
-    public void setMode_de_jeu(String mdj) {
-//        this.mode_de_jeu = mdj;
-        //TODO : a remodifier quand fichiers de grilles séparés
-        this.mode_de_jeu = "detente";
     }
 
     /**
