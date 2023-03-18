@@ -235,7 +235,9 @@ public class Profil {
      * @param mdj le mode de jeu courant
      */
     public void setMode_de_jeu(String mdj) {
-        this.mode_de_jeu = mdj;
+//        this.mode_de_jeu = mdj;
+        //TODO : a remodifier quand fichiers de grilles séparés
+        this.mode_de_jeu = "detente";
     }
 
     /**

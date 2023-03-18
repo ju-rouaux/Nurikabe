@@ -82,7 +82,7 @@ public class ControllerNiveau {
         joueur = Profil.getInstance();
         joueur.chargerProfil("jhvbsd");
         joueur.chargerProfil("Julieng");
-        joueur.setMode_de_jeu("detente");
+        joueur.setMode_de_jeu("clm");
         int id_niveau = 1;
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
