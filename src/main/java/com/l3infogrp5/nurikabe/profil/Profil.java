@@ -25,9 +25,9 @@ public class Profil {
     /* Les données du niveau */
     private static DonneesNiveau donneesNiveau;
     /* Le nom du joueur */
-    private String joueur;
+    private static String joueur;
     /* Le mode de jeu */
-    private String mode_de_jeu;
+    private static String mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
     private int id_niveau;
 
@@ -96,21 +96,21 @@ public class Profil {
      * retourne une liste de chaines de caractères de l'emplacement des images, s'il
      * elle existe, sinon on charge celle par défaut
      *
-     * @param joueur      le nom du joueur
-     * @param mode_de_jeu le nom du mode de jeu
      * @return la liste des emplacements des images
      */
-    public static List<String> chargerImageNiveau(String joueur, String mode_de_jeu) {
+    public static List<String> chargerImageNiveau() {
         List<String> url_images = new ArrayList<>();
-        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/" +
+        String mdj = getMode_de_jeu();
+        String joueur = getJoueur();
+        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
             "capture_niveau_");
         File placeholder_default = new File(Path.repertoire_jar.toString() + "/Nurikabe_grille.png");
 
         List<String> liste_fichiers = Sauvegarder.listeFichiers(mouvements_fichier.getParentFile());
 
-        for (int i = 0; i < Sauvegarder.nbGrilles(mode_de_jeu); i++) {
+        for (int i = 0; i < Sauvegarder.nbGrilles(mdj); i++) {
             if (liste_fichiers.contains("capture_niveau_" + i + ".png"))
-                url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/" +
+                url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
                     "capture_niveau_" + i + ".png").toString());
             else
                 url_images.add(placeholder_default.toString());
@@ -205,8 +205,8 @@ public class Profil {
      *
      * @return le nom du joueur
      */
-    public String getJoueur() {
-        return this.joueur;
+    public static String getJoueur() {
+        return joueur;
     }
 
     /**
@@ -223,7 +223,7 @@ public class Profil {
      *
      * @return l'id du niveau
      */
-    public String getMode_de_jeu() {
+    public static String getMode_de_jeu() {
         return mode_de_jeu;
     }
 
