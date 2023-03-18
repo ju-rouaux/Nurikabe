@@ -377,16 +377,19 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   l'id du niveau
      * @param historique  l'historique des mouvements
+     * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static void sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau, Historique historique) {
+    public static boolean sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau, Historique historique) {
         File mouvements_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File mouvements_fichier = new File(mouvements_repertoire + "/Mouvements_" + id_niveau);
 
         if (creerDossierFichier(mouvements_repertoire, mouvements_fichier)) {
             System.out.println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
             serialisationHistorique(mouvements_fichier, historique);
+            return true;
         } else {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
+            return false;
         }
     }
 
@@ -417,15 +420,18 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu associé à la grille
      * @param id_niveau   l'id du niveau associé à la grille
      * @param matrice     la matrice du niveau a sauvegarder
+     * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static void sauvegardeMatrice(String joueur, String mode_de_jeu, int id_niveau, int[][] matrice) {
+    public static boolean sauvegardeMatrice(String joueur, String mode_de_jeu, int id_niveau, int[][] matrice) {
         File matrice_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
         File matrice_fichier = new File(matrice_repertoire + "/Matrice_" + id_niveau);
 
         if (Sauvegarder.creerDossierFichier(matrice_repertoire, matrice_fichier)) {
             serialisationMatrice(matrice_fichier, matrice);
+            return true;
         } else {
             System.out.println("[Profil] Erreur lors de la création de fichier et/ou de dossier");
+            return false;
         }
     }
 
@@ -452,6 +458,7 @@ public class Sauvegarder {
 
     /**
      * Supprime le profil du joueur
+     *
      * @param nom_joueur le nom du joueur
      */
     public static void supprimerProfil(String nom_joueur) {

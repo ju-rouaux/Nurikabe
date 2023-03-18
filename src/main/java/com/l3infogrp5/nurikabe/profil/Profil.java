@@ -14,8 +14,8 @@ import java.util.List;
 
 /**
  * Classe représentant un profil de joueur.
- *
- * @author Guillaume Richard
+ * Elle permet de charger et sauvegarder des grilles de jeu, ainsi que l'historique des mouvements effectués sur la grille.
+ * Elle permet également de récupérer des informations sur le joueur et le niveau en cours.
  */
 public class Profil {
 
@@ -33,19 +33,16 @@ public class Profil {
 
     /**
      * Création d'un profil.
-     *
-     * @throws IOException {@link IOException}
      */
-    private Profil() throws IOException {
+    private Profil(){
     }
 
     /**
      * Retourne l'instance du profil.
      *
-     * @return l'instance du profil
-     * @throws IOException {@link IOException}
+     * @return l'instance unique de la classe Profil
      */
-    public static Profil getInstance() throws IOException {
+    public static Profil getInstance() {
         if (instance == null) {
             instance = new Profil();
         }
@@ -105,16 +102,16 @@ public class Profil {
      */
     public static List<String> chargerImageNiveau(String joueur, String mode_de_jeu) {
         List<String> url_images = new ArrayList<>();
-        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/"
-            + "capture_niveau_");
+        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/" +
+            "capture_niveau_");
         File placeholder_default = new File(Path.repertoire_jar.toString() + "/Nurikabe_grille.png");
 
         List<String> liste_fichiers = Sauvegarder.listeFichiers(mouvements_fichier.getParentFile());
 
         for (int i = 0; i < Sauvegarder.nbGrilles(mode_de_jeu); i++) {
             if (liste_fichiers.contains("capture_niveau_" + i + ".png"))
-                url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/"
-                    + "capture_niveau_" + i + ".png").toString());
+                url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/" +
+                    "capture_niveau_" + i + ".png").toString());
             else
                 url_images.add(placeholder_default.toString());
 
@@ -125,11 +122,12 @@ public class Profil {
 
     /**
      * Methode pour charger un profil
+     * Attention, il faut ensuite initialiser le mode de jeu avec le setter {@link #setMode_de_jeu(String)}.
+     * Et l'id du niveau en paramètre de la méthode chargerGrille {@link #chargerGrille(int)}.
      * @param joueur le nom du joueur
-     * @param mode_de_jeu le mode de jeu
-     * @throws IOException {@link IOException}
+     * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du profil
      */
-    public void chargerProfil(String joueur, String mode_de_jeu) throws IOException {
+    public void chargerProfil(String joueur) throws IOException {
         donneesNiveau = new DonneesNiveau();
         this.joueur = joueur;
         // Valeurs par défaut
@@ -146,7 +144,7 @@ public class Profil {
     /**
      * Sauvegarde le niveau deja commencé
      *
-     * @param niveau la grille du niveau a sauvegarder
+     * @param niveau la grille du niveau à sauvegarder
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
@@ -204,17 +202,8 @@ public class Profil {
         return donneesNiveau;
     }
 
-//    /**
-//     * setter pour le nom du joueur du profil
-//     *
-//     * @return le nom du joueur
-//     */
-//    public void setJoueur(String j) {
-//        this.joueur = j;
-//    }
-
     /**
-     * getter pour le nom du joueur du profil
+     * Getter pour le nom du joueur du profil
      *
      * @return le nom du joueur
      */
@@ -223,7 +212,7 @@ public class Profil {
     }
 
     /**
-     * getter pour l'identifiant du niveau
+     * Getter pour l'identifiant du niveau
      *
      * @return l'historique des mouvements
      */
@@ -232,7 +221,7 @@ public class Profil {
     }
 
     /**
-     * getter pour le nom du mode de jeu
+     * Getter pour le nom du mode de jeu
      *
      * @return l'id du niveau
      */
@@ -250,7 +239,7 @@ public class Profil {
     }
 
     /**
-     * getter pour l'historique des mouvements
+     * Getter pour l'historique des mouvements
      *
      * @return l'historique des mouvements
      */

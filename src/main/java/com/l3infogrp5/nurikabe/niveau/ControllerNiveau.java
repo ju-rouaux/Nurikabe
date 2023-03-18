@@ -61,8 +61,9 @@ public class ControllerNiveau {
         this.stage = stage;
         //TODO charger profil dans le menu de selection des profils
         joueur = Profil.getInstance();
-        joueur.chargerProfil("jhvbsd", "detente");
-        joueur.chargerProfil("Julieng", "detente");
+        joueur.chargerProfil("jhvbsd");
+        joueur.chargerProfil("Julieng");
+        joueur.setMode_de_jeu("detente");
         int id_niveau = 1;
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
