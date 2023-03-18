@@ -269,7 +269,7 @@ public class Sauvegarder {
 
         int nb_grilles = 0;
         InputStream inputStream;
-        inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
+        inputStream = Sauvegarder.class.getResourceAsStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + ".txt");
         if (inputStream == null) {
             System.out.println("[StockageNiveau] : Fichier inexistant");
             return -1;
@@ -312,9 +312,9 @@ public class Sauvegarder {
 
         InputStream inputStream;
         if (!solution) {
-            inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
+            inputStream = Sauvegarder.class.getResourceAsStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + ".txt");
         } else {
-            inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + "_solutions.txt");
+            inputStream = Sauvegarder.class.getResourceAsStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + "_solutions.txt");
         }
 
         if (inputStream == null) {
