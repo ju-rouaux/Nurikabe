@@ -137,7 +137,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne un mouvement pouvant être rétabli selon l'historique.
-     * Toujous vérifier si un mouvement peut être rétabli avec
+     * Toujours vérifier si un mouvement peut être rétabli avec
      * {@link #peutRetablir()}.
      *
      * @return un mouvement pouvant être rétabli selon l'historique.
@@ -156,7 +156,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne un mouvement pouvant être annulé selon l'historique.
-     * Toujous vérifier si un mouvement peut être annulé avec
+     * Toujours vérifier si un mouvement peut être annulé avec
      * {@link #peutAnnuler()}.
      *
      * @return un mouvement pouvant être annulé selon l'historique.
@@ -209,6 +209,10 @@ public class Historique implements Serializable {
 
     /**
      * Méthode exécutée après la deserialization de l'objet.
+     * 
+     * @param in paramètre pour invoquer le mécanisme de deserialization par défaut.
+     * @throws IOException            -
+     * @throws ClassNotFoundException -
      */
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
