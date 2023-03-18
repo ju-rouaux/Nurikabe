@@ -78,12 +78,15 @@ public class ControllerNiveau {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
 
-        // TODO charger profil dans le menu de selection des profils
-        joueur = new Profil("hgksd");
-        joueur.setId_niveau(110);
+        //TODO charger profil dans le menu de selection des profils
+        joueur = Profil.getInstance();
+        joueur.chargerProfil("jhvbsd");
+        joueur.chargerProfil("Julieng");
         joueur.setMode_de_jeu("detente");
-        Profil.DonneesNiveau donnees = joueur.chargerGrille();
+        int id_niveau = 1;
+        Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -115,7 +118,7 @@ public class ControllerNiveau {
         zone_clip.widthProperty().bind(this.panneau_central.widthProperty());
         zone_clip.heightProperty().bind(this.panneau_central.heightProperty());
         this.panneau_central.setClip(zone_clip);
-        
+
         // TODO charger les données de score
 
         // Lier les boutons Undo et Redo à l'historique
@@ -126,7 +129,7 @@ public class ControllerNiveau {
         this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
         this.toggle_aide.selectedProperty().addListener(new ChangeListener<Boolean>() {
             TranslateTransition transition = new TranslateTransition(Duration.millis(150), ControllerNiveau.this.panneau_aide);
-            
+
             public void changed(ObservableValue<? extends Boolean> obj, Boolean ancien, Boolean nouveau) {
                 //De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers le haut sinon
                 transition.setByY((panneau_aide.getHeight()-btn_aide.getHeight()) * (nouveau == true ? 1 : -1));

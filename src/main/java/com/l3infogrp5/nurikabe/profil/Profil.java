@@ -5,7 +5,6 @@ import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,66 +12,41 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Classe représentant un profil de joueur.
- *
- * @author Guillaume Richard
+ * Elle permet de charger et sauvegarder des grilles de jeu, ainsi que l'historique des mouvements effectués sur la grille.
+ * Elle permet également de récupérer des informations sur le joueur et le niveau en cours.
  */
 public class Profil {
 
-    /**
-     * Classe interne permettant de stocker les données d'un niveau.
-     */
-    public static class DonneesNiveau {
-        /**
-         * Constructeur privé.
-         */
-        private DonneesNiveau(){}
+    /* L'instance du profil */
+    private static Profil instance = null;
 
-        /**
-         * L'historique du niveau.
-         */
-        public Historique historique;
-        /**
-         * La grille du niveau.
-         */
-        public int [][] matrice_niveau;
-        /**
-         * La grille de solution du niveau.
-         */
-        public int [][] matrice_solution;
-    }
-
+    /* Les données du niveau */
+    private static DonneesNiveau donneesNiveau;
     /* Le nom du joueur */
-    private final String joueur;
+    private static String joueur;
     /* Le mode de jeu */
-    private String mode_de_jeu;
+    private static String mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
     private int id_niveau;
 
-    private static DonneesNiveau donneesNiveau;
-
-
     /**
      * Création d'un profil.
-     *
-     * @param joueur le nom du joueur
-     * @throws IOException {@link IOException}
      */
-    public Profil(String joueur) throws IOException {
-        donneesNiveau = new DonneesNiveau();
-        this.joueur = joueur;
-        // Valeurs par défaut
-        this.mode_de_jeu = "detente";
-        this.id_niveau = 0;
+    private Profil(){
+    }
 
-        if (Sauvegarder.RechercherSauvegarde(joueur)) {
-            System.out.println("[Profil] Profil deja existant");
-        } else {
-            Sauvegarder.creerDossierJoueur(joueur);
+    /**
+     * Retourne l'instance du profil.
+     *
+     * @return l'instance unique de la classe Profil
+     */
+    public static Profil getInstance() {
+        if (instance == null) {
+            instance = new Profil();
         }
-
+        return instance;
     }
 
     /**
@@ -122,22 +96,22 @@ public class Profil {
      * retourne une liste de chaines de caractères de l'emplacement des images, s'il
      * elle existe, sinon on charge celle par défaut
      *
-     * @param joueur      le nom du joueur
-     * @param mode_de_jeu le nom du mode de jeu
      * @return la liste des emplacements des images
      */
-    public static List<String> chargerImageNiveau(String joueur, String mode_de_jeu) {
+    public static List<String> chargerImageNiveau() {
         List<String> url_images = new ArrayList<>();
-        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/"
-            + "capture_niveau_");
+        String mdj = getMode_de_jeu();
+        String joueur = getJoueur();
+        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
+            "capture_niveau_");
         File placeholder_default = new File(Path.repertoire_jar.toString() + "/Nurikabe_grille.png");
 
         List<String> liste_fichiers = Sauvegarder.listeFichiers(mouvements_fichier.getParentFile());
 
-        for (int i = 0; i < Sauvegarder.nbGrilles(mode_de_jeu); i++) {
+        for (int i = 0; i < Sauvegarder.nbGrilles(mdj); i++) {
             if (liste_fichiers.contains("capture_niveau_" + i + ".png"))
-                url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/"
-                    + "capture_niveau_" + i + ".png").toString());
+                url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
+                    "capture_niveau_" + i + ".png").toString());
             else
                 url_images.add(placeholder_default.toString());
 
@@ -147,8 +121,30 @@ public class Profil {
     }
 
     /**
+     * Methode pour charger un profil
+     * Attention, il faut ensuite initialiser le mode de jeu avec le setter {@link #setMode_de_jeu(String)}.
+     * Et l'id du niveau en paramètre de la méthode chargerGrille {@link #chargerGrille(int)}.
+     * @param joueur le nom du joueur
+     * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du profil
+     */
+    public void chargerProfil(String joueur) throws IOException {
+        donneesNiveau = new DonneesNiveau();
+        this.joueur = joueur;
+        // Valeurs par défaut
+        this.mode_de_jeu = "detente";
+        this.id_niveau = 0;
+
+        if (Sauvegarder.RechercherSauvegarde(joueur)) {
+            System.out.println("[Profil] Profil deja existant");
+        } else {
+            Sauvegarder.creerDossierJoueur(joueur);
+        }
+    }
+
+    /**
      * Sauvegarde le niveau deja commencé
-     * @param niveau la grille du niveau a sauvegarder
+     *
+     * @param niveau la grille du niveau à sauvegarder
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
@@ -159,6 +155,7 @@ public class Profil {
     /**
      * Charge l'historique des mouvements du joueur
      * S'il n'y en a pas, création d'un historique vierge
+     *
      * @return l'historique des mouvements du joueur
      */
     public Historique chargerHistorique() {
@@ -175,16 +172,19 @@ public class Profil {
                 "[Profil] Aucune sauvegarde de l'historique des mouvements du joueur trouvée - Création d'un historique vide");
             hist = new Historique();
         }
-        donneesNiveau.historique= hist;
+        donneesNiveau.historique = hist;
         return hist;
     }
 
     /**
      * Charge la grille à partir du fichier.
      * S'il n'y en a pas, chargement du niveau par défaut
+     *
+     * @param niv l'indice du niveau à charger
      * @return les données du niveau
      */
-    public DonneesNiveau chargerGrille() {
+    public DonneesNiveau chargerGrille(int niv) {
+        this.id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + this.joueur + "/" + this.mode_de_jeu);
         File grille_fichier = new File(grille_repertoire + "/Matrice_" + this.id_niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
@@ -200,21 +200,17 @@ public class Profil {
         return donneesNiveau;
     }
 
-    /*
-     * Getters
-     */
-
     /**
-     * getter pour le nom du joueur du profil
+     * Getter pour le nom du joueur du profil
      *
      * @return le nom du joueur
      */
-    public String getJoueur() {
+    public static String getJoueur() {
         return joueur;
     }
 
     /**
-     * getter pour l'identifiant du niveau
+     * Getter pour l'identifiant du niveau
      *
      * @return l'historique des mouvements
      */
@@ -223,20 +219,11 @@ public class Profil {
     }
 
     /**
-     * Setter pour l'identifiant du niveau
-     *
-     * @param id l'identifiant du niveau
-     */
-    public void setId_niveau(int id) {
-        this.id_niveau = id;
-    }
-
-    /**
-     * getter pour l'id du niveau
+     * Getter pour le nom du mode de jeu
      *
      * @return l'id du niveau
      */
-    public String getMode_de_jeu() {
+    public static String getMode_de_jeu() {
         return mode_de_jeu;
     }
 
@@ -249,9 +236,8 @@ public class Profil {
         this.mode_de_jeu = mdj;
     }
 
-
     /**
-     * getter pour l'historique des mouvements
+     * Getter pour l'historique des mouvements
      *
      * @return l'historique des mouvements
      */
@@ -259,10 +245,28 @@ public class Profil {
         return donneesNiveau.historique;
     }
 
+    /**
+     * Classe interne permettant de stocker les données d'un niveau.
+     */
+    public static class DonneesNiveau {
+        /**
+         * L'historique du niveau.
+         */
+        public Historique historique;
+        /**
+         * La grille du niveau.
+         */
+        public int[][] matrice_niveau;
+        /**
+         * La grille de solution du niveau.
+         */
+        public int[][] matrice_solution;
 
-
-
-
-
+        /**
+         * Constructeur privé.
+         */
+        private DonneesNiveau() {
+        }
+    }
 
 }
