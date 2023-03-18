@@ -43,7 +43,7 @@ public class Profil {
      * Retourne l'instance du profil.
      *
      * @return l'instance du profil
-     * @throws IOException
+     * @throws IOException {@link IOException}
      */
     public static Profil getInstance() throws IOException {
         if (instance == null) {
@@ -123,6 +123,12 @@ public class Profil {
         return url_images;
     }
 
+    /**
+     * Methode pour charger un profil
+     * @param joueur le nom du joueur
+     * @param mode_de_jeu le mode de jeu
+     * @throws IOException {@link IOException}
+     */
     public void chargerProfil(String joueur, String mode_de_jeu) throws IOException {
         donneesNiveau = new DonneesNiveau();
         this.joueur = joueur;

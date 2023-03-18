@@ -27,8 +27,8 @@ public class ControllerNiveau {
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
-    Profil joueur;
     private final Grille grille;
+    Profil joueur;
     private Pane panneau_grille;
     @FXML
     private Button btn_aide;
