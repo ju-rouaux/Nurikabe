@@ -158,7 +158,7 @@ public class Profil {
         Profil.joueur = joueur;
         // Valeurs par défaut
         mode_de_jeu = "detente";
-        this.id_niveau = 0;
+        id_niveau = 0;
 
         if (Sauvegarder.RechercherSauvegarde(joueur)) {
             System.out.println("[Profil] Profil deja existant");
@@ -174,8 +174,8 @@ public class Profil {
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
-        Sauvegarder.sauvegardeMatrice(joueur, mode_de_jeu, this.id_niveau, niveau.getMatrice());
-        Sauvegarder.sauvegarderHistorique(joueur, mode_de_jeu, this.id_niveau, niveau.getHistorique());
+        Sauvegarder.sauvegardeMatrice(joueur, mode_de_jeu, id_niveau, niveau.getMatrice());
+        Sauvegarder.sauvegarderHistorique(joueur, mode_de_jeu, id_niveau, niveau.getHistorique());
     }
 
     /**
@@ -187,7 +187,7 @@ public class Profil {
     public Historique chargerHistorique() {
         Historique hist;
         File fichier_mouvements = new File(
-            Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + this.id_niveau);
+            Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + id_niveau);
         if (fichier_mouvements.exists() && fichier_mouvements.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de l'historique des mouvements du joueur trouvée - Chargement de l'historique des mouvements du joueur sauvegardé...");
@@ -211,23 +211,23 @@ public class Profil {
      * @throws FileNotFoundException si le fichier n'existe pas
      */
     public DonneesNiveau chargerGrille(int niv) throws FileNotFoundException {
-        this.id_niveau = niv;
+        id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
-        File grille_fichier = new File(grille_repertoire + "/Matrice_" + this.id_niveau);
+        File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
-            Sauvegarder.chargerGrilleFichier(this.id_niveau, mode_de_jeu, false);
+            Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
             donneesNiveau.matrice_niveau = deserialisationMatrice(grille_fichier);
         } else {
 //            TODO : Temporaire -> lit les grilles dans le fichier detente
 //            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
-            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, "detente", false);
+            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(id_niveau, "detente", false);
         }
         //            TODO : Temporaire -> lit les grilles dans le fichier detente
 
 //        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true);
-        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, "detente", true);
+        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, "detente", true);
 
         return donneesNiveau;
     }

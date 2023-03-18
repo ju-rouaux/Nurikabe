@@ -73,7 +73,7 @@ public class Sauvegarder {
      * Créer le dossier pour le joueur
      *
      * @param nom_joueur le nom du joueur
-     * @throws IOException {@link IOException}
+     * @throws IOException {@link IOException} si le dossier n'a pas pu être créé
      */
     public static void creerDossierJoueur(String nom_joueur) throws IOException {
 
@@ -185,7 +185,7 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   le numéro du niveau, -1 si en mode de jeu sans fin
      * @param o           le score
-     * @throws IOException {@link IOException}
+     * @throws IOException {@link IOException} si le fichier n'existe pas
      **/
     public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau, Object o) throws IOException {
         FileWriter writer;
@@ -221,7 +221,7 @@ public class Sauvegarder {
      * @param id_niveau   l'indice du niveau, négatif si en mode endless
      * @return un hashmap : [Nom du joueur[ date - le score]]], contenant tout les
      * scores du fichier
-     * @throws IOException {@link IOException}
+     * @throws IOException {@link IOException} si le fichier n'existe pas
      */
     public static HashMap<String, HashMap<String, String>> chargerScore(String mode_de_jeu, int id_niveau) throws IOException {
         HashMap<String, HashMap<String, String>> scores = new HashMap<>();
@@ -261,7 +261,7 @@ public class Sauvegarder {
      *
      * @param mode_de_jeu le mode de jeu
      * @return le nombre de niveaux
-     * @throws FileNotFoundException {@link FileNotFoundException}
+     * @throws FileNotFoundException {@link FileNotFoundException} si le fichier n'existe pas
      */
     public static int nbGrilles(String mode_de_jeu) throws FileNotFoundException {
 
@@ -271,10 +271,6 @@ public class Sauvegarder {
         int nb_grilles = 0;
         InputStream inputStream;
         inputStream = new FileInputStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + ".txt");
-        if (inputStream == null) {
-            System.out.println("[StockageNiveau] : Fichier inexistant");
-            return -1;
-        }
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(bufferedInputStream));
@@ -308,7 +304,7 @@ public class Sauvegarder {
      * @param solution    boolean, vrai s'il faut charger la solution du niveau
      *                    selon l'id
      * @return la matrice du niveau chargé
-     * @throws FileNotFoundException {@link FileNotFoundException}
+     * @throws FileNotFoundException {@link FileNotFoundException} si le fichier n'est pas trouvé
      */
     public static int[][] chargerGrilleFichier(int id_niveau, String mode_de_jeu, Boolean solution) throws FileNotFoundException {
 
@@ -317,11 +313,6 @@ public class Sauvegarder {
             inputStream = new FileInputStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + ".txt");
         } else {
             inputStream = new FileInputStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + "_solutions.txt");
-        }
-
-        if (inputStream == null) {
-            System.out.println("[StockageNiveau] : Fichier inexistant");
-            return null;
         }
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
