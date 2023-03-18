@@ -87,7 +87,6 @@ public class ControllerNiveau {
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
 
-
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
         loader.setController(this);

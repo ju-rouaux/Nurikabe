@@ -263,6 +263,10 @@ public class Sauvegarder {
      * @return le nombre de niveaux
      */
     public static int nbGrilles(String mode_de_jeu) {
+
+//        TODO : temporaire
+        mode_de_jeu = "detente";
+
         int nb_grilles = 0;
         InputStream inputStream;
         inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
