@@ -261,15 +261,16 @@ public class Sauvegarder {
      *
      * @param mode_de_jeu le mode de jeu
      * @return le nombre de niveaux
+     * @throws FileNotFoundException {@link FileNotFoundException}
      */
-    public static int nbGrilles(String mode_de_jeu) {
+    public static int nbGrilles(String mode_de_jeu) throws FileNotFoundException {
 
 //        TODO : temporaire
         mode_de_jeu = "detente";
 
         int nb_grilles = 0;
         InputStream inputStream;
-        inputStream = Sauvegarder.class.getResourceAsStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + ".txt");
+        inputStream = new FileInputStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + ".txt");
         if (inputStream == null) {
             System.out.println("[StockageNiveau] : Fichier inexistant");
             return -1;
@@ -307,14 +308,15 @@ public class Sauvegarder {
      * @param solution    boolean, vrai s'il faut charger la solution du niveau
      *                    selon l'id
      * @return la matrice du niveau chargé
+     * @throws FileNotFoundException {@link FileNotFoundException}
      */
-    public static int[][] chargerGrilleFichier(int id_niveau, String mode_de_jeu, Boolean solution) {
+    public static int[][] chargerGrilleFichier(int id_niveau, String mode_de_jeu, Boolean solution) throws FileNotFoundException {
 
         InputStream inputStream;
         if (!solution) {
-            inputStream = Sauvegarder.class.getResourceAsStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + ".txt");
+            inputStream = new FileInputStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + ".txt");
         } else {
-            inputStream = Sauvegarder.class.getResourceAsStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + "_solutions.txt");
+            inputStream = new FileInputStream(Path.repertoire_grilles.toString()+"/grilles_" + mode_de_jeu + "_solutions.txt");
         }
 
         if (inputStream == null) {

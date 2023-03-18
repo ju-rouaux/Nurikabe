@@ -5,10 +5,7 @@ import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,8 +96,9 @@ public class Profil {
      * elle existe, sinon on charge celle par défaut
      *
      * @return la liste des emplacements des images
+     * @throws FileNotFoundException si le fichier n'existe pas
      */
-    public static List<String> chargerImageNiveau() {
+    public static List<String> chargerImageNiveau() throws FileNotFoundException {
         List<String> url_images = new ArrayList<>();
         String mdj = getMode_de_jeu();
         String joueur = getJoueur();
@@ -212,8 +210,9 @@ public class Profil {
      *
      * @param niv l'indice du niveau à charger
      * @return les données du niveau
+     * @throws FileNotFoundException si le fichier n'existe pas
      */
-    public DonneesNiveau chargerGrille(int niv) {
+    public DonneesNiveau chargerGrille(int niv) throws FileNotFoundException {
         this.id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File grille_fichier = new File(grille_repertoire + "/Matrice_" + this.id_niveau);
