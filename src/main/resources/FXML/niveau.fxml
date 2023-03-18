@@ -4,10 +4,12 @@
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <BorderPane fx:id="panneau_principal" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0">
@@ -16,7 +18,7 @@
             <items>
                <HBox fx:id="barre" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="614.0" spacing="10.0">
                   <children>
-                     <Button fx:id="btn_retour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" text="X" textOverrun="CLIP" />
+                     <Button fx:id="btn_retour" cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" text="X" textOverrun="CLIP" />
                      <Button fx:id="btn_undo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#undoClique" prefHeight="30.0" prefWidth="30.0" text="Undo" textOverrun="CLIP" />
                      <Button fx:id="btn_redo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redoClique" prefHeight="30.0" prefWidth="30.0" text="Redo" textOverrun="CLIP" />
                      <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
@@ -34,6 +36,20 @@
             </items>
          </ToolBar>
       </top>
+      <center>
+         <StackPane fx:id="panneau_central" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <BorderPane fx:id="panneau_aide" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" translateY="-170.0" StackPane.alignment="TOP_CENTER">
+                  <center>
+                     <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: ffffff;" text="Demonstration" BorderPane.alignment="CENTER" />
+                  </center>
+                  <bottom>
+                     <ToggleButton fx:id="toggle_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-background-radius: 0 0 100% 100%;" text="\\/" textOverrun="CLIP" BorderPane.alignment="CENTER" />
+                  </bottom>
+               </BorderPane>
+            </children>
+         </StackPane>
+      </center>
    </BorderPane>
    <stylesheets>
       <URL value="@../css/niveau.css" />
