@@ -5,7 +5,6 @@ import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,29 +20,7 @@ import java.util.List;
  */
 public class Profil {
 
-    /**
-     * Classe interne permettant de stocker les données d'un niveau.
-     */
-    public static class DonneesNiveau {
-        /**
-         * Constructeur privé.
-         */
-        private DonneesNiveau(){}
-
-        /**
-         * L'historique du niveau.
-         */
-        public Historique historique;
-        /**
-         * La grille du niveau.
-         */
-        public int [][] matrice_niveau;
-        /**
-         * La grille de solution du niveau.
-         */
-        public int [][] matrice_solution;
-    }
-
+    private static DonneesNiveau donneesNiveau;
     /* Le nom du joueur */
     private final String joueur;
     /* Le mode de jeu */
@@ -51,14 +28,11 @@ public class Profil {
     /* L'identifiant du niveau représenté par un numéro */
     private int id_niveau;
 
-    private static DonneesNiveau donneesNiveau;
-
-
     /**
      * Création d'un profil.
      *
      * @param joueur le nom du joueur
-     * @throws IOException {@link IOException} -
+     * @throws IOException {@link IOException}
      */
     public Profil(String joueur) throws IOException {
         donneesNiveau = new DonneesNiveau();
@@ -148,7 +122,8 @@ public class Profil {
 
     /**
      * Sauvegarde le niveau deja commencé
-     * @param niveau la grille du niveau à sauvegarder
+     *
+     * @param niveau la grille du niveau a sauvegarder
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
@@ -159,6 +134,7 @@ public class Profil {
     /**
      * Charge l'historique des mouvements du joueur
      * S'il n'y en a pas, création d'un historique vierge
+     *
      * @return l'historique des mouvements du joueur
      */
     public Historique chargerHistorique() {
@@ -177,16 +153,19 @@ public class Profil {
                 "[Profil] Aucune sauvegarde de l'historique des mouvements du joueur trouvée - Création d'un historique vide");
             hist = new Historique();
         }
-        donneesNiveau.historique= hist;
+        donneesNiveau.historique = hist;
         return hist;
     }
 
     /**
      * Charge la grille à partir du fichier.
      * S'il n'y en a pas, chargement du niveau par défaut
+     *
+     * @param niv l'indice du niveau à charger
      * @return les données du niveau
      */
-    public DonneesNiveau chargerGrille() {
+    public DonneesNiveau chargerGrille(int niv) {
+        this.id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + this.joueur + "/" + this.mode_de_jeu);
         File grille_fichier = new File(grille_repertoire + "/Matrice_" + this.id_niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
@@ -202,12 +181,8 @@ public class Profil {
         return donneesNiveau;
     }
 
-    /*
-     * Getters
-     */
-
     /**
-     * Getter pour le nom du joueur du profil
+     * getter pour le nom du joueur du profil
      *
      * @return le nom du joueur
      */
@@ -215,8 +190,12 @@ public class Profil {
         return joueur;
     }
 
+    /*
+     * Getters
+     */
+
     /**
-     * Getter pour l'identifiant du niveau
+     * getter pour l'identifiant du niveau
      *
      * @return l'historique des mouvements
      */
@@ -225,16 +204,7 @@ public class Profil {
     }
 
     /**
-     * Setter pour l'identifiant du niveau
-     *
-     * @param id l'identifiant du niveau
-     */
-    public void setId_niveau(int id) {
-        this.id_niveau = id;
-    }
-
-    /**
-     * Getter pour l'id du niveau
+     * getter pour le nom du mode de jeu
      *
      * @return l'id du niveau
      */
@@ -251,9 +221,8 @@ public class Profil {
         this.mode_de_jeu = mdj;
     }
 
-
     /**
-     * Getter pour l'historique des mouvements
+     * getter pour l'historique des mouvements
      *
      * @return l'historique des mouvements
      */
@@ -261,10 +230,27 @@ public class Profil {
         return donneesNiveau.historique;
     }
 
-
-
-
-
-
+    /**
+     * Classe interne permettant de stocker les données d'un niveau.
+     */
+    public static class DonneesNiveau {
+        /**
+         * L'historique du niveau.
+         */
+        public Historique historique;
+        /**
+         * La grille du niveau.
+         */
+        public int[][] matrice_niveau;
+        /**
+         * La grille de solution du niveau.
+         */
+        public int[][] matrice_solution;
+        /**
+         * Constructeur privé.
+         */
+        private DonneesNiveau() {
+        }
+    }
 
 }
