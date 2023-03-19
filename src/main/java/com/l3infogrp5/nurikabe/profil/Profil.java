@@ -34,19 +34,28 @@ public class Profil {
      * Création d'un profil.
      *
      * {@link #chargerProfil}
+     *
+     * @throws IOException si le fichier de sauvegarde n'existe pas
      */
-    private Profil() {
+    private Profil() throws IOException {
         joueur = "default";
         mode_de_jeu = "detente";
         id_niveau = 0;
+
+        if (Sauvegarder.RechercherSauvegarde(joueur)) {
+            System.out.println("[Profil] Profil deja existant");
+        } else {
+            Sauvegarder.creerDossierJoueur(joueur);
+        }
     }
 
     /**
      * Retourne l'instance du profil.
      *
      * @return l'instance unique de la classe Profil
+     * @throws IOException si le fichier de sauvegarde n'existe pas
      */
-    public static Profil getInstance() {
+    public static Profil getInstance() throws IOException {
         if (instance == null) {
             instance = new Profil();
         }
