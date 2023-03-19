@@ -9,9 +9,6 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-//TODO imports pour la démo de lancement de niveau
-import com.l3infogrp5.nurikabe.niveau.ControllerNiveau;
-//TODO Charger images placeholder selon le profil dans le menu de selection des niveaux
 import com.l3infogrp5.nurikabe.profil.Profil;
 
 /**
@@ -48,11 +45,6 @@ public class ControllerMenuModeJeu {
      *                     être lu.
      */
     public ControllerMenuModeJeu(Stage stage) throws IOException {
-        /*
-         * Test chargement des images
-         */
-        // TODO Changer parametres avec <nomProfil>.get()
-//        Profil.chargerImageNiveau("Julieng", "detente");
 
         this.stage = stage;
 
@@ -78,9 +70,8 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void detenteClique(ActionEvent event) throws Exception {
-        // stage.setScene(new ControllerMenuNiveau(stage).getScene()); //TODO rétablir
-        // le menu
-        stage.setScene(new ControllerNiveau(stage).getScene());
+        Profil.getInstance().setMode_de_jeu("detente"); // TODO pas ouf d'écrire en dur le mode
+        stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
     /**
@@ -88,7 +79,8 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void contreMontreClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuNiveau(stage).getScene());
+        Profil.getInstance().setMode_de_jeu("clm"); // TODO pas ouf d'écrire en dur le mode
+        stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
     /**
