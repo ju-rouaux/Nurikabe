@@ -1,6 +1,5 @@
 package com.l3infogrp5.nurikabe.menu;
 
-import com.l3infogrp5.nurikabe.utils.Path;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -41,6 +40,11 @@ public class ControllerMenuSelection {
         private int id_niveau;
         private BorderPane panneau;
 
+        /**
+         * Créer une carte de sélection qui lancera le niveau donné.
+         * 
+         * @param id_niveau l'id du niveau à lancer.
+         */
         ControllerSelection(int id_niveau) throws IOException {
             this.id_niveau = id_niveau;
             FXMLLoader loader_selection = new FXMLLoader();
@@ -50,6 +54,9 @@ public class ControllerMenuSelection {
             this.panneau = loader_selection.load();
         }
 
+        /**
+         * Charge l'image et le nom du niveau sur la carte.
+         */
         @FXML
         private void initialize() {
             File image = new File(ControllerMenuSelection.this.liens_images.get(id_niveau));
@@ -57,6 +64,10 @@ public class ControllerMenuSelection {
             this.texte.setText("Niveau " + (id_niveau + 1));
         }
 
+        /**
+         * Retourne le panneau pour afficher la carte.
+         * @return le panneau pour afficher la carte.
+         */
         Pane getPanneau() {
             return this.panneau;
         }
@@ -67,12 +78,19 @@ public class ControllerMenuSelection {
         @FXML
         private Label texte;
 
+        /**
+         * Lance la fenêtre d'affichage des scores.
+         */
         @FXML
         private void scoreClique() {
             // TODO charger score ici
             System.out.println("Lancement score " + (id_niveau));
         }
 
+        /**
+         * Lance le niveau associé à la carte.
+         * @throws IOException lancé lorsque le niveau n'a pas pû être chargé.
+         */
         @FXML
         private void selectionClique() throws IOException {
             stage.setScene(new ControllerNiveau(stage, List.of(id_niveau)).getScene());
@@ -88,13 +106,12 @@ public class ControllerMenuSelection {
     private IntegerProperty page_chargee;
     // Lien des images
     private List<String> liens_images;
+    // Nombre de niveaux totaux
+    private int nb_grilles;
 
     private FXMLLoader loader;
     private Stage stage;
     private Scene scene;
-
-    // Nombre de niveaux totaux
-    private int nb_grilles;
 
     @FXML
     private GridPane grille;

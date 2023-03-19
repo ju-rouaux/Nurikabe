@@ -156,9 +156,9 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         joueur.sauvegarderNiveau(grille);
         // TODO : remplacer null avec le getScore du niveau
-        Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau(), null);
+        Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
-                + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + joueur.getId_niveau() + ".png");
+                + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
     }

@@ -28,20 +28,34 @@ public class Profil {
     /* Le mode de jeu */
     private static String mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
-    private int id_niveau;
+    private static int id_niveau;
 
     /**
      * Création d'un profil.
+     *
+     * {@link #chargerProfil}
+     *
+     * @throws IOException si le fichier de sauvegarde n'existe pas
      */
-    private Profil() {
+    private Profil() throws IOException {
+        joueur = "default";
+        mode_de_jeu = "detente";
+        id_niveau = 0;
+
+        if (Sauvegarder.RechercherSauvegarde(joueur)) {
+            System.out.println("[Profil] Profil deja existant");
+        } else {
+            Sauvegarder.creerDossierJoueur(joueur);
+        }
     }
 
     /**
      * Retourne l'instance du profil.
      *
      * @return l'instance unique de la classe Profil
+     * @throws IOException si le fichier de sauvegarde n'existe pas
      */
-    public static Profil getInstance() {
+    public static Profil getInstance() throws IOException {
         if (instance == null) {
             instance = new Profil();
         }
@@ -102,11 +116,11 @@ public class Profil {
         List<String> url_images = new ArrayList<>();
         String mdj = getMode_de_jeu();
         String joueur = getJoueur();
-        File mouvements_fichier = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
-            "capture_niveau_");
+        File image_grille = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
+            "capture_niveau_" + getIdNiveau() + ".png");
         File placeholder_default = new File(Path.repertoire_jar.toString() + "/img/placeholder.png");
 
-        List<String> liste_fichiers = Sauvegarder.listeFichiers(mouvements_fichier.getParentFile());
+        List<String> liste_fichiers = Sauvegarder.listeFichiers(image_grille.getParentFile());
 
         for (int i = 0; i < Sauvegarder.nbGrilles(mdj); i++) {
             if (liste_fichiers.contains("capture_niveau_" + i + ".png"))
@@ -114,9 +128,7 @@ public class Profil {
                     "capture_niveau_" + i + ".png").toString());
             else
                 url_images.add(placeholder_default.toString());
-
         }
-
         return url_images;
     }
 
@@ -148,6 +160,15 @@ public class Profil {
     }
 
     /**
+     * Getter pour l'identifiant du niveau
+     *
+     * @return l'historique des mouvements
+     */
+    public static int getIdNiveau() {
+        return id_niveau;
+    }
+
+    /**
      * Methode pour charger un profil
      * Attention, il faut ensuite initialiser le mode de jeu avec le setter {@link #setMode_de_jeu(String)}.
      * Et l'id du niveau en paramètre de la méthode chargerGrille {@link #chargerGrille(int)}.
@@ -160,7 +181,7 @@ public class Profil {
         Profil.joueur = joueur;
         // Valeurs par défaut
         mode_de_jeu = "detente";
-        this.id_niveau = 0;
+        id_niveau = 0;
 
         if (Sauvegarder.RechercherSauvegarde(joueur)) {
             System.out.println("[Profil] Profil deja existant");
@@ -176,8 +197,8 @@ public class Profil {
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
-        Sauvegarder.sauvegardeMatrice(joueur, mode_de_jeu, this.id_niveau, niveau.getMatrice());
-        Sauvegarder.sauvegarderHistorique(joueur, mode_de_jeu, this.id_niveau, niveau.getHistorique());
+        Sauvegarder.sauvegardeMatrice(joueur, mode_de_jeu, id_niveau, niveau.getMatrice());
+        Sauvegarder.sauvegarderHistorique(joueur, mode_de_jeu, id_niveau, niveau.getHistorique());
     }
 
     /**
@@ -189,7 +210,7 @@ public class Profil {
     public Historique chargerHistorique() {
         Historique hist;
         File fichier_mouvements = new File(
-            Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + this.id_niveau);
+            Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + id_niveau);
         if (fichier_mouvements.exists() && fichier_mouvements.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de l'historique des mouvements du joueur trouvée - Chargement de l'historique des mouvements du joueur sauvegardé...");
@@ -213,34 +234,28 @@ public class Profil {
      * @throws FileNotFoundException si le fichier n'existe pas
      */
     public DonneesNiveau chargerGrille(int niv) throws FileNotFoundException {
-        this.id_niveau = niv;
+        id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
-        File grille_fichier = new File(grille_repertoire + "/Matrice_" + this.id_niveau);
+        File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau);
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
-            Sauvegarder.chargerGrilleFichier(this.id_niveau, mode_de_jeu, false);
+            //            TODO : Temporaire -> lit les grilles dans le fichier detente
+
+            Sauvegarder.chargerGrilleFichier(id_niveau, "detente", false);
+//            Sauvegarder.chargerGrilleFichier(this.id_niveau, mode_de_jeu, false);
             donneesNiveau.matrice_niveau = deserialisationMatrice(grille_fichier);
         } else {
 //            TODO : Temporaire -> lit les grilles dans le fichier detente
 //            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
-            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, "detente", false);
+            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(id_niveau, "detente", false);
         }
         //            TODO : Temporaire -> lit les grilles dans le fichier detente
 
 //        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true);
-        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, "detente", true);
+        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, "detente", true);
 
         return donneesNiveau;
-    }
-
-    /**
-     * Getter pour l'identifiant du niveau
-     *
-     * @return l'historique des mouvements
-     */
-    public int getId_niveau() {
-        return id_niveau;
     }
 
     /**
