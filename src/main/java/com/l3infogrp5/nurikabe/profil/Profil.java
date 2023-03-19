@@ -32,8 +32,13 @@ public class Profil {
 
     /**
      * Création d'un profil.
+     *
+     * {@link #chargerProfil}
      */
     private Profil() {
+        joueur = "default";
+        mode_de_jeu = "detente";
+        id_niveau = 0;
     }
 
     /**
