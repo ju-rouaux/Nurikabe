@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -20,8 +21,9 @@ public class Nurikabe extends Application {
 
     /**
      * Constructeur.
+     * @throws FileNotFoundException Si le fichier de sauvegarde n'a pas été trouvé.
      */
-    public Nurikabe() {
+    public Nurikabe() throws FileNotFoundException {
         super();
 
         Sauvegarder.creerArborescence();
@@ -37,7 +39,7 @@ public class Nurikabe extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage, new Profil("default"));
+        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage, Profil.getInstance());
 
         stage.setMinHeight(480);
         stage.setMinWidth(640);
@@ -58,7 +60,11 @@ public class Nurikabe extends Application {
         // sauvegarde de la partie.
     }
 
-    private void testSauvegardeScoreProfil(){
+    /**
+     * Fonction de test pour la sauvegarde du profil
+     * @throws FileNotFoundException
+     */
+    private void testSauvegardeScoreProfil() throws FileNotFoundException {
         /*
          * TEMP
          */

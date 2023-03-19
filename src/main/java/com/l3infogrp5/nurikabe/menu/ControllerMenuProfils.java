@@ -121,7 +121,7 @@ public class ControllerMenuProfils {
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.showAndWait();
 
-        new Profil(nom_joueur);
+        joueur.chargerProfil(nom_joueur);
 
         // modification de l'affichage
         afficherNouveauxProfil(i);
@@ -150,7 +150,7 @@ public class ControllerMenuProfils {
                     System.out.println("Nouveau profil");
                 }
 
-                joueur = new Profil(nom_joueur);
+                joueur.chargerProfil(nom_joueur);
                 setActiveProfil(i);
             }
         }
@@ -205,9 +205,9 @@ public class ControllerMenuProfils {
             try (Scanner reader = new Scanner(file)) {
                 int actif = reader.nextInt();
                 String nom_actif = reader.nextLine().trim();
-                Profil joueur_actif = new Profil(nom_actif);
-                if (!joueur.equals(joueur_actif)) {
-                    joueur = joueur_actif;
+                joueur.chargerProfil(nom_actif);
+                if (!nom_actif.equals(Profil.getJoueur())) {
+                    joueur.chargerProfil(nom_actif);
                 }
                 setActiveProfil(actif);
             }

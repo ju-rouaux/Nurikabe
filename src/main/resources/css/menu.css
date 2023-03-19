@@ -46,6 +46,13 @@
     -fx-background-radius: 10;
 }
 
+
+/* Style du titre Nurikabe */
+#titre-nurikabe {
+    -fx-text-fill: #363684;
+    -fx-font-weight: bold;
+}
+
 /* ==================== IDs ==================== */
 
 /* Style du titre Nurikabe */

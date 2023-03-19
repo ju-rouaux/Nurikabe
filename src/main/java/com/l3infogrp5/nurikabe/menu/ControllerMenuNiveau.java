@@ -59,6 +59,6 @@ public class ControllerMenuNiveau {
      */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuModeJeu(stage, joueur).getScene());
+        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
     }
 }

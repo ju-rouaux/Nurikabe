@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.menu;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -8,9 +9,6 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-//TODO imports pour la démo de lancement de niveau
-import com.l3infogrp5.nurikabe.niveau.ControllerNiveau;
-//TODO Charger images placeholder selon le profil dans le menu de selection des niveaux
 import com.l3infogrp5.nurikabe.profil.Profil;
 
 /**
@@ -47,14 +45,7 @@ public class ControllerMenuModeJeu {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuModeJeu(Stage stage, Profil joueur) throws IOException {
-        /*
-         * Test chargement des images
-         */
-        // TODO Changer parametres avec <nomProfil>.get()
-//        Profil.chargerImageNiveau("Julieng", "detente");
-
-        this.joueur = joueur;
+    public ControllerMenuModeJeu(Stage stage) throws IOException {
 
         this.stage = stage;
 
@@ -79,18 +70,18 @@ public class ControllerMenuModeJeu {
      * Change la scène par le menu de sélection de niveau du mode détente.
      */
     @FXML
-    private void detenteClique() throws Exception {
-        // stage.setScene(new ControllerMenuNiveau(stage).getScene()); //TODO rétablir
-        // le menu
-        stage.setScene(new ControllerNiveau(stage, joueur).getScene());
+    private void detenteClique(ActionEvent event) throws Exception {
+        Profil.getInstance().setMode_de_jeu("detente"); // TODO pas ouf d'écrire en dur le mode
+        stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
     /**
      * Change la scène par le menu de sélection de niveau du mode contre la montre.
      */
     @FXML
-    private void contreMontreClique() throws Exception {
-        stage.setScene(new ControllerMenuNiveau(stage, joueur).getScene());
+    private void contreMontreClique(ActionEvent event) throws Exception {
+        Profil.getInstance().setMode_de_jeu("clm"); // TODO pas ouf d'écrire en dur le mode
+        stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
     /**

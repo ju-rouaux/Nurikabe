@@ -4,7 +4,7 @@ import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
-import com.l3infogrp5.nurikabe.utils.CaptureNode;
+import com.l3infogrp5.nurikabe.utils.Path;
 
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -39,7 +40,7 @@ public class ControllerNiveau {
     private final Scene scene;
     Profil joueur;
     private final Grille grille;
-    private BooleanProperty aide_affichee; //Vrai si l'aide est affichée sur l'écran.
+    private BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
 
     @FXML
     private Button btn_aide;
@@ -70,22 +71,20 @@ public class ControllerNiveau {
     /**
      * Initialise la vue du niveau.
      *
-     * @param stage la fenêtre contenant la scène.
+     * @param stage   la fenêtre contenant la scène.
+     * @param niveaux la liste de niveaux à jouer successivement.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerNiveau(Stage stage, Profil joueur) throws IOException {
+    public ControllerNiveau(Stage stage, List<Integer> niveaux) throws IOException {
         this.stage = stage;
-        //TODO charger profil dans le menu de selection des profils
-        
         this.aide_affichee = new SimpleBooleanProperty();
+        joueur = Profil.getInstance();
 
-        // TODO charger profil dans le menu de selection des profils
-        this.joueur = joueur;
-        this.joueur.setId_niveau(110);
-        this.joueur.setMode_de_jeu("detente");
-        Profil.DonneesNiveau donnees = this.joueur.chargerGrille();
-        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, this.joueur.chargerHistorique());
+        // TODO : préparer le terrain pour enchainer plusieurs niveaux
+        int id_niveau = niveaux.get(0);
+        Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
+        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -112,12 +111,13 @@ public class ControllerNiveau {
         this.panneau_central.getChildren().remove(panneau_aide);
         this.panneau_central.getChildren().add(panneau_aide);
 
-        // Ne pas faire de rendu en dehors du panneau central (pour ne pas masquer la barre d'outils)
+        // Ne pas faire de rendu en dehors du panneau central (pour ne pas masquer la
+        // barre d'outils)
         Rectangle zone_clip = new Rectangle();
         zone_clip.widthProperty().bind(this.panneau_central.widthProperty());
         zone_clip.heightProperty().bind(this.panneau_central.heightProperty());
         this.panneau_central.setClip(zone_clip);
-        
+
         // TODO charger les données de score
 
         // Lier les boutons Undo et Redo à l'historique
@@ -127,11 +127,13 @@ public class ControllerNiveau {
         // Afficher l'aide lorsque la Property aide_affichee est active.
         this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
         this.toggle_aide.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            TranslateTransition transition = new TranslateTransition(Duration.millis(150), ControllerNiveau.this.panneau_aide);
-            
+            TranslateTransition transition = new TranslateTransition(Duration.millis(150),
+                    ControllerNiveau.this.panneau_aide);
+
             public void changed(ObservableValue<? extends Boolean> obj, Boolean ancien, Boolean nouveau) {
-                //De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers le haut sinon
-                transition.setByY((panneau_aide.getHeight()-btn_aide.getHeight()) * (nouveau == true ? 1 : -1));
+                // De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers
+                // le haut sinon
+                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight()) * (nouveau == true ? 1 : -1));
                 transition.play();
             }
         });
@@ -154,10 +156,11 @@ public class ControllerNiveau {
         // TODO : capturer écran + sauvegarder
         joueur.sauvegarderNiveau(grille);
         // TODO : remplacer null avec le getScore du niveau
-        Sauvegarder.sauvegarderScore(joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau(), null);
-        CaptureNode.capturer(this.grille.getPanneau(), joueur.getJoueur(), joueur.getMode_de_jeu(), joueur.getId_niveau());
+        Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
+        this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
+                + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
-        stage.setScene(new ControllerMenuModeJeu(stage, joueur).getScene()); // temporaire
+        stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
     }
 
     /**
