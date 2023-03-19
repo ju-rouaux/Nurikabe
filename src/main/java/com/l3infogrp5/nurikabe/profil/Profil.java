@@ -146,6 +146,15 @@ public class Profil {
     }
 
     /**
+     * Getter pour l'identifiant du niveau
+     *
+     * @return l'historique des mouvements
+     */
+    public static int getIdNiveau() {
+        return id_niveau;
+    }
+
+    /**
      * Methode pour charger un profil
      * Attention, il faut ensuite initialiser le mode de jeu avec le setter {@link #setMode_de_jeu(String)}.
      * Et l'id du niveau en paramètre de la méthode chargerGrille {@link #chargerGrille(int)}.
@@ -217,7 +226,10 @@ public class Profil {
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
-            Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
+            //            TODO : Temporaire -> lit les grilles dans le fichier detente
+
+            Sauvegarder.chargerGrilleFichier(id_niveau, "detente", false);
+//            Sauvegarder.chargerGrilleFichier(this.id_niveau, mode_de_jeu, false);
             donneesNiveau.matrice_niveau = deserialisationMatrice(grille_fichier);
         } else {
 //            TODO : Temporaire -> lit les grilles dans le fichier detente
@@ -230,15 +242,6 @@ public class Profil {
         donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, "detente", true);
 
         return donneesNiveau;
-    }
-
-    /**
-     * Getter pour l'identifiant du niveau
-     *
-     * @return l'historique des mouvements
-     */
-    public static int getIdNiveau() {
-        return id_niveau;
     }
 
     /**
