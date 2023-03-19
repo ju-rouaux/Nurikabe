@@ -3,6 +3,7 @@ package com.l3infogrp5.nurikabe.menu;
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -296,6 +297,10 @@ public class ControllerMenuProfils {
         return profils_attributs;
     }
 }
+
+// TODO : PANIQUE A BORD REPOSIBILITER DAVOIR DEUX PROFILS MEME NOM (POTENTIEL SOLUTION MAJ LIST)
+// TODO : REVOIR JAVADOC
+// TODO : FORCER PROFILS DEFAULT EN PREMIERE POSITION
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
