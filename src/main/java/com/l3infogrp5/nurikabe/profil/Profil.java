@@ -118,7 +118,7 @@ public class Profil {
         String joueur = getJoueur();
         File image_grille = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
             "capture_niveau_" + getIdNiveau() + ".png");
-        File placeholder_default = new File(Path.repertoire_jar.toString() + "/Nurikabe_grille.png");
+        File placeholder_default = new File(Path.repertoire_jar.toString() + "/img/placeholder.png");
 
         List<String> liste_fichiers = Sauvegarder.listeFichiers(image_grille.getParentFile());
 
