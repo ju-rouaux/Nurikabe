@@ -33,14 +33,17 @@ public class ControllerMenuProfils {
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
+
     public String nom_joueur;
+
     private Profil joueur;
+    private int profil_actif;
     private List<String> profils_attributs;
+
     @FXML
     private Button btn_retour;
     @FXML
     private GridPane pseudo_grid;
-    private int profil_actif;
 
     /**
      * Initialise le menu de sélection d'affichage des règles et son contrôleur.
@@ -57,10 +60,9 @@ public class ControllerMenuProfils {
         loader.setLocation(getClass().getResource("/FXML/menu_profils.fxml"));
         loader.setController(this);
         scene = loader.load();
+
         profil_actif = 0;
         profils_attributs = Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString()));
-        System.out.println("joueur : " + profils_attributs);
-
     }
 
     /**
@@ -97,7 +99,7 @@ public class ControllerMenuProfils {
         bouton.getStyleClass().remove("btn-add");
         bouton.getStyleClass().add("btn-profile");
 
-        //Si on a encore de la place on rend visible le bouton pour ajouter un profil.
+        // Si on a encore de la place on rend visible le bouton pour ajouter un profil.
         // OK
         if (i + 1 < pseudo_grid.getChildren().size()) {
             VBox prochain_vbox = (VBox) pseudo_grid.getChildren().get(i + 1);
@@ -113,7 +115,6 @@ public class ControllerMenuProfils {
      * @throws IOException
      */
     private void nouveauxProfil(int i) throws IOException {
-        System.out.println("test Nouveau profil");
         // creation de la popup pour cree un nouveaux profil
         Stage popup = new Stage();
 
@@ -127,6 +128,7 @@ public class ControllerMenuProfils {
         afficherNouveauxProfil(i);
 
         ajoutProfils(nom_joueur);
+        chargerTableau();
     }
 
     /**
@@ -145,10 +147,8 @@ public class ControllerMenuProfils {
                 // acces au pseudo
                 nom_joueur = label.getText();
 
-                if (!Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur)) {
+                if (!Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur))
                     nouveauxProfil(i);
-                    System.out.println("Nouveau profil");
-                }
 
                 joueur.chargerProfil(nom_joueur);
                 setActiveProfil(i);
@@ -174,13 +174,12 @@ public class ControllerMenuProfils {
         profil_actif = i;
 
         BufferedWriter writer = new BufferedWriter(
-            new FileWriter(Path.repertoire_profils.toString() + "/profil_actif"));
+                new FileWriter(Path.repertoire_profils.toString() + "/profil_actif"));
 
         writer.write(String.valueOf(profil_actif));
         writer.newLine();
         writer.write(nom_joueur);
         writer.close();
-
     }
 
     /**
@@ -190,9 +189,7 @@ public class ControllerMenuProfils {
      * @throws NumberFormatException
      */
     public void chargerTableau() throws NumberFormatException, IOException {
-
         /// Récupération des profils existants
-        System.out.println("Reload tableau profils :" + Sauvegarder.listeFichiers(Path.repertoire_lvl));
         profils_attributs = Sauvegarder.listeFichiers(Path.repertoire_lvl);
         for (int i = 0; i < profils_attributs.size(); i++) {
             nom_joueur = profils_attributs.get(i);
@@ -220,12 +217,12 @@ public class ControllerMenuProfils {
      * @param nom_joueur le nom du joueur a ajouter
      */
     private void ajoutProfils(String nom_joueur) {
-        for (int i = 0; i < profils_attributs.size(); i++) {
-            if (profils_attributs.get(i).isEmpty()) {
-                profils_attributs.set(i, nom_joueur);
+
+            if (profils_attributs.get(profils_attributs.size() - 1).isEmpty()) {
+                profils_attributs.set(profils_attributs.size() - 1, nom_joueur);
                 return;
             }
-        }
+
     }
 
     /**
@@ -238,7 +235,8 @@ public class ControllerMenuProfils {
     private void viewDel(MouseEvent event) {
 
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
-            if (!((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).getText().equals("default") && (event.getSource()) == pseudo_grid.getChildren().get(i)) {
+            if (!((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).getText().equals("default")
+                    && (event.getSource()) == pseudo_grid.getChildren().get(i)) {
                 if (((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).getText() == "")
                     ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2).setVisible(true);
             }
@@ -253,9 +251,8 @@ public class ControllerMenuProfils {
      */
     @FXML
     private void hideDel(MouseEvent event) {
-        for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
+        for (int i = 0; i < pseudo_grid.getChildren().size(); i++)
             ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2).setVisible(false);
-        }
     }
 
     /**
@@ -273,13 +270,11 @@ public class ControllerMenuProfils {
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2))) {
                 // recuperation du pseudo
                 nom_joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
-                    .get(1)).getText());
+                        .get(1)).getText());
             }
         }
 
         profils_attributs.remove(nom_joueur);
-        System.out.println(profils_attributs);
-
 
         Sauvegarder.supprimerProfil(nom_joueur);
 
@@ -289,7 +284,6 @@ public class ControllerMenuProfils {
         reload.chargerTableau();
     }
 
-
     /**
      * Getter
      */
@@ -298,7 +292,6 @@ public class ControllerMenuProfils {
     }
 }
 
-// TODO : PANIQUE A BORD REPOSIBILITER DAVOIR DEUX PROFILS MEME NOM (POTENTIEL SOLUTION MAJ LIST)
 // TODO : REVOIR JAVADOC
 // TODO : FORCER PROFILS DEFAULT EN PREMIERE POSITION
 

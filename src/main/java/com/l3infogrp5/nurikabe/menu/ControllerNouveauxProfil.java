@@ -73,11 +73,8 @@ public class ControllerNouveauxProfil {
      * @return boolean | true si un profil avec ce pseudo exist false sinon
      */
     private boolean pseudoExist() {
-        for (String str : profils.getProfilsAttributs()) {
-            if (str != null && str.equals(pseudo.getText())) {
-                return true;
-            }
-        }
+        if(profils.getProfilsAttributs().contains(pseudo.getText()))
+            return true;
         return false;
     }
 
@@ -100,7 +97,6 @@ public class ControllerNouveauxProfil {
         if (pseudoExist()) {
             pseudo_correct = false;
         }
-
     }
 
     /**
@@ -113,7 +109,5 @@ public class ControllerNouveauxProfil {
         } else {
             ((Stage) this.scene.getWindow()).close();
         }
-
     }
-
 }
