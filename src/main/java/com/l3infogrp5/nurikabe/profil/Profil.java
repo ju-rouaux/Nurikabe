@@ -5,7 +5,10 @@ import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +35,6 @@ public class Profil {
 
     /**
      * Création d'un profil.
-     *
      * {@link #chargerProfil}
      *
      * @throws IOException si le fichier de sauvegarde n'existe pas
@@ -62,47 +64,6 @@ public class Profil {
         return instance;
     }
 
-    /**
-     * Désérialise l'historique des mouvements à partir d'un fichier.
-     *
-     * @param fichier le fichier sérialisé des mouvements
-     * @return l'historique des mouvements désérialisé
-     */
-    private static Historique deserialisationHistorique(File fichier) {
-        Historique historique = null;
-        try {
-            FileInputStream fichier_entree = new FileInputStream(fichier);
-            ObjectInputStream entree = new ObjectInputStream(fichier_entree);
-            historique = (Historique) entree.readObject();
-            entree.close();
-            fichier_entree.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return historique;
-    }
-
-    /**
-     * Désérialise la grille à partir du fichier.
-     *
-     * @param fichier le fichier sérialisé de la grille
-     * @return la matrice du niveau désérialisé
-     */
-    private static int[][] deserialisationMatrice(File fichier) {
-        int[][] matrice = null;
-        try {
-            FileInputStream fichier_entree = new FileInputStream(fichier);
-            ObjectInputStream entree = new ObjectInputStream(fichier_entree);
-            matrice = (int[][]) entree.readObject();
-            entree.close();
-            fichier_entree.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return matrice;
-    }
 
     /**
      * //TODO a utiliser
@@ -112,7 +73,7 @@ public class Profil {
      * @return la liste des emplacements des images
      * @throws FileNotFoundException si le fichier n'existe pas
      */
-    public static List<String> chargerImageNiveau() throws FileNotFoundException {
+    public static List<String> chargerImageNiveau() throws IOException {
         List<String> url_images = new ArrayList<>();
         String mdj = getMode_de_jeu();
         String joueur = getJoueur();
@@ -157,6 +118,8 @@ public class Profil {
      */
     public void setMode_de_jeu(String mdj) {
         mode_de_jeu = mdj;
+        //TODO temporaire : mode de jeu detente
+        mode_de_jeu = "detente";
     }
 
     /**
@@ -197,7 +160,7 @@ public class Profil {
      */
     public void sauvegarderNiveau(Grille niveau) {
         // sauvegarder le niveau correspondant au profil
-        Sauvegarder.sauvegardeMatrice(joueur, mode_de_jeu, id_niveau, niveau.getMatrice());
+        Sauvegarder.sauvegarderMatrice(joueur, mode_de_jeu, id_niveau, niveau.getMatrice());
         Sauvegarder.sauvegarderHistorique(joueur, mode_de_jeu, id_niveau, niveau.getHistorique());
     }
 
@@ -209,13 +172,13 @@ public class Profil {
      */
     public Historique chargerHistorique() {
         Historique hist;
-        File fichier_mouvements = new File(
-            Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu + "/Mouvements_" + id_niveau);
+        System.out.println("Mode de jeu : " + mode_de_jeu);
+        File fichier_mouvements = Paths.get(Path.repertoire_lvl.toString(), joueur, mode_de_jeu, "Mouvements_" + id_niveau + ".hist").toFile();
+
         if (fichier_mouvements.exists() && fichier_mouvements.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de l'historique des mouvements du joueur trouvée - Chargement de l'historique des mouvements du joueur sauvegardé...");
-
-            hist = deserialisationHistorique(fichier_mouvements);
+            hist = Sauvegarder.deserialiserHistorique(fichier_mouvements);
         } else {
             System.out.println(
                 "[Profil] Aucune sauvegarde de l'historique des mouvements du joueur trouvée - Création d'un historique vide");
@@ -236,7 +199,7 @@ public class Profil {
     public DonneesNiveau chargerGrille(int niv) throws FileNotFoundException {
         id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
-        File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau);
+        File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau + ".mat");
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
@@ -244,7 +207,7 @@ public class Profil {
 
             Sauvegarder.chargerGrilleFichier(id_niveau, "detente", false);
 //            Sauvegarder.chargerGrilleFichier(this.id_niveau, mode_de_jeu, false);
-            donneesNiveau.matrice_niveau = deserialisationMatrice(grille_fichier);
+            donneesNiveau.matrice_niveau = Sauvegarder.deserialiserMatrice(grille_fichier);
         } else {
 //            TODO : Temporaire -> lit les grilles dans le fichier detente
 //            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
