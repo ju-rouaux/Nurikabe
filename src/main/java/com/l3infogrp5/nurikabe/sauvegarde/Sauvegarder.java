@@ -6,6 +6,7 @@ import com.l3infogrp5.nurikabe.utils.Path;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -58,9 +59,23 @@ public class Sauvegarder {
      */
     public static List<String> listeFichiers(File repertoire) {
         List<String> fichiers = new ArrayList<>();
-
         if (dossierExistants(repertoire)) {
-            for (File fichier : repertoire.listFiles()) {
+            File[] files = repertoire.listFiles();
+
+            Arrays.sort(files, new Comparator<File>() {
+                @Override
+                public int compare(final File f1, final File f2) {
+                    try {
+                        BasicFileAttributes f1Attr = Files.readAttributes(Paths.get(f1.toURI()), BasicFileAttributes.class);
+                        BasicFileAttributes f2Attr = Files.readAttributes(Paths.get(f2.toURI()), BasicFileAttributes.class);
+                        return f1Attr.creationTime().compareTo(f2Attr.creationTime());
+                    } catch (IOException e) {
+                        return 0;
+                    }
+                }
+            });
+
+            for (File fichier : files) {
                 fichiers.add(fichier.getName());
             }
         }
@@ -93,7 +108,7 @@ public class Sauvegarder {
 
         try {
             boolean profil = fichiers.contains("profil");
-            if(!profil) {
+            if (!profil) {
                 Files.createDirectories(Paths.get(Path.repertoire_profils.toString()));
             }
 
@@ -455,6 +470,7 @@ public class Sauvegarder {
 
     /**
      * Supprime le profil du joueur
+     *
      * @param nom_joueur le nom du joueur
      */
     public static void supprimerProfil(String nom_joueur) {
