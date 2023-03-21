@@ -58,6 +58,10 @@ public final class Path {
      * Répertoire des grilles
      */
     public static File repertoire_grilles;
+    /**
+     * Répertoire des profils
+     */
+    public static File repertoire_profils;
 
     static {
         try {
@@ -68,6 +72,7 @@ public final class Path {
                 repertoire_lvl = new File(repertoire_save + DOSSIER_NIVEAUX);
                 repertoire_score = new File(repertoire_save + DOSSIER_SCORE);
                 repertoire_grilles = new File(repertoire_jar.getParent() + DOSSIER_GRILLES);
+                repertoire_profils = new File(repertoire_courant.getParent() + DOSSIER_PROFILS);
             } else {
                 throw new RuntimeException("Jar directory does not exist");
             }
