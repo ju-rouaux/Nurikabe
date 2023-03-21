@@ -1,15 +1,14 @@
 package com.l3infogrp5.nurikabe;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Jeu du Nurikabe.
@@ -21,9 +20,10 @@ public class Nurikabe extends Application {
 
     /**
      * Constructeur.
+     *
      * @throws FileNotFoundException Si le fichier de sauvegarde n'a pas été trouvé.
      */
-    public Nurikabe() throws FileNotFoundException {
+    public Nurikabe() throws IOException {
         super();
 
         Sauvegarder.creerArborescence();
@@ -62,9 +62,10 @@ public class Nurikabe extends Application {
 
     /**
      * Fonction de test pour la sauvegarde du profil
-     * @throws FileNotFoundException
+     *
+     * @throws IOException {@inheritDoc}
      */
-    private void testSauvegardeScoreProfil() throws FileNotFoundException {
+    private void testSauvegardeScoreProfil() throws IOException {
         /*
          * TEMP
          */
@@ -75,14 +76,14 @@ public class Nurikabe extends Application {
         String nom_joueur = "khkqsdqsds";
 
         try {
-            Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless", 1,2017);
-            Sauvegarder.sauvegarderScore("sdqez", "endless", 1,39);
-            Sauvegarder.sauvegarderScore("khkqsdqsds", "endless", 12,"3:30");
-            Sauvegarder.sauvegarderScore("sdqfgez", "endless", 13,"test");
-            Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 1,"test");
-            Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 1,"test");
-            Sauvegarder.sauvegarderScore("test", "detente", 2,"test");
-            Sauvegarder.sauvegarderScore("jhkjs", "detente", 2,"test");
+            Sauvegarder.sauvegarderScore("Julieqzeqsddng", "endless", 1, 2017);
+            Sauvegarder.sauvegarderScore("sdqez", "endless", 1, 39);
+            Sauvegarder.sauvegarderScore("khkqsdqsds", "endless", 12, "3:30");
+            Sauvegarder.sauvegarderScore("sdqfgez", "endless", 13, "test");
+            Sauvegarder.sauvegarderScore("khkqsdqsds", "detente", 1, "test");
+            Sauvegarder.sauvegarderScore("khaedqdsks", "detente", 1, "test");
+            Sauvegarder.sauvegarderScore("test", "detente", 2, "test");
+            Sauvegarder.sauvegarderScore("jhkjs", "detente", 2, "test");
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
