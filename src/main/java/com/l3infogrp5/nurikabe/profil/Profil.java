@@ -8,7 +8,10 @@ import com.l3infogrp5.nurikabe.utils.Path;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +74,7 @@ public class Profil {
      * elle existe, sinon on charge celle par défaut
      *
      * @return la liste des emplacements des images
-     * @throws FileNotFoundException si le fichier n'existe pas
+     * @throws IOException si le fichier de sauvegarde n'existe pas
      */
     public static List<String> chargerImageNiveau() throws IOException {
         List<String> url_images = new ArrayList<>();
@@ -79,7 +82,17 @@ public class Profil {
         String joueur = getJoueur();
         File image_grille = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
             "capture_niveau_" + getIdNiveau() + ".png");
-        File placeholder_default = new File(Path.repertoire_jar.toString() + "/img/placeholder.png");
+
+        InputStream placeholder_default = Profil.class.getClassLoader().getResourceAsStream("img/placeholder.png");
+        if (placeholder_default == null) {
+            throw new FileNotFoundException("[Profil] placeholder_default.png n'a pas été trouvé");
+        }
+
+        // Sauvegarde placeholder_default.png dans un fichier temporaire
+//        Supprimé quand le programme se termine
+        File placeholder_temp = File.createTempFile("placeholder_default", ".png");
+        placeholder_temp.deleteOnExit();
+        Files.copy(placeholder_default, placeholder_temp.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
         List<String> liste_fichiers = Sauvegarder.listeFichiers(image_grille.getParentFile());
 
@@ -88,10 +101,11 @@ public class Profil {
                 url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
                     "capture_niveau_" + i + ".png").toString());
             else
-                url_images.add(placeholder_default.toString());
+                url_images.add(placeholder_temp.toString());
         }
         return url_images;
     }
+
 
     /**
      * Getter pour le nom du joueur du profil
