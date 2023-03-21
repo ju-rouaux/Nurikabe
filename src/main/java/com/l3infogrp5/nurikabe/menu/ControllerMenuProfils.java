@@ -26,7 +26,7 @@ import java.util.Scanner;
 /**
  * Contrôleur du menu d'affichage des profils, et sa scène.
  *
- * @author Julien Rouaux - Nicolas Gouget
+ * @author Julien Rouaux - Nicolas
  */
 public class ControllerMenuProfils {
 
@@ -46,10 +46,10 @@ public class ControllerMenuProfils {
     private GridPane pseudo_grid;
 
     /**
-     * Initialise le menu de sélection d'affichage des règles et son contrôleur.
+     * Initialise le menu de sélection d'affichages des profils et son contrôleur.
      *
-     * @param stage la fenêtre contenant la scène.
-     * @throws IOException
+     * @param stage La fenêtre contenant la scène.
+     * @throws IOException {@inheritDoc}
      */
     public ControllerMenuProfils(Stage stage, Profil joueur) throws IOException {
         this.joueur = joueur;
@@ -68,7 +68,7 @@ public class ControllerMenuProfils {
     /**
      * Retourne la scène gérée par le contrôleur.
      *
-     * @return la scène gérée par le contrôleur.
+     * @return La scène gérée par le contrôleur.
      */
     public Scene getScene() {
         return scene;
@@ -76,6 +76,8 @@ public class ControllerMenuProfils {
 
     /**
      * Retourne au menu précédent, le menu principal.
+     * 
+     * @throws IOException {@inheritDoc}
      */
     @FXML
     private void retourClique(ActionEvent event) throws IOException {
@@ -83,12 +85,12 @@ public class ControllerMenuProfils {
     }
 
     /**
-     * Modfie l'affichage du menue profile pour afficher le profile du nouveaux
-     * joueur
+     * Modifie l'affichage du menu profil pour afficher le profil du nouveau joueur.
      *
-     * @param i l'indice de la grille a modifier
+     * @param i L'indice de la grille a modifié.
      */
     private void afficherNouveauxProfil(int i) {
+        // Récupération de la boite du label et du bouton dont l'affichage doit être modifié
         VBox vbox = (VBox) pseudo_grid.getChildren().get(i);
         Label label = (Label) vbox.getChildren().get(1);
         Button bouton = (Button) vbox.getChildren().get(0);
@@ -96,11 +98,12 @@ public class ControllerMenuProfils {
         bouton.setText("");
 
         label.setText(nom_joueur);
+
+        // Changement du style du bouton
         bouton.getStyleClass().remove("btn-add");
         bouton.getStyleClass().add("btn-profile");
 
-        // Si on a encore de la place on rend visible le bouton pour ajouter un profil.
-        // OK
+        // Si on a encore de la place, on rend visible le bouton pour ajouter un profil.
         if (i + 1 < pseudo_grid.getChildren().size()) {
             VBox prochain_vbox = (VBox) pseudo_grid.getChildren().get(i + 1);
             Button prochain_bouton = (Button) prochain_vbox.getChildren().get(0);
@@ -109,42 +112,44 @@ public class ControllerMenuProfils {
     }
 
     /**
-     * Méthode pour créer un nouveaux profils avec un pseudo
+     * Méthode pour créer un nouveau profil avec un pseudo
      *
-     * @param i l'indice de la grille a modifier
-     * @throws IOException
+     * @param i L'indice de la grille a modifié.
+     * @throws IOException {@inheritDoc}
      */
     private void nouveauxProfil(int i) throws IOException {
-        // creation de la popup pour cree un nouveaux profil
+        // Création du pop-up pour créer un nouveau profil
         Stage popup = new Stage();
 
         popup.setScene(new ControllerNouveauxProfil(this).getScene());
+        // On ne peux pas agir sur la fenêtre actuelle tant que la pop-up n'est pas fermé
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.showAndWait();
 
         joueur.chargerProfil(nom_joueur);
 
-        // modification de l'affichage
+        // Modification de l'affichage
         afficherNouveauxProfil(i);
 
+        // On ajoute le profil créé aux profils existant et on met à jour le tableau des noms.
         ajoutProfils(nom_joueur);
         chargerTableau();
     }
 
     /**
-     * Méthode pour charger un profils
+     * Méthode pour charger un profil
      *
-     * @throws IOException
+     * @throws IOException {@inheritDoc}
      */
     @FXML
     private void chargerProfil(ActionEvent event) throws IOException {
-        // on parcour la grid des profil pour savoir lequel est appuiyer
+        // On parcourt la grille des profils pour savoir lequel est appuyer.
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
             VBox vbox = (VBox) pseudo_grid.getChildren().get(i);
             Button bouton = (Button) vbox.getChildren().get(0);
             Label label = (Label) vbox.getChildren().get(1);
             if (event.getSource() == bouton) {
-                // acces au pseudo
+                // Accès au pseudo
                 nom_joueur = label.getText();
 
                 if (!Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur))
@@ -157,11 +162,11 @@ public class ControllerMenuProfils {
     }
 
     /**
-     * Methode qui modifi le style pour le profil actif et sauvegarde l'indice et le
-     * nom de ce dernier pour le recharger plus tard
+     * Méthode qui modifie le style pour le profil actif et sauvegarde l'indice et
+     * le nom de ce dernier pour le recharger plus tard
      *
-     * @param i l'indice du profil actif
-     * @throws IOException
+     * @param i L'indice du profil actif
+     * @throws IOException {@inheritDoc}
      */
     private void setActiveProfil(int i) throws IOException {
         if (profil_actif != -1) {
@@ -173,6 +178,7 @@ public class ControllerMenuProfils {
         vbox.getChildren().get(0).getStyleClass().add("actif");
         profil_actif = i;
 
+        // Sauvegarde du profil en cour d'utilisation
         BufferedWriter writer = new BufferedWriter(
                 new FileWriter(Path.repertoire_profils.toString() + "/profil_actif"));
 
@@ -183,13 +189,13 @@ public class ControllerMenuProfils {
     }
 
     /**
-     * Methode pour recuperer les joeur creer
+     * Méthode pour récupérer les joueurs créés
      *
-     * @throws IOException
-     * @throws NumberFormatException
+     * @throws IOException           {@inheritDoc}
+     * @throws NumberFormatException {@inheritDoc}
      */
     public void chargerTableau() throws NumberFormatException, IOException {
-        /// Récupération des profils existants
+        // Récupération des profils existants
         profils_attributs = Sauvegarder.listeFichiers(Path.repertoire_lvl);
         for (int i = 0; i < profils_attributs.size(); i++) {
             nom_joueur = profils_attributs.get(i);
@@ -212,28 +218,22 @@ public class ControllerMenuProfils {
     }
 
     /**
-     * Methode pour ajouter un joueur au tableau des joueur
+     * Méthode pour ajouter un joueur au tableau des joueurs
      *
-     * @param nom_joueur le nom du joueur a ajouter
+     * @param nom_joueur Le nom du joueur a ajouté.
      */
     private void ajoutProfils(String nom_joueur) {
-
-            if (profils_attributs.get(profils_attributs.size() - 1).isEmpty()) {
-                profils_attributs.set(profils_attributs.size() - 1, nom_joueur);
-                return;
-            }
-
+        profils_attributs.set(profils_attributs.size() - 1, nom_joueur);
     }
 
     /**
-     * Methode qui au passage de la souris sur un profil existant affiche l'icone
-     * d'une corbeille permetant sa suppression
+     * Méthode qui au passage de la souris sur un profil existant affiche l'icône
+     * d'une corbeille permettant sa suppression
      *
-     * @param event les action de la souris
+     * @param event Les actions de la souris
      */
     @FXML
     private void viewDel(MouseEvent event) {
-
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
             if (!((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).getText().equals("default")
                     && (event.getSource()) == pseudo_grid.getChildren().get(i)) {
@@ -244,10 +244,10 @@ public class ControllerMenuProfils {
     }
 
     /**
-     * Methode qui s'assure que l'icone de corbeille n'est pas afficher si la souri
-     * n'est pas sur le profils
+     * Méthode qui s'assure que l'icône de corbeille n'est pas affichée quand la
+     * souri n'est pas sur le profil
      *
-     * @param event les action de la souris
+     * @param event Les actions de la souris
      */
     @FXML
     private void hideDel(MouseEvent event) {
@@ -256,19 +256,19 @@ public class ControllerMenuProfils {
     }
 
     /**
-     * Methode qui supprime un profil de la liste des profil et qui reorganise
+     * Méthode qui supprime un profil de la liste des profils et qui réorganise
      * l'affichage
      *
-     * @param event le profil cliquer et a supprimer
-     * @throws IOException
+     * @param event Le profil cliqué et à supprimer
+     * @throws IOException {@inheritDoc}
      */
     @FXML
     private void suprProfil(ActionEvent event) throws IOException {
-        // on parcour la grid des profil pour savoir lequel est appuiyer
+        // On parcourt la grille des profils pour savoir lequel est appuyer.
         for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
-            // recuperation du boutton appuiyer
+            // Récupération du bouton appuyé
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2))) {
-                // recuperation du pseudo
+                // Récupération du pseudo
                 nom_joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
                         .get(1)).getText());
             }
@@ -278,7 +278,7 @@ public class ControllerMenuProfils {
 
         Sauvegarder.supprimerProfil(nom_joueur);
 
-        // rechargement de la scene
+        // Rechargement de la scène
         ControllerMenuProfils reload = new ControllerMenuProfils(stage, joueur);
         stage.setScene(reload.getScene());
         reload.chargerTableau();
@@ -292,8 +292,7 @@ public class ControllerMenuProfils {
     }
 }
 
-// TODO : REVOIR JAVADOC
-// TODO : FORCER PROFILS DEFAULT EN PREMIERE POSITION
+// TODO : erreur chargement profil apres partie
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
