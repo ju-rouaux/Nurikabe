@@ -115,6 +115,12 @@ public class Sauvegarder {
             Files.createDirectories(Path.repertoire_save.toPath());
             Files.createDirectories(Path.repertoire_score.toPath());
 
+            // Crée les dossiers "profil" s'il n'existent pas
+            boolean profil = fichiers.contains("profil");
+            if (!profil) {
+                Files.createDirectories(Paths.get(Path.repertoire_profils.toString()));
+            }
+
             // verifie si les fichiers existent
             String[] files = {"endless.save", "clm.save", "detente.save"};
             for (String file : files) {

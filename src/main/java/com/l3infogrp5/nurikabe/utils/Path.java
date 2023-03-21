@@ -71,8 +71,8 @@ public final class Path {
                 repertoire_save = new File(repertoire_courant + DOSSIER_SAVE);
                 repertoire_lvl = new File(repertoire_save + DOSSIER_NIVEAUX);
                 repertoire_score = new File(repertoire_save + DOSSIER_SCORE);
+                repertoire_profils = new File(repertoire_courant + DOSSIER_PROFILS);
                 repertoire_grilles = new File(repertoire_jar.getParent() + DOSSIER_GRILLES);
-                repertoire_profils = new File(repertoire_courant.getParent() + DOSSIER_PROFILS);
             } else {
                 throw new RuntimeException("Jar directory does not exist");
             }
