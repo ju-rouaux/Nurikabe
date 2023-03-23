@@ -14,8 +14,14 @@ import javafx.util.Duration;
 
 public class ScoreCLM extends ScoreChrono {
 
+    /**Calculateur du temps qui passe*/
     public Timeline timeline;
 
+    /**
+     * Constructeur du Score Contre La Montre
+     * @param totalSec nombre total de secondes
+     * @param text texte du chronomètre
+     */
     public ScoreCLM(int totalSec, Text text) {
         super(totalSec, text);
     }

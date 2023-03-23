@@ -11,12 +11,27 @@ import javafx.scene.text.Text;
  */
 abstract public class ScoreChrono implements ScoreInterface {
 
+    /**secondes*/
     public int sec;
+
+    /**minutes*/ 
     public float min;
+
+    /**nombre total de secondes écoulées*/
     public int totalSec;
+
+    /**Texte du chronomètre*/
     public Text text;
+
+    /**Zone d'affichage du chronomètre*/
     public Pane affichage;
 
+    /**
+     * Constructeur du chronomètre
+     * 
+     * @param totalSec nombre total de secondes
+     * @param text texte du chronomètre
+     */
     public ScoreChrono(int totalSec, Text text) {
         this.totalSec = totalSec;
         this.text = text;

@@ -13,10 +13,18 @@ import javafx.util.Duration;
  */
 public class ScoreEndless extends ScoreChrono {
 
+    /**Calcul du temps qui passe*/
     public Timeline timeline;
 
+    /**Nombres de grilles complétées lors de la partie*/
     public int nbGrilles = 0;
 
+
+    /**
+     * Constructeur du ScoreEndless
+     * @param totalSec nombre total de secondes
+     * @param text texte du chronomètre
+     */
     public ScoreEndless(int totalSec, Text text) {
         super(totalSec, text);
     }
