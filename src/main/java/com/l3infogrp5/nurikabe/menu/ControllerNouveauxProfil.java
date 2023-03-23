@@ -32,8 +32,10 @@ public class ControllerNouveauxProfil {
 
     /**
      * Initialise la fenêtre de création d'un nouveau profil et son contrôleur.
+     * 
+     * @param profils l'instance du menu profil actif
      *
-     * @throws IOException {@inheritDoc}
+     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû être lu.
      */
     public ControllerNouveauxProfil(ControllerMenuProfils profils) throws IOException {
         this.profils = profils;

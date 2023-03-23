@@ -40,7 +40,7 @@ public class ControllerMenuPrincipal {
      * Initialise le menu principal et son contrôleur.
      * 
      * @param stage la fenêtre contenant la scène.
-     * @throws IOException
+     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû être lu.
      */
     public ControllerMenuPrincipal(Stage stage) throws IOException {
         this.joueur = Profil.getInstance();

@@ -35,6 +35,9 @@ public class ControllerMenuProfils {
     private final Stage stage;
     private final Scene scene;
 
+    /**
+     * Le nom du joueur actif
+     */
     public String nom_joueur;
 
     private Profil joueur;
@@ -50,7 +53,7 @@ public class ControllerMenuProfils {
      * Initialise le menu de sélection d'affichages des profils et son contrôleur.
      *
      * @param stage La fenêtre contenant la scène.
-     * @throws IOException {@inheritDoc}
+     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû être lu.
      */
     public ControllerMenuProfils(Stage stage) throws IOException {
         this.joueur = Profil.getInstance();
@@ -192,10 +195,9 @@ public class ControllerMenuProfils {
     /**
      * Méthode pour récupérer les joueurs créés
      *
-     * @throws IOException           {@inheritDoc}
-     * @throws NumberFormatException {@inheritDoc}
+     * @throws IOException           lancé lorsque le fichier correspondant n'a pas pû être lu.
      */
-    public void chargerTableau() throws NumberFormatException, IOException {
+    public void chargerTableau() throws IOException {
         // Récupération des profils existants
         profils_attributs = Sauvegarder.listeFichiers(Path.repertoire_lvl);
         for (int i = 0; i < profils_attributs.size(); i++) {
@@ -287,6 +289,7 @@ public class ControllerMenuProfils {
 
     /**
      * Getter
+     * @return La liste des nom de tout les profils
      */
     public List<String> getProfilsAttributs() {
         return profils_attributs;
