@@ -6,12 +6,12 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.Pane;
 
 /**
- * Implémentation du score pour le mode zen
- * On calcule via un système d'étoiles allant de 0 à 5
- * 
+ * Cette classe représente une implémentation concrète de l'interface ScoreInterface, qui calcule le score pour le mode zen en utilisant un système d'étoiles allant de 0 à 5.
+ * Elle contient une variable double représentant le nombre d'étoiles, ainsi qu'un objet Rating de la librairie ControlsFX utilisé pour l'affichage graphique du score.
  * @author Antoine Couapel
  * @version 1.0
  */
+
 public class ScoreZen implements ScoreInterface {
 
     double etoiles;
@@ -22,9 +22,9 @@ public class ScoreZen implements ScoreInterface {
     }
 
     /**
-     * Réduction du nombre d'étoiles si une aide est utilisée
-     * 
-     * @param aide valeur de la pénalité appliquer à l'utilisation d'une aide
+     * Applique une pénalité de 0.5 étoile si une aide est utilisée.
+     * Si l'évaluation actuelle des étoiles est inférieure à 0, aucune pénalité n'est appliquée.
+     * Met à jour l'affichage de l'évaluation du score.
      */
     @Override
     public void aideUtilise() {
@@ -35,27 +35,43 @@ public class ScoreZen implements ScoreInterface {
         }
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void grilleComplete() {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void checkUtilise() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'start'");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void stop() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'stop'");
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void restart() {
         // TODO Auto-generated method stub
@@ -63,9 +79,9 @@ public class ScoreZen implements ScoreInterface {
     }
 
     /**
-    * Cette méthode permet de créer un objet Pane contenant un Rating, et d'initialiser les propriétés de celui-ci selon les valeurs définies dans l'objet ScoreZen.
-    * @return l'objet Pane contenant le Rating initialisé
-    */
+     * Cette méthode permet de créer un objet Pane contenant un Rating, et d'initialiser les propriétés de celui-ci selon les valeurs définies dans l'objet ScoreZen.
+     * @return l'objet Pane contenant le Rating initialisé
+     */
 
     @Override
     public Pane get_Pane() {
@@ -84,6 +100,10 @@ public class ScoreZen implements ScoreInterface {
         return ratingPane;                      // On retourne l'objet Pane contenant le Rating initialisé
     }
     
+
+    /**
+     * {@inheritDoc}
+     */
     public int getScore() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getScore'");
