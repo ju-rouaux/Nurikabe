@@ -33,8 +33,8 @@ public class ControllerMenuRegles {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuRegles(Stage stage, Profil joueur) throws IOException {
-        this.joueur = joueur;
+    public ControllerMenuRegles(Stage stage) throws IOException {
+        this.joueur = Profil.getInstance();
 
         this.stage = stage;
 
@@ -59,7 +59,7 @@ public class ControllerMenuRegles {
      */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuPrincipal(stage, joueur).getScene());
+        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
     }
 
 }

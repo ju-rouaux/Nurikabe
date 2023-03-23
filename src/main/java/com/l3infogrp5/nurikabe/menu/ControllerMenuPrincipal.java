@@ -42,8 +42,8 @@ public class ControllerMenuPrincipal {
      * @param stage la fenêtre contenant la scène.
      * @throws IOException
      */
-    public ControllerMenuPrincipal(Stage stage, Profil joueur) throws IOException {
-        this.joueur = joueur;
+    public ControllerMenuPrincipal(Stage stage) throws IOException {
+        this.joueur = Profil.getInstance();
 
         this.stage = stage;
 
@@ -78,7 +78,7 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void profilsClique(ActionEvent event) throws IOException {
-        ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage, joueur);
+        ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage);
         stage.setScene(controller_profil.getScene());
         controller_profil.chargerTableau();
     }
@@ -88,7 +88,7 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void reglesClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuRegles(stage, joueur).getScene());
+        stage.setScene(new ControllerMenuRegles(stage).getScene());
     }
 
     /**

@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * Jeu du Nurikabe.
@@ -36,7 +35,8 @@ public class Nurikabe extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage, Profil.getInstance());
+        Profil.getInstance().chargerProfil(Profil.getJoueur());
+        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
 
         stage.setMinHeight(480);
         stage.setMinWidth(640);

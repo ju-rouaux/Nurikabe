@@ -105,6 +105,6 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void retourClique() throws Exception {
-        stage.setScene(new ControllerMenuPrincipal(stage, joueur).getScene());
+        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
     }
 }

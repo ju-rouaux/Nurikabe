@@ -51,8 +51,8 @@ public class ControllerMenuProfils {
      * @param stage La fenêtre contenant la scène.
      * @throws IOException {@inheritDoc}
      */
-    public ControllerMenuProfils(Stage stage, Profil joueur) throws IOException {
-        this.joueur = joueur;
+    public ControllerMenuProfils(Stage stage) throws IOException {
+        this.joueur = Profil.getInstance();
 
         this.stage = stage;
 
@@ -81,7 +81,7 @@ public class ControllerMenuProfils {
      */
     @FXML
     private void retourClique(ActionEvent event) throws IOException {
-        stage.setScene(new ControllerMenuPrincipal(stage, joueur).getScene());
+        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
     }
 
     /**
@@ -126,10 +126,10 @@ public class ControllerMenuProfils {
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.showAndWait();
 
-        joueur.chargerProfil(nom_joueur);
-
         // Modification de l'affichage
         afficherNouveauxProfil(i);
+
+        joueur.chargerProfil(nom_joueur);
 
         // On ajoute le profil créé aux profils existant et on met à jour le tableau des noms.
         ajoutProfils(nom_joueur);
@@ -223,7 +223,7 @@ public class ControllerMenuProfils {
      * @param nom_joueur Le nom du joueur a ajouté.
      */
     private void ajoutProfils(String nom_joueur) {
-        profils_attributs.set(profils_attributs.size() - 1, nom_joueur);
+        profils_attributs.add(nom_joueur);
     }
 
     /**
@@ -279,7 +279,7 @@ public class ControllerMenuProfils {
         Sauvegarder.supprimerProfil(nom_joueur);
 
         // Rechargement de la scène
-        ControllerMenuProfils reload = new ControllerMenuProfils(stage, joueur);
+        ControllerMenuProfils reload = new ControllerMenuProfils(stage);
         stage.setScene(reload.getScene());
         reload.chargerTableau();
     }

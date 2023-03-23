@@ -33,8 +33,8 @@ public class ControllerMenuNiveau {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuNiveau(Stage stage, Profil joueur) throws IOException {
-        this.joueur = joueur;
+    public ControllerMenuNiveau(Stage stage) throws IOException {
+        this.joueur = Profil.getInstance();
 
         this.stage = stage;
 
