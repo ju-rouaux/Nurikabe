@@ -26,21 +26,32 @@ private FXMLLoader loader;
 private Scene scene;
 private int id_niveau;
 
-
 @FXML
 private BorderPane borderPane;
+
 @FXML
 private Button btn_retour;
+
 @FXML
 private TableColumn<Scoring, Date> date;
+
+@FXML
+private TableColumn<Scoring, Date> date_moi;
+
 @FXML
 private TableColumn<Scoring, String> nom;
+
 @FXML
 private TableColumn<Scoring, Double> score;
+
 @FXML
-private ScrollPane scrollPane;
+private TableColumn<Scoring, Double> score_moi;
+
 @FXML
 private TableView<Scoring> tableau;
+
+@FXML
+private TableView<Scoring> tableau_moi;
 
 
 
@@ -73,8 +84,18 @@ public void initialize() {
     this.tableau.getSortOrder().addAll(date, nom, score);
      
 
-    
-// Mettre à jour la colonne date avec la nouvelle valeur
+
+
+    this.date_moi.setCellValueFactory(new PropertyValueFactory<>("Date"));
+    this.score_moi.setCellValueFactory(new PropertyValueFactory<>("score"));
+
+    ObservableList<Scoring> items_moi = FXCollections.observableArrayList(
+        new Scoring("é",22.1, Date.valueOf("2022-02-01")),
+        new Scoring("ze",13.0, Date.valueOf("2022-03-01"))
+    );
+
+    this.tableau_moi.setItems(items_moi);
+
     //this.date.setVisible(false);
     this.date.setVisible(true);
 }
