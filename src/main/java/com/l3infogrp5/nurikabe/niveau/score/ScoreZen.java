@@ -62,21 +62,26 @@ public class ScoreZen implements ScoreInterface {
         throw new UnsupportedOperationException("Unimplemented method 'restart'");
     }
 
+    /**
+    * Cette méthode permet de créer un objet Pane contenant un Rating, et d'initialiser les propriétés de celui-ci selon les valeurs définies dans l'objet ScoreZen.
+    * @return l'objet Pane contenant le Rating initialisé
+    */
+
     @Override
     public Pane get_Pane() {
-        rating.setUpdateOnHover(false);
-        rating.setDisable(true);
-        rating.setPartialRating(true);
-        rating.setRating(etoiles);
+        rating.setUpdateOnHover(false); // On désactive la mise à jour du Rating au survol de la souris
+        rating.setDisable(true);        // On désactive la possibilité de cliquer sur le Rating
+        rating.setPartialRating(true);  // On active l'affichage des demi-étoiles
+        rating.setRating(etoiles);             // On définit la valeur du Rating en fonction du nombre d'étoiles
 
         /* Augmente la saturation mais ça colore le fond en rose
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setSaturation(1);
         rating.setEffect(colorAdjust);*/
 
-        Pane ratingPane = new Pane();
-        ratingPane.getChildren().add(rating);
-        return ratingPane;
+        Pane ratingPane = new Pane();           // On crée un nouvel objet Pane pour contenir le Rating
+        ratingPane.getChildren().add(rating);   // On ajoute le Rating à l'objet Pane
+        return ratingPane;                      // On retourne l'objet Pane contenant le Rating initialisé
     }
     
     public int getScore() {
