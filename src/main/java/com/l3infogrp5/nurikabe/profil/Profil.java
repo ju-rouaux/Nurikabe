@@ -136,8 +136,6 @@ public class Profil {
      */
     public void setMode_de_jeu(String mdj) {
         mode_de_jeu = mdj;
-        //TODO temporaire : mode de jeu detente
-        mode_de_jeu = "detente";
     }
 
     /**
