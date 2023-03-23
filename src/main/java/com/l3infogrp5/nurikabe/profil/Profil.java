@@ -25,7 +25,15 @@ import java.util.List;
 public class Profil {
 
     /* L'instance du profil */
-    private static Profil instance = null;
+    private static Profil instance;
+
+    static {
+        try {
+            instance = new Profil();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /* Les données du niveau */
     private static DonneesNiveau donneesNiveau;
@@ -58,12 +66,8 @@ public class Profil {
      * Retourne l'instance du profil.
      *
      * @return l'instance unique de la classe Profil
-     * @throws IOException si le fichier de sauvegarde n'existe pas
      */
-    public static Profil getInstance() throws IOException {
-        if (instance == null) {
-            instance = new Profil();
-        }
+    public static Profil getInstance() {
         return instance;
     }
 
