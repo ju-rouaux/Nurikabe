@@ -14,7 +14,7 @@ import com.l3infogrp5.nurikabe.profil.Profil;
 /**
  * Contrôleur du menu d'affichage des règles, et sa scène.
  * 
- * @author Julien Rouaux - Nicolas Gouget
+ * @author Julien Rouaux - Nicolas
  */
 public class ControllerMenuRegles {
 
