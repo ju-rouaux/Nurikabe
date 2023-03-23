@@ -10,6 +10,8 @@ import javafx.application.Platform;
 
 import java.io.IOException;
 
+import com.l3infogrp5.nurikabe.profil.Profil;
+
 /**
  * Contrôleur du menu principal, et sa scène.
  * 
@@ -63,6 +65,7 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void jouerClique(ActionEvent event) throws Exception {
+        Profil.getInstance().chargerProfil("Julieng"); // TODO charger profil dans menu selection
         stage.setScene(new ControllerMenuModeJeu(stage).getScene());
     }
 

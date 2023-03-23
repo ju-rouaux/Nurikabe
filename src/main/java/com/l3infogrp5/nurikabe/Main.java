@@ -1,6 +1,5 @@
 package com.l3infogrp5.nurikabe;
 
-import java.io.*;
 import javafx.application.Application;
 
 /**
@@ -17,7 +16,6 @@ public class Main {
      * Lancement de l'application.
      *
      * @param args arguments de ligne de commande.
-     * @throws IOException
      */
     public static void main(String[] args) {
         Application.launch(Nurikabe.class, args);

@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Stack;
 
@@ -12,7 +13,6 @@ import javafx.beans.property.ReadOnlyBooleanWrapper;
  * Classe enregistrant l'historique des mouvements du joueur.
  * Il est possible de lier des éléments graphiques aux propriétés
  * {@link #peutAnnuler()} et {@link #peutRetablir()} grâce à la méthode
- * {@link #lierInterface(BooleanProperty, BooleanProperty)}.
  *
  * @author Julien Rouaux
  */
@@ -97,7 +97,7 @@ public class Historique implements Serializable {
      * A appeler à chaque changement effectué sur la pile.
      * Actualise les états peutAnnuler et peutRetablir.
      */
-    public void actualiserEtat() {
+    private void actualiserEtat() {
         this.peutAnnuler.set(curseur >= 0);
         this.peutRetablir.set(this.pile.size() - 1 > curseur);
     }
@@ -137,7 +137,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne un mouvement pouvant être rétabli selon l'historique.
-     * Toujous vérifier si un mouvement peut être rétabli avec
+     * Toujours vérifier si un mouvement peut être rétabli avec
      * {@link #peutRetablir()}.
      *
      * @return un mouvement pouvant être rétabli selon l'historique.
@@ -156,7 +156,7 @@ public class Historique implements Serializable {
 
     /**
      * Retourne un mouvement pouvant être annulé selon l'historique.
-     * Toujous vérifier si un mouvement peut être annulé avec
+     * Toujours vérifier si un mouvement peut être annulé avec
      * {@link #peutAnnuler()}.
      *
      * @return un mouvement pouvant être annulé selon l'historique.
@@ -207,9 +207,17 @@ public class Historique implements Serializable {
         return this.peutRetablir.getReadOnlyProperty();
     }
 
-    public void initTransientBoolean() {
+    /**
+     * Méthode exécutée après la deserialization de l'objet.
+     * 
+     * @param in paramètre pour invoquer le mécanisme de deserialization par défaut.
+     * @throws IOException            -
+     * @throws ClassNotFoundException -
+     */
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
         this.peutAnnuler = new ReadOnlyBooleanWrapper(false);
         this.peutRetablir = new ReadOnlyBooleanWrapper(false);
+        this.actualiserEtat();
     }
-
 }

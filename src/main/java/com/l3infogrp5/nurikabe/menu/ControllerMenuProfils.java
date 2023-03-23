@@ -89,7 +89,7 @@ public class ControllerMenuProfils {
 
         System.out.println(joueur);
 
-        new Profil(joueur, null, 0);
+        //new Profil(joueur, null, 0);
 
         ((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).setText(joueur);
         ((Button) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0)).setText("");
@@ -114,7 +114,7 @@ public class ControllerMenuProfils {
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(0))) {
                 // recuperation du pseudo
                 joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(1)).getText());
-                dossier_joueur = Path.repertoire_Save;
+                dossier_joueur = Path.repertoire_save;
                 System.out.println(joueur);
                 if (joueur != " " && Sauvegarder.dossierExistants(dossier_joueur)) {
                     System.out.println("Profil " + joueur + " charger");

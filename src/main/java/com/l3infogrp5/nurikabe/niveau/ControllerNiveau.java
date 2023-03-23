@@ -1,19 +1,32 @@
 package com.l3infogrp5.nurikabe.niveau;
 
+import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
+import com.l3infogrp5.nurikabe.niveau.grille.Grille;
+import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
+import com.l3infogrp5.nurikabe.utils.Path;
+
+import javafx.animation.TranslateTransition;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
-
-import com.l3infogrp5.nurikabe.profil.Profil;
-import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
+import java.util.List;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -22,61 +35,56 @@ import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
  */
 public class ControllerNiveau {
 
-    private FXMLLoader loader;
-    private Stage stage;
-    private Scene scene;
-
-    private Niveau niveau;
+    private final FXMLLoader loader;
+    private final Stage stage;
+    private final Scene scene;
+    Profil joueur;
+    private final Grille grille;
+    private BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
 
     @FXML
     private Button btn_aide;
-
     @FXML
     private Button btn_check;
-
     @FXML
     private Button btn_redo;
-
     @FXML
     private Button btn_reset;
-
     @FXML
     private Button btn_retour;
-
     @FXML
     private Button btn_undo;
-
+    @FXML
+    private ToggleButton toggle_aide;
     @FXML
     private BorderPane panneau_principal;
-
     @FXML
     private BorderPane panneau_score;
+    @FXML
+    private StackPane panneau_central;
+    @FXML
+    private BorderPane panneau_aide;
 
     @FXML
     private HBox barre;
 
-    /*
-     * temp
-     */
-
-     Profil joueur;
-
     /**
      * Initialise la vue du niveau.
      *
-     * @param stage  la fenêtre contenant la scène.
-     * @param niveau le niveau à lancer.
+     * @param stage   la fenêtre contenant la scène.
+     * @param niveaux la liste de niveaux à jouer successivement.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerNiveau(Stage stage, Niveau niveau) throws IOException {
+    public ControllerNiveau(Stage stage, List<Integer> niveaux) throws IOException {
         this.stage = stage;
-        // this.niveau = niveau;
+        this.aide_affichee = new SimpleBooleanProperty();
+        joueur = Profil.getInstance();
 
-        joueur = new Profil("Julieng", "detente", 0);
-
-        this.niveau = joueur.chargerNiveau(joueur.getIdNiveau());
-
+        // TODO : préparer le terrain pour enchainer plusieurs niveaux
+        int id_niveau = niveaux.get(0);
+        Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
+        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -95,15 +103,40 @@ public class ControllerNiveau {
         this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(40));
 
         // Mettre la grille au centre (et ajouter une marge)
-        Pane grille =  this.niveau.getGrille().getPanneau();
-        BorderPane.setMargin(grille, new Insets(30, 30, 30, 30));
-        this.panneau_principal.setCenter(grille);
+        Pane panneau_grille = grille.getPanneau();
+        StackPane.setMargin(panneau_grille, new Insets(30, 30, 30, 30));
+        this.panneau_central.getChildren().add(panneau_grille);
+
+        // Recharger la fenêtre d'aide pour l'afficher par dessus la grille
+        this.panneau_central.getChildren().remove(panneau_aide);
+        this.panneau_central.getChildren().add(panneau_aide);
+
+        // Ne pas faire de rendu en dehors du panneau central (pour ne pas masquer la
+        // barre d'outils)
+        Rectangle zone_clip = new Rectangle();
+        zone_clip.widthProperty().bind(this.panneau_central.widthProperty());
+        zone_clip.heightProperty().bind(this.panneau_central.heightProperty());
+        this.panneau_central.setClip(zone_clip);
 
         // TODO charger les données de score
 
         // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.niveau.getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.niveau.getHistorique().peutRetablirProperty().not());
+        this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
+
+        // Afficher l'aide lorsque la Property aide_affichee est active.
+        this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
+        this.toggle_aide.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            TranslateTransition transition = new TranslateTransition(Duration.millis(150),
+                    ControllerNiveau.this.panneau_aide);
+
+            public void changed(ObservableValue<? extends Boolean> obj, Boolean ancien, Boolean nouveau) {
+                // De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers
+                // le haut sinon
+                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight()) * (nouveau == true ? 1 : -1));
+                transition.play();
+            }
+        });
     }
 
     /**
@@ -121,9 +154,13 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
+        joueur.sauvegarderNiveau(grille);
+        // TODO : remplacer null avec le getScore du niveau
+        Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
+        this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
+                + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
-        joueur.sauvegarderNiveau(this.niveau.getGrille().getMatrice(), this.niveau.getHistorique());
     }
 
     /**
@@ -131,7 +168,7 @@ public class ControllerNiveau {
      */
     @FXML
     private void undoClique() {
-        this.niveau.getGrille().undo();
+        grille.undo();
     }
 
     /**
@@ -139,6 +176,6 @@ public class ControllerNiveau {
      */
     @FXML
     private void redoClique() {
-        this.niveau.getGrille().redo();
+        grille.redo();
     }
 }

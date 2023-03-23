@@ -4,10 +4,12 @@
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
@@ -84,6 +86,20 @@
            </items>
         </ToolBar>
      </top>
+     <center>
+         <StackPane fx:id="panneau_central" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <BorderPane fx:id="panneau_aide" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" translateY="-170.0" StackPane.alignment="TOP_CENTER">
+                  <center>
+                     <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: ffffff;" text="Demonstration" BorderPane.alignment="CENTER" />
+                  </center>
+                  <bottom>
+                     <ToggleButton fx:id="toggle_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-background-radius: 0 0 100% 100%;" text="\\/" textOverrun="CLIP" BorderPane.alignment="CENTER" />
+                  </bottom>
+               </BorderPane>
+            </children>
+         </StackPane>
+      </center>
   </BorderPane>
    <stylesheets>
       <URL value="@../css/niveau.css" />
