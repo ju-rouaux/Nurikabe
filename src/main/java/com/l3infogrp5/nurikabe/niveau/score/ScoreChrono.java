@@ -9,7 +9,6 @@ import javafx.scene.text.Text;
  * @author Antoine Couapel, Killian Rattier
  * @version 1.0
  */
-
 abstract public class ScoreChrono implements ScoreInterface {
 
     public int sec;
@@ -31,21 +30,6 @@ abstract public class ScoreChrono implements ScoreInterface {
      */
     public void afficheChrono() {
 
-        // endless
-        /*
-         * if (sec < 0) {
-         * min--;
-         * sec = 59;
-         * 
-         * }
-         * 
-         * //CLM
-         * if (sec == 60) {
-         * min++;
-         * sec = 0;
-         * 
-         * }
-         */
         min = totalSec / 60;
         sec = totalSec % 60;
 
@@ -57,34 +41,37 @@ abstract public class ScoreChrono implements ScoreInterface {
     }
 
     /**
-     * Méthode abstraite de lancement de chrono
+     * {@inheritDoc}
      */
     public void start() {
     }
 
-    @Override
+
     /**
-     * Méthode abstraite à lancer quand une aide est utilisée
+     * {@inheritDoc}
      */
+    @Override
     public void aideUtilise() {
     }
 
-    @Override
+
     /**
-     * Méthode abstraite à lancer quand un check est utilisée
+     * {@inheritDoc}
      */
+    @Override
     public void checkUtilise() {
     }
 
-    @Override
+
     /**
-     * Méthode abstraite à lancer quand une grille a été complétée
+     * {@inheritDoc}
      */
+    @Override
     public void grilleComplete() {
     }
 
     /**
-     * Méthode qui retourne le score
+     * {@inheritDoc}
      * 
      * @return totalSec
      */
@@ -95,14 +82,14 @@ abstract public class ScoreChrono implements ScoreInterface {
     }
 
     /**
-     * Méthode abstraite à lancer quand une grille est recommencée
+     * {@inheritDoc}}
      */
     @Override
     public void restart() {
     }
 
     /**
-     * Méthode qui retourne l'affichage du score
+     * {@inheritDoc}}
      * 
      * @return affichage
      */

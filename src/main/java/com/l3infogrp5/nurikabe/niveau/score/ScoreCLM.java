@@ -39,7 +39,7 @@ public class ScoreCLM extends ScoreChrono {
     }
 
     /**
-     * Méthode d'arrêt du chrono
+     * {@inheritDoc}}
      */
     @Override
     public void stop() {
