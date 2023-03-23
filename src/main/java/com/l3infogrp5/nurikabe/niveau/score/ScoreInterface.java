@@ -48,8 +48,8 @@ public interface ScoreInterface {
 
     /**
      * Méthode qui retourne le score
-     * @return int
+     * @return Object
      */
-    public int getScore();
+    public Object getScore();
 
 }

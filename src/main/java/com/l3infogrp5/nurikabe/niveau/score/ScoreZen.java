@@ -109,10 +109,11 @@ public class ScoreZen implements ScoreInterface {
     
 
     /**
-     * {@inheritDoc}
+     * Méthodes qui retourne le nombre d'étoiles restante à la fin de la partie
+     * @return etoiles
      */
-    public int getScore() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getScore'");
+    @Override
+    public Object getScore() {
+        return etoiles;
     }
 }

@@ -13,9 +13,6 @@ import javafx.util.Duration;
  */
 public class ScoreEndless extends ScoreChrono {
 
-    /**Calcul du temps qui passe*/
-    public Timeline timeline;
-
     /**Nombres de grilles complétées lors de la partie*/
     public int nbGrilles = 0;
 
@@ -107,9 +104,11 @@ public class ScoreEndless extends ScoreChrono {
     }
 
     /**
-     * {@inheritDoc}
+     * Méthode qui retourne le nombre de grilles complétées durant la partie
+     * @return nbGrilles
      */
-    public int getScore() {
+    @Override
+    public Object getScore() {
         return nbGrilles;
     }
 
