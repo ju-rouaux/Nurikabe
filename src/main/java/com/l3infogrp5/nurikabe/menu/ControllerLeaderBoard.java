@@ -24,6 +24,7 @@ public class ControllerLeaderBoard {
 private Stage stage;
 private FXMLLoader loader;
 private Scene scene;
+private int id_niveau;
 
 
 @FXML
@@ -43,8 +44,9 @@ private TableView<Scoring> tableau;
 
 
 
-public ControllerLeaderBoard(Stage stage,int indice) throws IOException {
+public ControllerLeaderBoard(Stage stage,int id_niveau) throws IOException {
     this.stage = stage;
+    this.id_niveau=id_niveau;
 
     loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("/FXML/leaderboard.fxml"));
@@ -82,7 +84,7 @@ public void initialize() {
  */
 @FXML
 private void retourClique(ActionEvent event) throws Exception {
-    stage.setScene(new ControllerMenuNiveau(stage).getScene());
+    stage.setScene(new ControllerMenuSelection(stage).getScene());
 }
 
 /**
