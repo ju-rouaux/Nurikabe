@@ -38,7 +38,7 @@ public class ControllerMenuProfils {
     /**
      * Le nom du joueur actif
      */
-    public String nom_joueur;
+    public static String nom_joueur;
 
     private Profil joueur;
     private int profil_actif;
@@ -195,7 +195,7 @@ public class ControllerMenuProfils {
     /**
      * Méthode pour récupérer les joueurs créés
      *
-     * @throws IOException           lancé lorsque le fichier correspondant n'a pas pû être lu.
+     * @throws IOException lancé lorsque le fichier correspondant n'a pas pû être lu.
      */
     public void chargerTableau() throws IOException {
         // Récupération des profils existants
@@ -206,17 +206,19 @@ public class ControllerMenuProfils {
         }
 
         // Récupération du profil actif
-        File file = new File(Path.repertoire_profils, "actif");
+        File file = new File(Path.repertoire_profils, "profil_actif");
         if (file.exists()) {
-            try (Scanner reader = new Scanner(file)) {
-                int actif = reader.nextInt();
-                String nom_actif = reader.nextLine().trim();
-                joueur.chargerProfil(nom_actif);
-                if (!nom_actif.equals(Profil.getJoueur())) {
-                    joueur.chargerProfil(nom_actif);
-                }
-                setActiveProfil(actif);
+            Scanner reader = new Scanner(file);
+            
+            int actif = reader.nextInt();
+            nom_joueur = reader.nextLine().trim();
+
+            if (!nom_joueur.equals(Profil.getJoueur())) {
+                Profil.getInstance().chargerProfil(nom_joueur);
             }
+
+            setActiveProfil(actif);
+            reader.close();
         }
     }
 
@@ -296,7 +298,7 @@ public class ControllerMenuProfils {
     }
 }
 
-// TODO : erreur chargement profil apres partie
+// TODO : charger dernier profil actif au demarrage + regeler bug creation profil "detente"
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond

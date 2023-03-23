@@ -94,7 +94,7 @@ public class ControllerNouveauxProfil {
         // Vérifie que le pseudo saisi respecte le pattern.
         Matcher m = p.matcher(pseudo.getText());
         if (m.matches()) {
-            profils.nom_joueur = pseudo.getText();
+            ControllerMenuProfils.nom_joueur = pseudo.getText();
             pseudo_correct = true;
         } else {
             pseudo_correct = false;
