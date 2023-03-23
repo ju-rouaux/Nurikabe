@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
+
 /**
  * Classe pour sauvegarder le profil d'un joueur
  *
@@ -493,13 +495,13 @@ public class Sauvegarder {
      * Supprime le profil du joueur
      *
      * @param nom_joueur le nom du joueur
+     * @throws IOException lancé lorsque le dossier correspondant n'a pas pû être lu.
      */
-    public static void supprimerProfil(String nom_joueur) {
+    public static void supprimerProfil(String nom_joueur) throws IOException {
         File repertoire = new File(Path.repertoire_lvl + "/" + nom_joueur);
         if (repertoire.exists()) {
-            repertoire.delete();
+            FileUtils.deleteDirectory(repertoire);
             System.out.println("[Sauvegarde] Profil supprimé");
         }
     }
-
 }
