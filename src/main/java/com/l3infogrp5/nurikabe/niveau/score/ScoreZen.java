@@ -14,9 +14,16 @@ import javafx.scene.layout.Pane;
 
 public class ScoreZen implements ScoreInterface {
 
-    double etoiles;
+    /** Nombre d'étoiles pour le score */
+    private double etoiles;
+    /** Rating utilisé pour l'affichage graphique du score */
     public final Rating rating = new Rating();
     
+    /**
+     * Constructeur de la classe ScoreZen.
+     * @param etoiles le nombre d'étoiles initial du score.
+     */
+
     public ScoreZen(double etoiles) {
         this.etoiles = etoiles;
     }
