@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.niveau.score;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 /**
@@ -8,17 +9,35 @@ import javafx.scene.text.Text;
  * @author Antoine Couapel, Killian Rattier
  * @version 1.0
  */
-
 abstract public class ScoreChrono implements ScoreInterface {
 
+    /**secondes*/
     public int sec;
-    public int min;
+
+    /**minutes*/ 
+    public float min;
+
+    /**nombre total de secondes écoulées*/
+    public int totalSec;
+
+    /**Texte du chronomètre*/
     public Text text;
 
-    public ScoreChrono(int sec, int min, Text text) {
-        this.sec = sec;
-        this.min = min;
+    /**Zone d'affichage du chronomètre*/
+    public Pane affichage;
+
+    /**
+     * Constructeur du chronomètre
+     * 
+     * @param totalSec nombre total de secondes
+     * @param text texte du chronomètre
+     */
+    public ScoreChrono(int totalSec, Text text) {
+        this.totalSec = totalSec;
         this.text = text;
+
+        this.affichage = new Pane();
+        this.affichage.getChildren().setAll(text);
     }
 
     /**
@@ -26,32 +45,71 @@ abstract public class ScoreChrono implements ScoreInterface {
      */
     public void afficheChrono() {
 
-        if (sec > 10)
-            text.setText(min + ":" + sec);
+        min = totalSec / 60;
+        sec = totalSec % 60;
+
+        if (sec >= 10)
+            text.setText((int) min + ":" + (int) sec);
         else
-            text.setText(min + ":0" + sec);
+            text.setText((int) min + ":0" + (int) sec);
 
     }
 
     /**
-     * Méthode abstraite
+     * {@inheritDoc}
      */
-    public void calcul() {
+    public void start() {
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    /**
-     * Méthode abstraite à lancer quand une aide est utilisée
-     * 
-     * @param aide valeur de la pénalité appliquée à l'utilisation d'une aide
-     */
     public void aideUtilise() {
     }
 
-    @Override
+
     /**
-     * Méthode abstraite à lancer quand une grille a été complétée
+     * {@inheritDoc}
      */
+    @Override
+    public void checkUtilise() {
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void grilleComplete() {
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     * @return totalSec
+     */
+    @Override
+    public int getScore() {
+
+        return totalSec;
+    }
+
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
+    public void restart() {
+    }
+
+    /**
+     * {@inheritDoc}}
+     * 
+     * @return affichage
+     */
+    @Override
+    public Pane get_Pane() {
+        return this.affichage;
     }
 }
