@@ -1,6 +1,5 @@
 package com.l3infogrp5.nurikabe.niveau.score;
 
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 /**
@@ -13,17 +12,13 @@ import javafx.scene.text.Text;
 abstract public class ScoreChrono implements ScoreInterface {
 
     public int sec;
-    public float min;
-    public int totalSec;
+    public int min;
     public Text text;
-    public Pane affichage; 
 
-    public ScoreChrono(int totalSec, Text text) {
-        this.totalSec = totalSec;
+    public ScoreChrono(int sec, int min, Text text) {
+        this.sec = sec;
+        this.min = min;
         this.text = text;
-
-        this.affichage = new Pane();
-        this.affichage.getChildren().setAll(text);
     }
 
     /**
@@ -31,49 +26,26 @@ abstract public class ScoreChrono implements ScoreInterface {
      */
     public void afficheChrono() {
 
-        // endless
-        /*
-         * if (sec < 0) {
-         * min--;
-         * sec = 59;
-         * 
-         * }
-         * 
-         * //CLM
-         * if (sec == 60) {
-         * min++;
-         * sec = 0;
-         * 
-         * }
-         */
-        min = totalSec / 60;
-        sec = totalSec % 60;
-
-        if (sec >= 10)
-            text.setText((int) min + ":" + (int) sec);
+        if (sec > 10)
+            text.setText(min + ":" + sec);
         else
-            text.setText((int) min + ":0" + (int) sec);
+            text.setText(min + ":0" + sec);
 
     }
 
     /**
-     * Méthode abstraite de lancement de chrono
+     * Méthode abstraite
      */
-    public void start() {
+    public void calcul() {
     }
 
     @Override
     /**
      * Méthode abstraite à lancer quand une aide est utilisée
+     * 
+     * @param aide valeur de la pénalité appliquée à l'utilisation d'une aide
      */
     public void aideUtilise() {
-    }
-
-    @Override
-    /**
-     * Méthode abstraite à lancer quand un check est utilisée
-     */
-    public void checkUtilise() {
     }
 
     @Override
@@ -81,33 +53,5 @@ abstract public class ScoreChrono implements ScoreInterface {
      * Méthode abstraite à lancer quand une grille a été complétée
      */
     public void grilleComplete() {
-    }
-
-    /**
-     * Méthode qui retourne le score
-     * 
-     * @return totalSec
-     */
-    @Override
-    public int getScore() {
-
-        return totalSec;
-    }
-
-    /**
-     * Méthode abstraite à lancer quand une grille est recommencée
-     */
-    @Override
-    public void restart() {
-    }
-
-    /**
-     * Méthode qui retourne l'affichage du score
-     * 
-     * @return affichage
-     */
-    @Override
-    public Pane get_Pane() {
-        return this.affichage;
     }
 }

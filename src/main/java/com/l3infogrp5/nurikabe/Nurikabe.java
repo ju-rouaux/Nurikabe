@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -19,8 +20,9 @@ public class Nurikabe extends Application {
 
     /**
      * Constructeur.
+     * @throws FileNotFoundException Si le fichier de sauvegarde n'a pas été trouvé.
      */
-    public Nurikabe() {
+    public Nurikabe() throws FileNotFoundException {
         super();
 
         Sauvegarder.creerArborescence();
@@ -57,7 +59,11 @@ public class Nurikabe extends Application {
         // sauvegarde de la partie.
     }
 
-    private void testSauvegardeScoreProfil(){
+    /**
+     * Fonction de test pour la sauvegarde du profil
+     * @throws FileNotFoundException
+     */
+    private void testSauvegardeScoreProfil() throws FileNotFoundException {
         /*
          * TEMP
          */
@@ -108,7 +114,24 @@ public class Nurikabe extends Application {
     }
 }
 
-// Test affichage scores
+// Test affichage score détente
+// @Override
+// public void start(Stage primaryStage) {
+//     final Pane root = new Pane();
+//     final Scene scene = new Scene(root, 350, 300);
+
+//     ScoreZen score = new ScoreZen(5);
+//     score.aideUtilise();
+//     Pane scorePane = score.get_Pane();
+//     score.aideUtilise();
+//     score.aideUtilise();
+//     score.aideUtilise();
+//     score.aideUtilise();
+    
+//     root.getChildren().add(scorePane);
+// }
+
+// Test affichage scores CLM
 // @Override
 // public void start(Stage primaryStage) {
 

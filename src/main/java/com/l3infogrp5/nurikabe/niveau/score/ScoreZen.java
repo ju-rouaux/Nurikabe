@@ -1,19 +1,23 @@
 package com.l3infogrp5.nurikabe.niveau.score;
 
+import org.controlsfx.control.Rating;
+
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.Pane;
 
 /**
  * Implémentation du score pour le mode zen
- * On calcule via un système d'étoiles allant de 1 à 5
+ * On calcule via un système d'étoiles allant de 0 à 5
  * 
  * @author Antoine Couapel
  * @version 1.0
  */
 public class ScoreZen implements ScoreInterface {
 
-    float etoiles;
-
-    public ScoreZen(float etoiles) {
+    double etoiles;
+    public final Rating rating = new Rating();
+    
+    public ScoreZen(double etoiles) {
         this.etoiles = etoiles;
     }
 
@@ -25,9 +29,10 @@ public class ScoreZen implements ScoreInterface {
     @Override
     public void aideUtilise() {
 
-        if (etoiles > 1)
-            this.etoiles--;
-
+        if (etoiles >= 0) {
+            this.etoiles -= 0.5;
+            rating.setRating(etoiles);
+        }
     }
 
     @Override
@@ -51,22 +56,36 @@ public class ScoreZen implements ScoreInterface {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'stop'");
     }
-
     @Override
     public void restart() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'restart'");
     }
 
-    @Override
-    public Pane get_Pane() {
-        return null;
-    }
+    /**
+    * Cette méthode permet de créer un objet Pane contenant un Rating, et d'initialiser les propriétés de celui-ci selon les valeurs définies dans l'objet ScoreZen.
+    * @return l'objet Pane contenant le Rating initialisé
+    */
 
     @Override
+    public Pane get_Pane() {
+        rating.setUpdateOnHover(false); // On désactive la mise à jour du Rating au survol de la souris
+        rating.setDisable(true);        // On désactive la possibilité de cliquer sur le Rating
+        rating.setPartialRating(true);  // On active l'affichage des demi-étoiles
+        rating.setRating(etoiles);             // On définit la valeur du Rating en fonction du nombre d'étoiles
+
+        /* Augmente la saturation mais ça colore le fond en rose
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setSaturation(1);
+        rating.setEffect(colorAdjust);*/
+
+        Pane ratingPane = new Pane();           // On crée un nouvel objet Pane pour contenir le Rating
+        ratingPane.getChildren().add(rating);   // On ajoute le Rating à l'objet Pane
+        return ratingPane;                      // On retourne l'objet Pane contenant le Rating initialisé
+    }
+    
     public int getScore() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getScore'");
     }
-
 }
