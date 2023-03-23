@@ -11,7 +11,6 @@ import javafx.util.Duration;
  * @author Antoine Couapel, Killian Rattier
  * @version 1.0
  */
-
 public class ScoreCLM extends ScoreChrono {
 
     public Timeline timeline;

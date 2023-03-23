@@ -16,7 +16,7 @@ abstract public class ScoreChrono implements ScoreInterface {
     public float min;
     public int totalSec;
     public Text text;
-    public Pane affichage;
+    public Pane affichage; 
 
     public ScoreChrono(int totalSec, Text text) {
         this.totalSec = totalSec;
