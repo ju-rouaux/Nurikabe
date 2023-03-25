@@ -31,13 +31,62 @@ public class Zone {
     }
 
     /**
+     * Méthode permettant de supprimer une position de la zone.
+     * 
+     * @return la liste des positions formant la zone.
+     */
+    public List<Position> getZone() {
+        return this.zone;
+    }
+
+    /**
+     * Méthode permettant de savoir si une position est dans la zone.
+     * 
+     * @param pos la position à tester.
+     * @return true si la position est dans la zone, false sinon.
+     */
+    public boolean isInZone(Position pos) {
+        return this.zone.indexOf(pos) > -1;
+    }
+
+    /**
+     * Méthode permettant de savoir si la zone est vide.
+     * 
+     * @return true si la zone est vide, false sinon.
+     */
+    public boolean isEmty() {
+        return this.zone.isEmpty();
+    }
+
+    /**
+     * Méthode permettant de supprimer une position de la zone.
+     * 
+     * @param pos la position à supprimer.
+     */
+    public void removeFromZone(Position pos) {
+        this.zone.remove(pos);
+    }
+
+    /**
+     * Méthode permettant de trouver un chemin existant à partir d'une position.
+     * 
+     * @param pos la position à tester.
+     * @return La liste des positions formant la zone.
+     */
+    public List<Position> findZone(Position pos) {
+        this.zone = new ArrayList<Position>();
+        findZone_recursive(pos);
+        this.zone.add(pos);
+        return this.zone;
+    }
+
+    /**
      * Méthode permettant de trouver un chemin existant à partir d'une position.
      * 
      * @param pos la position à tester.
      * 
      */
-    public List<Position> findZone(Position pos) {
-
+    private List<Position> findZone_recursive(Position pos) {
         List<Etat> etatInit = new ArrayList<>();
         etatInit.add(Etat.fromInt(matrice.get(pos)));
 
@@ -59,7 +108,7 @@ public class Zone {
                     if (zone.indexOf(checkVois.get(i)) == -1) {
                         zone.add(checkVois.get(i));
                         // Appel récusif pour récupérer les voisins similaires à la zone
-                        findZone(checkVois.get(i));
+                        findZone_recursive(checkVois.get(i));
                     }
                 }
             }
@@ -71,7 +120,8 @@ public class Zone {
     }
 
     /**
-     * Decremente la valeur d'une case en fonction de la taille de la zone.
+     * Méthode qui décremente la valeur d'une case en fonction de la taille de la
+     * zone.
      * 
      * @param matrice la matrice d'entiers dans laquelle on veut décrémenter la
      *                valeur.
@@ -99,15 +149,20 @@ public class Zone {
             System.out.println("Val pos : " + matrice.get(position) + "\nTaille zone : " + laZone.zone.size()
                     + "\nValeur dec :" + (matrice.get(position) - laZone.zone.size()));
 
-            int valeur_decremente = matrice.get(position) - laZone.zone.size();
-
+            int valeur_decremente = matrice.get(position) - laZone.zone.size() + 1;
+            List<Position> zone = laZone.getZone();
+            // for (int i = 0; i < zone.size()-1; i++) {
+            // matrice.set(zone.get(i) , valeur_decremente);
+            // all_zone.add(zone.get(i));
+            // }
             for (Position cell_in_zone : laZone.zone) {
                 matrice.set(cell_in_zone, valeur_decremente);
                 all_zone.add(cell_in_zone);
+                this.removeFromZone(cell_in_zone);
             }
 
-            all_zone.add(position);
-            matrice.set(position, valeur_decremente);
+            // all_zone.add(position);
+            // matrice.set(position, valeur_decremente);
 
         }
 
@@ -133,37 +188,4 @@ public class Zone {
         System.out.println(matrice);
     }
 
-    public static void main(String[] args) {
-        Matrice grille = new Matrice(new int[][] {
-                { -1, 0, 3, 0, 0, 0, -2 },
-                { -1, 0, -2, -2, 0, 0, 0 },
-                { -1, 0, -2, -2, 0, 0, 0 },
-                { -1, 0, 0, 0, -2, 0, 0 },
-                { -1, -1, 0, 0, 0, 0, 0 },
-                { 0, -1, 0, 0, 0,  0, 0 },
-                { 0, 0, -1, 0, 0, -2, 3 },
-                { 0, 0, 0, 0, 0,  -2, 0 },
-                { 0, 0, 0, 0, 0,  10, 0 },
-                { 0, -2, 5, -2, 0, 0, 0 },
-                { 0, 0, 0, 0, 0,   0, 0 },
-                { 0, 0, 0, 0, 0,   0, 0 },
-        });
-
-        System.out.println("nombre_ligne : " + grille.getNbLigne());
-
-        System.out.println("nombre_colonne : " + grille.getNbColonne());
-
-        System.out.println("Grille avant affichage des zone :\n");
-        System.out.println(grille);
-        System.out.println("\n");
-        Position pos = new Position(0, 0);
-
-        Zone laZone = new Zone(grille);
-        laZone.findZone(pos);
-        // System.out.println(laZone.zone);
-        // System.out.println("Taille : "+laZone.zone.size());
-
-        System.out.println("Grille après affichage des zone :\n");
-        laZone.Decremente(grille);
-    }
 }
