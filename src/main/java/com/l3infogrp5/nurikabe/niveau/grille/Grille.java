@@ -1,7 +1,10 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
 import com.l3infogrp5.nurikabe.utils.Matrice;
@@ -13,6 +16,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -52,6 +57,8 @@ public class Grille {
 
     private Historique histo;
 
+    private GridPane panneau_grille; // Grille en elle même pour pouvoir la photographier
+
     /**
      * Créer une grille.
      * Utiliser {@link #getPanneau()} pour récupérer l'affichage de la grille
@@ -73,7 +80,7 @@ public class Grille {
         this.onVictoire = new ArrayList<>();
 
         // Créer une GridPane qui contient les cases
-        GridPane panneau_grille = new GridPane();
+        this.panneau_grille = new GridPane();
 
         // Adapter la taille de la GridPane à son panneau parent.
         // Cela permet de concerver le ratio hauteur-largeur en occupant un maximum
@@ -319,9 +326,40 @@ public class Grille {
 
     /**
      * Retourne la solution du niveau.
+     * 
      * @return la solution du niveau.
      */
-    public int [][] getSolution(){
+    public int[][] getSolution() {
         return this.solution;
+    }
+
+    /**
+     * Réalise une capture d'écran de la grille et la sauvegarde à l'emplacement
+     * donné.
+     * 
+     * @param emplacement l'emplacement de sauvegarde de la capture.
+     * @return vrai la capture a été sauvegardée, faux sinon.
+     */
+    public boolean capturerGrille(String emplacement) {
+        double old_Vgap = panneau_grille.getVgap();
+        double old_Hgap = panneau_grille.getHgap();
+
+        File file = new File(emplacement);
+
+        this.panneau_grille.setGridLinesVisible(true);
+        panneau_grille.setVgap(0);
+        panneau_grille.setHgap(0);
+        ImageView img = new ImageView(this.panneau_grille.snapshot(null, null));
+        this.panneau_grille.setGridLinesVisible(false);
+        panneau_grille.setVgap(old_Vgap);
+        panneau_grille.setHgap(old_Hgap);
+
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(img.getImage(), null), "png", file);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 }

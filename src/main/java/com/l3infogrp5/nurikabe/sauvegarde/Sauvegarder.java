@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Classe pour sauvegarder le profil d'un joueur
@@ -32,23 +33,22 @@ public class Sauvegarder {
      * @return vrai si la sauvegarde existe, faux sinon
      */
     public static boolean RechercherSauvegarde(String joueur) {
-        // Vérifier si le nom du joueur est nul
-        if (joueur == null) return false;
 
-        // Récupère tous les fichiers dans le répertoire
-        // Vérifier si le répertoire existe et s'il contient des fichiers
-        if (!dossierExistants(Path.repertoire_lvl)) {
-            // System.out.println("Il n'y pas de fichiers ou dossiers");
+        if (joueur == null) {
             return false;
-        } else Path.repertoire_lvl.listFiles();
+        }
 
-        // Parcourt tous les fichiers pour voir s'il y a une sauvegarde pour le joueur
-        for (File fichier : Path.repertoire_lvl.listFiles()) {
-            if (fichier.isDirectory() && fichier.getName().equals(joueur)) {
-                // System.out.println("La sauvegarde du joueur existe") ;
+        File[] files = Path.repertoire_lvl.listFiles();
+        if (files == null) {
+            return false;
+        }
+
+        for (File file : files) {
+            if (file.isDirectory() && file.getName().equals(joueur)) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -73,7 +73,7 @@ public class Sauvegarder {
      * Créer le dossier pour le joueur
      *
      * @param nom_joueur le nom du joueur
-     * @throws IOException {@link IOException}
+     * @throws IOException {@link IOException} si le dossier n'a pas pu être créé
      */
     public static void creerDossierJoueur(String nom_joueur) throws IOException {
 
@@ -90,48 +90,26 @@ public class Sauvegarder {
      * Création des dossiers nécessaires a la sauvegarde
      */
     public static void creerArborescence() {
-
         List<String> fichiers = listeFichiers(Path.repertoire_courant);
 
         try {
-            // Vérifier si le dossier "save" existe déjà
-            boolean sauvegarde_existe = fichiers.contains("save");
-            if (!sauvegarde_existe) {
-                // Créer le dossier "save" s'il n'existe pas
-                Files.createDirectories(Paths.get(Path.repertoire_save.toString()));
-                // System.out.println("Dossier save créé");
-            }
+            // Crée les dossiers "save" et "score" s'ils n'existent pas
+            Files.createDirectories(Path.repertoire_save.toPath());
+            Files.createDirectories(Path.repertoire_score.toPath());
 
-            // Vérifier si le dossier "score" existe déjà dans "save"
-            boolean score_existe = fichiers.contains("score");
-            if (!score_existe) {
-                // Créer le dossier "score" s'il n'existe pas
-                Files.createDirectories(Paths.get(Path.repertoire_score.toString()));
-                // System.out.println("Dossier score créé");
+            // verifie si les fichiers existent
+            String[] files = {"endless.save", "clm.save", "detente.save"};
+            for (String file : files) {
+                boolean fileExists = fichiers.contains(file);
+                if (!fileExists) {
+                    if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/" + file))) {
+                        System.out.println("[Sauvegarder] Erreur lors de la création du fichier " + file);
+                    }
+                }
             }
-
-            // Verification des fichiers "endless" et "detente"
-            fichiers = listeFichiers(Path.repertoire_score);
-            boolean endless = fichiers.contains("endless.save");
-            if (!endless) {
-                if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/endless.save")))
-                    System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
-            }
-            boolean clm = fichiers.contains("clm.save");
-            if (!clm) {
-                if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/clm.save")))
-                    System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
-            }
-            boolean detente = fichiers.contains("detente.save");
-            if (!detente) {
-                if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/detente.save")))
-                    System.out.println("[Sauvegarder] Erreur lors de la création du fichier endless.save");
-            }
-
         } catch (IOException e) {
             System.err.println("[Sauvegarde] Erreur lors de la création des répertoires nécessaires au jeu");
             e.printStackTrace();
-
         }
     }
 
@@ -143,29 +121,29 @@ public class Sauvegarder {
      * @return true si creation(s) bien effectuée, false sinon
      */
     public static boolean creerDossierFichier(File dossier, File fichier) {
-        if (!dossier.exists()) {
-            boolean resultat = dossier.mkdirs();
-            if (resultat) {
-                System.out.println("[Sauvegarde] Directory " + dossier.getName() + " créé avec succès.");
-            } else {
-                System.out.println("[Sauvegarde] Directory" + dossier.getName() + " n'a pas pu être créé.");
-                return false;
-            }
+        boolean dossierCree = dossier.mkdirs();
+        if (dossierCree) {
+            System.out.println("[Sauvegarde] Directory " + dossier.getName() + " créé avec succès.");
+        } else if (!dossier.exists()) {
+            System.out.println("[Sauvegarde] Directory" + dossier.getName() + " n'a pas pu être créé.");
+            return false;
         }
-
         try {
-            if (fichier.createNewFile() || fichier.exists()) {
-                System.out.println("[Sauvegarde] Fichier " + fichier.getName() + " créé avec succès ou deja existant.");
-            } else {
+            boolean fichierCree = fichier.createNewFile();
+            if (fichierCree) {
+                System.out.println("[Sauvegarde] Fichier " + fichier.getName() + " créé avec succès.");
+            } else if (!fichier.exists()) {
                 System.out.println("[Sauvegarde] Fichier " + fichier.getName() + " n'a pas pu être créé.");
                 return false;
             }
         } catch (IOException e) {
             System.err.println("[Sauvegarde] Erreur lors de la création du fichier" + fichier);
             e.printStackTrace();
+            return false;
         }
         return true;
     }
+
 
     /**
      * Vérifie s'il y a des dossiers dans le répertoire
@@ -185,7 +163,7 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   le numéro du niveau, -1 si en mode de jeu sans fin
      * @param o           le score
-     * @throws IOException {@link IOException}
+     * @throws IOException {@link IOException} si le fichier n'existe pas
      **/
     public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau, Object o) throws IOException {
         FileWriter writer;
@@ -199,7 +177,6 @@ public class Sauvegarder {
         // Formater la date en tant que chaîne de caractères en utilisant l'objet
         // SimpleDateFormat
         String date_formate = format.format(date);
-
 
         if (!mode_de_jeu.equals("detente"))
             writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
@@ -221,7 +198,7 @@ public class Sauvegarder {
      * @param id_niveau   l'indice du niveau, négatif si en mode endless
      * @return un hashmap : [Nom du joueur[ date - le score]]], contenant tout les
      * scores du fichier
-     * @throws IOException {@link IOException}
+     * @throws IOException {@link IOException} si le fichier n'existe pas
      */
     public static HashMap<String, HashMap<String, String>> chargerScore(String mode_de_jeu, int id_niveau) throws IOException {
         HashMap<String, HashMap<String, String>> scores = new HashMap<>();
@@ -263,32 +240,20 @@ public class Sauvegarder {
      * @return le nombre de niveaux
      */
     public static int nbGrilles(String mode_de_jeu) {
-        int nb_grilles = 0;
-        InputStream inputStream;
-        inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
-        if (inputStream == null) {
-            System.out.println("[StockageNiveau] : Fichier inexistant");
-            return -1;
-        }
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+        // TODO : temporaire
+        mode_de_jeu = "detente";
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(bufferedInputStream));
-        try {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Grille ")) {
-                    nb_grilles++;
-                }
+        int nb_grilles;
+        try (InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/grilles_" + mode_de_jeu + ".txt")) {
+            assert inputStream != null;
+            try (BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(bufferedInputStream))) {
+                Pattern pattern = Pattern.compile("^Grille\\s");
+                nb_grilles = (int) reader.lines().filter(pattern.asPredicate()).count();
             }
         } catch (IOException e) {
             e.printStackTrace();
             return -1;
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return nb_grilles;
     }
@@ -303,19 +268,20 @@ public class Sauvegarder {
      * @param solution    boolean, vrai s'il faut charger la solution du niveau
      *                    selon l'id
      * @return la matrice du niveau chargé
+     * @throws FileNotFoundException {@link FileNotFoundException} si le fichier n'est pas trouvé
      */
-    public static int[][] chargerGrilleFichier(int id_niveau, String mode_de_jeu, Boolean solution) {
+    public static int[][] chargerGrilleFichier(int id_niveau, String mode_de_jeu, Boolean solution) throws FileNotFoundException {
 
-        InputStream inputStream;
-        if (!solution) {
-            inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + ".txt");
-        } else {
-            inputStream = Sauvegarder.class.getResourceAsStream("/grilles/grilles_" + mode_de_jeu + "_solutions.txt");
+
+        String nom_fichier = "grilles_" + mode_de_jeu;
+        if (solution) {
+            nom_fichier += "_solutions";
         }
+        nom_fichier += ".txt";
 
+        InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/" + nom_fichier);
         if (inputStream == null) {
-            System.out.println("[StockageNiveau] : Fichier inexistant");
-            return null;
+            throw new FileNotFoundException("Fichier pas trouvé: " + nom_fichier);
         }
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -367,7 +333,7 @@ public class Sauvegarder {
 
 
     /*
-     * Sauvegarde
+     * Gestion des fichiers de sauvegarde
      */
 
     /**
@@ -377,16 +343,19 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   l'id du niveau
      * @param historique  l'historique des mouvements
+     * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static void sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau, Historique historique) {
+    public static boolean sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau, Historique historique) {
         File mouvements_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
-        File mouvements_fichier = new File(mouvements_repertoire + "/Mouvements_" + id_niveau);
+        File mouvements_fichier = new File(mouvements_repertoire + "/Mouvements_" + id_niveau + ".hist");
 
         if (creerDossierFichier(mouvements_repertoire, mouvements_fichier)) {
             System.out.println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
             serialisationHistorique(mouvements_fichier, historique);
+            return true;
         } else {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
+            return false;
         }
     }
 
@@ -411,21 +380,46 @@ public class Sauvegarder {
     }
 
     /**
+     * Désérialise l'historique des mouvements à partir d'un fichier.
+     *
+     * @param fichier le fichier sérialisé des mouvements
+     * @return l'historique des mouvements désérialisé
+     */
+    public static Historique deserialiserHistorique(File fichier) {
+        Historique historique = null;
+        try {
+            FileInputStream fichier_entree = new FileInputStream(fichier);
+            ObjectInputStream entree = new ObjectInputStream(fichier_entree);
+            historique = (Historique) entree.readObject();
+            entree.close();
+            fichier_entree.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return historique;
+    }
+
+
+    /**
      * Sauvegarde la grille
      *
      * @param joueur      le nom du joueur/profil associé à la grille
      * @param mode_de_jeu le mode de jeu associé à la grille
      * @param id_niveau   l'id du niveau associé à la grille
      * @param matrice     la matrice du niveau a sauvegarder
+     * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static void sauvegardeMatrice(String joueur, String mode_de_jeu, int id_niveau, int[][] matrice) {
+    public static boolean sauvegarderMatrice(String joueur, String mode_de_jeu, int id_niveau, int[][] matrice) {
         File matrice_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
-        File matrice_fichier = new File(matrice_repertoire + "/Matrice_" + id_niveau);
+        File matrice_fichier = new File(matrice_repertoire + "/Matrice_" + id_niveau + ".mat");
 
         if (Sauvegarder.creerDossierFichier(matrice_repertoire, matrice_fichier)) {
-            serialisationMatrice(matrice_fichier, matrice);
+            serialiserMatrice(matrice_fichier, matrice);
+            return true;
         } else {
             System.out.println("[Profil] Erreur lors de la création de fichier et/ou de dossier");
+            return false;
         }
     }
 
@@ -435,7 +429,7 @@ public class Sauvegarder {
      * @param repertoire le répertoire
      * @param matrice    la matrice de la grille
      */
-    private static void serialisationMatrice(File repertoire, int[][] matrice) {
+    private static void serialiserMatrice(File repertoire, int[][] matrice) {
         try {
             FileOutputStream fichier_sortie = new FileOutputStream(repertoire, false);
             ObjectOutputStream sortie = new ObjectOutputStream(fichier_sortie);
@@ -446,6 +440,41 @@ public class Sauvegarder {
             System.out.println("[Sauvegarde] Matrice sérialisé et sauvegardé dans Matrice_<id_niveau>");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Désérialise la grille à partir du fichier.
+     *
+     * @param fichier le fichier sérialisé de la grille
+     * @return la matrice du niveau désérialisé
+     */
+    public static int[][] deserialiserMatrice(File fichier) {
+        int[][] matrice = null;
+        try {
+            FileInputStream fichier_entree = new FileInputStream(fichier);
+            ObjectInputStream entree = new ObjectInputStream(fichier_entree);
+            matrice = (int[][]) entree.readObject();
+            entree.close();
+            fichier_entree.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return matrice;
+    }
+
+
+    /**
+     * Supprime le profil du joueur
+     *
+     * @param nom_joueur le nom du joueur
+     */
+    public static void supprimerProfil(String nom_joueur) {
+        File repertoire = new File(Path.repertoire_lvl + "/" + nom_joueur);
+        if (repertoire.exists()) {
+            repertoire.delete();
+            System.out.println("[Sauvegarde] Profil supprimé");
         }
     }
 
