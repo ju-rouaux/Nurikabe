@@ -54,7 +54,7 @@ public class Zone {
      * 
      * @return true si la zone est vide, false sinon.
      */
-    public boolean isEmty() {
+    public boolean isEmpty() {
         return this.zone.isEmpty();
     }
 
@@ -75,7 +75,7 @@ public class Zone {
      */
     public List<Position> findZone(Position pos) {
         this.zone = new ArrayList<Position>();
-        findZone_recursive(pos);
+        findZoneRecursive(pos);
         this.zone.add(pos);
         return this.zone;
     }
@@ -86,7 +86,7 @@ public class Zone {
      * @param pos la position à tester.
      * 
      */
-    private List<Position> findZone_recursive(Position pos) {
+    private List<Position> findZoneRecursive(Position pos) {
         List<Etat> etatInit = new ArrayList<>();
         etatInit.add(Etat.fromInt(matrice.get(pos)));
 
@@ -104,11 +104,11 @@ public class Zone {
                 // if (Etat.fromInt(matrice.get(checkVois.get(i))).equals(etatInit)) {
 
                 if (etatInit.indexOf(Etat.fromInt(matrice.get(checkVois.get(i)))) > -1) {
-                    // On vérifie la position n'a pas déja été ajouté a la zone
+                    // On vérifie la position n'a pas deja été ajouté a la zone
                     if (zone.indexOf(checkVois.get(i)) == -1) {
                         zone.add(checkVois.get(i));
-                        // Appel récusif pour récupérer les voisins similaires à la zone
-                        findZone_recursive(checkVois.get(i));
+                        // Appel récursif pour récupérer les voisins similaires à la zone
+                        findZoneRecursive(checkVois.get(i));
                     }
                 }
             }
@@ -120,13 +120,13 @@ public class Zone {
     }
 
     /**
-     * Méthode qui décremente la valeur d'une case en fonction de la taille de la
+     * Méthode qui décrémente la valeur d'une case en fonction de la taille de la
      * zone.
      * 
      * @param matrice la matrice d'entiers dans laquelle on veut décrémenter la
      *                valeur.
      */
-    public void Decremente(Matrice matrice) {
+    public void decremente(Matrice matrice) {
         List<Position> num_pos = new ArrayList<>();
         List<Position> all_zone = new ArrayList<>();
 
