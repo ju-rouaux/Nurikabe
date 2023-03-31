@@ -63,6 +63,7 @@ abstract public class ScoreChrono implements ScoreInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void start() {
     }
 
