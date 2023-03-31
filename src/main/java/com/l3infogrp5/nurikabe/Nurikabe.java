@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * Jeu du Nurikabe.
@@ -56,3 +55,51 @@ public class Nurikabe extends Application {
         // sauvegarde de la partie.
     }
 }
+
+// Test affichage score détente
+// @Override
+// public void start(Stage primaryStage) {
+//     final Pane root = new Pane();
+//     final Scene scene = new Scene(root, 350, 300);
+
+//     ScoreZen score = new ScoreZen(5);
+//     score.aideUtilise();
+//     Pane scorePane = score.get_Pane();
+//     score.aideUtilise();
+//     score.aideUtilise();
+//     score.aideUtilise();
+//     score.aideUtilise();
+    
+//     root.getChildren().add(scorePane);
+// }
+
+// Test affichage scores CLM
+// @Override
+// public void start(Stage primaryStage) {
+
+//     final Text text = new Text("00:00");
+//     text.setLayoutX(100);
+//     text.setLayoutY(100);
+//     text.setFill(Color.BLUE);
+
+
+//     ScoreChrono score = new ScoreCLM(75, text);
+//     final Scene scene = new Scene(score.get_Pane(), 350, 300);
+//     score.start();
+
+//     System.out.println("test");
+//     score.aideUtilise();
+
+//     /* 
+//      * ScoreChrono score = new ScoreEndless(40,0, text);
+//      * score.calcul();
+//      * 
+//      * System.out.println("test");
+//      * //score.aideUtilise(35);
+//      * score.grilleComplete();
+//      */
+
+//     primaryStage.setTitle("Test sur l'opacité");
+//     primaryStage.setScene(scene);
+//     primaryStage.show();
+// }
