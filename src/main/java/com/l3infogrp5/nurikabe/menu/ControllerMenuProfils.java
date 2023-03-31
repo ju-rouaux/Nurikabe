@@ -40,7 +40,6 @@ public class ControllerMenuProfils {
      */
     public static String nom_joueur;
 
-    private Profil joueur;
     private int profil_actif;
     private List<String> profils_attributs;
 
@@ -56,8 +55,6 @@ public class ControllerMenuProfils {
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû être lu.
      */
     public ControllerMenuProfils(Stage stage) throws IOException {
-        this.joueur = Profil.getInstance();
-
         this.stage = stage;
 
         loader = new FXMLLoader();
@@ -133,7 +130,7 @@ public class ControllerMenuProfils {
         // Modification de l'affichage
         afficherNouveauxProfil(i);
 
-        joueur.chargerProfil(nom_joueur);
+        Profil.getInstance().chargerProfil(nom_joueur);
 
         // On ajoute le profil créé aux profils existant et on met à jour le tableau des noms.
         ajoutProfils(nom_joueur);
@@ -159,7 +156,7 @@ public class ControllerMenuProfils {
                 if (!Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur))
                     nouveauxProfil(i);
 
-                joueur.chargerProfil(nom_joueur);
+                Profil.getInstance().chargerProfil(nom_joueur);
                 setActiveProfil(i);
             }
         }
@@ -212,7 +209,6 @@ public class ControllerMenuProfils {
             
             int actif = reader.nextInt();
             nom_joueur = reader.nextLine().trim();
-
             if (!nom_joueur.equals(Profil.getJoueur())) {
                 Profil.getInstance().chargerProfil(nom_joueur);
             }
@@ -298,8 +294,8 @@ public class ControllerMenuProfils {
     }
 }
 
-// TODO : charger dernier profil actif au demarrage + regeler bug creation profil "detente"
+// TODO : regeler bug creation profil "detente" (mauvais placement du dossier)
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
-// IDEA : permettrre d'appuiyer dur + pour creer nouveau profil
+// IDEA : permettre d’appuyer dur + pour créer nouveau profil
