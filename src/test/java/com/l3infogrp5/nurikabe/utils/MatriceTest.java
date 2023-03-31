@@ -18,6 +18,11 @@ public class MatriceTest {
 
     Matrice matrice;
 
+    @BeforeAll
+    void setup(TestInfo testInfo) {
+        System.out.println("\u001B[31m" + "\nTest " + testInfo.getDisplayName() + "\n \u001B[0m");
+    }
+
     @BeforeEach
     public void setUp() {
         int[][] elements = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
@@ -165,9 +170,50 @@ public class MatriceTest {
 
     @Test
     public void testRotation90() {
-        int[][] expectedElements = { { 7, 4, 1 }, { 8, 5, 2 }, { 9, 6, 3 } };
-        Matrice expectedMatrice = new Matrice(expectedElements);
-        assertEquals(expectedMatrice, matrice.rotation90());
+        int[][] matrix1 = { { 1 } };
+        int[][] expected1 = { { 1 } };
+        assertEquals(new Matrice(expected1), new Matrice(matrix1).rotation90());
+
+        int[][] matrix2 = { { 1, 2 }, { 3, 4 } };
+        int[][] expected2 = { { 3, 1 }, { 4, 2 } };
+        assertEquals(new Matrice(expected2), new Matrice(matrix2).rotation90());
+
+        int[][] matrix3 = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+        int[][] expected3 = { { 7, 4, 1 }, { 8, 5, 2 }, { 9, 6, 3 } };
+        assertEquals(new Matrice(expected3), new Matrice(matrix3).rotation90());
+
+        int[][] matrix4 = {
+                { 1, 2, 3, 4 },
+                { 5, 6, 7, 8 }
+        };
+
+        int[][] expected4 = {
+                { 5, 1 },
+                { 6, 2 },
+                { 7, 3 },
+                { 8, 4 }
+        };
+
+        assertEquals(new Matrice(expected4), new Matrice(matrix4).rotation90());
+
+        int[][] matrix5 = { { 1, 2, 3 }, { 4, 5, 6 } };
+        int[][] expected5 = { { 4, 1 }, { 5, 2 }, { 6, 3 } };
+        assertEquals(new Matrice(expected5), new Matrice(matrix5).rotation90());
+
+        int[][] matrix6 = {
+                { 1, 2, 0 },
+                { 3, 4, 0 },
+                { 5, 6, 0 },
+                { 7, 8, 0 }
+        };
+
+        int[][] expected6 = {
+                { 7, 5, 3, 1 },
+                { 8, 6, 4, 2 },
+                { 0, 0, 0, 0 }
+        };
+
+        assertEquals(new Matrice(expected6), new Matrice(matrix6).rotation90());
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.l3infogrp5.nurikabe.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Classe fournissant différentes méthodes utiles à la manipulation de matrices.
@@ -108,7 +109,8 @@ public class Matrice {
      * @return vrai si la position est contenue dans la matrice.
      */
     public boolean posValide(Position p) {
-        return (p.getX() < this.getNbLignes()) && (p.getX() >= 0) && (p.getY() < this.getNbColonnes()) && (p.getY() >= 0);
+        return (p.getX() < this.getNbLignes()) && (p.getX() >= 0) && (p.getY() < this.getNbColonnes())
+                && (p.getY() >= 0);
     }
 
     /**
@@ -427,61 +429,19 @@ public class Matrice {
      * aiguilles d'une montre.
      * 
      * @return la matrice résultant de la rotation de 90 degrés de cette matrice
-     * @throws IllegalArgumentException si la matrice appelant la fonction n'est pas carrée
+     * @throws IllegalArgumentException si la matrice appelant la fonction n'est pas
+     *                                  carrée
      */
     public Matrice rotation90() {
-        if (this.estCarree() == false) {
-            throw new IllegalArgumentException("La matrice doit être carree pour pouvoir faire la rotation de 90°");
-        }
-        Matrice nouvelleMatrice = this.clone();
-        int n = nouvelleMatrice.getNbLignes();
-        int m = nouvelleMatrice.getNbColonnes();
+        Matrice mat_cpy = new Matrice(this.getNbColonnes(), this.getNbLignes());
 
-        int nombre_ajout_lignes = 0;
-        int nombre_ajout_colonnes = 0;
-
-        // Vérification si la matrice est carrée, sinon ajout des lignes ou des colonnes
-        if (!nouvelleMatrice.estCarree()) {
-            int diff = Math.abs(n - m);
-            if (n > m) {
-                for (int i = 0; i < diff; i++) {
-                    nouvelleMatrice.ajouterColonne(999);
-                    nombre_ajout_colonnes++;
-                }
-                m = n;
-            } else {
-                for (int i = 0; i < diff; i++) {
-                    nouvelleMatrice.ajouterLigne(999);
-                    nombre_ajout_lignes++;
-                }
-                n = m;
+        for (int i = 0; i < this.getNbLignes(); i++) {
+            for (int j = 0; j < this.getNbColonnes(); j++) {
+                mat_cpy.setElement(j, this.getNbLignes() - i - 1, this.getElement(i, j));
             }
         }
 
-        // On effectue la rotation
-        for (int i = 0; i < n / 2; i++) {
-            for (int j = i; j < m - i - 1; j++) {
-                int temp = nouvelleMatrice.getElement(i, j);
-                nouvelleMatrice.setElement(i, j, nouvelleMatrice.getElement(m - j - 1, i));
-                nouvelleMatrice.setElement(m - j - 1, i, nouvelleMatrice.getElement(m - i - 1, m - j - 1));
-                nouvelleMatrice.setElement(m - i - 1, m - j - 1, nouvelleMatrice.getElement(j, m - i - 1));
-                nouvelleMatrice.setElement(j, m - i - 1, temp);
-            }
-        }
-
-        // Suppression des lignes ou des colonnes ajoutées
-        ArrayList<Integer> lignes_a_suprimer = nouvelleMatrice.getLignesEqualto(999);
-        ArrayList<Integer> colonnes_a_suprimer = nouvelleMatrice.getColonesEqualto(999);
-
-        for (int i = 0; i < lignes_a_suprimer.size(); i++) {
-            nouvelleMatrice.enleverLigne(lignes_a_suprimer.get(i));
-        }
-
-        for (int i = 0; i < colonnes_a_suprimer.size(); i++) {
-            nouvelleMatrice.enleverColonne(colonnes_a_suprimer.get(i));
-        }
-
-        return nouvelleMatrice;
+        return mat_cpy;
     }
 
     /**

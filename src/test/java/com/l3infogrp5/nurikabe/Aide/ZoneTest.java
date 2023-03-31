@@ -18,6 +18,11 @@ class ZoneTest {
     private Matrice matrice;
     private Zone zone;
 
+    @BeforeAll
+    void setup(TestInfo testInfo) {
+        System.out.println("\u001B[31m" + "\nTest " + testInfo.getDisplayName() + "\n \u001B[0m");
+    }
+
     @BeforeEach
     void setUp() throws Exception {
         int[][] grille = {
@@ -34,6 +39,11 @@ class ZoneTest {
         };
         matrice = new Matrice(grille);
         zone = new Zone(matrice);
+    }
+
+    @AfterEach
+    void afficheOK(TestInfo testInfo) {
+        System.out.println("Test OK " + testInfo.getDisplayName());
     }
 
     @Test
