@@ -37,49 +37,38 @@ public final class Path {
     /**
      * Répertoire courant
      */
-    public static File repertoire_courant = null;
+    public static File repertoire_courant;
     /**
      * Répertoire des sauvegardes
      */
-    public static File repertoire_save = null;
+    public static File repertoire_save;
     /**
      * Répertoire des niveaux
      */
-    public static File repertoire_lvl = null;
+    public static File repertoire_lvl;
     /**
      * Répertoire des scores
      */
-    public static File repertoire_score = null;
+    public static File repertoire_score;
     /**
      * Répertoire des grilles
      */
-    public static File repertoire_grilles = null;
+    public static File repertoire_grilles;
 
     static {
         try {
-            // Récupère le répertoire du .jar
-            repertoire_jar = new File(
-                Path.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-        } catch (URISyntaxException e) {
-            // Affichage d'une erreur si impossible de récupérer le répertoire du .jar
-            System.out.println("[Path] Erreur indexation fichiers : Impossible de récupérer le répertoire du .jar");
-            e.printStackTrace();
-        }
-        if (repertoire_jar != null && repertoire_jar.toString().length() > 0) {
-            String baseDir = repertoire_jar.toString().replaceAll("\\\\", "/");
-            int lastSeparatorIndex = baseDir.lastIndexOf("/");
-            if (lastSeparatorIndex > 0) {
-                String currentDir = baseDir.substring(0, lastSeparatorIndex) + "/" + DOSSIER_NURIKABE;
-                repertoire_courant = new File(currentDir);
-                repertoire_save = new File(currentDir + "/" + DOSSIER_SAVE);
-                repertoire_lvl = new File(repertoire_save + "/" + DOSSIER_NIVEAUX);
-                repertoire_score = new File(repertoire_save + "/" + DOSSIER_SCORE);
-                repertoire_grilles = new File(baseDir + "/" + DOSSIER_GRILLES);
+            repertoire_jar = new File(Path.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+            if (repertoire_jar.exists()) {
+                repertoire_courant = new File(repertoire_jar.getParent() + DOSSIER_NURIKABE);
+                repertoire_save = new File(repertoire_courant + DOSSIER_SAVE);
+                repertoire_lvl = new File(repertoire_save + DOSSIER_NIVEAUX);
+                repertoire_score = new File(repertoire_save + DOSSIER_SCORE);
+                repertoire_grilles = new File(repertoire_jar.getParent() + DOSSIER_GRILLES);
             } else {
-                System.out.println("[Path] erreur index < 0");
+                throw new RuntimeException("Jar directory does not exist");
             }
-        } else {
-            System.out.println("[Path] Problème d'indexation de fichiers");
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Error getting jar directory", e);
         }
     }
 
