@@ -133,7 +133,9 @@ public Scene getScene() {
     return scene;
 }
     /**
+     * Classe interne au leaderBoard 
      * 
+     * @author Cyprien PENNACHI
      */
 
     public class Scoring{
@@ -153,27 +155,48 @@ public Scene getScene() {
             this.score=score;
             this.date=date;
         }
-
+        /**
+         * Retourne le nom du profil.
+         * 
+         * @return le nom du profil.
+         */
         public String getNom(){
             return this.nom;
         }
-
+                /**
+         * Retourne le nom du profil.
+         * 
+         * @return le score du profil.
+         */
         public double getScore(){
             return this.score;
         }
-
+        /**
+         * Retourne la date du score rélisé.
+         * 
+         * @return le date.
+         */
         public Date getDate(){
             return this.date;
         }
-
+        /**
+         * Change le nom du profil.
+         * @param nom le nom du profil.
+         */
         public void setNom(String nom){
             this.nom=nom;
         }
-
+        /**
+         * change le score d'un profil.
+         * @param score le score du profil.
+         */
         public void setScore(double score){
             this.score=score;
         }
-
+        /**
+         * Change la date du score réalisé.
+         * @param date la date du score réalisé.
+         */
         public void setDate(Date date){
             this.date=date;
         }
