@@ -2,7 +2,7 @@ package com.l3infogrp5.nurikabe.niveau.score;
 
 import org.controlsfx.control.Rating;
 
-import javafx.scene.effect.ColorAdjust;
+//import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.Pane;
 
 /**
@@ -47,43 +47,38 @@ public class ScoreZen implements ScoreInterface {
      * {@inheritDoc}
      */
     @Override
-    public void grilleComplete() {
+    public void grilleComplete() {}
 
-    }
     /**
-     * {@inheritDoc}
+     * Applique une pénalité de une étoile si le check est utilisé.
+     * Si l'évaluation actuelle des étoiles est inférieure à 0, aucune pénalité n'est appliquée.
+     * Met à jour l'affichage de l'évaluation du score.
      */
     @Override
     public void checkUtilise() {
-
+        if (etoiles >= 0) {
+            this.etoiles -= 1;
+            rating.setRating(etoiles);
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void start() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'start'");
-    }
+    public void start() {}
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void stop() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'stop'");
-    }
+    public void stop() {}
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void restart() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'restart'");
-    }
+    public void restart() {}
 
     /**
      * Cette méthode permet de créer un objet Pane contenant un Rating, et d'initialiser les propriétés de celui-ci selon les valeurs définies dans l'objet ScoreZen.
