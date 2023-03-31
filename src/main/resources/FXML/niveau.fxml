@@ -94,7 +94,15 @@
                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: ffffff;" text="Demonstration" BorderPane.alignment="CENTER" />
                   </center>
                   <bottom>
-                     <ToggleButton fx:id="toggle_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" style="-fx-background-radius: 0 0 100% 100%;" text="\\/" textOverrun="CLIP" BorderPane.alignment="CENTER" />
+                     <ToggleButton fx:id="toggle_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" styleClass="btn-toggle-aide" textOverrun="CLIP" BorderPane.alignment="CENTER">
+                        <graphic>
+                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                             <image>
+                                <Image url="@../chevron.png" />
+                             </image>
+                          </ImageView>
+                        </graphic>
+                     </ToggleButton>
                   </bottom>
                </BorderPane>
             </children>
