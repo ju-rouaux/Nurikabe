@@ -38,7 +38,7 @@ public class ControllerNiveau {
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
-    Profil joueur;
+
     private final Grille grille;
     private BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
 
@@ -79,12 +79,11 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, List<Integer> niveaux) throws IOException {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
-        joueur = Profil.getInstance();
 
         // TODO : préparer le terrain pour enchainer plusieurs niveaux
         int id_niveau = niveaux.get(0);
-        Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
-        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+        Profil.DonneesNiveau donnees = Profil.getInstance().chargerGrille(id_niveau);
+        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, Profil.getInstance().chargerHistorique());
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -121,8 +120,8 @@ public class ControllerNiveau {
         // TODO charger les données de score
 
         // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
+        this.btn_undo.disableProperty().bind(Profil.getInstance().getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(Profil.getInstance().getHistorique().peutRetablirProperty().not());
 
         // Afficher l'aide lorsque la Property aide_affichee est active.
         this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
@@ -154,7 +153,7 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
-        joueur.sauvegarderNiveau(grille);
+        Profil.getInstance().sauvegarderNiveau(grille);
         // TODO : remplacer null avec le getScore du niveau
         Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
