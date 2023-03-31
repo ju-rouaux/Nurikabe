@@ -1,5 +1,6 @@
-package com.l3infogrp5.nurikabe.Niveaux.Score;
+package com.l3infogrp5.nurikabe.niveau.score;
 
+import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -9,15 +10,33 @@ import javafx.scene.text.Text;
  * @author Antoine Couapel, Killian Rattier
  * @version 1.0
  */
-
 abstract public class ScoreChrono implements ScoreInterface {
 
+    /**secondes*/
     public int sec;
+
+    /**minutes*/ 
     public float min;
+
+    /**nombre total de secondes écoulées*/
     public int totalSec;
+
+    /**Texte du chronomètre*/
     public Text text;
+
+    /**Zone d'affichage du chronomètre*/
     public Pane affichage;
 
+    /**Calculateur du temps qui passe*/
+    public Timeline timeline;
+
+
+    /**
+     * Constructeur du chronomètre
+     * 
+     * @param totalSec nombre total de secondes
+     * @param text texte du chronomètre
+     */
     public ScoreChrono(int totalSec, Text text) {
         this.totalSec = totalSec;
         this.text = text;
@@ -31,21 +50,6 @@ abstract public class ScoreChrono implements ScoreInterface {
      */
     public void afficheChrono() {
 
-        // endless
-        /*
-         * if (sec < 0) {
-         * min--;
-         * sec = 59;
-         * 
-         * }
-         * 
-         * //CLM
-         * if (sec == 60) {
-         * min++;
-         * sec = 0;
-         * 
-         * }
-         */
         min = totalSec / 60;
         sec = totalSec % 60;
 
@@ -57,52 +61,56 @@ abstract public class ScoreChrono implements ScoreInterface {
     }
 
     /**
-     * Méthode abstraite de lancement de chrono
+     * {@inheritDoc}
      */
+    @Override
     public void start() {
     }
 
-    @Override
+
     /**
-     * Méthode abstraite à lancer quand une aide est utilisée
+     * {@inheritDoc}
      */
+    @Override
     public void aideUtilise() {
     }
 
-    @Override
+
     /**
-     * Méthode abstraite à lancer quand un check est utilisée
+     * {@inheritDoc}
      */
+    @Override
     public void checkUtilise() {
     }
 
-    @Override
+
     /**
-     * Méthode abstraite à lancer quand une grille a été complétée
+     * {@inheritDoc}
      */
+    @Override
     public void grilleComplete() {
     }
 
     /**
-     * Méthode qui retourne le score
+     * Méthode qui retourne le nombre de secondes écoulées durant la partie
      * 
      * @return totalSec
      */
     @Override
-    public int getScore() {
+    public Object getScore() {
 
         return totalSec;
     }
 
     /**
-     * Méthode abstraite à lancer quand une grille est recommencée
+     * {@inheritDoc}}
      */
     @Override
     public void restart() {
     }
 
     /**
-     * Méthode qui retourne l'affichage du score
+     * {@inheritDoc}}
      * 
      * @return affichage
      */

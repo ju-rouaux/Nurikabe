@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.Niveaux.Score;
+package com.l3infogrp5.nurikabe.niveau.score;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,10 +13,15 @@ import javafx.util.Duration;
  */
 public class ScoreEndless extends ScoreChrono {
 
-    public Timeline timeline;
-
+    /**Nombres de grilles complétées lors de la partie*/
     public int nbGrilles = 0;
 
+
+    /**
+     * Constructeur du ScoreEndless
+     * @param totalSec nombre total de secondes
+     * @param text texte du chronomètre
+     */
     public ScoreEndless(int totalSec, Text text) {
         super(totalSec, text);
     }
@@ -44,7 +49,7 @@ public class ScoreEndless extends ScoreChrono {
     }
 
     /**
-     * Méthode d'arrêt du chrono
+     * {@inheritDoc}}
      */
     @Override
     public void stop() {
@@ -99,9 +104,11 @@ public class ScoreEndless extends ScoreChrono {
     }
 
     /**
-     * {@inheritDoc}
+     * Méthode qui retourne le nombre de grilles complétées durant la partie
+     * @return nbGrilles
      */
-    public int getScore() {
+    @Override
+    public Object getScore() {
         return nbGrilles;
     }
 
