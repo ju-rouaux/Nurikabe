@@ -14,7 +14,7 @@ import javafx.util.Duration;
 public class ScoreEndless extends ScoreChrono {
 
     /**Nombres de grilles complétées lors de la partie*/
-    public int nbGrilles = 0;
+    public double nbGrilles = 0;
 
 
     /**
@@ -22,7 +22,7 @@ public class ScoreEndless extends ScoreChrono {
      * @param totalSec nombre total de secondes
      * @param text texte du chronomètre
      */
-    public ScoreEndless(int totalSec, Text text) {
+    public ScoreEndless(double totalSec, Text text) {
         super(totalSec, text);
     }
 
@@ -108,7 +108,7 @@ public class ScoreEndless extends ScoreChrono {
      * @return nbGrilles
      */
     @Override
-    public Object getScore() {
+    public double getScore() {
         return nbGrilles;
     }
 
