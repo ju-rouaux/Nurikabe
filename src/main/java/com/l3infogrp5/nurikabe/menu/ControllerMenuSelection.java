@@ -85,7 +85,7 @@ public class ControllerMenuSelection {
         private void scoreClique() throws IOException{
             // TODO charger score ici
             System.out.println("Lancement score " + (id_niveau));
-            stage.setScene(new ControllerLeaderBoard(stage, id_niveau).getScene());
+            stage.setScene(new ControllerLeaderboard(stage, id_niveau).getScene());
         }
 
         /**

@@ -1,17 +1,11 @@
 package com.l3infogrp5.nurikabe.menu;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import javafx.scene.control.cell.*;
-import javafx.beans.property.*;
-import javafx.beans.binding.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.collections.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
@@ -22,12 +16,12 @@ import java.io.IOException;
 import java.sql.Date;
 
 /**
- * Contrôleur du LeaderBoard
+ * Contrôleur du Leaderboard
  *
  * @author Cyprien-Pennachi
  */
 
-public class ControllerLeaderBoard {
+public class ControllerLeaderboard {
 private Stage stage;
 private FXMLLoader loader;
 private Scene scene;
@@ -69,7 +63,7 @@ private TableView<Scoring> tableau_moi;
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-public ControllerLeaderBoard(Stage stage,int id_niveau) throws IOException {
+public ControllerLeaderboard(Stage stage,int id_niveau) throws IOException {
     this.stage = stage;
     this.id_niveau=id_niveau;
 
@@ -133,7 +127,7 @@ public Scene getScene() {
     return scene;
 }
     /**
-     * Classe interne au leaderBoard 
+     * Classe interne au leaderboard 
      * 
      * @author Cyprien PENNACHI
      */
