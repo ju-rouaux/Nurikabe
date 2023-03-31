@@ -21,6 +21,12 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.sql.Date;
 
+/**
+ * Contrôleur du LeaderBoard
+ *
+ * @author Cyprien-Pennachi
+ */
+
 public class ControllerLeaderBoard {
 private Stage stage;
 private FXMLLoader loader;
@@ -55,7 +61,14 @@ private TableView<Scoring> tableau;
 private TableView<Scoring> tableau_moi;
 
 
-
+   /**
+     * Initialise le menu de sélection de mode de jeu et son contrôleur.
+     *
+     * @param stage la fenêtre contenant la scène.
+     * @param id_niveau le numéro du niveau.
+     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
+     *                     être lu.
+     */
 public ControllerLeaderBoard(Stage stage,int id_niveau) throws IOException {
     this.stage = stage;
     this.id_niveau=id_niveau;
@@ -67,53 +80,44 @@ public ControllerLeaderBoard(Stage stage,int id_niveau) throws IOException {
     scene = loader.load();
 }
 
-public void initialize() { 
+
+    /**
+     * Charge l'image et le nom du niveau sur la carte.
+    */
+    public void initialize() { 
+
+
+        this.date.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        this.nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
+
+        // ajout des valeurs
+        ObservableList<Scoring> items = FXCollections.observableArrayList(
+            new Scoring("é",22.1, Date.valueOf("2022-02-01")),
+            new Scoring("ze",13.0, Date.valueOf("2022-03-01"))
+        );
+
+        this.tableau.setItems(items);
+
+        // rendre les colonnes triables
+        this.tableau.getSortOrder().addAll(date, nom, score);
+        
 
 
 
-    DoubleProperty tableWidth = tableau.prefWidthProperty();
+        this.date_moi.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        this.score_moi.setCellValueFactory(new PropertyValueFactory<>("score"));
 
-    //Définir la largeur de chaque colonne en un tiers de la largeur de la tableview
-    date.prefWidthProperty().bind(tableau.prefWidthProperty().divide(3));
-    nom.prefWidthProperty().bind(tableWidth.divide(3));
-    score.prefWidthProperty().bind(tableWidth.divide(3));
+        ObservableList<Scoring> items_moi = FXCollections.observableArrayList(
+            new Scoring("é",22.1, Date.valueOf("2022-02-01")),
+            new Scoring("ze",13.0, Date.valueOf("2022-03-01"))
+        );
 
-
-
-    this.date.setCellValueFactory(new PropertyValueFactory<>("Date"));
-    this.nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-    this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
-
-    // ajout des valeurs
-    ObservableList<Scoring> items = FXCollections.observableArrayList(
-        new Scoring("é",22.1, Date.valueOf("2022-02-01")),
-        new Scoring("ze",13.0, Date.valueOf("2022-03-01"))
-    );
-
-    this.tableau.setItems(items);
-
-    // rendre les colonnes triables
-    this.tableau.getSortOrder().addAll(date, nom, score);
-     
-
-
-
-    this.date_moi.setCellValueFactory(new PropertyValueFactory<>("Date"));
-    this.score_moi.setCellValueFactory(new PropertyValueFactory<>("score"));
-
-    ObservableList<Scoring> items_moi = FXCollections.observableArrayList(
-        new Scoring("é",22.1, Date.valueOf("2022-02-01")),
-        new Scoring("ze",13.0, Date.valueOf("2022-03-01"))
-    );
-
-    this.tableau_moi.setItems(items_moi);
-
-    this.date.setVisible(false);
-    this.date.setVisible(true);
-}
+        this.tableau_moi.setItems(items_moi);
+    }
 
 /*
- * Retourne au menu précédent, le menu principal.
+ * Retourne au menu précédent, le menu de selection  .
  */
 @FXML
 private void retourClique(ActionEvent event) throws Exception {
@@ -128,59 +132,52 @@ private void retourClique(ActionEvent event) throws Exception {
 public Scene getScene() {
     return scene;
 }
+    /**
+     * 
+     */
 
-    
-public static void autoResizeColumns(TableView<?> table) {
-    // Set the right policy
-    table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-    
-    // Calculate the width of each column
-    double tableWidth = table.getWidth();
-    double columnWidth = tableWidth / table.getColumns().size();
-    
-    table.getColumns().forEach((column) -> {
-        // Set the calculated width for each column
-        column.setPrefWidth(columnWidth);
-    });
-}
+    public class Scoring{
 
-public class Scoring{
+        private String nom;
+        private double score;
+        private Date date;
+        /**
+         * Initialise le menu de sélection de mode de jeu et son contrôleur.
+         *
+         * @param nom le nom de la personne.
+         * @param score le score de la personne.
+         * @param date la date du score fait. 
+         */
+        public Scoring(String nom, double score, Date date){
+            this.nom=nom;
+            this.score=score;
+            this.date=date;
+        }
 
-    private String nom;
-    private double score;
-    private Date date;
+        public String getNom(){
+            return this.nom;
+        }
 
-    public Scoring(String nom, double score, Date date){
-        this.nom=nom;
-        this.score=score;
-        this.date=date;
+        public double getScore(){
+            return this.score;
+        }
+
+        public Date getDate(){
+            return this.date;
+        }
+
+        public void setNom(String nom){
+            this.nom=nom;
+        }
+
+        public void setScore(double score){
+            this.score=score;
+        }
+
+        public void setDate(Date date){
+            this.date=date;
+        }
     }
-
-    public String getNom(){
-        return this.nom;
-    }
-
-    public double getScore(){
-        return this.score;
-    }
-
-    public Date getDate(){
-        return this.date;
-    }
-
-    public void setNom(String nom){
-        this.nom=nom;
-    }
-
-    public void setScore(double score){
-        this.score=score;
-    }
-
-    public void setDate(Date date){
-        this.date=date;
-    }
-}
-
 }
 
 

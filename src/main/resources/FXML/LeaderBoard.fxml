@@ -10,12 +10,12 @@
 <?import javafx.scene.text.Text?>
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <BorderPane fx:id="borderPane" minHeight="480.0" minWidth="640.0" prefHeight="480.0">
+   <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0">
       <top>
          <Button fx:id="btn_retour" alignment="CENTER" mnemonicParsing="false" onAction="#retourClique" text="&lt;&lt;" BorderPane.alignment="TOP_LEFT" />
       </top>
       <center>
-         <SplitPane dividerPositions="0.4" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <SplitPane dividerPositions="0.4" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="620.0" BorderPane.alignment="CENTER">
            <items>
                <BorderPane prefHeight="200.0" prefWidth="200.0">
                   <top>
