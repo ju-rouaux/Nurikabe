@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import javafx.scene.control.cell.*;
 import javafx.beans.property.*;
+import javafx.beans.binding.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.collections.*;
@@ -68,6 +69,17 @@ public ControllerLeaderBoard(Stage stage,int id_niveau) throws IOException {
 
 public void initialize() { 
 
+
+
+    DoubleProperty tableWidth = tableau.prefWidthProperty();
+
+    //Définir la largeur de chaque colonne en un tiers de la largeur de la tableview
+    date.prefWidthProperty().bind(tableau.prefWidthProperty().divide(3));
+    nom.prefWidthProperty().bind(tableWidth.divide(3));
+    score.prefWidthProperty().bind(tableWidth.divide(3));
+
+
+
     this.date.setCellValueFactory(new PropertyValueFactory<>("Date"));
     this.nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
     this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
@@ -96,7 +108,7 @@ public void initialize() {
 
     this.tableau_moi.setItems(items_moi);
 
-    //this.date.setVisible(false);
+    this.date.setVisible(false);
     this.date.setVisible(true);
 }
 
@@ -117,6 +129,20 @@ public Scene getScene() {
     return scene;
 }
 
+    
+public static void autoResizeColumns(TableView<?> table) {
+    // Set the right policy
+    table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+    
+    // Calculate the width of each column
+    double tableWidth = table.getWidth();
+    double columnWidth = tableWidth / table.getColumns().size();
+    
+    table.getColumns().forEach((column) -> {
+        // Set the calculated width for each column
+        column.setPrefWidth(columnWidth);
+    });
+}
 
 public class Scoring{
 
@@ -154,8 +180,6 @@ public class Scoring{
         this.date=date;
     }
 }
-
-
 
 }
 
