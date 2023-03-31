@@ -19,7 +19,7 @@ public class ScoreCLM extends ScoreChrono {
      * @param totalSec nombre total de secondes
      * @param text texte du chronomètre
      */
-    public ScoreCLM(int totalSec, Text text) {
+    public ScoreCLM(double totalSec, Text text) {
         super(totalSec, text);
     }
 
