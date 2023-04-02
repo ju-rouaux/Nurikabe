@@ -185,7 +185,7 @@ public class ControllerMenuProfils {
 
         writer.write(String.valueOf(profil_actif));
         writer.newLine();
-        writer.write(nom_joueur);
+        writer.write(Profil.getJoueur());
         writer.close();
     }
 
@@ -203,6 +203,10 @@ public class ControllerMenuProfils {
         }
 
         // Récupération du profil actif
+        getActif();
+    }
+
+    public void getActif() throws IOException {
         File file = new File(Path.repertoire_profils, "profil_actif");
         if (file.exists()) {
             Scanner reader = new Scanner(file);
@@ -294,7 +298,7 @@ public class ControllerMenuProfils {
     }
 }
 
-// TODO : regeler bug creation profil "detente" (mauvais placement du dossier)
+// TODO : regeler bug creation profil "detente" (mauvais placement du dossier) car Profil.getJoueur() vide
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond

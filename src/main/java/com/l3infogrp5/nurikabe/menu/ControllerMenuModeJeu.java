@@ -21,7 +21,6 @@ public class ControllerMenuModeJeu {
     private FXMLLoader loader;
     private Stage stage;
     private Scene scene;
-    Profil joueur;
 
     @FXML
     private Button btn_detente;
@@ -46,7 +45,6 @@ public class ControllerMenuModeJeu {
      *                     être lu.
      */
     public ControllerMenuModeJeu(Stage stage) throws IOException {
-
         this.stage = stage;
 
         loader = new FXMLLoader();
