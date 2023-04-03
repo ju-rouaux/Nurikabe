@@ -3,6 +3,7 @@ package com.l3infogrp5.nurikabe.pattern_matching;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import com.l3infogrp5.nurikabe.pattern_matching.PatternDetector;
+import com.l3infogrp5.nurikabe.utils.Position;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class PatternDetectorTest {
@@ -40,9 +42,9 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector1 = new PatternDetector(pattern1);
-                ArrayList<int[]> locations1 = detector1.detectInGrid(grid1);
+                HashMap<Integer, ArrayList <Position>> locations1 = detector1.detectInGrid(grid1);
                 assertEquals(1, locations1.size());
-                assertArrayEquals(new int[] { 0, 0 }, locations1.get(0));
+                new Position(0, 0).equals(locations1.get(1).get(0));
         }
 
         @Test
@@ -62,9 +64,9 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector2 = new PatternDetector(pattern2);
-                ArrayList<int[]> locations2 = detector2.detectInGrid(grid2);
+                HashMap<Integer, ArrayList <Position>>  locations2 = detector2.detectInGrid(grid2);
                 assertEquals(1, locations2.size());
-                assertArrayEquals(new int[] { 1, 1 }, locations2.get(0));
+                new Position(1,1).equals(locations2.get(1).get(0));
         }
 
         @Test
@@ -86,9 +88,9 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector3 = new PatternDetector(pattern3);
-                ArrayList<int[]> locations3 = detector3.detectInGrid(grid3);
+                HashMap<Integer, ArrayList <Position>> locations3 = detector3.detectInGrid(grid3);
                 assertEquals(1, locations3.size());
-                assertArrayEquals(new int[] { 1, 1 }, locations3.get(0));
+                new Position(1,1).equals(locations3.get(1).get(0));
         }
 
         @Test
@@ -111,12 +113,12 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
 
                 assertEquals(3, locations.size());
-                assertArrayEquals(new int[] { 0, 0 }, locations.get(0));
-                assertArrayEquals(new int[] { 0, 2 }, locations.get(1));
-                assertArrayEquals(new int[] { 4, 1 }, locations.get(2));
+                new Position(1,1).equals(locations.get(1).get(0));
+                new Position(0,2).equals(locations.get(2).get(0));
+                new Position(4,1).equals(locations.get(3).get(0));
         }
 
         @Test
@@ -133,7 +135,7 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(0, locations.size());
         }
 
@@ -151,9 +153,9 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(1, locations.size());
-                assertArrayEquals(new int[] { 1, 1 }, locations.get(0));
+                new Position(1,1).equals(locations.get(1).get(0));
         }
 
         @Test
@@ -172,10 +174,10 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(2, locations.size());
-                assertArrayEquals(new int[] { 1, 1 }, locations.get(0));
-                assertArrayEquals(new int[] { 2, 1 }, locations.get(1));
+                new Position(1,1).equals(locations.get(1).get(0));
+                new Position(2,1).equals(locations.get(2).get(0));
         }
 
         @Test
@@ -193,7 +195,7 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(0, locations.size());
         }
 
@@ -212,7 +214,7 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(0, locations.size());
         }
 
@@ -231,7 +233,7 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(0, locations.size());
         }
 
@@ -251,7 +253,7 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(0, locations.size());
         }
 
@@ -270,7 +272,7 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(0, locations.size());
         }
 
@@ -291,9 +293,9 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(1, locations.size());
-                assertArrayEquals(new int[] { 1, 1 }, locations.get(0));
+                new Position(1,1).equals(locations.get(1).get(0));
         }
 
         @Test
@@ -311,7 +313,7 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(0, locations.size());
         }
 
@@ -326,10 +328,9 @@ public class PatternDetectorTest {
                 };
 
                 PatternDetector detector = new PatternDetector(pattern);
-                ArrayList<int[]> locations = detector.detectInGrid(grid);
+                HashMap<Integer, ArrayList <Position>> locations = detector.detectInGrid(grid);
                 assertEquals(1, locations.size());
-                assertEquals(0, locations.get(0)[0]);
-                assertEquals(0, locations.get(0)[1]);
+                new Position(0,0).equals(locations.get(1).get(0));
         }
 
         // @Test
