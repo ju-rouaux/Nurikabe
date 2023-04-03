@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -125,6 +126,13 @@ public class ControllerMenuProfils {
         Stage popup = new Stage();
 
         popup.setScene(new ControllerNouveauxProfil(this).getScene());
+        popup.setResizable(false);
+
+        // empêche l'utilisation de la croix pour fermer la fenêtre
+        popup.setOnCloseRequest((WindowEvent event) -> {
+            event.consume();
+        });
+        
         // On ne peux pas agir sur la fenêtre actuelle tant que la pop-up n'est pas
         // fermé
         popup.initModality(Modality.APPLICATION_MODAL);
