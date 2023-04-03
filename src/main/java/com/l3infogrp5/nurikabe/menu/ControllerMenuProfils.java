@@ -52,7 +52,8 @@ public class ControllerMenuProfils {
      * Initialise le menu de sélection d'affichages des profils et son contrôleur.
      *
      * @param stage La fenêtre contenant la scène.
-     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû être lu.
+     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
+     *                     être lu.
      */
     public ControllerMenuProfils(Stage stage) throws IOException {
         this.stage = stage;
@@ -91,7 +92,8 @@ public class ControllerMenuProfils {
      * @param i L'indice de la grille a modifié.
      */
     private void afficherNouveauxProfil(int i) {
-        // Récupération de la boite du label et du bouton dont l'affichage doit être modifié
+        // Récupération de la boite du label et du bouton dont l'affichage doit être
+        // modifié
         VBox vbox = (VBox) pseudo_grid.getChildren().get(i);
         Label label = (Label) vbox.getChildren().get(1);
         Button bouton = (Button) vbox.getChildren().get(0);
@@ -123,7 +125,8 @@ public class ControllerMenuProfils {
         Stage popup = new Stage();
 
         popup.setScene(new ControllerNouveauxProfil(this).getScene());
-        // On ne peux pas agir sur la fenêtre actuelle tant que la pop-up n'est pas fermé
+        // On ne peux pas agir sur la fenêtre actuelle tant que la pop-up n'est pas
+        // fermé
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.showAndWait();
 
@@ -132,9 +135,9 @@ public class ControllerMenuProfils {
 
         Profil.getInstance().chargerProfil(nom_joueur);
 
-        // On ajoute le profil créé aux profils existant et on met à jour le tableau des noms.
+        // On ajoute le profil créé aux profils existant et on met à jour le tableau des
+        // noms.
         ajoutProfils(nom_joueur);
-        writeActif(nom_joueur);
         chargerTableau();
     }
 
@@ -156,9 +159,12 @@ public class ControllerMenuProfils {
 
                 if (!Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString())).contains(nom_joueur))
                     nouveauxProfil(i);
+                else
+                    Profil.getInstance().chargerProfil(nom_joueur);
 
-                Profil.getInstance().chargerProfil(nom_joueur);
                 setActiveProfil(i);
+                writeActif(nom_joueur);
+                return;
             }
         }
     }
@@ -186,7 +192,7 @@ public class ControllerMenuProfils {
         BufferedWriter writer = new BufferedWriter(
                 new FileWriter(Path.repertoire_profils.toString() + "/profil_actif"));
 
-        writer.write(String.valueOf(profil_actif + 1));
+        writer.write(String.valueOf(profil_actif));
         writer.newLine();
         writer.write(nom_actif);
         writer.close();
@@ -195,7 +201,8 @@ public class ControllerMenuProfils {
     /**
      * Méthode pour récupérer les joueurs créés
      *
-     * @throws IOException lancé lorsque le fichier correspondant n'a pas pû être lu.
+     * @throws IOException lancé lorsque le fichier correspondant n'a pas pû être
+     *                     lu.
      */
     public void chargerTableau() throws IOException {
         // Récupération des profils existants
@@ -212,23 +219,25 @@ public class ControllerMenuProfils {
     /**
      * Méthode pour récupérer le joueur actif
      * 
-     * @throws IOException lancé lorsque le fichier correspondant n'a pas pû être lu.
+     * @throws IOException lancé lorsque le fichier correspondant n'a pas pû être
+     *                     lu.
      */
-    private void getActif() throws IOException {
+    public void getActif() throws IOException {
         File file = new File(Path.repertoire_profils, "profil_actif");
         if (file.exists()) {
             Scanner reader = new Scanner(file);
-            
-            int actif  = reader.nextInt();
+
+            int actif = reader.nextInt();
             setActiveProfil(actif);
 
             String nom_actif = reader.next();
 
-            // si la ligne récupérer n'est pas égal au profil en cour on change 
-            if (!nom_actif.isEmpty() && !nom_actif.equals(Profil.getJoueur()))
+            // si la ligne récupérer n'est pas égal au profil en cour on change
+            if (!nom_actif.isEmpty() && !nom_actif.equals(Profil.getJoueur())) {
                 writeActif(nom_actif);
-            
-            
+                Profil.getInstance().chargerProfil(nom_actif);
+            }
+
             reader.close();
         }
     }
@@ -302,14 +311,13 @@ public class ControllerMenuProfils {
 
     /**
      * Getter
+     * 
      * @return La liste des nom de tout les profils
      */
     public List<String> getProfilsAttributs() {
         return profils_attributs;
     }
 }
-
-// TODO : reavoir derniere charger au lancement
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond

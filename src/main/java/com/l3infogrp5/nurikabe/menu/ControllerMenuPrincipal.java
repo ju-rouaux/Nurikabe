@@ -49,6 +49,8 @@ public class ControllerMenuPrincipal {
 
         scene = loader.load();
 
+        ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage);
+        controller_profil.getActif();
     }
 
     /**
