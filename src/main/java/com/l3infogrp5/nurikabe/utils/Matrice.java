@@ -170,7 +170,7 @@ public class Matrice {
      * @return la colonne de la matrice
      */
     public ArrayList<Integer> getColonne(int numColonne) {
-        ArrayList<Integer> colonne = new ArrayList<Integer>();
+        ArrayList<Integer> colonne = new ArrayList<>();
         for (int i = 0; i < lignes; i++) {
             colonne.add(getElement(i, numColonne));
         }
@@ -185,7 +185,7 @@ public class Matrice {
      * @return la ligne de la matrice
      */
     public ArrayList<Integer> getLigne(int numLigne) {
-        ArrayList<Integer> ligne = new ArrayList<Integer>();
+        ArrayList<Integer> ligne = new ArrayList<>();
         for (int j = 0; j < colonnes; j++) {
             ligne.add(getElement(numLigne, j));
         }
@@ -201,10 +201,10 @@ public class Matrice {
      * @return la liste des lignes de la matrice qui sont égales à la valeur donnée.
      */
     public ArrayList<Integer> getLignesEqualto(int valeur) {
-        ArrayList<Integer> lignesCorrespondante = new ArrayList<Integer>();
+        ArrayList<Integer> lignesCorrespondante = new ArrayList<>();
 
         for (int i = 0; i < getNbLignes(); i++) {
-            if (getLigne(i).equals(new ArrayList<Integer>(Collections.nCopies(getNbColonnes(), valeur)))) {
+            if (getLigne(i).equals(new ArrayList<>(Collections.nCopies(getNbColonnes(), valeur)))) {
                 lignesCorrespondante.add(i);
             }
         }
@@ -221,10 +221,10 @@ public class Matrice {
      *         donnée.
      */
     public ArrayList<Integer> getColonesEqualto(int valeur) {
-        ArrayList<Integer> colonesCorrespondante = new ArrayList<Integer>();
+        ArrayList<Integer> colonesCorrespondante = new ArrayList<>();
 
         for (int i = 0; i < getNbColonnes(); i++) {
-            if (getColonne(i).equals(new ArrayList<Integer>(Collections.nCopies(getNbLignes(), valeur)))) {
+            if (getColonne(i).equals(new ArrayList<>(Collections.nCopies(getNbLignes(), valeur)))) {
                 colonesCorrespondante.add(i);
             }
         }
@@ -474,9 +474,7 @@ public class Matrice {
      */
     public void remplir(int valeur) {
         for (int i = 0; i < lignes; i++) {
-            for (int j = 0; j < colonnes; j++) {
-                elements[i][j] = valeur;
-            }
+            Arrays.fill(elements[i], valeur);
         }
     }
 
@@ -588,10 +586,9 @@ public class Matrice {
      */
     @Override
     public boolean equals(Object m) {
-        if (!(m instanceof Matrice))
+        if (!(m instanceof Matrice m2))
             return false;
 
-        Matrice m2 = (Matrice) m;
         if (m2.getNbColonnes() != this.getNbColonnes() || m2.getNbLignes() != this.getNbLignes())
             return false;
 
@@ -612,9 +609,7 @@ public class Matrice {
     public Matrice clone() {
         int[][] newElements = new int[lignes][colonnes];
         for (int i = 0; i < lignes; i++) {
-            for (int j = 0; j < colonnes; j++) {
-                newElements[i][j] = elements[i][j];
-            }
+            System.arraycopy(elements[i], 0, newElements[i], 0, colonnes);
         }
         return new Matrice(newElements);
     }

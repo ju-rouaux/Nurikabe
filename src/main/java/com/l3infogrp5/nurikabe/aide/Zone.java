@@ -46,7 +46,7 @@ public class Zone {
      * @return true si la position est dans la zone, false sinon.
      */
     public boolean isInZone(Position pos) {
-        return this.zone.indexOf(pos) > -1;
+        return this.zone.contains(pos);
     }
 
     /**
@@ -77,8 +77,8 @@ public class Zone {
         this.zone = new ArrayList<Position>();
         findZoneRecursive(pos);
         
-        if (this.zone.contains(pos) == false)
-        this.zone.add(pos);
+        if (!this.zone.contains(pos))
+            this.zone.add(pos);
         
         return this.zone;
     }
@@ -99,24 +99,21 @@ public class Zone {
 
         List<Position> checkVois = pos.getVoisins();
 
-        for (int i = 0; i < checkVois.size(); i++) {
-
+        for (Position vois : checkVois) {
             // On vérifie que le voisin à liste si la position est dans la matrice.
-            if (matrice.posValide(checkVois.get(i))) {
+            if (matrice.posValide(vois)) {
 
                 // On vérifie que le voisin est bien du même type de case.
-                if (etatInit.indexOf(Etat.fromInt(matrice.get(checkVois.get(i)))) > -1) {
+                if (etatInit.contains(Etat.fromInt(matrice.get(vois)))) {
                     // On vérifie la position n'a pas deja été ajouté a la zone
-                    if (zone.indexOf(checkVois.get(i)) == -1) {
-                        zone.add(checkVois.get(i));
+                    if (!zone.contains(vois)) {
+                        zone.add(vois);
                         // Appel récursif pour récupérer les voisins similaires à la zone
-                        findZoneRecursive(checkVois.get(i));
+                        findZoneRecursive(vois);
                     }
                 }
             }
-
         }
-
         return this.zone;
     }
 
@@ -162,7 +159,7 @@ public class Zone {
                 Position pos = new Position(j, i);
 
                 if (matrice.posValide(pos)) {
-                    if (all_zone.indexOf(pos) == -1) {
+                    if (!all_zone.contains(pos)) {
                         if (Etat.fromInt(matrice.get(pos)) == Etat.NOIR) {
                             matrice.set(pos, -999);
                         }

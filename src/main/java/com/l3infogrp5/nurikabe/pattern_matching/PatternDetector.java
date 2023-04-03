@@ -62,7 +62,7 @@ public class PatternDetector {
         // Vérifier si le hash de la sous-grille correspond à celui du pattern
         Integer subGridHash = ZHash.hash(subGrid, patternRowSize, patternColSize);
 
-        Integer index = patternHash.indexOf(subGridHash);
+        int index = patternHash.indexOf(subGridHash);
         subGridHashList.add(subGridHash);
         if (index > -1) {
           // Si oui, ajouter la position (i, j) à la liste des positions du pattern dans
