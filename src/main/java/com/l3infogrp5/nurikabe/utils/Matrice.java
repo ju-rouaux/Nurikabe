@@ -114,12 +114,20 @@ public class Matrice {
     }
 
     /**
-     * Retourne une copie de la matrice courante.
+     * Retourne une référence de la matrice courante.
      * 
-     * @return une copie de la matrice courante
+     * @return une référence de la matrice courante
      */
     public Matrice getMatrice() {
         return this;
+    }
+
+    /**
+     * Retourne un tableau à 2 dimensions d'entier contenant les éléments de la matrice.
+     * @return un tableau à 2 dimensions d'integer contenant les éléments de la matrice.
+     */
+    public int[][] getElements() {
+        return this.elements;
     }
 
     /**
