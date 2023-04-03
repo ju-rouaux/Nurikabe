@@ -134,6 +134,7 @@ public class ControllerMenuProfils {
 
         // On ajoute le profil créé aux profils existant et on met à jour le tableau des noms.
         ajoutProfils(nom_joueur);
+        writeActif(nom_joueur);
         chargerTableau();
     }
 
@@ -178,14 +179,16 @@ public class ControllerMenuProfils {
         VBox vbox = (VBox) pseudo_grid.getChildren().get(i);
         vbox.getChildren().get(0).getStyleClass().add("actif");
         profil_actif = i;
+    }
 
+    private void writeActif(String nom_actif) throws IOException {
         // Sauvegarde du profil en cour d'utilisation
         BufferedWriter writer = new BufferedWriter(
                 new FileWriter(Path.repertoire_profils.toString() + "/profil_actif"));
 
-        writer.write(String.valueOf(profil_actif));
+        writer.write(String.valueOf(profil_actif + 1));
         writer.newLine();
-        writer.write(Profil.getJoueur());
+        writer.write(nom_actif);
         writer.close();
     }
 
@@ -206,18 +209,26 @@ public class ControllerMenuProfils {
         getActif();
     }
 
-    public void getActif() throws IOException {
+    /**
+     * Méthode pour récupérer le joueur actif
+     * 
+     * @throws IOException lancé lorsque le fichier correspondant n'a pas pû être lu.
+     */
+    private void getActif() throws IOException {
         File file = new File(Path.repertoire_profils, "profil_actif");
         if (file.exists()) {
             Scanner reader = new Scanner(file);
             
-            int actif = reader.nextInt();
-            nom_joueur = reader.nextLine().trim();
-            if (!nom_joueur.equals(Profil.getJoueur())) {
-                Profil.getInstance().chargerProfil(nom_joueur);
-            }
-
+            int actif  = reader.nextInt();
             setActiveProfil(actif);
+
+            String nom_actif = reader.next();
+
+            // si la ligne récupérer n'est pas égal au profil en cour on change 
+            if (!nom_actif.isEmpty() && !nom_actif.equals(Profil.getJoueur()))
+                writeActif(nom_actif);
+            
+            
             reader.close();
         }
     }
@@ -298,7 +309,7 @@ public class ControllerMenuProfils {
     }
 }
 
-// TODO : regeler bug creation profil "detente" (mauvais placement du dossier) car Profil.getJoueur() vide
+// TODO : reavoir derniere charger au lancement
 
 // IDEA : different profil meme icon fond de couleur different
 // IDEA : potentiellement laisser joueur modifier pseudo et couleur de fond
