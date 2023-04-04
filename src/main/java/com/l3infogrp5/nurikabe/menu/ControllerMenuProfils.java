@@ -297,8 +297,10 @@ public class ControllerMenuProfils {
      */
     @FXML
     private void suprProfil(ActionEvent event) throws IOException {
+        int i ;
+
         // On parcourt la grille des profils pour savoir lequel est appuyer.
-        for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
+        for (i = 0; i < pseudo_grid.getChildren().size(); i++) {
             // Récupération du bouton appuyé
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2))) {
                 // Récupération du pseudo
@@ -309,16 +311,24 @@ public class ControllerMenuProfils {
 
         profils_attributs.remove(nom_joueur);
 
-        Sauvegarder.supprimerProfil(nom_joueur);
-
-        Profil.getInstance().chargerProfil("default");
-        setActiveProfil(0);
-        writeActif("default");
+        Sauvegarder.supprimerProfil(nom_joueur);   
+        
+        if(i == profil_actif){
+            setActiveProfil(0);
+            writeActif("default");
+        }
+        else {
+            getActif();
+            profil_actif = profil_actif - 1;
+            setActiveProfil(profil_actif);
+            writeActif(Profil.getJoueur());
+        }
 
         // Rechargement de la scène
         ControllerMenuProfils reload = new ControllerMenuProfils(stage);
         stage.setScene(reload.getScene());
         reload.chargerTableau();
+        Profil.getInstance().chargerProfil(nom_joueur);
     }
 
     /**
