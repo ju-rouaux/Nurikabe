@@ -311,6 +311,10 @@ public class ControllerMenuProfils {
 
         Sauvegarder.supprimerProfil(nom_joueur);
 
+        Profil.getInstance().chargerProfil("default");
+        setActiveProfil(0);
+        writeActif("default");
+
         // Rechargement de la scène
         ControllerMenuProfils reload = new ControllerMenuProfils(stage);
         stage.setScene(reload.getScene());
