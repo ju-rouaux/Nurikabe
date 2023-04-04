@@ -42,12 +42,12 @@ public class PatternDetector {
    * Détecte le pattern dans la grille
    * 
    * @param grid la grille dans laquelle le pattern doit être détecté
-   * @return un HashMap contenant les positions du pattern dans la grille
+   * @return une liste des positions de la première coccurence du pattern dans la grille
    */
   
-  public HashMap<Integer, ArrayList <Position>> detectInGrid(int[][] grid) {
-    HashMap<Integer, ArrayList <Position>> patternHashMap = new HashMap <Integer, ArrayList <Position>> ();
-    int patternHashCount = 0;
+  public ArrayList <Position> detectInGrid(int[][] grid) {
+    // ArrayList <Position> patternPositions = new ArrayList <Position>();
+    // int patternHashCount = 0;
 
     int gridRowSize = grid.length; // taille d'une ligne de la grille
     int gridColSize = grid[0].length; // taille d'une colone de la grille
@@ -82,14 +82,12 @@ public class PatternDetector {
             }
           }
 
-          //patternLocations.add(new int[] { i, j });
-          patternHashCount++;
-          patternHashMap.put(patternHashCount, subGrid_pos_array);
+          return subGrid_pos_array;
         }
       }
     }
 
-    return patternHashMap;
+    return new ArrayList <Position>();
   }
 
 }
