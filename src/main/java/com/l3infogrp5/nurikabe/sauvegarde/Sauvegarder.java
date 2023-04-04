@@ -68,10 +68,8 @@ public class Sauvegarder {
         List<String> fichiers = new ArrayList<>();
         if (dossierExistants(repertoire)) {
             File[] files = repertoire.listFiles();
-
-            Arrays.sort(files, new Comparator<File>() {
-                @Override
-                public int compare(final File f1, final File f2) {
+            if(files != null) {
+                Arrays.sort(files, (f1, f2) -> {
                     try {
                         BasicFileAttributes f1Attr = Files.readAttributes(Paths.get(f1.toURI()), BasicFileAttributes.class);
                         BasicFileAttributes f2Attr = Files.readAttributes(Paths.get(f2.toURI()), BasicFileAttributes.class);
@@ -79,11 +77,11 @@ public class Sauvegarder {
                     } catch (IOException e) {
                         return 0;
                     }
-                }
-            });
+                });
 
-            for (File fichier : files) {
-                fichiers.add(fichier.getName());
+                for (File fichier : files) {
+                    fichiers.add(fichier.getName());
+                }
             }
         }
         return fichiers;
@@ -266,8 +264,6 @@ public class Sauvegarder {
      * @return le nombre de niveaux
      */
     public static int nbGrilles(String mode_de_jeu) {
-        // TODO : temporaire
-        mode_de_jeu = "detente";
 
         int nb_grilles;
         try (InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/grilles_" + mode_de_jeu + ".txt")) {
@@ -383,6 +379,7 @@ public class Sauvegarder {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
             return false;
         }
+
     }
 
     /**
