@@ -2,7 +2,6 @@ package com.l3infogrp5.nurikabe.niveau.score;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 /**
@@ -20,10 +19,9 @@ public class ScoreEndless extends ScoreChrono {
     /**
      * Constructeur du ScoreEndless
      * @param totalSec nombre total de secondes
-     * @param text texte du chronomètre
      */
-    public ScoreEndless(double totalSec, Text text) {
-        super(totalSec, text);
+    public ScoreEndless(double totalSec) {
+        super(totalSec);
     }
 
     /**

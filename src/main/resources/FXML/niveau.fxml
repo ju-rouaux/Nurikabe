@@ -22,15 +22,11 @@
                      <Button fx:id="btn_undo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#undoClique" prefHeight="30.0" prefWidth="30.0" text="Undo" textOverrun="CLIP" />
                      <Button fx:id="btn_redo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redoClique" prefHeight="30.0" prefWidth="30.0" text="Redo" textOverrun="CLIP" />
                      <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                     <BorderPane fx:id="panneau_score" prefHeight="200.0" prefWidth="200.0">
-                        <center>
-                           <Label text="Label" BorderPane.alignment="CENTER" />
-                        </center>
-                     </BorderPane>
+                     <BorderPane fx:id="panneau_score" prefHeight="200.0" prefWidth="200.0" />
                      <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                     <Button fx:id="btn_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Aide" textOverrun="CLIP" />
-                     <Button fx:id="btn_check" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Correction" textOverrun="CLIP" />
-                     <Button fx:id="btn_reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Recommencer" textOverrun="CLIP" />
+                     <Button fx:id="btn_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aideClique" prefHeight="30.0" prefWidth="30.0" text="Aide" textOverrun="CLIP" />
+                     <Button fx:id="btn_check" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkClique" prefHeight="30.0" prefWidth="30.0" text="Correction" textOverrun="CLIP" />
+                     <Button fx:id="btn_reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#resetClique" prefHeight="30.0" prefWidth="30.0" text="Recommencer" textOverrun="CLIP" />
                   </children>
                </HBox>
             </items>
