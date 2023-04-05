@@ -4,18 +4,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 
 import java.io.IOException;
-
-import com.l3infogrp5.nurikabe.profil.Profil;
 
 /**
  * Contrôleur du menu principal, et sa scène.
  * 
- * @author Julien Rouaux - Nicolas Gouget
+ * @author Julien Rouaux - Nicolas
  */
 public class ControllerMenuPrincipal {
 
@@ -39,7 +37,8 @@ public class ControllerMenuPrincipal {
      * Initialise le menu principal et son contrôleur.
      * 
      * @param stage la fenêtre contenant la scène.
-     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû être lu.
+     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
+     *                     être lu.
      */
     public ControllerMenuPrincipal(Stage stage) throws IOException {
         this.stage = stage;
@@ -49,6 +48,9 @@ public class ControllerMenuPrincipal {
         loader.setController(this);
 
         scene = loader.load();
+
+        ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage);
+        controller_profil.getActif();
     }
 
     /**
@@ -65,16 +67,19 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void jouerClique(ActionEvent event) throws Exception {
-        Profil.getInstance().chargerProfil("Julieng"); // TODO charger profil dans menu selection
         stage.setScene(new ControllerMenuModeJeu(stage).getScene());
     }
 
     /**
      * Change la scène par le menu de sélection de profil.
+     * 
+     * @throws IOException
      */
     @FXML
-    private void profilsClique(ActionEvent event) {
-
+    private void profilsClique(ActionEvent event) throws IOException {
+        ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage);
+        stage.setScene(controller_profil.getScene());
+        controller_profil.chargerTableau();
     }
 
     /**

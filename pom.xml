@@ -63,6 +63,12 @@
             <artifactId>controlsfx</artifactId>
             <version>11.1.2</version>
         </dependency>
+        <!-- Import Apache Commons IO pour supprimer récursivement les dossiers -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+    </dependency>
     </dependencies>
 
     <build>

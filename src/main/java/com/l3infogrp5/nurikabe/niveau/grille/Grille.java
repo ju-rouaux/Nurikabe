@@ -79,7 +79,7 @@ public class Grille {
         this.panneau_grille = new GridPane();
 
         // Adapter la taille de la GridPane à son panneau parent.
-        // Cela permet de concerver le ratio hauteur-largeur en occupant un maximum
+        // Cela permet de conserver le ratio hauteur-largeur en occupant un maximum
         // d'espace au sein du parent.
         this.panneau = new BorderPane();
         NumberBinding ratio = Bindings.min(
@@ -113,12 +113,12 @@ public class Grille {
                         }
 
                         public void relache(Case c) {
-                            System.out.println("Relachement de : " + c.getPosition());
+                            System.out.println("Relâchement de : " + c.getPosition());
                         }
                     });
                 }
 
-                // Case intéractive
+                // Case interactive
                 else {
                     case_courante = new CaseInteractive(new Position(i, j));
 
@@ -131,7 +131,7 @@ public class Grille {
                         }
 
                         public void relache(Case c) {
-                            System.out.println("Relachement de : " + c.getPosition());
+                            System.out.println("Relâchement de : " + c.getPosition());
                             c.surbrillance(false, 0);
                         }
                     });
@@ -201,7 +201,7 @@ public class Grille {
     public void set(int x, int y, Etat etat) throws IllegalArgumentException {
         if (this.grille[x][y].get() > 0)
             throw new IllegalArgumentException(
-                    "Impossible de modifier l'état de la celulle à la position (" + x + ", " + y + ").");
+                    "Impossible de modifier l'état de la cellule à la position (" + x + ", " + y + ").");
 
         this.grille[x][y].set(etat.toInt());
     }
@@ -239,7 +239,7 @@ public class Grille {
      * Retourne le panneau contenant la grille.
      * Il est conseillé de ne pas modifier ce panneau.
      *
-     * @return le paneau contenant la grille.
+     * @return le panneau contenant la grille.
      */
     public Pane getPanneau() {
         return this.panneau;
@@ -274,7 +274,7 @@ public class Grille {
     }
 
     /**
-     * Active ou désactive l'intéraction du joueur avec les cases.
+     * Active ou désactive l’interaction du joueur avec les cases.
      *
      * @param b vrai si les cases doivent être activées, faux si désactivées.
      */
