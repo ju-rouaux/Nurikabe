@@ -3,7 +3,6 @@ package com.l3infogrp5.nurikabe.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Classe fournissant différentes méthodes utiles à la manipulation de matrices.
@@ -111,15 +110,6 @@ public class Matrice {
     public boolean posValide(Position p) {
         return (p.getX() < this.getNbLignes()) && (p.getX() >= 0) && (p.getY() < this.getNbColonnes())
                 && (p.getY() >= 0);
-    }
-
-    /**
-     * Retourne une référence de la matrice courante.
-     * 
-     * @return une référence de la matrice courante
-     */
-    public Matrice getMatrice() {
-        return this;
     }
 
     /**

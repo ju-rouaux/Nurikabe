@@ -1,7 +1,6 @@
 package com.l3infogrp5.nurikabe.pattern_matching;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
