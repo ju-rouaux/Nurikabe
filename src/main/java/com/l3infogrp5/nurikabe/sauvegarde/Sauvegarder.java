@@ -2,21 +2,15 @@ package com.l3infogrp5.nurikabe.sauvegarde;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.utils.Path;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
-
-import org.apache.commons.io.FileUtils;
 
 /**
  * Classe pour sauvegarder le profil d'un joueur
@@ -68,7 +62,7 @@ public class Sauvegarder {
         List<String> fichiers = new ArrayList<>();
         if (dossierExistants(repertoire)) {
             File[] files = repertoire.listFiles();
-            if(files != null) {
+            if (files != null) {
                 Arrays.sort(files, (f1, f2) -> {
                     try {
                         BasicFileAttributes f1Attr = Files.readAttributes(Paths.get(f1.toURI()), BasicFileAttributes.class);
@@ -189,7 +183,7 @@ public class Sauvegarder {
      * @param o           le score
      * @throws IOException {@link IOException} si le fichier n'existe pas
      **/
-    public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau, Object o) throws IOException {
+    public static void sauvegarderScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, Object o) throws IOException {
         FileWriter writer;
 
         // Récupérer la date courante
@@ -202,13 +196,12 @@ public class Sauvegarder {
         // SimpleDateFormat
         String date_formate = format.format(date);
 
-        if (!mode_de_jeu.equals("detente"))
+        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE))
             writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
         else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
 
 
-        if (mode_de_jeu.equals("endless")) writer.write(joueur + " % " + o + " % " + date_formate + "\n");
-        else writer.write(joueur + " % " + o + " % " + id_niveau + " % " + date_formate + "\n");
+        writer.write(joueur + " % " + o + " % " + date_formate + "\n");
 
         writer.close();
 
@@ -224,10 +217,10 @@ public class Sauvegarder {
      * scores du fichier
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
-    public static HashMap<String, HashMap<String, String>> chargerScore(String mode_de_jeu, int id_niveau) throws IOException {
+    public static HashMap<String, HashMap<String, String>> chargerScore(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
         HashMap<String, HashMap<String, String>> scores = new HashMap<>();
         Reader file_reader;
-        if (!mode_de_jeu.equals("detente")) {
+        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
         } else {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
@@ -263,10 +256,11 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @return le nombre de niveaux
      */
-    public static int nbGrilles(String mode_de_jeu) {
+    public static int nbGrilles(ModeDeJeu mode_de_jeu) {
 
         int nb_grilles;
-        try (InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/grilles_" + mode_de_jeu + ".txt")) {
+//        TODO : modifier mode de jeu pour fichier des grilles
+        try (InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/grilles_" + ModeDeJeu.DETENTE + ".txt")) {
             assert inputStream != null;
             try (BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
                  BufferedReader reader = new BufferedReader(new InputStreamReader(bufferedInputStream))) {
@@ -292,10 +286,10 @@ public class Sauvegarder {
      * @return la matrice du niveau chargé
      * @throws FileNotFoundException {@link FileNotFoundException} si le fichier n'est pas trouvé
      */
-    public static int[][] chargerGrilleFichier(int id_niveau, String mode_de_jeu, Boolean solution) throws FileNotFoundException {
+    public static int[][] chargerGrilleFichier(int id_niveau, ModeDeJeu mode_de_jeu, Boolean solution) throws FileNotFoundException {
 
-
-        String nom_fichier = "grilles_" + mode_de_jeu;
+//    TODO : Modifier si split niveaux en différents fichiers
+        String nom_fichier = "grilles_" + ModeDeJeu.DETENTE;
         if (solution) {
             nom_fichier += "_solutions";
         }
@@ -367,7 +361,7 @@ public class Sauvegarder {
      * @param historique  l'historique des mouvements
      * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static boolean sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau, Historique historique) {
+    public static boolean sauvegarderHistorique(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, Historique historique) {
         File mouvements_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File mouvements_fichier = new File(mouvements_repertoire + "/Mouvements_" + id_niveau + ".hist");
 
@@ -433,7 +427,7 @@ public class Sauvegarder {
      * @param matrice     la matrice du niveau a sauvegarder
      * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static boolean sauvegarderMatrice(String joueur, String mode_de_jeu, int id_niveau, int[][] matrice) {
+    public static boolean sauvegarderMatrice(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, int[][] matrice) {
         File matrice_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
         File matrice_fichier = new File(matrice_repertoire + "/Matrice_" + id_niveau + ".mat");
 
