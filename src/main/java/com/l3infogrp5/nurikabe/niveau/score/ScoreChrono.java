@@ -35,7 +35,6 @@ abstract public class ScoreChrono implements ScoreInterface {
      * Constructeur du chronomètre
      * 
      * @param totalSec nombre total de secondes
-     * @param text texte du chronomètre
      */
     public ScoreChrono(double totalSec) {
         this.totalSec = totalSec;

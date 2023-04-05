@@ -138,6 +138,8 @@ public class ControllerNiveau {
 
     /**
      * Charge la grille suivante dans la liste des niveaux à jouer.
+     * 
+     * @throws Exception lancée lorsque la grille n'a pas pû être chargée.
      */
     public void loadNiveauSuivant() throws Exception {
         int id_niveau = file_niveaux.get(index_file++);
