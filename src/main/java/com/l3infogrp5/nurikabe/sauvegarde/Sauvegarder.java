@@ -6,12 +6,17 @@ import com.l3infogrp5.nurikabe.utils.Path;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * Classe pour sauvegarder le profil d'un joueur
@@ -62,8 +67,21 @@ public class Sauvegarder {
     public static List<String> listeFichiers(File repertoire) {
         List<String> fichiers = new ArrayList<>();
         if (dossierExistants(repertoire)) {
-            for (File fichier : repertoire.listFiles()) {
-                fichiers.add(fichier.getName());
+            File[] files = repertoire.listFiles();
+            if(files != null) {
+                Arrays.sort(files, (f1, f2) -> {
+                    try {
+                        BasicFileAttributes f1Attr = Files.readAttributes(Paths.get(f1.toURI()), BasicFileAttributes.class);
+                        BasicFileAttributes f2Attr = Files.readAttributes(Paths.get(f2.toURI()), BasicFileAttributes.class);
+                        return f1Attr.creationTime().compareTo(f2Attr.creationTime());
+                    } catch (IOException e) {
+                        return 0;
+                    }
+                });
+
+                for (File fichier : files) {
+                    fichiers.add(fichier.getName());
+                }
             }
         }
         return fichiers;
@@ -96,6 +114,12 @@ public class Sauvegarder {
             // Crée les dossiers "save" et "score" s'ils n'existent pas
             Files.createDirectories(Path.repertoire_save.toPath());
             Files.createDirectories(Path.repertoire_score.toPath());
+
+            // Crée les dossiers "profil" s'il n'existent pas
+            boolean profil = fichiers.contains("profil");
+            if (!profil) {
+                Files.createDirectories(Paths.get(Path.repertoire_profils.toString()));
+            }
 
             // verifie si les fichiers existent
             String[] files = {"endless.save", "clm.save", "detente.save"};
@@ -240,8 +264,6 @@ public class Sauvegarder {
      * @return le nombre de niveaux
      */
     public static int nbGrilles(String mode_de_jeu) {
-        // TODO : temporaire
-        mode_de_jeu = "detente";
 
         int nb_grilles;
         try (InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/grilles_" + mode_de_jeu + ".txt")) {
@@ -357,6 +379,7 @@ public class Sauvegarder {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
             return false;
         }
+
     }
 
     /**
@@ -469,13 +492,13 @@ public class Sauvegarder {
      * Supprime le profil du joueur
      *
      * @param nom_joueur le nom du joueur
+     * @throws IOException lancé lorsque le dossier correspondant n'a pas pû être lu.
      */
-    public static void supprimerProfil(String nom_joueur) {
+    public static void supprimerProfil(String nom_joueur) throws IOException {
         File repertoire = new File(Path.repertoire_lvl + "/" + nom_joueur);
         if (repertoire.exists()) {
-            repertoire.delete();
+            FileUtils.deleteDirectory(repertoire);
             System.out.println("[Sauvegarde] Profil supprimé");
         }
     }
-
 }

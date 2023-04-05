@@ -12,11 +12,11 @@ import java.io.IOException;
 import com.l3infogrp5.nurikabe.profil.Profil;
 
 /**
- * Contrôleur du menu d'affichage des règles, et sa scène.
- * 
- * @author Nicolas
+ * Contrôleur du menu de sélection de niveau, et sa scène.
+ *
+ * @author Julien Rouaux - Nicolas
  */
-public class ControllerMenuRegles {
+public class ControllerMenuNiveau {
 
     private FXMLLoader loader;
     private Stage stage;
@@ -24,22 +24,22 @@ public class ControllerMenuRegles {
     Profil joueur;
 
     @FXML
-    private Button retour;
+    private Button btn_retour;
 
     /**
-     * Initialise le menu de sélection d'affichage des règles et son contrôleur.
-     * 
+     * Initialise le menu de sélection de niveau et son contrôleur.
+     *
      * @param stage la fenêtre contenant la scène.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuRegles(Stage stage) throws IOException {
+    public ControllerMenuNiveau(Stage stage) throws IOException {
         this.joueur = Profil.getInstance();
 
         this.stage = stage;
 
         loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FXML/menu_regles.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/menu_niveau.fxml"));
         loader.setController(this);
 
         scene = loader.load();
@@ -47,7 +47,7 @@ public class ControllerMenuRegles {
 
     /**
      * Retourne la scène gérée par le contrôleur.
-     * 
+     *
      * @return la scène gérée par le contrôleur.
      */
     public Scene getScene() {
@@ -59,7 +59,6 @@ public class ControllerMenuRegles {
      */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
+        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
     }
-
 }

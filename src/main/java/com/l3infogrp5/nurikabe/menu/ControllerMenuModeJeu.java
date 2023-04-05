@@ -1,10 +1,10 @@
 package com.l3infogrp5.nurikabe.menu;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import com.l3infogrp5.nurikabe.profil.Profil;
 /**
  * Contrôleur du menu de sélection de mode de jeu, et sa scène.
  *
- * @author Julien Rouaux - Nicolas Gouget
+ * @author Julien Rouaux - Nicolas
  */
 public class ControllerMenuModeJeu {
 
@@ -45,7 +45,6 @@ public class ControllerMenuModeJeu {
      *                     être lu.
      */
     public ControllerMenuModeJeu(Stage stage) throws IOException {
-
         this.stage = stage;
 
         loader = new FXMLLoader();
@@ -87,7 +86,7 @@ public class ControllerMenuModeJeu {
      * Change la scène par une partie du mode sans fin.
      */
     @FXML
-    private void sansFinClique(ActionEvent event) {
+    private void sansFinClique() {
 
     }
 
@@ -95,7 +94,7 @@ public class ControllerMenuModeJeu {
      * Change la scène par le menu de consultation des scores du mode sans fin.
      */
     @FXML
-    private void scoreClique(ActionEvent event) {
+    private void scoreClique() {
 
     }
 
