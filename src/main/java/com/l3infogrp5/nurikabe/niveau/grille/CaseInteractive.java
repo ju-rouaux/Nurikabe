@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
  * @author Julien Rouaux
  * @see com.l3infogrp5.nurikabe.niveau.grille.Case
  */
-class CaseInteractive extends Case {
+public class CaseInteractive extends Case {
 
     private ImageView imagePoint;
 
@@ -21,7 +21,7 @@ class CaseInteractive extends Case {
      * 
      * @param pos position de la case dans la grille.
      */
-    CaseInteractive(Position pos) {
+    public CaseInteractive(Position pos) {
         super(pos);
 
         // Exécuté lors d'un simple clic

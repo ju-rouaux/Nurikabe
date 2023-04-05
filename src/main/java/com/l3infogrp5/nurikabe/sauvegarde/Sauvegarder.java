@@ -2,15 +2,14 @@ package com.l3infogrp5.nurikabe.sauvegarde;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.utils.Path;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -62,8 +61,21 @@ public class Sauvegarder {
     public static List<String> listeFichiers(File repertoire) {
         List<String> fichiers = new ArrayList<>();
         if (dossierExistants(repertoire)) {
-            for (File fichier : repertoire.listFiles()) {
-                fichiers.add(fichier.getName());
+            File[] files = repertoire.listFiles();
+            if (files != null) {
+                Arrays.sort(files, (f1, f2) -> {
+                    try {
+                        BasicFileAttributes f1Attr = Files.readAttributes(Paths.get(f1.toURI()), BasicFileAttributes.class);
+                        BasicFileAttributes f2Attr = Files.readAttributes(Paths.get(f2.toURI()), BasicFileAttributes.class);
+                        return f1Attr.creationTime().compareTo(f2Attr.creationTime());
+                    } catch (IOException e) {
+                        return 0;
+                    }
+                });
+
+                for (File fichier : files) {
+                    fichiers.add(fichier.getName());
+                }
             }
         }
         return fichiers;
@@ -96,6 +108,12 @@ public class Sauvegarder {
             // Crée les dossiers "save" et "score" s'ils n'existent pas
             Files.createDirectories(Path.repertoire_save.toPath());
             Files.createDirectories(Path.repertoire_score.toPath());
+
+            // Crée les dossiers "profil" s'il n'existent pas
+            boolean profil = fichiers.contains("profil");
+            if (!profil) {
+                Files.createDirectories(Paths.get(Path.repertoire_profils.toString()));
+            }
 
             // verifie si les fichiers existent
             String[] files = {"endless.save", "clm.save", "detente.save"};
@@ -165,7 +183,7 @@ public class Sauvegarder {
      * @param o           le score
      * @throws IOException {@link IOException} si le fichier n'existe pas
      **/
-    public static void sauvegarderScore(String joueur, String mode_de_jeu, int id_niveau, Object o) throws IOException {
+    public static void sauvegarderScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, Object o) throws IOException {
         FileWriter writer;
 
         // Récupérer la date courante
@@ -178,13 +196,12 @@ public class Sauvegarder {
         // SimpleDateFormat
         String date_formate = format.format(date);
 
-        if (!mode_de_jeu.equals("detente"))
+        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE))
             writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
         else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
 
 
-        if (mode_de_jeu.equals("endless")) writer.write(joueur + " % " + o + " % " + date_formate + "\n");
-        else writer.write(joueur + " % " + o + " % " + id_niveau + " % " + date_formate + "\n");
+        writer.write(joueur + " % " + o + " % " + date_formate + "\n");
 
         writer.close();
 
@@ -200,10 +217,10 @@ public class Sauvegarder {
      * scores du fichier
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
-    public static HashMap<String, HashMap<String, String>> chargerScore(String mode_de_jeu, int id_niveau) throws IOException {
+    public static HashMap<String, HashMap<String, String>> chargerScore(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
         HashMap<String, HashMap<String, String>> scores = new HashMap<>();
         Reader file_reader;
-        if (!mode_de_jeu.equals("detente")) {
+        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
         } else {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
@@ -239,12 +256,11 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @return le nombre de niveaux
      */
-    public static int nbGrilles(String mode_de_jeu) {
-        // TODO : temporaire
-        mode_de_jeu = "detente";
+    public static int nbGrilles(ModeDeJeu mode_de_jeu) {
 
         int nb_grilles;
-        try (InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/grilles_" + mode_de_jeu + ".txt")) {
+//        TODO : modifier mode de jeu pour fichier des grilles
+        try (InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/grilles_" + ModeDeJeu.DETENTE + ".txt")) {
             assert inputStream != null;
             try (BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
                  BufferedReader reader = new BufferedReader(new InputStreamReader(bufferedInputStream))) {
@@ -270,10 +286,10 @@ public class Sauvegarder {
      * @return la matrice du niveau chargé
      * @throws FileNotFoundException {@link FileNotFoundException} si le fichier n'est pas trouvé
      */
-    public static int[][] chargerGrilleFichier(int id_niveau, String mode_de_jeu, Boolean solution) throws FileNotFoundException {
+    public static int[][] chargerGrilleFichier(int id_niveau, ModeDeJeu mode_de_jeu, Boolean solution) throws FileNotFoundException {
 
-
-        String nom_fichier = "grilles_" + mode_de_jeu;
+//    TODO : Modifier si split niveaux en différents fichiers
+        String nom_fichier = "grilles_" + ModeDeJeu.DETENTE;
         if (solution) {
             nom_fichier += "_solutions";
         }
@@ -345,7 +361,7 @@ public class Sauvegarder {
      * @param historique  l'historique des mouvements
      * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static boolean sauvegarderHistorique(String joueur, String mode_de_jeu, int id_niveau, Historique historique) {
+    public static boolean sauvegarderHistorique(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, Historique historique) {
         File mouvements_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File mouvements_fichier = new File(mouvements_repertoire + "/Mouvements_" + id_niveau + ".hist");
 
@@ -357,6 +373,7 @@ public class Sauvegarder {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
             return false;
         }
+
     }
 
     /**
@@ -410,7 +427,7 @@ public class Sauvegarder {
      * @param matrice     la matrice du niveau a sauvegarder
      * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static boolean sauvegarderMatrice(String joueur, String mode_de_jeu, int id_niveau, int[][] matrice) {
+    public static boolean sauvegarderMatrice(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, int[][] matrice) {
         File matrice_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
         File matrice_fichier = new File(matrice_repertoire + "/Matrice_" + id_niveau + ".mat");
 
@@ -469,13 +486,13 @@ public class Sauvegarder {
      * Supprime le profil du joueur
      *
      * @param nom_joueur le nom du joueur
+     * @throws IOException lancé lorsque le dossier correspondant n'a pas pû être lu.
      */
-    public static void supprimerProfil(String nom_joueur) {
+    public static void supprimerProfil(String nom_joueur) throws IOException {
         File repertoire = new File(Path.repertoire_lvl + "/" + nom_joueur);
         if (repertoire.exists()) {
-            repertoire.delete();
+            FileUtils.deleteDirectory(repertoire);
             System.out.println("[Sauvegarde] Profil supprimé");
         }
     }
-
 }

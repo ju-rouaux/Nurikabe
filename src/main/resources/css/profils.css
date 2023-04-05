@@ -18,6 +18,13 @@
   -fx-background-repeat: no-repeat;
 }
 
+.btn-del {
+  -fx-background-image: url("../trash.png");
+  -fx-background-size: 30;
+  -fx-background-position: center;
+  -fx-background-repeat: no-repeat;
+}
+
 .btn-add {
   -fx-text-fill: black;
   -fx-font-weight: bold;
@@ -29,6 +36,10 @@
 .name-profile {
   -fx-text-fill: black;
   -fx-font-size: 20px;
+}
+
+.actif {
+  -fx-background-color: #bfffa9;
 }
 
 /* ==================== IDs ==================== */

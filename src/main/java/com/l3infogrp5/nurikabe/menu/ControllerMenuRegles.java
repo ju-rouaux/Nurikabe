@@ -9,16 +9,19 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
+import com.l3infogrp5.nurikabe.profil.Profil;
+
 /**
  * Contrôleur du menu d'affichage des règles, et sa scène.
  * 
- * @author Julien Rouaux - Nicolas Gouget
+ * @author Nicolas
  */
 public class ControllerMenuRegles {
 
     private FXMLLoader loader;
     private Stage stage;
     private Scene scene;
+    Profil joueur;
 
     @FXML
     private Button retour;
@@ -31,6 +34,8 @@ public class ControllerMenuRegles {
      *                     être lu.
      */
     public ControllerMenuRegles(Stage stage) throws IOException {
+        this.joueur = Profil.getInstance();
+
         this.stage = stage;
 
         loader = new FXMLLoader();

@@ -2,6 +2,8 @@ package com.l3infogrp5.nurikabe.niveau;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
@@ -38,9 +40,11 @@ public class ControllerNiveau {
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
-    Profil joueur;
-    private final Grille grille;
+
+    private Grille grille;
+    private ScoreInterface score;
     private BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
+    private Profil joueur;
 
     @FXML
     private Button btn_aide;
@@ -68,6 +72,9 @@ public class ControllerNiveau {
     @FXML
     private HBox barre;
 
+    private List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
+    private int index_file; // Indice du niveau lancé dans la liste
+
     /**
      * Initialise la vue du niveau.
      *
@@ -79,12 +86,10 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, List<Integer> niveaux) throws IOException {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
-        joueur = Profil.getInstance();
+        this.joueur = Profil.getInstance();
 
-        // TODO : préparer le terrain pour enchainer plusieurs niveaux
-        int id_niveau = niveaux.get(0);
-        Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
-        grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+        this.file_niveaux = niveaux;
+        this.index_file = 0;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
@@ -97,19 +102,10 @@ public class ControllerNiveau {
      * Initialise les éléments de l'interface après le préchargement du FXMLLoader.
      */
     @FXML
-    private void initialize() {
+    private void initialize() throws Exception {
 
         // Adapter la largeur de la barre à l'écran
         this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(40));
-
-        // Mettre la grille au centre (et ajouter une marge)
-        Pane panneau_grille = grille.getPanneau();
-        StackPane.setMargin(panneau_grille, new Insets(30, 30, 30, 30));
-        this.panneau_central.getChildren().add(panneau_grille);
-
-        // Recharger la fenêtre d'aide pour l'afficher par dessus la grille
-        this.panneau_central.getChildren().remove(panneau_aide);
-        this.panneau_central.getChildren().add(panneau_aide);
 
         // Ne pas faire de rendu en dehors du panneau central (pour ne pas masquer la
         // barre d'outils)
@@ -117,12 +113,6 @@ public class ControllerNiveau {
         zone_clip.widthProperty().bind(this.panneau_central.widthProperty());
         zone_clip.heightProperty().bind(this.panneau_central.heightProperty());
         this.panneau_central.setClip(zone_clip);
-
-        // TODO charger les données de score
-
-        // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
 
         // Afficher l'aide lorsque la Property aide_affichee est active.
         this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
@@ -137,6 +127,43 @@ public class ControllerNiveau {
                 transition.play();
             }
         });
+
+        try {
+            this.loadNiveauSuivant();
+        } catch(Exception e) {
+            System.out.println(e);
+            this.retourClique();
+        }
+    }
+
+    /**
+     * Charge la grille suivante dans la liste des niveaux à jouer.
+     *
+     * @throws Exception lancée lorsque la grille n'a pas pû être chargée.
+     */
+    public void loadNiveauSuivant() throws Exception {
+        int id_niveau = file_niveaux.get(index_file++);
+        Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
+        this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+
+        // Mettre la grille au centre (et ajouter une marge)
+        Pane panneau_grille = grille.getPanneau();
+        StackPane.setMargin(panneau_grille, new Insets(30, 30, 30, 30));
+        this.panneau_central.getChildren().add(panneau_grille);
+
+        // Recharger la fenêtre d'aide pour l'afficher par dessus la grille
+        this.panneau_central.getChildren().remove(panneau_aide);
+        this.panneau_central.getChildren().add(panneau_aide);
+
+        // TODO charger les données de score depuis le profil
+        this.score = new ScoreZen(5);
+        this.panneau_score.setCenter(this.score.get_Pane());
+
+        // Lier les boutons Undo et Redo à l'historique
+        this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
+
+        this.score.start();
     }
 
     /**
@@ -154,12 +181,11 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
-        joueur.sauvegarderNiveau(grille);
+        Profil.getInstance().sauvegarderNiveau(grille);
         // TODO : remplacer null avec le getScore du niveau
         Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
                 + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
-        // stage.setScene(new ControllerMenuNiveau(stage).getScene());
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
     }
 
@@ -178,4 +204,23 @@ public class ControllerNiveau {
     private void redoClique() {
         grille.redo();
     }
+
+    //TODO
+    @FXML
+    void aideClique() {
+        this.score.aideUtilise();
+    }
+
+    //TODO
+    @FXML
+    void checkClique() {
+        this.score.checkUtilise();
+    }
+
+    //TODO
+    @FXML
+    void resetClique() {
+        this.score.restart();
+    }
+
 }

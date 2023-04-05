@@ -42,7 +42,7 @@ public class ControllerMenuSelection {
 
         /**
          * Créer une carte de sélection qui lancera le niveau donné.
-         * 
+         *
          * @param id_niveau l'id du niveau à lancer.
          */
         ControllerSelection(int id_niveau) throws IOException {
@@ -82,9 +82,10 @@ public class ControllerMenuSelection {
          * Lance la fenêtre d'affichage des scores.
          */
         @FXML
-        private void scoreClique() {
+        private void scoreClique() throws IOException{
             // TODO charger score ici
             System.out.println("Lancement score " + (id_niveau));
+            stage.setScene(new ControllerLeaderboard(stage, id_niveau).getScene());
         }
 
         /**

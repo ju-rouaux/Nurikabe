@@ -2,6 +2,7 @@ package com.l3infogrp5.nurikabe.profil;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
+import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 
@@ -40,7 +41,7 @@ public class Profil {
     /* Le nom du joueur */
     private static String joueur;
     /* Le mode de jeu */
-    private static String mode_de_jeu;
+    private static ModeDeJeu mode_de_jeu;
     /* L'identifiant du niveau représenté par un numéro */
     private static int id_niveau;
 
@@ -52,7 +53,7 @@ public class Profil {
      */
     private Profil() throws IOException {
         joueur = "default";
-        mode_de_jeu = "detente";
+        mode_de_jeu = ModeDeJeu.DETENTE;
         id_niveau = 0;
 
         if (Sauvegarder.RechercherSauvegarde(joueur)) {
@@ -73,7 +74,6 @@ public class Profil {
 
 
     /**
-     * //TODO a utiliser
      * retourne une liste de chaines de caractères de l'emplacement des images, s'il
      * elle existe, sinon on charge celle par défaut
      *
@@ -82,7 +82,7 @@ public class Profil {
      */
     public static List<String> chargerImageNiveau() throws IOException {
         List<String> url_images = new ArrayList<>();
-        String mdj = getMode_de_jeu();
+        ModeDeJeu mdj = getMode_de_jeu();
         String joueur = getJoueur();
         File image_grille = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
             "capture_niveau_" + getIdNiveau() + ".png");
@@ -93,7 +93,7 @@ public class Profil {
         }
 
         // Sauvegarde placeholder_default.png dans un fichier temporaire
-//        Supprimé quand le programme se termine
+        //  Supprimé quand le programme se termine
         File placeholder_temp = File.createTempFile("placeholder_default", ".png");
         placeholder_temp.deleteOnExit();
         Files.copy(placeholder_default, placeholder_temp.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -125,7 +125,7 @@ public class Profil {
      *
      * @return l'id du niveau
      */
-    public static String getMode_de_jeu() {
+    public static ModeDeJeu getMode_de_jeu() {
         return mode_de_jeu;
     }
 
@@ -134,7 +134,7 @@ public class Profil {
      *
      * @param mdj le mode de jeu courant
      */
-    public void setMode_de_jeu(String mdj) {
+    public void setMode_de_jeu(ModeDeJeu mdj) {
         mode_de_jeu = mdj;
     }
 
@@ -149,7 +149,7 @@ public class Profil {
 
     /**
      * Methode pour charger un profil
-     * Attention, il faut ensuite initialiser le mode de jeu avec le setter {@link #setMode_de_jeu(String)}.
+     * Attention, il faut ensuite initialiser le mode de jeu avec le setter {@link #setMode_de_jeu(ModeDeJeu)}.
      * Et l'id du niveau en paramètre de la méthode chargerGrille {@link #chargerGrille(int)}.
      *
      * @param joueur le nom du joueur
@@ -159,7 +159,7 @@ public class Profil {
         donneesNiveau = new DonneesNiveau();
         Profil.joueur = joueur;
         // Valeurs par défaut
-        mode_de_jeu = "detente";
+        mode_de_jeu = ModeDeJeu.DETENTE;
         id_niveau = 0;
 
         if (Sauvegarder.RechercherSauvegarde(joueur)) {
@@ -189,7 +189,7 @@ public class Profil {
     public Historique chargerHistorique() {
         Historique hist;
         System.out.println("Mode de jeu : " + mode_de_jeu);
-        File fichier_mouvements = Paths.get(Path.repertoire_lvl.toString(), joueur, mode_de_jeu, "Mouvements_" + id_niveau + ".hist").toFile();
+        File fichier_mouvements = Paths.get(Path.repertoire_lvl.toString(), joueur, mode_de_jeu.toString(), "Mouvements_" + id_niveau + ".hist").toFile();
 
         if (fichier_mouvements.exists() && fichier_mouvements.length() > 0) {
             System.out.println(
@@ -219,20 +219,12 @@ public class Profil {
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
-            //            TODO : Temporaire -> lit les grilles dans le fichier detente
-
-            Sauvegarder.chargerGrilleFichier(id_niveau, "detente", false);
-//            Sauvegarder.chargerGrilleFichier(this.id_niveau, mode_de_jeu, false);
+            Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
             donneesNiveau.matrice_niveau = Sauvegarder.deserialiserMatrice(grille_fichier);
-        } else {
-//            TODO : Temporaire -> lit les grilles dans le fichier detente
-//            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, false);
-            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(id_niveau, "detente", false);
-        }
-        //            TODO : Temporaire -> lit les grilles dans le fichier detente
+        } else
+            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
 
-//        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(this.id_niveau, this.mode_de_jeu, true);
-        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, "detente", true);
+        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, true);
 
         return donneesNiveau;
     }

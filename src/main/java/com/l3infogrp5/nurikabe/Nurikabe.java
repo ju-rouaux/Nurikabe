@@ -1,6 +1,7 @@
 package com.l3infogrp5.nurikabe;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
+import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -34,6 +35,7 @@ public class Nurikabe extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
+        Profil.getInstance().chargerProfil(Profil.getJoueur());
         ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
 
         stage.setMinHeight(480);

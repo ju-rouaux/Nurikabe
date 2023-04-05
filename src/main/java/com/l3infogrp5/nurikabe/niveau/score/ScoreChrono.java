@@ -13,33 +13,32 @@ import javafx.scene.text.Text;
 abstract public class ScoreChrono implements ScoreInterface {
 
     /**secondes*/
-    public int sec;
+    protected double sec;
 
     /**minutes*/ 
-    public float min;
+    protected double min;
 
     /**nombre total de secondes écoulées*/
-    public int totalSec;
+    protected double totalSec;
 
     /**Texte du chronomètre*/
-    public Text text;
+    protected Text text;
 
     /**Zone d'affichage du chronomètre*/
-    public Pane affichage;
+    protected Pane affichage;
 
     /**Calculateur du temps qui passe*/
-    public Timeline timeline;
+    protected Timeline timeline;
 
 
     /**
      * Constructeur du chronomètre
      * 
      * @param totalSec nombre total de secondes
-     * @param text texte du chronomètre
      */
-    public ScoreChrono(int totalSec, Text text) {
+    public ScoreChrono(double totalSec) {
         this.totalSec = totalSec;
-        this.text = text;
+        this.text = new Text();
 
         this.affichage = new Pane();
         this.affichage.getChildren().setAll(text);
@@ -64,30 +63,6 @@ abstract public class ScoreChrono implements ScoreInterface {
      * {@inheritDoc}
      */
     @Override
-    public void start() {
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void aideUtilise() {
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void checkUtilise() {
-    }
-
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void grilleComplete() {
     }
 
@@ -97,7 +72,7 @@ abstract public class ScoreChrono implements ScoreInterface {
      * @return totalSec
      */
     @Override
-    public Object getScore() {
+    public double getScore() {
 
         return totalSec;
     }
