@@ -1,6 +1,7 @@
 package com.l3infogrp5.nurikabe.niveau.score;
 
 import javafx.animation.Timeline;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -25,7 +26,7 @@ abstract public class ScoreChrono implements ScoreInterface {
     protected Text text;
 
     /**Zone d'affichage du chronomètre*/
-    protected Pane affichage;
+    protected BorderPane affichage;
 
     /**Calculateur du temps qui passe*/
     protected Timeline timeline;
@@ -40,8 +41,8 @@ abstract public class ScoreChrono implements ScoreInterface {
         this.totalSec = totalSec;
         this.text = new Text();
 
-        this.affichage = new Pane();
-        this.affichage.getChildren().setAll(text);
+        this.affichage = new BorderPane();
+        this.affichage.setCenter(text);
     }
 
     /**
