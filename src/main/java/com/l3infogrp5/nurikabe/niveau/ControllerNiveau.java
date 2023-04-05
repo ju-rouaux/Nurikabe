@@ -2,6 +2,8 @@ package com.l3infogrp5.nurikabe.niveau;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
@@ -27,7 +29,6 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -41,6 +42,7 @@ public class ControllerNiveau {
     private final Scene scene;
 
     private Grille grille;
+    private ScoreInterface score;
     private BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
     private Profil joueur;
 
@@ -135,8 +137,7 @@ public class ControllerNiveau {
     }
 
     /**
-     * 
-     * @return
+     * Charge la grille suivante dans la liste des niveaux à jouer.
      */
     public void loadNiveauSuivant() throws Exception {
         int id_niveau = file_niveaux.get(index_file++);
@@ -152,11 +153,15 @@ public class ControllerNiveau {
         this.panneau_central.getChildren().remove(panneau_aide);
         this.panneau_central.getChildren().add(panneau_aide);
 
-        // TODO charger les données de score
-
+        // TODO charger les données de score depuis le profil
+        this.score = new ScoreZen(5);
+        this.panneau_score.setCenter(this.score.get_Pane());
+        
         // Lier les boutons Undo et Redo à l'historique
         this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
         this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
+
+        this.score.start();
     }
 
     /**
@@ -198,4 +203,23 @@ public class ControllerNiveau {
     private void redoClique() {
         grille.redo();
     }
+
+    //TODO
+    @FXML
+    void aideClique() {
+        this.score.aideUtilise();
+    }
+
+    //TODO
+    @FXML
+    void checkClique() {
+        this.score.checkUtilise();
+    }
+
+    //TODO
+    @FXML
+    void resetClique() {
+        this.score.restart();
+    }
+
 }

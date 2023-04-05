@@ -2,7 +2,6 @@ package com.l3infogrp5.nurikabe.niveau.score;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 /**
@@ -17,10 +16,9 @@ public class ScoreCLM extends ScoreChrono {
     /**
      * Constructeur du Score Contre La Montre
      * @param totalSec nombre total de secondes
-     * @param text texte du chronomètre
      */
-    public ScoreCLM(double totalSec, Text text) {
-        super(totalSec, text);
+    public ScoreCLM(double totalSec) {
+        super(totalSec);
     }
 
     /**
