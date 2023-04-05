@@ -3,7 +3,6 @@ package com.l3infogrp5.nurikabe.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Classe fournissant différentes méthodes utiles à la manipulation de matrices.
@@ -114,12 +113,11 @@ public class Matrice {
     }
 
     /**
-     * Retourne une copie de la matrice courante.
-     * 
-     * @return une copie de la matrice courante
+     * Retourne un tableau à 2 dimensions d'entier contenant les éléments de la matrice.
+     * @return un tableau à 2 dimensions d'integer contenant les éléments de la matrice.
      */
-    public Matrice getMatrice() {
-        return this;
+    public int[][] getElements() {
+        return this.elements;
     }
 
     /**
