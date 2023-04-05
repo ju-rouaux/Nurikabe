@@ -3,6 +3,7 @@ package com.l3infogrp5.nurikabe.pattern_matching;
 import java.util.ArrayList;
 
 import com.l3infogrp5.nurikabe.utils.Matrice;
+import com.l3infogrp5.nurikabe.utils.Position;
 
 /**
  * Classe permettant de détecter un pattern dans une Matrice
@@ -40,10 +41,13 @@ public class PatternDetector {
    * Détecte le pattern dans la grille
    * 
    * @param grid la grille dans laquelle le pattern doit être détecté
-   * @return la liste des positions du pattern dans la grille
+   * @return une liste des positions de la première coccurence du pattern dans la grille
    */
-  public ArrayList<int[]> detectInGrid(int[][] grid) {
-    ArrayList<int[]> patternLocations = new ArrayList<>();
+  
+  public ArrayList <Position> detectInGrid(int[][] grid) {
+    // ArrayList <Position> patternPositions = new ArrayList <Position>();
+    // int patternHashCount = 0;
+
     int gridRowSize = grid.length; // taille d'une ligne de la grille
     int gridColSize = grid[0].length; // taille d'une colone de la grille
 
@@ -67,12 +71,22 @@ public class PatternDetector {
         if (index > -1) {
           // Si oui, ajouter la position (i, j) à la liste des positions du pattern dans
           // la grille
-          patternLocations.add(new int[] { i, j });
+          // parcour la sous grille
+          ArrayList <Position> subGrid_pos_array = new ArrayList<Position>();
+
+
+          for (int k = 0; k < patternRowSize; k++) {
+            for (int l = 0; l < patternColSize; l++) {
+              subGrid_pos_array.add(new Position(i+k, j+l));
+            }
+          }
+
+          return subGrid_pos_array;
         }
       }
     }
 
-    return patternLocations;
+    return new ArrayList <Position>();
   }
 
 }

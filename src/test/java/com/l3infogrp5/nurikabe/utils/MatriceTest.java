@@ -53,7 +53,7 @@ public class MatriceTest {
     public void testGetMatrice() {
         int[][] expectedElements = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
         Matrice expectedMatrice = new Matrice(expectedElements);
-        assertEquals(expectedMatrice, matrice.getMatrice());
+        assertEquals(expectedMatrice, matrice);
     }
 
     @Test
@@ -224,9 +224,9 @@ public class MatriceTest {
         int[][] expectedElements2 = { { 9, 8, 7 }, { 6, 5, 4 }, { 3, 2, 1 } };
         int[][] expectedElements3 = { { 3, 6, 9 }, { 2, 5, 8 }, { 1, 4, 7 } };
 
-        assertEquals(new Matrice(expectedElements1), rotations.get(1).getMatrice());
-        assertEquals(new Matrice(expectedElements2), rotations.get(2).getMatrice());
-        assertEquals(new Matrice(expectedElements3), rotations.get(3).getMatrice());
+        assertEquals(new Matrice(expectedElements1), rotations.get(1));
+        assertEquals(new Matrice(expectedElements2), rotations.get(2));
+        assertEquals(new Matrice(expectedElements3), rotations.get(3));
     }
 
     @Test
@@ -234,7 +234,7 @@ public class MatriceTest {
         matrice.remplir(10);
         int[][] expectedElements = { { 10, 10, 10 }, { 10, 10, 10 }, { 10, 10, 10 } };
         Matrice expectedMatrice = new Matrice(expectedElements);
-        assertEquals(expectedMatrice, matrice.getMatrice());
+        assertEquals(expectedMatrice, matrice);
     }
 
     @Test
@@ -242,7 +242,7 @@ public class MatriceTest {
         matrice.remplacerValeurs(2, 10);
         int[][] expectedElements = { { 1, 10, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
         Matrice expectedMatrice = new Matrice(expectedElements);
-        assertEquals(expectedMatrice, matrice.getMatrice());
+        assertEquals(expectedMatrice, matrice);
     }
 
     @Test
@@ -250,7 +250,7 @@ public class MatriceTest {
         matrice.ajouterLigne(10);
         int[][] expectedElements = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 10, 10, 10 } };
         Matrice expectedMatrice = new Matrice(expectedElements);
-        assertEquals(expectedMatrice, matrice.getMatrice());
+        assertEquals(expectedMatrice, matrice);
     }
 
     @Test
@@ -258,7 +258,7 @@ public class MatriceTest {
         matrice.ajouterColonne(10);
         int[][] expectedElements = { { 1, 2, 3, 10 }, { 4, 5, 6, 10 }, { 7, 8, 9, 10 } };
         Matrice expectedMatrice = new Matrice(expectedElements);
-        assertEquals(expectedMatrice, matrice.getMatrice());
+        assertEquals(expectedMatrice, matrice);
     }
 
     @Test
@@ -266,7 +266,7 @@ public class MatriceTest {
         matrice.enleverLigne(1);
         int[][] expectedElements = { { 1, 2, 3 }, { 7, 8, 9 } };
         Matrice expectedMatrice = new Matrice(expectedElements);
-        assertEquals(expectedMatrice, matrice.getMatrice());
+        assertEquals(expectedMatrice, matrice);
     }
 
     @Test
@@ -274,7 +274,7 @@ public class MatriceTest {
         matrice.enleverColonne(1);
         int[][] expectedElements = { { 1, 3 }, { 4, 6 }, { 7, 9 } };
         Matrice expectedMatrice = new Matrice(expectedElements);
-        assertEquals(expectedMatrice, matrice.getMatrice());
+        assertEquals(expectedMatrice, matrice);
     }
 
     @Test
