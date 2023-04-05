@@ -138,7 +138,7 @@ public class ControllerNiveau {
 
     /**
      * Charge la grille suivante dans la liste des niveaux à jouer.
-     * 
+     *
      * @throws Exception lancée lorsque la grille n'a pas pû être chargée.
      */
     public void loadNiveauSuivant() throws Exception {
@@ -150,7 +150,7 @@ public class ControllerNiveau {
         Pane panneau_grille = grille.getPanneau();
         StackPane.setMargin(panneau_grille, new Insets(30, 30, 30, 30));
         this.panneau_central.getChildren().add(panneau_grille);
-        
+
         // Recharger la fenêtre d'aide pour l'afficher par dessus la grille
         this.panneau_central.getChildren().remove(panneau_aide);
         this.panneau_central.getChildren().add(panneau_aide);
@@ -158,7 +158,7 @@ public class ControllerNiveau {
         // TODO charger les données de score depuis le profil
         this.score = new ScoreZen(5);
         this.panneau_score.setCenter(this.score.get_Pane());
-        
+
         // Lier les boutons Undo et Redo à l'historique
         this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
         this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
