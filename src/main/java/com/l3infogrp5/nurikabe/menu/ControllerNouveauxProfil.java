@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * Contrôleur du menu d'affichage des profils, et sa scène.
  *
- * @author Julien Rouaux - Nicolas
+ * @author Nicolas
  */
 public class ControllerNouveauxProfil {
 
