@@ -42,7 +42,7 @@ public class ControllerMenuSelection {
 
         /**
          * Créer une carte de sélection qui lancera le niveau donné.
-         * 
+         *
          * @param id_niveau l'id du niveau à lancer.
          */
         ControllerSelection(int id_niveau) throws IOException {

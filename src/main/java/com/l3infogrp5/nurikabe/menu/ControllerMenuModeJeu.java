@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.menu;
 
+import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,7 +70,7 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void detenteClique(ActionEvent event) throws Exception {
-        Profil.getInstance().setMode_de_jeu("detente"); // TODO pas ouf d'écrire en dur le mode
+        Profil.getInstance().setMode_de_jeu(ModeDeJeu.DETENTE);
         stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
@@ -78,7 +79,7 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void contreMontreClique(ActionEvent event) throws Exception {
-        Profil.getInstance().setMode_de_jeu("clm"); // TODO pas ouf d'écrire en dur le mode
+        Profil.getInstance().setMode_de_jeu(ModeDeJeu.CONTRELAMONTRE);
         stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
