@@ -131,7 +131,7 @@ public class ControllerMenuSelection {
     public ControllerMenuSelection(Stage stage) throws IOException {
         this.stage = stage;
         this.page_chargee = new SimpleIntegerProperty(1);
-        this.nb_grilles = Sauvegarder.nbGrilles(Profil.getMode_de_jeu());
+        this.nb_grilles = Sauvegarder.nbGrilles();
         this.liens_images = Profil.chargerImageNiveau();
 
         loader = new FXMLLoader();

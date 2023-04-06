@@ -142,10 +142,8 @@ public class ControllerNiveau {
         int id_niveau = file_niveaux.get(index_file++);
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
-        donnees.donneesScore = joueur.chargerScore(id_niveau, niveau_en_cours);
-        this.grille.addOnVictoire(() -> {
-            niveau_en_cours = true;
-        });
+        donnees.donneesScore = joueur.chargerScore(id_niveau);
+        this.grille.addOnVictoire(() -> niveau_en_cours = false);
 
         // Mettre la grille au centre (et ajouter une marge)
         Pane panneau_grille = grille.getPanneau();
@@ -157,7 +155,7 @@ public class ControllerNiveau {
         this.panneau_central.getChildren().add(panneau_aide);
 
         // TODO charger les données de score depuis le profil
-        this.score = new ScoreZen(5);
+        this.score = new ScoreZen(Double.parseDouble(donnees.donneesScore.score));
         this.panneau_score.setCenter(this.score.get_Pane());
 
         // Lier les boutons Undo et Redo à l'historique
@@ -181,11 +179,8 @@ public class ControllerNiveau {
      */
     @FXML
     private void retourClique() throws Exception {
-        // TODO : capturer écran + sauvegarder
+        Profil.setScore(score.getScore(),niveau_en_cours);
         Profil.getInstance().sauvegarderNiveau(grille);
-        System.out.println("Niveau en cours ?" + niveau_en_cours);
-        System.out.println("Profil.getDonneesScore().score = " + Profil.getDonneesScore().score);
-        Profil.getInstance().sauvegarderScore(Double.parseDouble(Profil.getDonneesScore().score), niveau_en_cours);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
             + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire

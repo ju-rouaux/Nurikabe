@@ -9,10 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -54,17 +51,93 @@ public class Sauvegarder {
         return false;
     }
 
-    public static boolean RechercherSauvegardeNiveau(ModeDeJeu modeDeJeu, int id_niveau) {
-        File[] files = Path.repertoire_score.listFiles();
-        if (files == null)
-            return false;
+    /**
+     * Recherche si la sauvegarde pour le joueur existe déjà
+     *
+     * @param joueur nom du joueur
+     * @param mode_de_jeu le mode de jeu
+     * @param id_niveau l'id du niveau
+     * @return vrai si la sauvegarde existe, faux sinon
+     * @throws IOException {@link IOException} si le fichier n'existe pas
+     */
+    public static boolean RechercherSauvegardeNiveau(String joueur, ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
 
-        for (File file : files) {
-            if (file.getName().equals(modeDeJeu.toString() + "_" + id_niveau + ".save"))
+        Reader file_reader;
+        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
+            try {
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+            } catch (FileNotFoundException e) {
+                return false;
+            }
+        } else {
+            try {
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
+            } catch (FileNotFoundException e) {
+                return false;
+            }
+        }
+        System.out.println("[SAUVEGARDER]Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
+        BufferedReader bufferedReader = new BufferedReader(file_reader);
+
+        while (bufferedReader.ready()) {
+            String line = bufferedReader.readLine();
+            String[] parts = line.split("%");
+            String nom_joueur = parts[0].trim();
+            String enCours = parts[3].trim();
+            if (nom_joueur.equals(joueur) && enCours.equals("true"))
                 return true;
         }
+        bufferedReader.close();
         return false;
     }
+
+    /**
+     * Supprime les sauvegardes du joueur s'il a deja finit le niveau une fois
+     * @param mode_de_jeu le mode de jeu
+     * @param id_niveau l'id du niveau
+     * @throws IOException {@link IOException} si le fichier n'existe pas
+     */
+    public static void supprimerScores(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
+
+        String filename;
+        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
+            filename = Path.repertoire_score + "/" + mode_de_jeu + ".save";
+        } else {
+            filename = Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save";
+        }
+
+        Set<String> playersWithFinishedLevel = new HashSet<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("%");
+                String player = parts[0];
+                boolean isLevelFinished = Boolean.parseBoolean(parts[3].trim());
+                if (isLevelFinished) {
+                    playersWithFinishedLevel.add(player);
+                }
+            }
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("%");
+                String player = parts[0];
+                boolean isLevelFinished = Boolean.parseBoolean(parts[3].trim());
+                if (isLevelFinished || !playersWithFinishedLevel.contains(player)) {
+                    stringBuilder.append(line).append("\n");
+                }
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            writer.write(stringBuilder.toString());
+        }
+    }
+
 
     /**
      * Scanne les fichiers et répertoires et les ajoutés dans une liste
@@ -195,6 +268,7 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   le numéro du niveau, -1 si en mode de jeu sans fin
      * @param score       le score
+     * @param enCours si le niveau est en cours ou non
      * @throws IOException {@link IOException} si le fichier n'existe pas
      **/
     public static void sauvegarderScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, double score, boolean enCours) throws IOException {
@@ -231,7 +305,7 @@ public class Sauvegarder {
      * scores du fichier
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
-    public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
+    public static List<DonneesScore> chargerScore(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
         List<DonneesScore> scores = new ArrayList<>();
         DonneesScore donneeScore = new DonneesScore();
         Reader file_reader;
@@ -240,24 +314,14 @@ public class Sauvegarder {
         } else {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
         }
-        System.out.println("[SAUVEGARDER]Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
         BufferedReader bufferedReader = new BufferedReader(file_reader);
 
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
-            String nom_joueur = parts[0].trim();
-            System.out.println("[SAUVEGARDER] joueur = " + nom_joueur + " joueur = " + joueur + " : " + nom_joueur.equals(joueur));
-            if (!nom_joueur.equals(joueur)) continue;
             String score = parts[1].trim();
             String date = parts[2].trim();
             String enCours = parts[3].trim();
-            System.out.println("String enCours"+enCours);
-            System.out.println("Boolean enCours" + Boolean.getBoolean(enCours));
-            boolean test = Boolean.parseBoolean(enCours) == niveau_en_cours;
-            System.out.println("[SAUVEGARDER] enCours = " + enCours + " niveau_en_cours = " + niveau_en_cours + " : " + test );
-            if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
-            System.out.println("Le score de :" + joueur + "existe pour le niveau" + mode_de_jeu + "_" + id_niveau);
             donneeScore.score = score;
             donneeScore.date = date;
             donneeScore.niveau_en_cours = enCours;
@@ -270,10 +334,9 @@ public class Sauvegarder {
     /**
      * Compte le nombre de niveaux implémentés
      *
-     * @param mode_de_jeu le mode de jeu
      * @return le nombre de niveaux
      */
-    public static int nbGrilles(ModeDeJeu mode_de_jeu) {
+    public static int nbGrilles() {
 
         int nb_grilles;
 //        TODO : modifier mode de jeu pour fichier des grilles
@@ -296,13 +359,12 @@ public class Sauvegarder {
      * mode de jeu
      *
      * @param id_niveau   le numéro de la grille
-     * @param mode_de_jeu le mode de jeu
      * @param solution    boolean, vrai s'il faut charger la solution du niveau
      *                    selon l'id
      * @return la matrice du niveau chargé
      * @throws FileNotFoundException {@link FileNotFoundException} si le fichier n'est pas trouvé
      */
-    public static int[][] chargerGrilleFichier(int id_niveau, ModeDeJeu mode_de_jeu, Boolean solution) throws FileNotFoundException {
+    public static int[][] chargerGrilleFichier(int id_niveau, Boolean solution) throws FileNotFoundException {
 
 //    TODO : Modifier si split niveaux en différents fichiers
         String nom_fichier = "grilles_" + ModeDeJeu.DETENTE;
@@ -510,24 +572,53 @@ public class Sauvegarder {
         }
     }
 
+    /**
+     * Type de données pour le score
+     */
     public static class DonneesScore {
 
+        /** Le score */
         public String score;
+        /** La date */
         public String date;
+        /** Le niveau en cours */
         public String niveau_en_cours;
 
+        /**
+         * Constructeur
+         */
+        public DonneesScore(){
+
+        }
+
+        /**
+         * Construit l'affichage des données du score
+         * @return la chaine de caractère à afficher
+         */
         public String toString() {
             return score + " " + date + " " + niveau_en_cours;
         }
 
+        /**
+         * Récupère le score
+         * @return le score
+         */
         public String getScore() {
             return score;
         }
 
+        /**
+         * Récupère la date
+         * @return la date
+         */
         public String getDate() {
             return date;
         }
 
+        /**
+         * Récupère le boolean pour savoir si le niveau en cours
+         * @return le boolean du niveau en cours
+         */
         public boolean getNiveauEnCours() {
             return Boolean.getBoolean(niveau_en_cours);
         }

@@ -4,7 +4,7 @@ import javafx.scene.layout.Pane;
 
 /**
  * Classe interface répertoriant les méthodes à invoquer pour calculer un score
- * 
+ *
  * @author Antoine Couapel
  * @version 1.0
  */

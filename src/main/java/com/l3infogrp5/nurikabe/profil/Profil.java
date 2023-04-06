@@ -102,7 +102,7 @@ public class Profil {
 
         List<String> liste_fichiers = Sauvegarder.listeFichiers(image_grille.getParentFile());
 
-        for (int i = 0; i < Sauvegarder.nbGrilles(mdj); i++) {
+        for (int i = 0; i < Sauvegarder.nbGrilles(); i++) {
             if (liste_fichiers.contains("capture_niveau_" + i + ".png"))
                 url_images.add(new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
                     "capture_niveau_" + i + ".png").toString());
@@ -144,6 +144,8 @@ public class Profil {
      * Setter pour le score du joueur
      *
      * @param score le score du joueur
+     * @param enCours si le niveau est en cours ou non
+     * @throws IOException si le fichier de sauvegarde n'existe pas
      */
     public static void setScore(double score, boolean enCours) throws IOException {
         Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, enCours);
@@ -162,29 +164,29 @@ public class Profil {
      * Getter pour le score du niveau
      *
      * @return le score du niveau
+     * @throws IOException si le fichier de sauvegarde n'existe pas
      */
     public static Sauvegarder.DonneesScore getDonneesScore() throws IOException {
-        Sauvegarder.DonneesScore score_temp = new Sauvegarder.DonneesScore();
-        boolean sauvegardeExistante = false;
-        if (Sauvegarder.RechercherSauvegardeNiveau(mode_de_jeu, id_niveau)) {
-            System.out.println("Sauvegarde existante ? : " + Sauvegarder.RechercherSauvegardeNiveau(mode_de_jeu, id_niveau));
-            score = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, true);
+//        Sauvegarder.DonneesScore score_temp = new Sauvegarder.DonneesScore();
+        if (Sauvegarder.RechercherSauvegardeNiveau(joueur,mode_de_jeu, id_niveau)) {
+            System.out.println("Sauvegarde existante ? : " + Sauvegarder.RechercherSauvegardeNiveau(joueur,mode_de_jeu, id_niveau));
+            score = Sauvegarder.chargerScore(mode_de_jeu, id_niveau);
             if (score.size() > 0) {
                 for (Sauvegarder.DonneesScore s : score) {
                     if (s.getNiveauEnCours()) {
-                        score_temp.score = score.get(0).toString();
+                        donneesNiveau.donneesScore = s;
                     }
                 }
-                return score_temp;
+                return donneesNiveau.donneesScore;
             }
 
         }
         if (mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
-            score_temp.score = "5";
-            return score_temp;
+            donneesNiveau.donneesScore.score = "5";
+            return donneesNiveau.donneesScore;
         }
-        score_temp.score = "0";
-        return score_temp;
+        donneesNiveau.donneesScore.score = "0";
+        return donneesNiveau.donneesScore;
     }
 
     /**
@@ -197,6 +199,7 @@ public class Profil {
      */
     public void chargerProfil(String joueur) throws IOException {
         donneesNiveau = new DonneesNiveau();
+        donneesNiveau.donneesScore = new Sauvegarder.DonneesScore();
         Profil.joueur = joueur;
         // Valeurs par défaut
         mode_de_jeu = ModeDeJeu.DETENTE;
@@ -218,6 +221,10 @@ public class Profil {
         // sauvegarder le niveau correspondant au profil
         Sauvegarder.sauvegarderMatrice(joueur, mode_de_jeu, id_niveau, niveau.getMatrice());
         Sauvegarder.sauvegarderHistorique(joueur, mode_de_jeu, id_niveau, niveau.getHistorique());
+        try {
+            Sauvegarder.supprimerScores(mode_de_jeu, id_niveau);
+        } catch (IOException ignored) {
+        }
     }
 
     /**
@@ -259,12 +266,12 @@ public class Profil {
         if (grille_fichier.exists() && grille_fichier.length() > 0) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
-            Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
+            Sauvegarder.chargerGrilleFichier(id_niveau, false);
             donneesNiveau.matrice_niveau = Sauvegarder.deserialiserMatrice(grille_fichier);
         } else
-            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, false);
+            donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(id_niveau, false);
 
-        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, mode_de_jeu, true);
+        donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, true);
 
         return donneesNiveau;
     }
@@ -278,14 +285,21 @@ public class Profil {
         return donneesNiveau.historique;
     }
 
-    public void sauvegarderScore(double score, boolean niveau_en_cours) throws IOException {
-        Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), score, niveau_en_cours);
-    }
 
-    public Sauvegarder.DonneesScore chargerScore(int id_niveau, boolean niveau_en_cours) throws IOException {
-        if (Sauvegarder.RechercherSauvegardeNiveau(mode_de_jeu, id_niveau))
-            return Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours).get(0);
+    /**
+     * Charger le score du niveau
+     * @param id_niveau l'id du niveau
+     * @return le score du niveau
+     * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du score
+     */
+    public Sauvegarder.DonneesScore chargerScore(int id_niveau) throws IOException {
+        if (Sauvegarder.RechercherSauvegardeNiveau(joueur,mode_de_jeu, id_niveau)){
+            System.out.println("[Profil] Sauvegarde du score du niveau trouvée - Chargement du score du niveau sauvegardé...");
+            Sauvegarder.supprimerScores(mode_de_jeu, id_niveau);
+            return Sauvegarder.chargerScore(mode_de_jeu, id_niveau).get(0);
+        }
         else {
+            System.out.println("[Profil] Aucune sauvegarde du score du niveau trouvée - Création d'un score vide");
             return getDonneesScore();
         }
     }
@@ -307,6 +321,7 @@ public class Profil {
          */
         public int[][] matrice_solution;
 
+        /** Les données de score */
         public Sauvegarder.DonneesScore donneesScore;
 
         /**
