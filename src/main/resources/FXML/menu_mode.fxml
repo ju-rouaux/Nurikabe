@@ -21,7 +21,7 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints/>
+          <RowConstraints />
             <RowConstraints maxHeight="91.93956724803307" minHeight="10.0" prefHeight="59.82394424562734" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="177.7135864893661" minHeight="10.0" prefHeight="94.74248804073332" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="142.61112606912496" minHeight="10.0" prefHeight="109.70306274458096" vgrow="SOMETIMES" />
@@ -48,7 +48,7 @@
                <children>
                   <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour">
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true"  styleClass="img-retour">
+                        <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                            <image>
                               <Image url="@../back.png" />
                            </image>

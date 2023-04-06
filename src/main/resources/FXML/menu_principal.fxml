@@ -15,20 +15,22 @@
    <root>
       <AnchorPane>
          <children>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="750.0" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columnConstraints>
-                  <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
                   <ColumnConstraints halignment="CENTER" />
-                  <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints valignment="TOP" vgrow="ALWAYS" />
+                  <RowConstraints fillHeight="false" valignment="TOP" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
+                  <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
                </rowConstraints>
                <children>
                   <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="SOMETIMES">
                      <children>
-                        <Label id="titre-nurikabe" alignment="TOP_CENTER" text="NURIKABE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label id="titre-nurikabe" alignment="TOP_CENTER" contentDisplay="CENTER" text="NURIKABE" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="System Bold" size="60.0" />
                            </font>
@@ -41,7 +43,7 @@
                         <Insets bottom="50.0" left="25.0" right="25.0" top="25.0" />
                      </padding>
                   </AnchorPane>
-                  <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <rowConstraints>
@@ -51,9 +53,9 @@
                             <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                            <children>
-                              <AnchorPane maxHeight="100.0" maxWidth="4000.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                              <AnchorPane maxHeight="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
-                                    <Button fx:id="btn_jouer" layoutX="247.0" mnemonicParsing="false" onAction="#jouerClique" styleClass="btn-principal" text="Jouer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Button fx:id="btn_jouer" mnemonicParsing="false" onAction="#jouerClique" styleClass="btn-principal" text="Jouer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
                                        </font>
@@ -69,7 +71,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </AnchorPane>
-                              <AnchorPane maxHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <AnchorPane maxHeight="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
                                     <Button fx:id="btn_profils" mnemonicParsing="false" onAction="#profilsClique" styleClass="btn-principal" text="Profils" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
