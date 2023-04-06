@@ -6,47 +6,91 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="panneau-principal">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="85.03677756814113" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.3325691941177" minWidth="10.0" prefWidth="314.4324227097427" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints />
-            <RowConstraints maxHeight="91.93956724803307" minHeight="10.0" prefHeight="59.82394424562734" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="177.7135864893661" minHeight="10.0" prefHeight="94.74248804073332" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="142.61112606912496" minHeight="10.0" prefHeight="109.70306274458096" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="135.58747652527865" minHeight="10.0" prefHeight="102.71617725334164" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="108.79238096873621" minHeight="10.0" prefHeight="41.834424767466146" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <AnchorPane>
          <children>
-            <Button fx:id="btn_detente" mnemonicParsing="false" onAction="#detenteClique" prefHeight="87.0" prefWidth="349.0" styleClass="btn-principal" text="Détente" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
-               </font>
-            </Button>
-            <Button fx:id="btn_contre_montre" mnemonicParsing="false" onAction="#contreMontreClique" prefHeight="87.0" prefWidth="349.0" styleClass="btn-principal" text="Contre la montre" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <font>
-                  <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
-               </font>
-            </Button>
-            <Button fx:id="btn_sans_fin" mnemonicParsing="false" onAction="#sansFinClique" prefHeight="87.0" prefWidth="349.0" styleClass="btn-principal" text="Sans fin" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <font>
-                  <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
-               </font>
-            </Button>
-            <HBox GridPane.rowIndex="1" GridPane.valignment="BASELINE">
+            <GridPane alignment="CENTER" minHeight="500.0" minWidth="750.0" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints />
+                  <RowConstraints minHeight="50.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints minHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour">
+                  <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <GridPane layoutX="3.0" layoutY="9.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="btn_detente" minHeight="87.0" minWidth="349.0" mnemonicParsing="false" onAction="#detenteClique" styleClass="btn-principal" text="Détente" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                 </GridPane.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="btn_contre_montre" minHeight="87.0" minWidth="349.0" mnemonicParsing="false" onAction="#contreMontreClique" styleClass="btn-principal" text="Contre la montre" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                 </GridPane.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="btn_sans_fin" minHeight="87.0" minWidth="349.0" mnemonicParsing="false" onAction="#sansFinClique" styleClass="btn-principal" text="Sans fin" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <font>
+                                          <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                 </GridPane.margin>
+                              </AnchorPane>
+                              <Button fx:id="btn_score" mnemonicParsing="false" onAction="#scoreClique" styleClass="btn-trophee" translateX="260.0" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../trophee2.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                            <image>
@@ -54,30 +98,14 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <GridPane.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </GridPane.margin>
                   </Button>
                </children>
-               <padding>
-                  <Insets left="10.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="4">
-               <children>
-                  <Button fx:id="btn_score" mnemonicParsing="false" onAction="#scoreClique" styleClass="btn-trophee">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../trophee2.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </HBox>
+            </GridPane>
          </children>
-      </GridPane>
+      </AnchorPane>
    </root>
    <stylesheets>
       <URL value="@../css/menu.css" />

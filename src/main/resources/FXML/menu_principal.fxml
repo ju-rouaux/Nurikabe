@@ -15,7 +15,7 @@
    <root>
       <AnchorPane>
          <children>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="750.0" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane alignment="CENTER" minHeight="500.0" minWidth="750.0" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columnConstraints>
                   <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
                   <ColumnConstraints halignment="CENTER" />
@@ -53,7 +53,7 @@
                             <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                            <children>
-                              <AnchorPane maxHeight="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
                                     <Button fx:id="btn_jouer" mnemonicParsing="false" onAction="#jouerClique" styleClass="btn-principal" text="Jouer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
@@ -71,7 +71,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </AnchorPane>
-                              <AnchorPane maxHeight="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
                                     <Button fx:id="btn_profils" mnemonicParsing="false" onAction="#profilsClique" styleClass="btn-principal" text="Profils" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
@@ -86,7 +86,7 @@
                                     <Insets bottom="20.0" left="200.0" right="200.0" />
                                  </padding>
                               </AnchorPane>
-                              <AnchorPane maxHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
                                     <Button fx:id="btn_regles" mnemonicParsing="false" onAction="#reglesClique" styleClass="btn-principal" text="Règles" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
@@ -101,7 +101,7 @@
                                     <Insets bottom="20.0" left="200.0" right="200.0" />
                                  </padding>
                               </AnchorPane>
-                              <AnchorPane maxHeight="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                                  <children>
                                     <Button fx:id="btn_quitter" mnemonicParsing="false" onAction="#quitterClique" styleClass="btn-principal" text="Quitter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
