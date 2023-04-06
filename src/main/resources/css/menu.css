@@ -3,32 +3,35 @@
 /* Gros boutons de sélection d'un menu */
 .btn-principal {
 
-    /* OLD */
-    /* -fx-background-color: #ffffff;
-    -fx-border-color: #000000;
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
-    -fx-border-width: 3; */
-
-    /* GRADIENT */
-    -fx-font-size: 25px;
-    -fx-font-weight: bold;
+    /* GRADIENT */    
     -fx-background-color: #ffffff;
     -fx-background-radius: 50px;
     -fx-border-radius: 50px;
     -fx-border-width: 4px;
-    -fx-border-color: black;
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 1), 60, 0, 0, 0);
+    /*-fx-border-color: rgb(226, 222, 0);*/
+    -fx-border-color: rgb(226, 185, 0);
+    -fx-effect: innershadow(gaussian, rgb(255, 227, 70), 28, 0.5, 0, 0);
+    /*-fx-effect: dropshadow(three-pass-box, rgb(248, 255, 173),60, 0, 0, 0);*/
+}
+.btn-principal .text{
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-fill: rgb(255, 255, 255);
+    -fx-stroke: #85690e;
+    -fx-stroke-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgb(233, 190, 0), 2, 0.7, 2, 2);
+    
+
 }
 
 /* Style du bouton lorsqu'il est survolé */
 .btn-principal:hover {
-    -fx-background-color: #c4c4c4;
+    -fx-background-color: #ffee57;
 }
 
 /* Style du bouton lorsqu'il est pressé */
 .btn-principal:pressed {
-    -fx-background-color: #bfffa9;
+    -fx-background-color: #fffb00;
 }
 
 
@@ -37,26 +40,32 @@
 
 
 /* Boutons d'accès aux scores (trophée) */
-.btn-trophee {}
+.btn-trophee {
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 0, 0), 4, 0.2, 0, 0);
+}
 
 
 /* Boutons retour */
 .btn-retour {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 10;
+    -fx-background-color: transparent;
 }
 
-
-/* Style du titre Nurikabe */
-#titre-nurikabe {
-    -fx-text-fill: #363684;
-    -fx-font-weight: bold;
+/* Images boutons retour*/
+.img-retour{
+    -fx-effect: dropshadow(gaussian, rgb(255, 255, 255),3.1, 1, 0, 0);
 }
 
 /* ==================== IDs ==================== */
 
 /* Style du titre Nurikabe */
-#titre-nurikabe {
-    -fx-text-fill: #363684;
-    -fx-font-weight: bold;
+#titre-nurikabe .text{
+    
+    -fx-fill: linear-gradient(from 13px 38px to 52px 52px, reflect,  #eb6f16, #ffc04b 100%);
+    -fx-stroke: #ffee00;
+    -fx-stroke-width: 3px;
+    -fx-effect: dropshadow(three-pass-box, rgb(241, 205, 0), 7, 0.7, 4, 4);
+    -fx-font-size: 1.4em;
+    -fx-font-weight:bold;
+    
 }

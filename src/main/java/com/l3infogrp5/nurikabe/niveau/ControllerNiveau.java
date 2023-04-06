@@ -105,7 +105,7 @@ public class ControllerNiveau {
     private void initialize() throws Exception {
 
         // Adapter la largeur de la barre à l'écran
-        this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(15));
+        this.barre.prefWidthProperty().bind(this.panneau_principal.widthProperty().subtract(40));
 
         // Ne pas faire de rendu en dehors du panneau central (pour ne pas masquer la
         // barre d'outils)
