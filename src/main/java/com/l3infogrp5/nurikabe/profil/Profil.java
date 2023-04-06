@@ -26,7 +26,16 @@ import java.util.List;
 public class Profil {
 
     /* L'instance du profil */
-    private static Profil instance;
+    private static final Profil instance;
+    /* Les données du niveau */
+    private static DonneesNiveau donneesNiveau;
+    /* Le nom du joueur */
+    private static String joueur;
+    /* Le mode de jeu */
+    private static ModeDeJeu mode_de_jeu;
+    /* L'identifiant du niveau représenté par un numéro */
+    private static int id_niveau;
+    private static List<Sauvegarder.DonneesScore> score;
 
     static {
         try {
@@ -36,14 +45,6 @@ public class Profil {
         }
     }
 
-    /* Les données du niveau */
-    private static DonneesNiveau donneesNiveau;
-    /* Le nom du joueur */
-    private static String joueur;
-    /* Le mode de jeu */
-    private static ModeDeJeu mode_de_jeu;
-    /* L'identifiant du niveau représenté par un numéro */
-    private static int id_niveau;
 
     /**
      * Création d'un profil.
@@ -55,6 +56,7 @@ public class Profil {
         joueur = "default";
         mode_de_jeu = ModeDeJeu.DETENTE;
         id_niveau = 0;
+        score = null;
 
         if (Sauvegarder.RechercherSauvegarde(joueur)) {
             System.out.println("[Profil] Profil deja existant");
@@ -139,12 +141,50 @@ public class Profil {
     }
 
     /**
+     * Setter pour le score du joueur
+     *
+     * @param score le score du joueur
+     */
+    public static void setScore(double score, boolean enCours) throws IOException {
+        Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, enCours);
+    }
+
+    /**
      * Getter pour l'identifiant du niveau
      *
      * @return l'historique des mouvements
      */
     public static int getIdNiveau() {
         return id_niveau;
+    }
+
+    /**
+     * Getter pour le score du niveau
+     *
+     * @return le score du niveau
+     */
+    public static Sauvegarder.DonneesScore getDonneesScore() throws IOException {
+        Sauvegarder.DonneesScore score_temp = new Sauvegarder.DonneesScore();
+        boolean sauvegardeExistante = false;
+        if (Sauvegarder.RechercherSauvegardeNiveau(mode_de_jeu, id_niveau)) {
+            System.out.println("Sauvegarde existante ? : " + Sauvegarder.RechercherSauvegardeNiveau(mode_de_jeu, id_niveau));
+            score = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, true);
+            if (score.size() > 0) {
+                for (Sauvegarder.DonneesScore s : score) {
+                    if (s.getNiveauEnCours()) {
+                        score_temp.score = score.get(0).toString();
+                    }
+                }
+                return score_temp;
+            }
+
+        }
+        if (mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
+            score_temp.score = "5";
+            return score_temp;
+        }
+        score_temp.score = "0";
+        return score_temp;
     }
 
     /**
@@ -238,6 +278,18 @@ public class Profil {
         return donneesNiveau.historique;
     }
 
+    public void sauvegarderScore(double score, boolean niveau_en_cours) throws IOException {
+        Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), score, niveau_en_cours);
+    }
+
+    public Sauvegarder.DonneesScore chargerScore(int id_niveau, boolean niveau_en_cours) throws IOException {
+        if (Sauvegarder.RechercherSauvegardeNiveau(mode_de_jeu, id_niveau))
+            return Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours).get(0);
+        else {
+            return getDonneesScore();
+        }
+    }
+
     /**
      * Classe interne permettant de stocker les données d'un niveau.
      */
@@ -254,6 +306,8 @@ public class Profil {
          * La grille de solution du niveau.
          */
         public int[][] matrice_solution;
+
+        public Sauvegarder.DonneesScore donneesScore;
 
         /**
          * Constructeur privé.

@@ -9,7 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -48,6 +51,18 @@ public class Sauvegarder {
             }
         }
 
+        return false;
+    }
+
+    public static boolean RechercherSauvegardeNiveau(ModeDeJeu modeDeJeu, int id_niveau) {
+        File[] files = Path.repertoire_score.listFiles();
+        if (files == null)
+            return false;
+
+        for (File file : files) {
+            if (file.getName().equals(modeDeJeu.toString() + "_" + id_niveau + ".save"))
+                return true;
+        }
         return false;
     }
 
@@ -162,7 +177,6 @@ public class Sauvegarder {
         return true;
     }
 
-
     /**
      * Vérifie s'il y a des dossiers dans le répertoire
      *
@@ -180,10 +194,10 @@ public class Sauvegarder {
      * @param joueur      le nom du joueur/profil
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   le numéro du niveau, -1 si en mode de jeu sans fin
-     * @param o           le score
+     * @param score       le score
      * @throws IOException {@link IOException} si le fichier n'existe pas
      **/
-    public static void sauvegarderScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, Object o) throws IOException {
+    public static void sauvegarderScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, double score, boolean enCours) throws IOException {
         FileWriter writer;
 
         // Récupérer la date courante
@@ -201,7 +215,7 @@ public class Sauvegarder {
         else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
 
 
-        writer.write(joueur + " % " + o + " % " + date_formate + "\n");
+        writer.write(joueur + " % " + score + " % " + date_formate + " % " + enCours + "\n");
 
         writer.close();
 
@@ -217,38 +231,41 @@ public class Sauvegarder {
      * scores du fichier
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
-    public static HashMap<String, HashMap<String, String>> chargerScore(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
-        HashMap<String, HashMap<String, String>> scores = new HashMap<>();
+    public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
+        List<DonneesScore> scores = new ArrayList<>();
+        DonneesScore donneeScore = new DonneesScore();
         Reader file_reader;
         if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
         } else {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
         }
-
+        System.out.println("[SAUVEGARDER]Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
         BufferedReader bufferedReader = new BufferedReader(file_reader);
 
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
             String nom_joueur = parts[0].trim();
+            System.out.println("[SAUVEGARDER] joueur = " + nom_joueur + " joueur = " + joueur + " : " + nom_joueur.equals(joueur));
+            if (!nom_joueur.equals(joueur)) continue;
             String score = parts[1].trim();
-
-            String date;
-            HashMap<String, String> infos_niveau = new HashMap<>();
-            if (id_niveau >= 0 && parts[2].trim().equals(Integer.toString(id_niveau))) {
-                date = parts[3].trim();
-            } else {
-                date = parts[2].trim();
-            }
-            infos_niveau.put("score", score);
-            infos_niveau.put("date", date);
-            scores.put(nom_joueur, infos_niveau);
+            String date = parts[2].trim();
+            String enCours = parts[3].trim();
+            System.out.println("String enCours"+enCours);
+            System.out.println("Boolean enCours" + Boolean.getBoolean(enCours));
+            boolean test = Boolean.parseBoolean(enCours) == niveau_en_cours;
+            System.out.println("[SAUVEGARDER] enCours = " + enCours + " niveau_en_cours = " + niveau_en_cours + " : " + test );
+            if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
+            System.out.println("Le score de :" + joueur + "existe pour le niveau" + mode_de_jeu + "_" + id_niveau);
+            donneeScore.score = score;
+            donneeScore.date = date;
+            donneeScore.niveau_en_cours = enCours;
+            scores.add(donneeScore);
         }
         bufferedReader.close();
         return scores;
     }
-
 
     /**
      * Compte le nombre de niveaux implémentés
@@ -273,7 +290,6 @@ public class Sauvegarder {
         }
         return nb_grilles;
     }
-
 
     /**
      * Charge une grille depuis un fichier texte selon le numéro de la grille et le
@@ -347,11 +363,6 @@ public class Sauvegarder {
         return grille;
     }
 
-
-    /*
-     * Gestion des fichiers de sauvegarde
-     */
-
     /**
      * Sauvegarde l'historique des mouvements
      *
@@ -375,6 +386,11 @@ public class Sauvegarder {
         }
 
     }
+
+
+    /*
+     * Gestion des fichiers de sauvegarde
+     */
 
     /**
      * Serialisation de l'historique des mouvements
@@ -416,7 +432,6 @@ public class Sauvegarder {
 
         return historique;
     }
-
 
     /**
      * Sauvegarde la grille
@@ -481,7 +496,6 @@ public class Sauvegarder {
         return matrice;
     }
 
-
     /**
      * Supprime le profil du joueur
      *
@@ -494,5 +508,30 @@ public class Sauvegarder {
             FileUtils.deleteDirectory(repertoire);
             System.out.println("[Sauvegarde] Profil supprimé");
         }
+    }
+
+    public static class DonneesScore {
+
+        public String score;
+        public String date;
+        public String niveau_en_cours;
+
+        public String toString() {
+            return score + " " + date + " " + niveau_en_cours;
+        }
+
+        public String getScore() {
+            return score;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public boolean getNiveauEnCours() {
+            return Boolean.getBoolean(niveau_en_cours);
+        }
+
+
     }
 }

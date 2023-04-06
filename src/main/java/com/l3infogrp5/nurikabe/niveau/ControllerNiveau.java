@@ -5,9 +5,7 @@ import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
 import com.l3infogrp5.nurikabe.profil.Profil;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
-
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -40,12 +38,12 @@ public class ControllerNiveau {
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
-
+    private final BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
+    private final Profil joueur;
+    private final List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
     private Grille grille;
     private ScoreInterface score;
-    private BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
-    private Profil joueur;
-
+    private boolean niveau_en_cours; // Vrai si le niveau est en cours de jeu.
     @FXML
     private Button btn_aide;
     @FXML
@@ -68,11 +66,8 @@ public class ControllerNiveau {
     private StackPane panneau_central;
     @FXML
     private BorderPane panneau_aide;
-
     @FXML
     private HBox barre;
-
-    private List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
     private int index_file; // Indice du niveau lancé dans la liste
 
     /**
@@ -87,6 +82,8 @@ public class ControllerNiveau {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
         this.joueur = Profil.getInstance();
+
+        this.niveau_en_cours = true;
 
         this.file_niveaux = niveaux;
         this.index_file = 0;
@@ -117,20 +114,20 @@ public class ControllerNiveau {
         // Afficher l'aide lorsque la Property aide_affichee est active.
         this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
         this.toggle_aide.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            TranslateTransition transition = new TranslateTransition(Duration.millis(150),
-                    ControllerNiveau.this.panneau_aide);
+            final TranslateTransition transition = new TranslateTransition(Duration.millis(150),
+                ControllerNiveau.this.panneau_aide);
 
             public void changed(ObservableValue<? extends Boolean> obj, Boolean ancien, Boolean nouveau) {
                 // De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers
                 // le haut sinon
-                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight()) * (nouveau == true ? 1 : -1));
+                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight()) * (nouveau ? 1 : -1));
                 transition.play();
             }
         });
 
         try {
             this.loadNiveauSuivant();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             this.retourClique();
         }
@@ -145,6 +142,10 @@ public class ControllerNiveau {
         int id_niveau = file_niveaux.get(index_file++);
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+        donnees.donneesScore = joueur.chargerScore(id_niveau, niveau_en_cours);
+        this.grille.addOnVictoire(() -> {
+            niveau_en_cours = true;
+        });
 
         // Mettre la grille au centre (et ajouter une marge)
         Pane panneau_grille = grille.getPanneau();
@@ -182,10 +183,11 @@ public class ControllerNiveau {
     private void retourClique() throws Exception {
         // TODO : capturer écran + sauvegarder
         Profil.getInstance().sauvegarderNiveau(grille);
-        // TODO : remplacer null avec le getScore du niveau
-        Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
+        System.out.println("Niveau en cours ?" + niveau_en_cours);
+        System.out.println("Profil.getDonneesScore().score = " + Profil.getDonneesScore().score);
+        Profil.getInstance().sauvegarderScore(Double.parseDouble(Profil.getDonneesScore().score), niveau_en_cours);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
-                + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
+            + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
     }
 
