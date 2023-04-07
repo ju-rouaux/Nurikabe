@@ -97,8 +97,7 @@ public abstract class Case extends Button {
     }
 
     private Position position; // Position de la case dans la grille.
-    /**  Etat stocké sous forme numérique. */
-    private IntegerProperty etat;
+    private IntegerProperty etat; // Etat stocké sous forme numérique.
 
     private ChronoMaintien chronoClicGauche; // Clic gauche maintenu
     private ChronoMaintien chronoClicDroit; // Clic droit maintenu

@@ -1,9 +1,13 @@
 package com.l3infogrp5.nurikabe.niveau;
 
+import com.l3infogrp5.nurikabe.aide.Aide;
+import com.l3infogrp5.nurikabe.aide.Resultat;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
+import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.utils.Path;
 import javafx.animation.TranslateTransition;
@@ -152,10 +156,10 @@ public class ControllerNiveau {
 
         Profil.DonneesNiveau donnees = joueur.getDonneesNiveau(id_niveau, niveau_en_cours);
         this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.getDonneesNiveau(id_niveau,niveau_en_cours).getHistorique());
-        this.grille.addOnVictoire(() -> niveau_en_cours = false);
 
         // Evenement lancé lorsque la grille est terminée
         this.grille.addOnVictoire(() -> {
+            niveau_en_cours = false;
             System.out.println("gagné !");
             // Arrêter le comptage du score
             this.score.stop();
@@ -255,7 +259,17 @@ public class ControllerNiveau {
     //TODO
     @FXML
     void aideClique() {
-        this.score.aideUtilise();
+        Resultat r =  Aide.calculer(new Matrice(this.grille.getMatrice()));
+        if (r.getSucces()) {
+            this.score.aideUtilise();
+            this.toggle_aide.setSelected(true);
+            // TODO proposer de marquer l'emplacement de la solution
+            if (r.getAffichage() != null){
+                Pane p = r.getAffichage();
+                p.getStyleClass().add("panneau-aide");
+                this.panneau_aide.setCenter(p);
+            }
+        }
     }
 
     //TODO
