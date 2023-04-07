@@ -19,7 +19,7 @@
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="640.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0">
          <top>
             <HBox BorderPane.alignment="CENTER">
                <children>
@@ -62,9 +62,9 @@
                         <HBox>
                            <children>
                               <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                              <ScrollPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="scroll-p" vbarPolicy="ALWAYS" HBox.hgrow="ALWAYS">
+                              <ScrollPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="scroll-p" HBox.hgrow="ALWAYS">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="3480.0" prefWidth="674.0" style="-fx-pref-width: 50%;">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="674.0" style="-fx-pref-width: 50%;">
                                        <padding>
                                           <Insets top="10.0" />
                                        </padding>
@@ -73,15 +73,16 @@
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font></Label>
-                                          <BorderPane fx:id="preview_ile" layoutX="240.0" layoutY="10.0" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: cc00cc;" />
+                                          <BorderPane fx:id="preview_ile" layoutX="240.0" layoutY="10.0" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: black;" />
                                           <Label layoutX="385.0" layoutY="30.0" text="Ceci est un fleuve.">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font></Label>
                                           <Label layoutX="165.0" layoutY="75.0" text="Cliquez sur les cases pour leur faire changer d'état." />
-                                          <Label layoutX="150.0" layoutY="100.0" text="Le but est de séparer les îles par un UNIQUE fleuve." />
-                                          <Label layoutX="100.0" layoutY="120.0" text="Pour cela, aidez vous des nombres indiquants la taille que doivent faire vos îles." />
-                                          <Label layoutX="130.0" layoutY="140.0" text="Attention, le fleuve de peut pas avoir de lac de 2x2 cases." />
+                                          <Label layoutX="165.0" layoutY="120.0" text="Le but est de séparer les îles par un UNIQUE fleuve." />
+                                          <Label layoutX="90.0" layoutY="140.0" text="Pour cela, aidez vous des nombres indiquants la taille que doivent faire vos îles." />
+                                          <Label layoutX="150.0" layoutY="160.0" text="Attention, le fleuve de peut pas avoir de lac de 2x2 cases." />
+                                          <BorderPane fx:id="preview_jeu" layoutX="200.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" />
                                        </children>
                                     </AnchorPane>
                                  </content>

@@ -6,17 +6,13 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-import com.l3infogrp5.nurikabe.niveau.grille.CaseInteractive;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
 import com.l3infogrp5.nurikabe.profil.Profil;
-import com.l3infogrp5.nurikabe.utils.Position;
 
 /**
  * Contrôleur du menu d'affichage des règles, et sa scène.
@@ -34,6 +30,8 @@ public class ControllerMenuRegles {
     private Button retour;
     @FXML
     private BorderPane preview_ile;
+    @FXML
+    private BorderPane preview_jeu;
 
     /**
      * Initialise le menu de sélection d'affichage des règles et son contrôleur.
@@ -57,6 +55,10 @@ public class ControllerMenuRegles {
     @FXML
     private void initialize() throws IOException {
         this.preview_ile.setCenter(new Grille(new int[][] {{-2,-1}}, new int[][] {{50,50}}, new Historique()).getPanneau());
+        this.preview_jeu.setCenter(new Grille(
+            new int[][] {{-2, 2, -1, -1, -1}, {-1, -1, -1, -2, -1}, {-1, 1, -1, -2, -1}, {-1, -1, 4, -2, -1}, {-2, 2, -1, -1, -1}},
+            new int[][] {{-2, 2, -1, -1, -1}, {-1, -1, -1, -2, -1}, {-1, 1, -1, -2, -1}, {-1, -1, 4, -2, -1}, {-2, 2, -1, -1, -1}}, 
+        new Historique()).getPanneau());
     }
 
     /**
