@@ -243,7 +243,7 @@ public class Sauvegarder {
         if (!mode_de_jeu.equals(ModeDeJeu.DETENTE))
             writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
         else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
-        if(!mode_de_jeu.equals(ModeDeJeu.SANSFIN))
+        if (!mode_de_jeu.equals(ModeDeJeu.SANSFIN))
             writer.write(joueur + " % " + score + " % " + date_formate + " % " + enCours + "\n");
         else writer.write(joueur + " % " + score + " % " + date_formate + "\n");
         writer.close();
@@ -282,11 +282,12 @@ public class Sauvegarder {
             if (!nom_joueur.equals(joueur)) continue;
             String score = parts[1].trim();
             String date = parts[2].trim();
-            String enCours = parts[3].trim();
-            System.out.println("String enCours" + enCours);
-            System.out.println("Boolean enCours" + Boolean.getBoolean(enCours));
-            boolean test = Boolean.parseBoolean(enCours) == niveau_en_cours;
-            System.out.println("[SAUVEGARDER] enCours = " + enCours + " niveau_en_cours = " + niveau_en_cours + " : " + test);
+            String enCours = "";
+            if (!mode_de_jeu.equals(ModeDeJeu.SANSFIN))
+                enCours = parts[3].trim();
+            else{
+                enCours = "false";
+            }
             if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
             System.out.println("Le score de :" + joueur + "existe pour le niveau" + mode_de_jeu + "_" + id_niveau);
             donneeScore.score = score;
