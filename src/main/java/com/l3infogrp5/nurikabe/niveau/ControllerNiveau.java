@@ -5,6 +5,7 @@ import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
 import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
@@ -140,10 +141,10 @@ public class ControllerNiveau {
      */
     public void loadNiveauSuivant() throws Exception {
         int id_niveau = file_niveaux.get(index_file++);
+        Sauvegarder.DonneesScore donneesScore = joueur.chargerScore(id_niveau,true);
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
+        donnees.donneesScore = donneesScore;
         this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
-        System.out.println("joueur.chargerScore : " + joueur.chargerScore(id_niveau,true).score);
-        donnees.donneesScore = joueur.chargerScore(id_niveau,true);
         this.grille.addOnVictoire(() -> niveau_en_cours = false);
 
         // Mettre la grille au centre (et ajouter une marge)

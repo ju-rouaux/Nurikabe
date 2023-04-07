@@ -82,16 +82,20 @@ public class Sauvegarder {
         System.out.println("[SAUVEGARDER]Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
         BufferedReader bufferedReader = new BufferedReader(file_reader);
 
+        boolean lastScoreInProgress = false;
+        String enCours = "";
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
             String nom_joueur = parts[0].trim();
-            String enCours = parts[3].trim();
+            enCours = parts[3].trim();
             if (nom_joueur.equals(joueur) && enCours.equals("true"))
-                return true;
+                lastScoreInProgress = true;
         }
         bufferedReader.close();
-        return false;
+        boolean test = lastScoreInProgress && enCours.equals("true");
+        System.out.println("[SAUVEGARDER]Dernier score en cours: " + test);
+        return lastScoreInProgress && enCours.equals("true");
     }
 
 
@@ -233,7 +237,7 @@ public class Sauvegarder {
         // Récupérer la date courante
         Date date = new Date();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
 
         // Formater la date en tant que chaîne de caractères en utilisant l'objet
         // SimpleDateFormat
@@ -397,19 +401,16 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   l'id du niveau
      * @param historique  l'historique des mouvements
-     * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static boolean sauvegarderHistorique(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, Historique historique) {
+    public static void sauvegarderHistorique(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, Historique historique) {
         File mouvements_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File mouvements_fichier = new File(mouvements_repertoire + "/Mouvements_" + id_niveau + ".hist");
 
         if (creerDossierFichier(mouvements_repertoire, mouvements_fichier)) {
             System.out.println("[Sauvegarde] Fichier de sauvegarde de l'historique des mouvements créé / deja existant");
             serialisationHistorique(mouvements_fichier, historique);
-            return true;
         } else {
             System.out.println("[Sauvegarde] Erreur lors de la création de fichier et/ou de dossier");
-            return false;
         }
 
     }
@@ -467,18 +468,15 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu associé à la grille
      * @param id_niveau   l'id du niveau associé à la grille
      * @param matrice     la matrice du niveau a sauvegarder
-     * @return True si la sauvegarde s'est bien passée, False sinon
      */
-    public static boolean sauvegarderMatrice(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, int[][] matrice) {
+    public static void sauvegarderMatrice(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, int[][] matrice) {
         File matrice_repertoire = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mode_de_jeu);
         File matrice_fichier = new File(matrice_repertoire + "/Matrice_" + id_niveau + ".mat");
 
         if (Sauvegarder.creerDossierFichier(matrice_repertoire, matrice_fichier)) {
             serialiserMatrice(matrice_fichier, matrice);
-            return true;
         } else {
             System.out.println("[Profil] Erreur lors de la création de fichier et/ou de dossier");
-            return false;
         }
     }
 
