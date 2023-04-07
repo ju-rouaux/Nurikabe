@@ -79,7 +79,7 @@ public class Sauvegarder {
                 return false;
             }
         }
-        System.out.println("[SAUVEGARDER]Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
+        System.out.println("[SAUVEGARDER] Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
         BufferedReader bufferedReader = new BufferedReader(file_reader);
 
         boolean lastScoreInProgress = false;
@@ -93,8 +93,6 @@ public class Sauvegarder {
                 lastScoreInProgress = true;
         }
         bufferedReader.close();
-        boolean test = lastScoreInProgress && enCours.equals("true");
-        System.out.println("[SAUVEGARDER]Dernier score en cours: " + test);
         return lastScoreInProgress && enCours.equals("true");
     }
 
@@ -237,19 +235,16 @@ public class Sauvegarder {
         // Récupérer la date courante
         Date date = new Date();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
 
-        // Formater la date en tant que chaîne de caractères en utilisant l'objet
-        // SimpleDateFormat
+        // Formater la date en tant que chaîne de caractères en utilisant l'objet SimpleDateFormat
         String date_formate = format.format(date);
 
         if (!mode_de_jeu.equals(ModeDeJeu.DETENTE))
             writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
         else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
 
-
         writer.write(joueur + " % " + score + " % " + date_formate + " % " + enCours + "\n");
-
         writer.close();
 
     }
@@ -257,11 +252,13 @@ public class Sauvegarder {
     /**
      * Charge les scores d'un mode de jeu donné et selon l'indice du niveau
      *
-     * @param mode_de_jeu le mode de jeu pour lequel les scores doivent être
-     *                    chargés.
-     * @param id_niveau   l'indice du niveau, négatif si en mode endless
-     * @return un hashmap : [Nom du joueur[ date - le score]]], contenant tout les
-     * scores du fichier
+     * @param joueur          le nom du joueur/profil
+     * @param mode_de_jeu     le mode de jeu pour lequel les scores doivent être
+     *                        chargés.
+     * @param id_niveau       l'indice du niveau, négatif si en mode endless
+     * @param niveau_en_cours si le niveau est en cours ou non
+     * @return une liste de type DonneesScore, contenant tout les
+     * scores du joueur
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
     public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
@@ -285,10 +282,10 @@ public class Sauvegarder {
             String score = parts[1].trim();
             String date = parts[2].trim();
             String enCours = parts[3].trim();
-            System.out.println("String enCours"+enCours);
+            System.out.println("String enCours" + enCours);
             System.out.println("Boolean enCours" + Boolean.getBoolean(enCours));
             boolean test = Boolean.parseBoolean(enCours) == niveau_en_cours;
-            System.out.println("[SAUVEGARDER] enCours = " + enCours + " niveau_en_cours = " + niveau_en_cours + " : " + test );
+            System.out.println("[SAUVEGARDER] enCours = " + enCours + " niveau_en_cours = " + niveau_en_cours + " : " + test);
             if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
             System.out.println("Le score de :" + joueur + "existe pour le niveau" + mode_de_jeu + "_" + id_niveau);
             donneeScore.score = score;

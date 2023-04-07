@@ -152,6 +152,10 @@ public class Profil {
      */
     public static void setScore(double score, boolean enCours) throws IOException {
         Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, enCours);
+        if(mode_de_jeu == ModeDeJeu.SANSFIN) {
+            System.out.println("Nouvelles grilles a la prochaine partie");
+            charger_nouvelle_grille = true;
+        }
     }
 
     /**
@@ -166,6 +170,7 @@ public class Profil {
     /**
      * Getter pour le score du niveau
      *
+     * @param niveau_en_cours si le niveau est en cours ou non
      * @return le score du niveau
      * @throws IOException si le fichier de sauvegarde n'existe pas
      */
@@ -290,6 +295,7 @@ public class Profil {
      * Charger le score du niveau
      *
      * @param id_niveau l'id du niveau
+     * @param niveau_en_cours si le niveau est en cours ou non
      * @return le score du niveau
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du score
      */

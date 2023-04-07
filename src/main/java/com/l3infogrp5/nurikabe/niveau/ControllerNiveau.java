@@ -5,6 +5,7 @@ import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
 import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 import javafx.animation.TranslateTransition;
@@ -141,7 +142,7 @@ public class ControllerNiveau {
      */
     public void loadNiveauSuivant() throws Exception {
         int id_niveau = file_niveaux.get(index_file++);
-        Sauvegarder.DonneesScore donneesScore = joueur.chargerScore(id_niveau,true);
+        Sauvegarder.DonneesScore donneesScore = joueur.chargerScore(id_niveau, true);
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         donnees.donneesScore = donneesScore;
         this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
@@ -182,7 +183,8 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() throws Exception {
         Profil.setScore(score.getScore(), niveau_en_cours);
-        Profil.getInstance().sauvegarderNiveau(grille);
+        if (Profil.getMode_de_jeu() != ModeDeJeu.SANSFIN)
+            Profil.getInstance().sauvegarderNiveau(grille);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
             + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
