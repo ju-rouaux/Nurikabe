@@ -233,7 +233,7 @@ public class Sauvegarder {
         // Récupérer la date courante
         Date date = new Date();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
 
         // Formater la date en tant que chaîne de caractères en utilisant l'objet
         // SimpleDateFormat
@@ -260,7 +260,7 @@ public class Sauvegarder {
      * scores du fichier
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
-    public static List<DonneesScore> chargerScore(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
+    public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
         List<DonneesScore> scores = new ArrayList<>();
         DonneesScore donneeScore = new DonneesScore();
         Reader file_reader;
@@ -269,14 +269,24 @@ public class Sauvegarder {
         } else {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
         }
+        System.out.println("[SAUVEGARDER]Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
         BufferedReader bufferedReader = new BufferedReader(file_reader);
 
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
+            String nom_joueur = parts[0].trim();
+            System.out.println("[SAUVEGARDER] joueur = " + nom_joueur + " joueur = " + joueur + " : " + nom_joueur.equals(joueur));
+            if (!nom_joueur.equals(joueur)) continue;
             String score = parts[1].trim();
-            String date = parts[2].split(" ")[0];
+            String date = parts[2].trim();
             String enCours = parts[3].trim();
+            System.out.println("String enCours"+enCours);
+            System.out.println("Boolean enCours" + Boolean.getBoolean(enCours));
+            boolean test = Boolean.parseBoolean(enCours) == niveau_en_cours;
+            System.out.println("[SAUVEGARDER] enCours = " + enCours + " niveau_en_cours = " + niveau_en_cours + " : " + test );
+            if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
+            System.out.println("Le score de :" + joueur + "existe pour le niveau" + mode_de_jeu + "_" + id_niveau);
             donneeScore.score = score;
             donneeScore.date = date;
             donneeScore.niveau_en_cours = enCours;

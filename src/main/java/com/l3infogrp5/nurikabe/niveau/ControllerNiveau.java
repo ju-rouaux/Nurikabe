@@ -142,7 +142,8 @@ public class ControllerNiveau {
         int id_niveau = file_niveaux.get(index_file++);
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
-        donnees.donneesScore = joueur.chargerScore(id_niveau);
+        System.out.println("joueur.chargerScore : " + joueur.chargerScore(id_niveau,true).score);
+        donnees.donneesScore = joueur.chargerScore(id_niveau,true);
         this.grille.addOnVictoire(() -> niveau_en_cours = false);
 
         // Mettre la grille au centre (et ajouter une marge)
@@ -179,9 +180,8 @@ public class ControllerNiveau {
      */
     @FXML
     private void retourClique() throws Exception {
-        Profil.getInstance().sauvegarderNiveau(grille);
-
         Profil.setScore(score.getScore(), niveau_en_cours);
+        Profil.getInstance().sauvegarderNiveau(grille);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
             + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire

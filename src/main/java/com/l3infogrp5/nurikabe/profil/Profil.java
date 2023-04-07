@@ -166,11 +166,11 @@ public class Profil {
      * @return le score du niveau
      * @throws IOException si le fichier de sauvegarde n'existe pas
      */
-    public static Sauvegarder.DonneesScore getDonneesScore() throws IOException {
+    public static Sauvegarder.DonneesScore getDonneesScore(boolean niveau_en_cours) throws IOException {
 //        Sauvegarder.DonneesScore score_temp = new Sauvegarder.DonneesScore();
         if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
             System.out.println("Sauvegarde existante ? : " + Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau));
-            score = Sauvegarder.chargerScore(mode_de_jeu, id_niveau);
+            score = Sauvegarder.chargerScore(joueur,mode_de_jeu, id_niveau,niveau_en_cours);
             if (score.size() > 0) {
                 for (Sauvegarder.DonneesScore s : score) {
                     if (s.getNiveauEnCours()) {
@@ -289,14 +289,16 @@ public class Profil {
      * @return le score du niveau
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du score
      */
-    public Sauvegarder.DonneesScore chargerScore(int id_niveau) throws IOException {
+    public Sauvegarder.DonneesScore chargerScore(int id_niveau, boolean niveau_en_cours) throws IOException {
         if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
             System.out.println("[Profil] Sauvegarde du score du niveau trouvée - Chargement du score du niveau sauvegardé...");
-            List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(mode_de_jeu, id_niveau);
-            return scores.get(score.size() - 1);
+            List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(joueur,mode_de_jeu, id_niveau,niveau_en_cours);
+            System.out.println("Size : " + scores.size());
+            System.out.println("Score : " + scores.get(scores.size() - 1).score + " - " + scores.get(scores.size() - 1).date);
+            return scores.get(scores.size() - 1);
         } else {
             System.out.println("[Profil] Aucune sauvegarde du score du niveau trouvée - Création d'un score vide");
-            return getDonneesScore();
+            return getDonneesScore(niveau_en_cours);
         }
     }
 
