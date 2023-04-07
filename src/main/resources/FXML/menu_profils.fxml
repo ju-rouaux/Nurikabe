@@ -6,6 +6,8 @@
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -24,7 +26,32 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="1112.0" GridPane.columnIndex="1">
+            <HBox>
+               <children>
+                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                           <image>
+                              <Image url="@../back.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" GridPane.columnIndex="1">
+               <children>
+                  <Label contentDisplay="CENTER" styleClass="titre" text="PROFILS">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <GridPane fx:id="pseudo_grid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="1112.0" GridPane.columnIndex="1">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="155.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="646.0" minWidth="10.0" prefWidth="608.0" />
@@ -77,10 +104,13 @@
                                     <String fx:value="actif" />
                                     <String fx:value="btn" />
                                  </styleClass>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
                               </Button>
                               <Label styleClass="name-profile" text="default">
                                  <padding>
-                                    <Insets top="10.0" />
+                                    <Insets top="30.0" />
                                  </padding>
                               </Label>
                               <Button mnemonicParsing="false" onAction="#suprProfil" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false">

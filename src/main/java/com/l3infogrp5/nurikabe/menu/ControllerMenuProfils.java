@@ -145,7 +145,7 @@ public class ControllerMenuProfils {
 
         // On ajoute le profil créé aux profils existant et on met à jour le tableau des
         // noms.
-        ajoutProfils(nom_joueur);
+        ajoutProfils(Profil.getJoueur());
         chargerTableau();
     }
 
@@ -172,6 +172,7 @@ public class ControllerMenuProfils {
 
                 setActiveProfil(i);
                 writeActif(nom_joueur);
+                
                 return;
             }
         }
@@ -297,38 +298,41 @@ public class ControllerMenuProfils {
      */
     @FXML
     private void suprProfil(ActionEvent event) throws IOException {
-        int i ;
+        String name_to_delete = "";
 
         // On parcourt la grille des profils pour savoir lequel est appuyer.
-        for (i = 0; i < pseudo_grid.getChildren().size(); i++) {
+        for (int i = 0; i < pseudo_grid.getChildren().size(); i++) {
             // Récupération du bouton appuyé
             if ((event.getSource()) == (((VBox) pseudo_grid.getChildren().get(i)).getChildren().get(2))) {
                 // Récupération du pseudo
-                nom_joueur = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
+                name_to_delete = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
                         .get(1)).getText());
+            }
+        }        
+
+        if(name_to_delete != ""){
+            // Si le joueur courant est supprimer on charge le profils par default
+            if(name_to_delete.equals(nom_joueur)){
+                profil_actif = 0;
+                setActiveProfil(0);
+                writeActif("default");
+                Profil.getInstance().chargerProfil("default");
+            }// sinon on récupère le joueur actif et on applique le décalage
+            else {
+                if(profil_actif > 0)
+                    profil_actif --;
+                setActiveProfil(profil_actif);
+                writeActif(Profil.getJoueur());
             }
         }
 
-        profils_attributs.remove(nom_joueur);
-
-        Sauvegarder.supprimerProfil(nom_joueur);   
-        
-        if(i == profil_actif){
-            setActiveProfil(0);
-            writeActif("default");
-        }
-        else {
-            getActif();
-            profil_actif = profil_actif - 1;
-            setActiveProfil(profil_actif);
-            writeActif(Profil.getJoueur());
-        }
+        Sauvegarder.supprimerProfil(name_to_delete);
+        profils_attributs.remove(name_to_delete);
 
         // Rechargement de la scène
         ControllerMenuProfils reload = new ControllerMenuProfils(stage);
         stage.setScene(reload.getScene());
         reload.chargerTableau();
-        Profil.getInstance().chargerProfil(nom_joueur);
     }
 
     /**
