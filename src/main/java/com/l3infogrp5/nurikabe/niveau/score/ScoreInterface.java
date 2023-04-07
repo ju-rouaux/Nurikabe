@@ -52,4 +52,10 @@ public interface ScoreInterface {
      */
     public double getScore();
 
+    /**
+     * Méthode qui modifie le score
+     * @param score le nouveau score
+     */
+    public void setScore(double score);
+
 }

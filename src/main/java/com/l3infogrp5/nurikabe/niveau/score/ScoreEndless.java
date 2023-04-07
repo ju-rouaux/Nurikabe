@@ -110,6 +110,10 @@ public class ScoreEndless extends ScoreChrono {
         return nbGrilles;
     }
 
+    @Override
+    public void setScore(double score) {
+        nbGrilles = score;
+    }
 
 
 }

@@ -3,12 +3,9 @@ package com.l3infogrp5.nurikabe.niveau;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
-import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
 import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
-
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -19,10 +16,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -148,11 +145,13 @@ public class ControllerNiveau {
      * @throws Exception lancée lorsque la grille n'a pas pû être chargée.
      */
     public void loadNiveauSuivant() throws Exception {
-        int id_niveau = file_niveaux.get(index_file++);
-        Sauvegarder.DonneesScore donneesScore = joueur.chargerScore(id_niveau, true);
-        Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
-        donnees.donneesScore = donneesScore;
-        this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+//    TODO a corriger
+//        int id_niveau = file_niveaux.get(index_file++);
+
+        int id_niveau = 0;
+
+        Profil.DonneesNiveau donnees = joueur.getDonneesNiveau(id_niveau, niveau_en_cours);
+        this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.getDonneesNiveau(id_niveau,niveau_en_cours).getHistorique());
         this.grille.addOnVictoire(() -> niveau_en_cours = false);
 
         // Evenement lancé lorsque la grille est terminée
@@ -172,8 +171,7 @@ public class ControllerNiveau {
                 ButtonType btn_suivant = new ButtonType("Grille suivante");
                 btn_quitter = new ButtonType("Abandonner");
                 popup.getButtonTypes().add(btn_suivant);
-            }
-            else { // Le joueur a terminé la partie
+            } else { // Le joueur a terminé la partie
                 popup.setContentText("Partie terminée ! Score : " + score.getScore() + ".");
                 btn_quitter = new ButtonType("Quitter");
             }
@@ -202,12 +200,12 @@ public class ControllerNiveau {
         this.panneau_central.getChildren().add(panneau_aide);
 
         // TODO charger les données de score depuis le profil
-        this.score = new ScoreZen(Double.parseDouble(donnees.donneesScore.score));
+        this.score = Profil.getInstance().getDonneesNiveau(id_niveau,niveau_en_cours).score;
         this.panneau_score.setCenter(this.score.get_Pane());
 
         // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
+        this.btn_undo.disableProperty().bind(this.joueur.getDonneesNiveau(id_niveau,niveau_en_cours).getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(this.joueur.getDonneesNiveau(id_niveau,niveau_en_cours).getHistorique().peutRetablirProperty().not());
 
         this.score.start();
     }
@@ -233,8 +231,7 @@ public class ControllerNiveau {
             this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
                 + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
             stage.setScene(new ControllerMenuModeJeu(stage).getScene()); //TODO temporaire
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -275,7 +272,7 @@ public class ControllerNiveau {
         alert.setTitle("Réinitialiser la grille");
         alert.setHeaderText("Voulez-vous vraiment réinitialiser la grille ?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             this.score.restart();
             this.grille.reset();
         }

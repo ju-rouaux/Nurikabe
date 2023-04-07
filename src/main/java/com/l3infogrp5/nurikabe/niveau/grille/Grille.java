@@ -183,7 +183,9 @@ public class Grille {
         }
     }
 
-    // reset la grille
+    /**
+     * Réinitialiser la grille.
+     */
     public void reset() {
         this.suivre_mouvement = false;
         for (int i = 0; i < nb_lignes; i++)
@@ -327,7 +329,7 @@ public class Grille {
 
     /**
      * Retourne la solution du niveau.
-     * 
+     *
      * @return la solution du niveau.
      */
     public int[][] getSolution() {
@@ -337,7 +339,7 @@ public class Grille {
     /**
      * Réalise une capture d'écran de la grille et la sauvegarde à l'emplacement
      * donné.
-     * 
+     *
      * @param emplacement l'emplacement de sauvegarde de la capture.
      * @return vrai la capture a été sauvegardée, faux sinon.
      */

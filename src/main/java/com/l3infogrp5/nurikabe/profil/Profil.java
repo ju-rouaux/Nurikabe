@@ -2,6 +2,10 @@ package com.l3infogrp5.nurikabe.profil;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreCLM;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreEndless;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
 import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
@@ -26,7 +30,7 @@ import java.util.List;
 public class Profil {
 
     /* L'instance du profil */
-    private static Profil instance;
+    private static final Profil instance;
     /* Les données du niveau */
     private static DonneesNiveau donneesNiveau;
     /* Le nom du joueur */
@@ -39,6 +43,14 @@ public class Profil {
 
     private static boolean charger_nouvelle_grille;
 
+    static {
+        try {
+            instance = new Profil();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     /**
      * Création d'un profil.
@@ -50,14 +62,33 @@ public class Profil {
         joueur = "default";
         mode_de_jeu = ModeDeJeu.DETENTE;
         id_niveau = 0;
-        score = null;
+        score = new ArrayList<>();
         charger_nouvelle_grille = true;
+        initialiserDonnesNiveau();
+
+        if (donneesNiveau.donneesScore == null) {
+            System.out.println("donneesScore null");
+        }
+        if (donneesNiveau.donneesScore.score == null) {
+            System.out.println("donneesScore.score null");
+        }
+
+        if (donneesNiveau.score == null) {
+            System.out.println("score null");
+        }
+
+        if (donneesNiveau == null) {
+            System.out.println("donneesNiveau null");
+        }
 
         if (Sauvegarder.RechercherSauvegarde(joueur)) {
-            System.out.println("[Profil] Profil deja existant");
+            System.out.println("[Profile] Profile deja existant");
         } else {
+            System.out.println("[Profile] Creation du profile");
             Sauvegarder.creerDossierJoueur(joueur);
         }
+
+        System.out.println("[Profil] Initialisation du profil 100%");
     }
 
     /**
@@ -66,16 +97,8 @@ public class Profil {
      * @return l'instance unique de la classe Profil
      */
     public static Profil getInstance() {
-        if (instance == null) {
-            try {
-                instance = new Profil();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
         return instance;
     }
-
 
     /**
      * retourne une liste de chaines de caractères de l'emplacement des images, s'il
@@ -89,7 +112,7 @@ public class Profil {
         ModeDeJeu mdj = getMode_de_jeu();
         String joueur = getJoueur();
         File image_grille = new File(Path.repertoire_lvl.toString() + "/" + joueur + "/" + mdj + "/" +
-            "capture_niveau_" + getIdNiveau() + ".png");
+            "capture_niveau_" + id_niveau + ".png");
 
         InputStream placeholder_default = Profil.class.getClassLoader().getResourceAsStream("img/placeholder.png");
         if (placeholder_default == null) {
@@ -113,7 +136,6 @@ public class Profil {
         }
         return url_images;
     }
-
 
     /**
      * Getter pour le nom du joueur du profil
@@ -173,7 +195,7 @@ public class Profil {
      * @return le score du niveau
      * @throws IOException si le fichier de sauvegarde n'existe pas
      */
-    public static Sauvegarder.DonneesScore getDonneesScore(boolean niveau_en_cours) throws IOException {
+    private static Sauvegarder.DonneesScore getDonneesScore(boolean niveau_en_cours) throws IOException {
         if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
             System.out.println("Sauvegarde existante ? : " + Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau));
             score = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
@@ -196,6 +218,29 @@ public class Profil {
     }
 
     /**
+     * Initialise les donneesNiveau
+     *
+     * @throws FileNotFoundException si le fichier de sauvegarde n'existe pas
+     */
+    private void initialiserDonnesNiveau() throws FileNotFoundException {
+        donneesNiveau = new DonneesNiveau(null, null, null, null);
+        donneesNiveau.donneesScore = new Sauvegarder.DonneesScore();
+        donneesNiveau.score = new ScoreZen(5);
+        donneesNiveau.historique = new Historique();
+        donneesNiveau = chargerGrille(id_niveau);
+    }
+
+    /**
+     * Getter pour les donnees du niveau selon l'id_niveau
+     *
+     * @param id_niveau l'id du niveau
+     * @return les donnees du niveau
+     */
+    public DonneesNiveau getNiveau(int id_niveau) {
+        return donneesNiveau;
+    }
+
+    /**
      * Methode pour charger un profil
      * Attention, il faut ensuite initialiser le mode de jeu avec le setter {@link #setMode_de_jeu(ModeDeJeu)}.
      * Et l'id du niveau en paramètre de la méthode chargerGrille {@link #chargerGrille(int)}.
@@ -204,18 +249,13 @@ public class Profil {
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du profil
      */
     public void chargerProfil(String joueur) throws IOException {
-        donneesNiveau = new DonneesNiveau();
-        donneesNiveau.donneesScore = new Sauvegarder.DonneesScore();
-        Profil.joueur = joueur;
-        // Valeurs par défaut
-        mode_de_jeu = ModeDeJeu.DETENTE;
-        id_niveau = 0;
+        joueur = joueur;
 
-        if (Sauvegarder.RechercherSauvegarde(joueur)) {
-            System.out.println("[Profil] Profil deja existant");
-        } else {
-            Sauvegarder.creerDossierJoueur(joueur);
-        }
+        donneesNiveau.score = chargerScore(id_niveau, charger_nouvelle_grille);
+
+        donneesNiveau.donneesScore = new Sauvegarder.DonneesScore();
+
+
     }
 
     /**
@@ -235,7 +275,7 @@ public class Profil {
      *
      * @return l'historique des mouvements du joueur
      */
-    public Historique chargerHistorique() {
+    private Historique chargerHistorique() {
         Historique hist;
         System.out.println("Mode de jeu : " + mode_de_jeu);
         File fichier_mouvements = Paths.get(Path.repertoire_lvl.toString(), joueur, mode_de_jeu.toString(), "Mouvements_" + id_niveau + ".hist").toFile();
@@ -261,7 +301,7 @@ public class Profil {
      * @return les données du niveau
      * @throws FileNotFoundException si le fichier n'existe pas
      */
-    public DonneesNiveau chargerGrille(int niv) throws FileNotFoundException {
+    private DonneesNiveau chargerGrille(int niv) throws FileNotFoundException {
         id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau + ".mat");
@@ -275,17 +315,7 @@ public class Profil {
             donneesNiveau.matrice_niveau = Sauvegarder.chargerGrilleFichier(id_niveau, false);
 
         donneesNiveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, true);
-        charger_nouvelle_grille = false;
         return donneesNiveau;
-    }
-
-    /**
-     * Getter pour l'historique des mouvements
-     *
-     * @return l'historique des mouvements
-     */
-    public Historique getHistorique() {
-        return donneesNiveau.historique;
     }
 
 
@@ -297,25 +327,67 @@ public class Profil {
      * @return le score du niveau
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du score
      */
-    public Sauvegarder.DonneesScore chargerScore(int id_niveau, boolean niveau_en_cours) throws IOException {
+    private ScoreInterface chargerScore(int id_niveau, boolean niveau_en_cours) throws IOException {
         if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
             System.out.println("[Profil] Sauvegarde du score du niveau trouvée - Chargement du score du niveau sauvegardé...");
             List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
             System.out.println("Size : " + scores.size());
             System.out.println("Score : " + scores.get(scores.size() - 1).score + " - " + scores.get(scores.size() - 1).date);
             charger_nouvelle_grille = false;
-            return scores.get(scores.size() - 1);
+            donneesNiveau.score.setScore(Double.parseDouble(scores.get(scores.size() - 1).score));
+            donneesNiveau.donneesScore = scores.get(scores.size() - 1);
+            return donneesNiveau.score;
         } else {
             System.out.println("[Profil] Aucune sauvegarde du score du niveau trouvée - Création d'un score vide");
             charger_nouvelle_grille = true;
-            return getDonneesScore(niveau_en_cours);
+            donneesNiveau.score = new ScoreZen(0);
+            switch (mode_de_jeu) {
+                case DETENTE ->
+                    donneesNiveau.score = new ScoreZen(Double.parseDouble(getDonneesScore(niveau_en_cours).score));
+                case CONTRELAMONTRE ->
+                    donneesNiveau.score = new ScoreCLM(Double.parseDouble(getDonneesScore(niveau_en_cours).score));
+                case SANSFIN ->
+                    donneesNiveau.score = new ScoreEndless(Double.parseDouble(getDonneesScore(niveau_en_cours).score));
+            }
+            donneesNiveau.score.setScore(Double.parseDouble(getDonneesScore(niveau_en_cours).score));
+            donneesNiveau.donneesScore = getDonneesScore(niveau_en_cours);
+            return donneesNiveau.score;
         }
     }
+
+    /**
+     * Actualise les données du niveau
+     *
+     * @param id_niveau l'id du niveau
+     * @param en_cours  si le niveau est en cours ou non
+     * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement des données du niveau
+     */
+    private void chargerDonneesNiveau(int id_niveau, boolean en_cours) throws IOException {
+        donneesNiveau.historique = chargerHistorique();
+        donneesNiveau = chargerGrille(id_niveau);
+        donneesNiveau.score = chargerScore(id_niveau, en_cours);
+
+    }
+
+    /**
+     * Retourne les données du niveau
+     *
+     * @param id_niveau l'id du niveau
+     * @param en_cours  si le niveau est en cours ou non
+     * @return les données du niveau
+     * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement des données du niveau
+     */
+    public DonneesNiveau getDonneesNiveau(int id_niveau, boolean en_cours) throws IOException {
+        chargerDonneesNiveau(id_niveau, en_cours);
+        return donneesNiveau;
+    }
+
 
     /**
      * Classe interne permettant de stocker les données d'un niveau.
      */
     public static class DonneesNiveau {
+
         /**
          * L'historique du niveau.
          */
@@ -328,16 +400,55 @@ public class Profil {
          * La grille de solution du niveau.
          */
         public int[][] matrice_solution;
-
         /**
          * Les données de score
          */
         public Sauvegarder.DonneesScore donneesScore;
+        /**
+         * Le score du niveau.
+         */
+        public ScoreInterface score;
 
         /**
-         * Constructeur privé.
+         * Constructeur
+         *
+         * @param h        l'historique du niveau
+         * @param grille   la grille du niveau
+         * @param solution la grille de solution du niveau
+         * @param score    le score du niveau
          */
-        private DonneesNiveau() {
+        public DonneesNiveau(Historique h, int[][] grille, int[][] solution, ScoreInterface score) {
+            historique = h;
+            matrice_niveau = grille;
+            matrice_solution = solution;
+            this.score = score;
+        }
+
+        /**
+         * Getter pour l'historique des mouvements
+         *
+         * @return l'historique des mouvements
+         */
+        public Historique getHistorique() {
+            return donneesNiveau.historique;
+        }
+
+        /**
+         * Getter pour la matrice du niveau
+         *
+         * @return la matrice du niveau
+         */
+        public int[][] getMatriceNiveau() {
+            return donneesNiveau.matrice_niveau;
+        }
+
+        /**
+         * Getter pour la matrice de solution
+         *
+         * @return la matrice de solution
+         */
+        public int[][] getMatriceSolution() {
+            return donneesNiveau.matrice_solution;
         }
     }
 

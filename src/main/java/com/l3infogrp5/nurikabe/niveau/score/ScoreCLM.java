@@ -6,7 +6,7 @@ import javafx.util.Duration;
 
 /**
  * Implémentation du calcul d'un score pour le mode Contre La Montre
- * 
+ *
  * @author Antoine Couapel, Killian Rattier
  * @version 1.0
  */
@@ -67,6 +67,11 @@ public class ScoreCLM extends ScoreChrono {
         int malus = 40;
         totalSec += malus;
 
+    }
+
+    @Override
+    public void setScore(double score) {
+        this.totalSec = score;
     }
 
     /**
