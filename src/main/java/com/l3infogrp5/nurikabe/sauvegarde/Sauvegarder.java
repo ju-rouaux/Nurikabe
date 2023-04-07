@@ -243,8 +243,9 @@ public class Sauvegarder {
         if (!mode_de_jeu.equals(ModeDeJeu.DETENTE))
             writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
         else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
-
-        writer.write(joueur + " % " + score + " % " + date_formate + " % " + enCours + "\n");
+        if(!mode_de_jeu.equals(ModeDeJeu.SANSFIN))
+            writer.write(joueur + " % " + score + " % " + date_formate + " % " + enCours + "\n");
+        else writer.write(joueur + " % " + score + " % " + date_formate + "\n");
         writer.close();
 
     }
