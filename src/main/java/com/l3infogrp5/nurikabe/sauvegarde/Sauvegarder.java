@@ -263,7 +263,7 @@ public class Sauvegarder {
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
     public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
-        System.out.println("niveau_en_cours = " + niveau_en_cours);
+        System.out.println("Chargement des scores pour le joueur " + joueur + " en mode " + mode_de_jeu + "niveau_en_cours" + niveau_en_cours );
         List<DonneesScore> scores = new ArrayList<>();
         DonneesScore donneeScore = new DonneesScore();
         Reader file_reader;
@@ -272,14 +272,12 @@ public class Sauvegarder {
         } else {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
         }
-        System.out.println("[SAUVEGARDER]Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
         BufferedReader bufferedReader = new BufferedReader(file_reader);
 
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
             String nom_joueur = parts[0].trim();
-            System.out.println("[SAUVEGARDER] joueur = " + nom_joueur + " joueur = " + joueur + " : " + nom_joueur.equals(joueur));
             if (!nom_joueur.equals(joueur)) continue;
             String score = parts[1].trim();
             String date = parts[2].trim();
@@ -290,16 +288,17 @@ public class Sauvegarder {
                 enCours = "false";
             }
             if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
-            System.out.println("Le score de :" + joueur + "existe pour le niveau" + mode_de_jeu + "_" + id_niveau);
+            System.out.println("score : " + score + " date : " + date + " en cours : " + enCours + " mode de jeu : " + mode_de_jeu);
             donneeScore.score = score;
             donneeScore.date = date;
             donneeScore.niveau_en_cours = enCours;
             scores.add(donneeScore);
         }
         bufferedReader.close();
-        for(DonneesScore score : scores)
-            System.out.println(score.score + " " + score.date + " " + score.niveau_en_cours);
-        return scores;
+        for (DonneesScore donneesScore : scores) {
+            System.out.println("score : " + donneesScore.score + " date : " + donneesScore.date + " en cours : " + donneesScore.niveau_en_cours + " mode de jeu : " + mode_de_jeu);
+        }
+            return scores;
     }
 
     /**
@@ -559,9 +558,9 @@ public class Sauvegarder {
          * Constructeur
          */
         public DonneesScore() {
-            score = "";
-            date = "";
-            niveau_en_cours = "";
+            this.score = "";
+            this.date = "";
+            this.niveau_en_cours = "";
         }
 
 

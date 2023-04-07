@@ -66,29 +66,10 @@ public class Profil {
         charger_nouvelle_grille = true;
         initialiserDonnesNiveau();
 
-        if (donneesNiveau.donneesScore == null) {
-            System.out.println("donneesScore null");
-        }
-        if (donneesNiveau.donneesScore.score == null) {
-            System.out.println("donneesScore.score null");
-        }
 
-        if (donneesNiveau.score == null) {
-            System.out.println("score null");
-        }
-
-        if (donneesNiveau == null) {
-            System.out.println("donneesNiveau null");
-        }
-
-        if (Sauvegarder.RechercherSauvegarde(joueur)) {
-            System.out.println("[Profile] Profile deja existant");
-        } else {
-            System.out.println("[Profile] Creation du profile");
+        if (!Sauvegarder.RechercherSauvegarde(joueur))
             Sauvegarder.creerDossierJoueur(joueur);
-        }
 
-        System.out.println("[Profil] Initialisation du profil 100%");
     }
 
     /**
@@ -197,7 +178,6 @@ public class Profil {
      */
     private static Sauvegarder.DonneesScore getDonneesScore(boolean niveau_en_cours) throws IOException {
         if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
-            System.out.println("Sauvegarde existante ? : " + Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau));
             score = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
             if (score.size() > 0) {
                 for (Sauvegarder.DonneesScore s : score) {
@@ -217,6 +197,7 @@ public class Profil {
         return donneesNiveau.donneesScore;
     }
 
+
     /**
      * Initialise les donneesNiveau
      *
@@ -230,15 +211,6 @@ public class Profil {
         donneesNiveau = chargerGrille(id_niveau);
     }
 
-    /**
-     * Getter pour les donnees du niveau selon l'id_niveau
-     *
-     * @param id_niveau l'id du niveau
-     * @return les donnees du niveau
-     */
-    public DonneesNiveau getNiveau(int id_niveau) {
-        return donneesNiveau;
-    }
 
     /**
      * Methode pour charger un profil
@@ -249,9 +221,13 @@ public class Profil {
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement du profil
      */
     public void chargerProfil(String joueur) throws IOException {
-        joueur = joueur;
 
-        donneesNiveau.score = chargerScore(id_niveau, charger_nouvelle_grille);
+
+        Profil.joueur = joueur;
+
+        if (!Sauvegarder.RechercherSauvegarde(joueur))
+            Sauvegarder.creerDossierJoueur(joueur);
+        donneesNiveau.score = chargerScore(id_niveau, true);
 
         donneesNiveau.donneesScore = new Sauvegarder.DonneesScore();
 
@@ -277,7 +253,6 @@ public class Profil {
      */
     private Historique chargerHistorique() {
         Historique hist;
-        System.out.println("Mode de jeu : " + mode_de_jeu);
         File fichier_mouvements = Paths.get(Path.repertoire_lvl.toString(), joueur, mode_de_jeu.toString(), "Mouvements_" + id_niveau + ".hist").toFile();
 
         if (fichier_mouvements.exists() && fichier_mouvements.length() > 0) {
@@ -305,7 +280,6 @@ public class Profil {
         id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau + ".mat");
-        System.out.println("Faut-il charger une nouvelle grille ?" + charger_nouvelle_grille);
         if (grille_fichier.exists() && grille_fichier.length() > 0 && !charger_nouvelle_grille) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
@@ -331,8 +305,13 @@ public class Profil {
         if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
             System.out.println("[Profil] Sauvegarde du score du niveau trouvée - Chargement du score du niveau sauvegardé...");
             List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
-            System.out.println("Size : " + scores.size());
-            System.out.println("Score : " + scores.get(scores.size() - 1).score + " - " + scores.get(scores.size() - 1).date);
+            System.out.println("scores.size() = " + scores.size());
+            switch(mode_de_jeu){
+                case DETENTE -> donneesNiveau.score = new ScoreZen(Double.parseDouble(scores.get(scores.size() - 1).score));
+                case CONTRELAMONTRE -> donneesNiveau.score = new ScoreCLM(Double.parseDouble(scores.get(scores.size() - 1).score));
+                case SANSFIN -> donneesNiveau.score = new ScoreEndless(Double.parseDouble(scores.get(scores.size() - 1).score));
+
+            }
             charger_nouvelle_grille = false;
             donneesNiveau.score.setScore(Double.parseDouble(scores.get(scores.size() - 1).score));
             donneesNiveau.donneesScore = scores.get(scores.size() - 1);
