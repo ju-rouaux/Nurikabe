@@ -255,6 +255,7 @@ public class ControllerNiveau {
         Resultat r =  Aide.calculer(new Matrice(this.grille.getMatrice()));
         if (r.getSucces()) {
             this.score.aideUtilise();
+            this.toggle_aide.setSelected(true);
             // TODO proposer de marquer l'emplacement de la solution
             if (r.getAffichage() != null){
                 Pane p = r.getAffichage();
