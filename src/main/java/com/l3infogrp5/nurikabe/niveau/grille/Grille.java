@@ -158,11 +158,15 @@ public class Grille {
                     boolean victoire = true;
 
                     for (int a = 0; a < this.solution.length; a++)
-                        for (int b = 0; b < this.solution[a].length; b++)
-                            if (this.solution[a][b] != this.grille[a][b].get()) {
+                        for (int b = 0; b < this.solution[a].length; b++) {
+                            int v = this.grille[a][b].get();
+                            if (v == Etat.POINT.toInt())
+                                v = Etat.BLANC.toInt();
+                            if (this.solution[a][b] != v) {
                                 victoire = false;
                                 break;
                             }
+                        }
                     if (victoire) {
                         System.out.println("Grille complétée.");
                         for (Runnable r : onVictoire)
@@ -177,6 +181,16 @@ public class Grille {
                 GridPane.setVgrow(case_courante, Priority.ALWAYS);
             }
         }
+    }
+
+    // reset la grille
+    public void reset() {
+        this.suivre_mouvement = false;
+        for (int i = 0; i < nb_lignes; i++)
+            for (int j = 0; j < nb_colonnes; j++)
+                if (this.grille[i][j].get() < 0)
+                    this.grille[i][j].set(0);
+        this.suivre_mouvement = true;
     }
 
     /**

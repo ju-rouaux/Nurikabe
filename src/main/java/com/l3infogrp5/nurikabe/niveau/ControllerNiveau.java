@@ -17,8 +17,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -29,6 +32,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -128,12 +132,8 @@ public class ControllerNiveau {
             }
         });
 
-        try {
-            this.loadNiveauSuivant();
-        } catch(Exception e) {
-            System.out.println(e);
-            this.retourClique();
-        }
+        // Charger le premier niveau
+        this.loadNiveauSuivant();
     }
 
     /**
@@ -145,6 +145,43 @@ public class ControllerNiveau {
         int id_niveau = file_niveaux.get(index_file++);
         Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
         this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+
+        // Evenement lancé lorsque la grille est terminée
+        this.grille.addOnVictoire(() -> {
+            System.out.println("gagné !");
+            // Arrêter le comptage du score
+            this.score.stop();
+
+            // Afficher une popup de victoire
+            Alert popup = new Alert(AlertType.NONE);
+            popup.setTitle("Grille terminée !");
+            ButtonType btn_quitter;
+
+            // Le joueur poursuit sa partie
+            if (index_file < file_niveaux.size()) {
+                popup.setContentText("Nombre de grilles terminées : " + score.getScore() + ". Cliquez pour poursuivre.");
+                ButtonType btn_suivant = new ButtonType("Grille suivante");
+                btn_quitter = new ButtonType("Abandonner");
+                popup.getButtonTypes().add(btn_suivant);
+            }
+            else { // Le joueur a terminé la partie
+                popup.setContentText("Partie terminée ! Score : " + score.getScore() + ".");
+                btn_quitter = new ButtonType("Quitter");
+            }
+
+            popup.getButtonTypes().add(btn_quitter);
+            Optional<ButtonType> result = popup.showAndWait();
+
+            if (result.get() == btn_quitter)
+                this.retourClique();
+            else {
+                try {
+                    this.loadNiveauSuivant();
+                } catch (Exception e) {
+                    this.retourClique();
+                }
+            }
+        });
 
         // Mettre la grille au centre (et ajouter une marge)
         Pane panneau_grille = grille.getPanneau();
@@ -179,14 +216,18 @@ public class ControllerNiveau {
      * Retourne au menu précédent, le menu principal.
      */
     @FXML
-    private void retourClique() throws Exception {
-        // TODO : capturer écran + sauvegarder
-        Profil.getInstance().sauvegarderNiveau(grille);
-        // TODO : remplacer null avec le getScore du niveau
-        Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
-        this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
-                + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
-        stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire
+    private void retourClique() {
+        try {
+            Profil.getInstance().sauvegarderNiveau(grille);
+            // TODO : remplacer null avec le getScore du niveau
+            Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
+            this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
+                    + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
+            stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // TODO temporaire
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -220,7 +261,15 @@ public class ControllerNiveau {
     //TODO
     @FXML
     void resetClique() {
-        this.score.restart();
+        //afficher une fenêtre de confirmation
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Réinitialiser la grille");
+        alert.setHeaderText("Voulez-vous vraiment réinitialiser la grille ?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            this.score.restart();
+            this.grille.reset();
+        }
     }
 
 }
