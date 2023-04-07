@@ -183,7 +183,9 @@ public class Grille {
         }
     }
 
-    // reset la grille
+    /**
+     * Réinitialiser la grille.
+     */
     public void reset() {
         this.suivre_mouvement = false;
         for (int i = 0; i < nb_lignes; i++)
