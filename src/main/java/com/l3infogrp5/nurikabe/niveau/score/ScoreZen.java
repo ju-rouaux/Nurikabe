@@ -95,7 +95,10 @@ public class ScoreZen implements ScoreInterface {
      * {@inheritDoc}
      */
     @Override
-    public void restart() {}
+    public void restart() {
+        this.etoiles = 5;
+        this.rating.setRating(etoiles);
+    }
 
     /**
      * Cette méthode permet de créer un objet Pane contenant un Rating, et d'initialiser les propriétés de celui-ci selon les valeurs définies dans l'objet ScoreZen.
