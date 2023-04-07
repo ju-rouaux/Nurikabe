@@ -67,7 +67,7 @@ public class Profil {
         initialiserDonnesNiveau();
 
 
-        if (!Sauvegarder.RechercherSauvegarde(joueur))
+        if (Sauvegarder.RechercherSauvegarde(joueur))
             Sauvegarder.creerDossierJoueur(joueur);
 
     }
@@ -225,7 +225,7 @@ public class Profil {
 
         Profil.joueur = joueur;
 
-        if (!Sauvegarder.RechercherSauvegarde(joueur))
+        if (Sauvegarder.RechercherSauvegarde(joueur))
             Sauvegarder.creerDossierJoueur(joueur);
         donneesNiveau.score = chargerScore(id_niveau, true);
 

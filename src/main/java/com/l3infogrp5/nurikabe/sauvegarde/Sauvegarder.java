@@ -37,21 +37,21 @@ public class Sauvegarder {
     public static boolean RechercherSauvegarde(String joueur) {
 
         if (joueur == null) {
-            return false;
+            return true;
         }
 
         File[] files = Path.repertoire_lvl.listFiles();
         if (files == null) {
-            return false;
+            return true;
         }
 
         for (File file : files) {
             if (file.isDirectory() && file.getName().equals(joueur)) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
