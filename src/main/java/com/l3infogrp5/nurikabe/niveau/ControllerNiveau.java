@@ -179,8 +179,9 @@ public class ControllerNiveau {
      */
     @FXML
     private void retourClique() throws Exception {
-        Profil.setScore(score.getScore(),niveau_en_cours);
         Profil.getInstance().sauvegarderNiveau(grille);
+
+        Profil.setScore(score.getScore(),niveau_en_cours);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
             + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire

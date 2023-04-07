@@ -1,6 +1,7 @@
 package com.l3infogrp5.nurikabe.sauvegarde;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
+import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.utils.Path;
 import org.apache.commons.io.FileUtils;
 
@@ -54,9 +55,9 @@ public class Sauvegarder {
     /**
      * Recherche si la sauvegarde pour le joueur existe déjà
      *
-     * @param joueur nom du joueur
+     * @param joueur      nom du joueur
      * @param mode_de_jeu le mode de jeu
-     * @param id_niveau l'id du niveau
+     * @param id_niveau   l'id du niveau
      * @return vrai si la sauvegarde existe, faux sinon
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
@@ -93,8 +94,9 @@ public class Sauvegarder {
 
     /**
      * Supprime les sauvegardes du joueur s'il a deja finit le niveau une fois
+     *
      * @param mode_de_jeu le mode de jeu
-     * @param id_niveau l'id du niveau
+     * @param id_niveau   l'id du niveau
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
     public static void supprimerScores(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
@@ -106,15 +108,19 @@ public class Sauvegarder {
             filename = Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save";
         }
 
-        Set<String> playersWithFinishedLevel = new HashSet<>();
+        Set<String> joueurs_niveau_fini = new HashSet<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("%");
                 String player = parts[0];
-                boolean isLevelFinished = Boolean.parseBoolean(parts[3].trim());
-                if (isLevelFinished) {
-                    playersWithFinishedLevel.add(player);
+                boolean niveau_en_cours = Boolean.parseBoolean(parts[3].trim());
+                String date = parts[2];
+                if (niveau_en_cours) {
+                    joueurs_niveau_fini.add(player);
+                }
+                if (player.equals(Profil.getJoueur()) && date.equals(datePartie) && !niveau_en_cours) {
+                    joueurs_niveau_fini.add(player);
                 }
             }
         }
@@ -126,8 +132,9 @@ public class Sauvegarder {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("%");
                 String player = parts[0];
-                boolean isLevelFinished = Boolean.parseBoolean(parts[3].trim());
-                if (isLevelFinished || !playersWithFinishedLevel.contains(player)) {
+                String date = parts[2];
+                boolean niveau_en_cours = Boolean.parseBoolean(parts[3].trim());
+                if (!niveau_en_cours || !joueurs_niveau_fini.contains(player)) {
                     stringBuilder.append(line).append("\n");
                 }
             }
@@ -268,7 +275,7 @@ public class Sauvegarder {
      * @param mode_de_jeu le mode de jeu
      * @param id_niveau   le numéro du niveau, -1 si en mode de jeu sans fin
      * @param score       le score
-     * @param enCours si le niveau est en cours ou non
+     * @param enCours     si le niveau est en cours ou non
      * @throws IOException {@link IOException} si le fichier n'existe pas
      **/
     public static void sauvegarderScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, double score, boolean enCours) throws IOException {
@@ -277,8 +284,7 @@ public class Sauvegarder {
         // Récupérer la date courante
         Date date = new Date();
 
-        // Créer un objet SimpleDateFormat avec le format souhaité
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy hh:mm");
 
         // Formater la date en tant que chaîne de caractères en utilisant l'objet
         // SimpleDateFormat
@@ -320,7 +326,7 @@ public class Sauvegarder {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
             String score = parts[1].trim();
-            String date = parts[2].trim();
+            String date = parts[2].split(" ")[0];
             String enCours = parts[3].trim();
             donneeScore.score = score;
             donneeScore.date = date;
@@ -358,9 +364,9 @@ public class Sauvegarder {
      * Charge une grille depuis un fichier texte selon le numéro de la grille et le
      * mode de jeu
      *
-     * @param id_niveau   le numéro de la grille
-     * @param solution    boolean, vrai s'il faut charger la solution du niveau
-     *                    selon l'id
+     * @param id_niveau le numéro de la grille
+     * @param solution  boolean, vrai s'il faut charger la solution du niveau
+     *                  selon l'id
      * @return la matrice du niveau chargé
      * @throws FileNotFoundException {@link FileNotFoundException} si le fichier n'est pas trouvé
      */
@@ -577,22 +583,29 @@ public class Sauvegarder {
      */
     public static class DonneesScore {
 
-        /** Le score */
+        /**
+         * Le score
+         */
         public String score;
-        /** La date */
+        /**
+         * La date
+         */
         public String date;
-        /** Le niveau en cours */
+        /**
+         * Le niveau en cours
+         */
         public String niveau_en_cours;
 
         /**
          * Constructeur
          */
-        public DonneesScore(){
+        public DonneesScore() {
 
         }
 
         /**
          * Construit l'affichage des données du score
+         *
          * @return la chaine de caractère à afficher
          */
         public String toString() {
@@ -601,6 +614,7 @@ public class Sauvegarder {
 
         /**
          * Récupère le score
+         *
          * @return le score
          */
         public String getScore() {
@@ -609,6 +623,7 @@ public class Sauvegarder {
 
         /**
          * Récupère la date
+         *
          * @return la date
          */
         public String getDate() {
@@ -617,6 +632,7 @@ public class Sauvegarder {
 
         /**
          * Récupère le boolean pour savoir si le niveau en cours
+         *
          * @return le boolean du niveau en cours
          */
         public boolean getNiveauEnCours() {
