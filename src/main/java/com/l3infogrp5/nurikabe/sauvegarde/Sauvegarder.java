@@ -32,7 +32,7 @@ public class Sauvegarder {
      * Recherche si la sauvegarde pour le joueur existe déjà
      *
      * @param joueur nom du joueur
-     * @return vrai si la sauvegarde existe, faux sinon
+     * @return faux si la sauvegarde existe, vrai sinon
      */
     public static boolean RechercherSauvegarde(String joueur) {
 
