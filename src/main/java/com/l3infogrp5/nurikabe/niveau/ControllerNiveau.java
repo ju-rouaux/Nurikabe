@@ -181,7 +181,7 @@ public class ControllerNiveau {
     private void retourClique() throws Exception {
         Profil.getInstance().sauvegarderNiveau(grille);
 
-        Profil.setScore(score.getScore(),niveau_en_cours);
+        Profil.setScore(score.getScore(), niveau_en_cours);
         this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
             + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
         stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // temporaire

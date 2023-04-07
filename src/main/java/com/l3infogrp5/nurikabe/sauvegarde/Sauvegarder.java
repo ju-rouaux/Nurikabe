@@ -1,7 +1,6 @@
 package com.l3infogrp5.nurikabe.sauvegarde;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
-import com.l3infogrp5.nurikabe.profil.Profil;
 import com.l3infogrp5.nurikabe.utils.Path;
 import org.apache.commons.io.FileUtils;
 
@@ -10,7 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -90,59 +92,6 @@ public class Sauvegarder {
         }
         bufferedReader.close();
         return false;
-    }
-
-    /**
-     * Supprime les sauvegardes du joueur s'il a deja finit le niveau une fois
-     *
-     * @param mode_de_jeu le mode de jeu
-     * @param id_niveau   l'id du niveau
-     * @throws IOException {@link IOException} si le fichier n'existe pas
-     */
-    public static void supprimerScores(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
-
-        String filename;
-        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
-            filename = Path.repertoire_score + "/" + mode_de_jeu + ".save";
-        } else {
-            filename = Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save";
-        }
-
-        Set<String> joueurs_niveau_fini = new HashSet<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("%");
-                String player = parts[0];
-                boolean niveau_en_cours = Boolean.parseBoolean(parts[3].trim());
-                String date = parts[2];
-                if (niveau_en_cours) {
-                    joueurs_niveau_fini.add(player);
-                }
-                if (player.equals(Profil.getJoueur()) && date.equals(datePartie) && !niveau_en_cours) {
-                    joueurs_niveau_fini.add(player);
-                }
-            }
-        }
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("%");
-                String player = parts[0];
-                String date = parts[2];
-                boolean niveau_en_cours = Boolean.parseBoolean(parts[3].trim());
-                if (!niveau_en_cours || !joueurs_niveau_fini.contains(player)) {
-                    stringBuilder.append(line).append("\n");
-                }
-            }
-        }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            writer.write(stringBuilder.toString());
-        }
     }
 
 
