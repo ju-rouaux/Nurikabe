@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.pattern_matching;
+package com.l3infogrp5.nurikabe.aide;
 
 import java.util.ArrayList;
 
