@@ -13,12 +13,6 @@ import javafx.scene.text.Text;
  */
 abstract public class ScoreChrono implements ScoreInterface {
 
-    /**secondes*/
-    protected double sec;
-
-    /**minutes*/ 
-    protected double min;
-
     /**nombre total de secondes écoulées*/
     protected double totalSec;
 
@@ -59,8 +53,8 @@ abstract public class ScoreChrono implements ScoreInterface {
     public String getScoreFormate() {
         String s;
 
-        min = totalSec / 60;
-        sec = totalSec % 60;
+        int min = (int) totalSec / 60;
+        int sec = (int) totalSec % 60;
 
         if (sec >= 10)
             s = min + ":" + sec;
