@@ -5,12 +5,9 @@ import com.l3infogrp5.nurikabe.aide.Resultat;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
-import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
 import com.l3infogrp5.nurikabe.profil.Profil;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Path;
-
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -21,10 +18,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -47,11 +44,15 @@ public class ControllerNiveau {
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
-
+    
+    private final BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
+    private List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
     private Grille grille;
     private ScoreInterface score;
-    private BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
-    private Profil joueur;
+    private boolean niveau_en_cours; // Vrai si le niveau est en cours de jeu.
+    private int index_file; // Indice du niveau lancé dans la liste
+
+    private Profil.DonneesNiveau donnees_niveau; // Données du niveau en cours de jeu.
 
     @FXML
     private Button btn_aide;
@@ -75,12 +76,8 @@ public class ControllerNiveau {
     private StackPane panneau_central;
     @FXML
     private BorderPane panneau_aide;
-
     @FXML
     private HBox barre;
-
-    private List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
-    private int index_file; // Indice du niveau lancé dans la liste
 
     /**
      * Initialise la vue du niveau.
@@ -93,7 +90,8 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, List<Integer> niveaux) throws IOException {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
-        this.joueur = Profil.getInstance();
+
+        this.niveau_en_cours = true;
 
         this.file_niveaux = niveaux;
         this.index_file = 0;
@@ -124,13 +122,13 @@ public class ControllerNiveau {
         // Afficher l'aide lorsque la Property aide_affichee est active.
         this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
         this.toggle_aide.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            TranslateTransition transition = new TranslateTransition(Duration.millis(150),
-                    ControllerNiveau.this.panneau_aide);
+            final TranslateTransition transition = new TranslateTransition(Duration.millis(150),
+                ControllerNiveau.this.panneau_aide);
 
             public void changed(ObservableValue<? extends Boolean> obj, Boolean ancien, Boolean nouveau) {
                 // De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers
                 // le haut sinon
-                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight()) * (nouveau == true ? 1 : -1));
+                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight()) * (nouveau ? 1 : -1));
                 transition.play();
             }
         });
@@ -145,12 +143,15 @@ public class ControllerNiveau {
      * @throws Exception lancée lorsque la grille n'a pas pû être chargée.
      */
     public void loadNiveauSuivant() throws Exception {
-        int id_niveau = file_niveaux.get(index_file++);
-        Profil.DonneesNiveau donnees = joueur.chargerGrille(id_niveau);
-        this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.chargerHistorique());
+        int id_niveau = file_niveaux.get(this.index_file++);
+
+        donnees_niveau = Profil.getInstance().chargerDonneesNiveau(id_niveau, true);
+
+        this.grille = new Grille(donnees_niveau.getMatriceNiveau(), donnees_niveau.getMatriceSolution(), donnees_niveau.getHistorique());
 
         // Evenement lancé lorsque la grille est terminée
         this.grille.addOnVictoire(() -> {
+            niveau_en_cours = false;
             System.out.println("gagné !");
             // Arrêter le comptage du score
             this.score.stop();
@@ -166,8 +167,7 @@ public class ControllerNiveau {
                 ButtonType btn_suivant = new ButtonType("Grille suivante");
                 btn_quitter = new ButtonType("Abandonner");
                 popup.getButtonTypes().add(btn_suivant);
-            }
-            else { // Le joueur a terminé la partie
+            } else { // Le joueur a terminé la partie
                 popup.setContentText("Partie terminée ! Score : " + score.getScore() + ".");
                 btn_quitter = new ButtonType("Quitter");
             }
@@ -196,12 +196,12 @@ public class ControllerNiveau {
         this.panneau_central.getChildren().add(panneau_aide);
 
         // TODO charger les données de score depuis le profil
-        this.score = new ScoreZen(5);
+        this.score = donnees_niveau.getScore();
         this.panneau_score.setCenter(this.score.get_Pane());
 
         // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.joueur.getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.joueur.getHistorique().peutRetablirProperty().not());
+        this.btn_undo.disableProperty().bind(donnees_niveau.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(donnees_niveau.getHistorique().peutRetablirProperty().not());
 
         this.score.start();
     }
@@ -221,14 +221,13 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() {
         try {
+            Profil.setScore(score.getScore(), niveau_en_cours);
             Profil.getInstance().sauvegarderNiveau(grille);
-            // TODO : remplacer null avec le getScore du niveau
-            Sauvegarder.sauvegarderScore(Profil.getJoueur(), Profil.getMode_de_jeu(), Profil.getIdNiveau(), null);
             this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
-                    + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
-            stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // TODO temporaire
-        }
-        catch (Exception e) {
+                + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
+
+            stage.setScene(new ControllerMenuModeJeu(stage).getScene()); //TODO temporaire
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -252,12 +251,12 @@ public class ControllerNiveau {
     //TODO
     @FXML
     void aideClique() {
-        Resultat r =  Aide.calculer(new Matrice(this.grille.getMatrice()));
+        Resultat r = Aide.calculer(new Matrice(this.grille.getMatrice()));
         if (r.getSucces()) {
             this.score.aideUtilise();
             this.toggle_aide.setSelected(true);
             // TODO proposer de marquer l'emplacement de la solution
-            if (r.getAffichage() != null){
+            if (r.getAffichage() != null) {
                 Pane p = r.getAffichage();
                 p.getStyleClass().add("panneau-aide");
                 this.panneau_aide.setCenter(p);
@@ -279,7 +278,7 @@ public class ControllerNiveau {
         alert.setTitle("Réinitialiser la grille");
         alert.setHeaderText("Voulez-vous vraiment réinitialiser la grille ?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             this.score.restart();
             this.grille.reset();
         }

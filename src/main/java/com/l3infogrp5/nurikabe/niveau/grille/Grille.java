@@ -1,13 +1,9 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
+import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.utils.Position;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.IntegerProperty;
@@ -18,6 +14,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Génère une grille de {@link Case} à partir de la matrice donnée.
@@ -33,27 +33,29 @@ import javafx.scene.layout.Priority;
  */
 public class Grille {
 
-    /** Vrai si le suivi des mouvements doit être activé. */
+    /**
+     * Vrai si le suivi des mouvements doit être activé.
+     */
     private boolean suivre_mouvement;
 
-    private int nb_lignes;
-    private int nb_colonnes;
+    private final int nb_lignes;
+    private final int nb_colonnes;
 
     /**
      * Grille interne composée des Properties des cases.
      * Pour récupérer la case liée à la Property, utiliser
      * {@link #getCase(IntegerProperty)}
      */
-    private IntegerProperty[][] grille;
-    private int[][] solution;
+    private final IntegerProperty[][] grille;
+    private final int[][] solution;
 
-    private ArrayList<Runnable> onVictoire;
+    private final ArrayList<Runnable> onVictoire;
 
-    private BorderPane panneau; // Panneau contenant l'affichage de la grille
+    private final BorderPane panneau; // Panneau contenant l'affichage de la grille
 
-    private Historique histo;
+    private final Historique histo;
 
-    private GridPane panneau_grille; // Grille en elle même pour pouvoir la photographier
+    private final GridPane panneau_grille; // Grille en elle même pour pouvoir la photographier
 
     /**
      * Créer une grille.
@@ -83,8 +85,8 @@ public class Grille {
         // d'espace au sein du parent.
         this.panneau = new BorderPane();
         NumberBinding ratio = Bindings.min(
-                this.panneau.widthProperty().divide(nb_colonnes),
-                this.panneau.heightProperty().divide(nb_lignes));
+            this.panneau.widthProperty().divide(nb_colonnes),
+            this.panneau.heightProperty().divide(nb_lignes));
         panneau_grille.maxWidthProperty().bind(ratio.multiply(nb_colonnes));
         panneau_grille.maxHeightProperty().bind(ratio.multiply(nb_lignes));
 
@@ -152,7 +154,7 @@ public class Grille {
                     // Ajouter la modification à l'historique si cela est autorisé.
                     if (this.suivre_mouvement)
                         this.histo.ajoutMouvement(new Mouvement(this.getCase((IntegerProperty) property).getPosition(),
-                                Etat.fromInt(ancienEtat.intValue()), Etat.fromInt(nouvelEtat.intValue())));
+                            Etat.fromInt(ancienEtat.intValue()), Etat.fromInt(nouvelEtat.intValue())));
 
                     // Vérifier si le mouvement ne mène pas à la victoire
                     boolean victoire = true;
@@ -217,7 +219,7 @@ public class Grille {
     public void set(int x, int y, Etat etat) throws IllegalArgumentException {
         if (this.grille[x][y].get() > 0)
             throw new IllegalArgumentException(
-                    "Impossible de modifier l'état de la cellule à la position (" + x + ", " + y + ").");
+                "Impossible de modifier l'état de la cellule à la position (" + x + ", " + y + ").");
 
         this.grille[x][y].set(etat.toInt());
     }
@@ -329,7 +331,7 @@ public class Grille {
 
     /**
      * Retourne la solution du niveau.
-     * 
+     *
      * @return la solution du niveau.
      */
     public int[][] getSolution() {
@@ -339,28 +341,30 @@ public class Grille {
     /**
      * Réalise une capture d'écran de la grille et la sauvegarde à l'emplacement
      * donné.
-     * 
+     *
      * @param emplacement l'emplacement de sauvegarde de la capture.
      * @return vrai la capture a été sauvegardée, faux sinon.
      */
     public boolean capturerGrille(String emplacement) {
-        double old_Vgap = panneau_grille.getVgap();
-        double old_Hgap = panneau_grille.getHgap();
+        if (Profil.getModeDeJeu() != ModeDeJeu.SANSFIN) {
+            double old_Vgap = panneau_grille.getVgap();
+            double old_Hgap = panneau_grille.getHgap();
 
-        File file = new File(emplacement);
+            File file = new File(emplacement);
 
-        this.panneau_grille.setGridLinesVisible(true);
-        panneau_grille.setVgap(0);
-        panneau_grille.setHgap(0);
-        ImageView img = new ImageView(this.panneau_grille.snapshot(null, null));
-        this.panneau_grille.setGridLinesVisible(false);
-        panneau_grille.setVgap(old_Vgap);
-        panneau_grille.setHgap(old_Hgap);
+            this.panneau_grille.setGridLinesVisible(true);
+            panneau_grille.setVgap(0);
+            panneau_grille.setHgap(0);
+            ImageView img = new ImageView(this.panneau_grille.snapshot(null, null));
+            this.panneau_grille.setGridLinesVisible(false);
+            panneau_grille.setVgap(old_Vgap);
+            panneau_grille.setHgap(old_Hgap);
 
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(img.getImage(), null), "png", file);
-        } catch (Exception e) {
-            return false;
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(img.getImage(), null), "png", file);
+            } catch (Exception e) {
+                return false;
+            }
         }
 
         return true;

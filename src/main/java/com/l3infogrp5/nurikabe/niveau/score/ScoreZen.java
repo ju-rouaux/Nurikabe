@@ -21,7 +21,7 @@ public class ScoreZen implements ScoreInterface {
     private Rating rating;
     /** Pane utilisé pour contenir le Rating */
     private BorderPane ratingPane;
-    
+
     /**
      * Constructeur de la classe ScoreZen.
      * @param etoiles le nombre d'étoiles initial du score.
@@ -109,7 +109,7 @@ public class ScoreZen implements ScoreInterface {
     public Pane get_Pane() {
         return this.ratingPane;
     }
-    
+
 
     /**
      * Méthodes qui retourne le nombre d'étoiles restante à la fin de la partie
@@ -118,5 +118,11 @@ public class ScoreZen implements ScoreInterface {
     @Override
     public double getScore() {
         return this.etoiles;
+    }
+
+    @Override
+    public void setScore(double score) {
+        this.etoiles = score;
+        this.rating.setRating(etoiles);
     }
 }

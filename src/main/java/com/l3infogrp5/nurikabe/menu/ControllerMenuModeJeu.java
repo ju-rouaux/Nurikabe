@@ -71,7 +71,7 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void detenteClique() throws Exception {
-        Profil.getInstance().setMode_de_jeu(ModeDeJeu.DETENTE);
+        Profil.getInstance().setModeDeJeu(ModeDeJeu.DETENTE);
         stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
@@ -80,7 +80,7 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void contreMontreClique() throws Exception {
-        Profil.getInstance().setMode_de_jeu(ModeDeJeu.CONTRELAMONTRE);
+        Profil.getInstance().setModeDeJeu(ModeDeJeu.CONTRELAMONTRE);
         stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
@@ -89,7 +89,7 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void sansFinClique() throws Exception {
-        Profil.getInstance().setMode_de_jeu(ModeDeJeu.SANSFIN);
+        Profil.getInstance().setModeDeJeu(ModeDeJeu.SANSFIN);
         stage.setScene(new ControllerNiveau(stage, List.of(
             0, 1//, 3, 4, 5, 6, 7, 8, 9, 10 //TODO selectionner les niveaux à jouer
         )).getScene());

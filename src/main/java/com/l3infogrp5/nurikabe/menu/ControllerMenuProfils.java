@@ -79,7 +79,7 @@ public class ControllerMenuProfils {
 
     /**
      * Retourne au menu précédent, le menu principal.
-     * 
+     *
      * @throws IOException {@inheritDoc}
      */
     @FXML
@@ -132,7 +132,7 @@ public class ControllerMenuProfils {
         popup.setOnCloseRequest((WindowEvent event) -> {
             event.consume();
         });
-        
+
         // On ne peux pas agir sur la fenêtre actuelle tant que la pop-up n'est pas
         // fermé
         popup.initModality(Modality.APPLICATION_MODAL);
@@ -145,7 +145,7 @@ public class ControllerMenuProfils {
 
         // On ajoute le profil créé aux profils existant et on met à jour le tableau des
         // noms.
-        ajoutProfils(Profil.getJoueur());
+        ajoutProfils(Profil.getInstance().getJoueur());
         chargerTableau();
     }
 
@@ -172,7 +172,7 @@ public class ControllerMenuProfils {
 
                 setActiveProfil(i);
                 writeActif(nom_joueur);
-                
+
                 return;
             }
         }
@@ -227,7 +227,7 @@ public class ControllerMenuProfils {
 
     /**
      * Méthode pour récupérer le joueur actif
-     * 
+     *
      * @throws IOException lancé lorsque le fichier correspondant n'a pas pû être
      *                     lu.
      */
@@ -242,7 +242,7 @@ public class ControllerMenuProfils {
             String nom_actif = reader.next();
 
             // si la ligne récupérer n'est pas égal au profil en cour on change
-            if (!nom_actif.isEmpty() && !nom_actif.equals(Profil.getJoueur())) {
+            if (!nom_actif.isEmpty() && !nom_actif.equals(Profil.getInstance().getJoueur())) {
                 writeActif(nom_actif);
                 Profil.getInstance().chargerProfil(nom_actif);
             }
@@ -308,7 +308,7 @@ public class ControllerMenuProfils {
                 name_to_delete = (((Label) ((VBox) pseudo_grid.getChildren().get(i)).getChildren()
                         .get(1)).getText());
             }
-        }        
+        }
 
         if(name_to_delete != ""){
             // Si le joueur courant est supprimer on charge le profils par default
@@ -322,7 +322,7 @@ public class ControllerMenuProfils {
                 if(profil_actif > 0)
                     profil_actif --;
                 setActiveProfil(profil_actif);
-                writeActif(Profil.getJoueur());
+                writeActif(Profil.getInstance().getJoueur());
             }
         }
 
@@ -337,7 +337,7 @@ public class ControllerMenuProfils {
 
     /**
      * Getter
-     * 
+     *
      * @return La liste des nom de tout les profils
      */
     public List<String> getProfilsAttributs() {
