@@ -22,13 +22,8 @@ public class ScoreEndless extends ScoreChrono {
      */
     public ScoreEndless(double totalSec) {
         super(totalSec);
-    }
 
-    /**
-     * Méthode de calcul pour la décrémentation du chrono
-     */
-    @Override
-    public void start() {
+        /**calcul pour la décrémentation du chrono */
         KeyFrame kf = new KeyFrame(Duration.millis(1000), e -> {
 
             totalSec--;
@@ -41,7 +36,14 @@ public class ScoreEndless extends ScoreChrono {
 
         });
 
-        timeline = new Timeline(kf);
+        this.timeline = new Timeline(kf);    
+    }
+
+    /**
+     * Méthode qui démarre le chrono
+     */
+    @Override
+    public void start() {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
@@ -115,5 +117,12 @@ public class ScoreEndless extends ScoreChrono {
         nbGrilles = score;
     }
 
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
+    public Pane get_Pane() {
+        super.getPane();
+    }
 
 }
