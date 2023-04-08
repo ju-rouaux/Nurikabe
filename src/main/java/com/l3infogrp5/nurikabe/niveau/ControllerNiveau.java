@@ -44,12 +44,16 @@ public class ControllerNiveau {
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
+    
     private final BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
-    private final Profil joueur;
-    private final List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
+    private List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
     private Grille grille;
     private ScoreInterface score;
     private boolean niveau_en_cours; // Vrai si le niveau est en cours de jeu.
+    private int index_file; // Indice du niveau lancé dans la liste
+
+    private Profil.DonneesNiveau donnees_niveau; // Données du niveau en cours de jeu.
+
     @FXML
     private Button btn_aide;
     @FXML
@@ -74,7 +78,6 @@ public class ControllerNiveau {
     private BorderPane panneau_aide;
     @FXML
     private HBox barre;
-    private final int index_file; // Indice du niveau lancé dans la liste
 
     /**
      * Initialise la vue du niveau.
@@ -87,7 +90,6 @@ public class ControllerNiveau {
     public ControllerNiveau(Stage stage, List<Integer> niveaux) throws IOException {
         this.stage = stage;
         this.aide_affichee = new SimpleBooleanProperty();
-        this.joueur = Profil.getInstance();
 
         this.niveau_en_cours = true;
 
@@ -131,12 +133,6 @@ public class ControllerNiveau {
             }
         });
 
-        try {
-            this.loadNiveauSuivant();
-        } catch (Exception e) {
-            System.out.println(e);
-            this.retourClique();
-        }
         // Charger le premier niveau
         this.loadNiveauSuivant();
     }
@@ -147,13 +143,10 @@ public class ControllerNiveau {
      * @throws Exception lancée lorsque la grille n'a pas pû être chargée.
      */
     public void loadNiveauSuivant() throws Exception {
-//    TODO a corriger
-//        int id_niveau = file_niveaux.get(index_file++);
+        int id_niveau = file_niveaux.get(this.index_file++);
 
-        int id_niveau = 0;
+        donnees_niveau = Profil.getInstance().chargerDonneesNiveau(id_niveau, true);
 
-
-        Profil.DonneesNiveau donnees_niveau = joueur.chargerDonneesNiveau(id_niveau, niveau_en_cours);
         this.grille = new Grille(donnees_niveau.getMatriceNiveau(), donnees_niveau.getMatriceSolution(), donnees_niveau.getHistorique());
 
         // Evenement lancé lorsque la grille est terminée
