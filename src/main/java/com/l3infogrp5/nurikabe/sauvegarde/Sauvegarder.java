@@ -263,7 +263,7 @@ public class Sauvegarder {
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
     public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
-        System.out.println("Chargement des scores pour le joueur " + joueur + " en mode " + mode_de_jeu + "niveau_en_cours" + niveau_en_cours );
+        System.out.println("Chargement des scores pour le joueur " + joueur + " en mode " + mode_de_jeu + "niveau_en_cours" + niveau_en_cours);
         List<DonneesScore> scores = new ArrayList<>();
         DonneesScore donneeScore = new DonneesScore("");
         Reader file_reader;
@@ -298,7 +298,7 @@ public class Sauvegarder {
         for (DonneesScore donneesScore : scores) {
             System.out.println("score : " + donneesScore.score + " date : " + donneesScore.date + " en cours : " + donneesScore.niveau_en_cours + " mode de jeu : " + mode_de_jeu);
         }
-            return scores;
+        return scores;
     }
 
     /**
@@ -556,6 +556,8 @@ public class Sauvegarder {
 
         /**
          * Constructeur
+         *
+         * @param score le score
          */
         public DonneesScore(String score) {
             this.score = score;
