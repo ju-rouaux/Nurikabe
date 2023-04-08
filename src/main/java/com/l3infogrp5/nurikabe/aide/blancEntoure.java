@@ -15,7 +15,7 @@ import javafx.scene.layout.BorderPane;
  *
  * @author Elias OKAT
  */
-public class BlancEntoure implements Algorithme {
+class BlancEntoure implements Algorithme {
 
     /**
      * Résoud l'algorithme de la case BLANCHE ou POINT entouré de voisins NOIR doit
