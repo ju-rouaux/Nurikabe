@@ -265,7 +265,7 @@ public class Sauvegarder {
     public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
         System.out.println("Chargement des scores pour le joueur " + joueur + " en mode " + mode_de_jeu + "niveau_en_cours" + niveau_en_cours );
         List<DonneesScore> scores = new ArrayList<>();
-        DonneesScore donneeScore = new DonneesScore();
+        DonneesScore donneeScore = new DonneesScore("");
         Reader file_reader;
         if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
             file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
@@ -557,8 +557,8 @@ public class Sauvegarder {
         /**
          * Constructeur
          */
-        public DonneesScore() {
-            this.score = "";
+        public DonneesScore(String score) {
+            this.score = score;
             this.date = "";
             this.niveau_en_cours = "";
         }

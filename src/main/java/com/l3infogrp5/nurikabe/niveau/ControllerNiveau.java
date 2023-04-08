@@ -6,9 +6,7 @@ import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.profil.Profil;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Matrice;
-import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.utils.Path;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
@@ -76,7 +74,7 @@ public class ControllerNiveau {
     private BorderPane panneau_aide;
     @FXML
     private HBox barre;
-    private int index_file; // Indice du niveau lancé dans la liste
+    private final int index_file; // Indice du niveau lancé dans la liste
 
     /**
      * Initialise la vue du niveau.
@@ -154,8 +152,9 @@ public class ControllerNiveau {
 
         int id_niveau = 0;
 
-        Profil.DonneesNiveau donnees = joueur.getDonneesNiveau(id_niveau, niveau_en_cours);
-        this.grille = new Grille(donnees.matrice_niveau, donnees.matrice_solution, joueur.getDonneesNiveau(id_niveau,niveau_en_cours).getHistorique());
+
+        Profil.DonneesNiveau donnees_niveau = joueur.chargerDonneesNiveau(id_niveau, niveau_en_cours);
+        this.grille = new Grille(donnees_niveau.getMatriceNiveau(), donnees_niveau.getMatriceSolution(), donnees_niveau.getHistorique());
 
         // Evenement lancé lorsque la grille est terminée
         this.grille.addOnVictoire(() -> {
@@ -204,12 +203,12 @@ public class ControllerNiveau {
         this.panneau_central.getChildren().add(panneau_aide);
 
         // TODO charger les données de score depuis le profil
-        this.score = Profil.getInstance().getDonneesNiveau(id_niveau,niveau_en_cours).score;
+        this.score = donnees_niveau.getScore();
         this.panneau_score.setCenter(this.score.get_Pane());
 
         // Lier les boutons Undo et Redo à l'historique
-        this.btn_undo.disableProperty().bind(this.joueur.getDonneesNiveau(id_niveau,niveau_en_cours).getHistorique().peutAnnulerProperty().not());
-        this.btn_redo.disableProperty().bind(this.joueur.getDonneesNiveau(id_niveau,niveau_en_cours).getHistorique().peutRetablirProperty().not());
+        this.btn_undo.disableProperty().bind(donnees_niveau.getHistorique().peutAnnulerProperty().not());
+        this.btn_redo.disableProperty().bind(donnees_niveau.getHistorique().peutRetablirProperty().not());
 
         this.score.start();
     }
@@ -230,10 +229,10 @@ public class ControllerNiveau {
     private void retourClique() {
         try {
             Profil.setScore(score.getScore(), niveau_en_cours);
-            if (Profil.getMode_de_jeu() != ModeDeJeu.SANSFIN)
-                Profil.getInstance().sauvegarderNiveau(grille);
+            Profil.getInstance().sauvegarderNiveau(grille);
             this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
-                + Profil.getMode_de_jeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
+                + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
+
             stage.setScene(new ControllerMenuModeJeu(stage).getScene()); //TODO temporaire
         } catch (Exception e) {
             e.printStackTrace();
@@ -259,12 +258,12 @@ public class ControllerNiveau {
     //TODO
     @FXML
     void aideClique() {
-        Resultat r =  Aide.calculer(new Matrice(this.grille.getMatrice()));
+        Resultat r = Aide.calculer(new Matrice(this.grille.getMatrice()));
         if (r.getSucces()) {
             this.score.aideUtilise();
             this.toggle_aide.setSelected(true);
             // TODO proposer de marquer l'emplacement de la solution
-            if (r.getAffichage() != null){
+            if (r.getAffichage() != null) {
                 Pane p = r.getAffichage();
                 p.getStyleClass().add("panneau-aide");
                 this.panneau_aide.setCenter(p);
