@@ -263,42 +263,46 @@ public class Sauvegarder {
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
     public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
-        System.out.println("Chargement des scores pour le joueur " + joueur + " en mode " + mode_de_jeu + "niveau_en_cours" + niveau_en_cours);
-        List<DonneesScore> scores = new ArrayList<>();
-        DonneesScore donneeScore = new DonneesScore("");
-        Reader file_reader;
-        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
-            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
-        } else {
-            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
-        }
-        BufferedReader bufferedReader = new BufferedReader(file_reader);
-
-        while (bufferedReader.ready()) {
-            String line = bufferedReader.readLine();
-            String[] parts = line.split("%");
-            String nom_joueur = parts[0].trim();
-            if (!nom_joueur.equals(joueur)) continue;
-            String score = parts[1].trim();
-            String date = parts[2].trim();
-            String enCours = "";
-            if (mode_de_jeu != ModeDeJeu.SANSFIN)
-                enCours = parts[3].trim();
-            else {
-                enCours = "false";
+        if(RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
+            System.out.println("Chargement des scores pour le joueur " + joueur + " en mode " + mode_de_jeu + "niveau_en_cours" + niveau_en_cours);
+            List<DonneesScore> scores = new ArrayList<>();
+            DonneesScore donneeScore = new DonneesScore();
+            Reader file_reader;
+            if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+            } else {
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
             }
-            if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
-            System.out.println("score : " + score + " date : " + date + " en cours : " + enCours + " mode de jeu : " + mode_de_jeu);
-            donneeScore.score = score;
-            donneeScore.date = date;
-            donneeScore.niveau_en_cours = enCours;
-            scores.add(donneeScore);
+            BufferedReader bufferedReader = new BufferedReader(file_reader);
+
+            while (bufferedReader.ready()) {
+                String line = bufferedReader.readLine();
+                String[] parts = line.split("%");
+                String nom_joueur = parts[0].trim();
+                if (!nom_joueur.equals(joueur)) continue;
+                String score = parts[1].trim();
+                String date = parts[2].trim();
+                String enCours = "";
+                if (mode_de_jeu != ModeDeJeu.SANSFIN)
+                    enCours = parts[3].trim();
+                else {
+                    enCours = "false";
+                }
+                if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
+                System.out.println("score : " + score + " date : " + date + " en cours : " + enCours + " mode de jeu : " + mode_de_jeu);
+                donneeScore.nom_joueur = nom_joueur;
+                donneeScore.score = score;
+                donneeScore.date = date;
+                donneeScore.niveau_en_cours = enCours;
+                scores.add(donneeScore);
+            }
+            bufferedReader.close();
+            for (DonneesScore donneesScore : scores) {
+                System.out.println("score : " + donneesScore.score + " date : " + donneesScore.date + " en cours : " + donneesScore.niveau_en_cours + " mode de jeu : " + mode_de_jeu);
+            }
+            return scores;
         }
-        bufferedReader.close();
-        for (DonneesScore donneesScore : scores) {
-            System.out.println("score : " + donneesScore.score + " date : " + donneesScore.date + " en cours : " + donneesScore.niveau_en_cours + " mode de jeu : " + mode_de_jeu);
-        }
-        return scores;
+        return null;
     }
 
     /**
@@ -553,14 +557,28 @@ public class Sauvegarder {
          * Le niveau en cours
          */
         public String niveau_en_cours;
+        /**
+         * Le nom du joueur
+         */
+        public String nom_joueur;
 
         /**
          * Constructeur
          *
-         * @param score le score
+         * @param n le nom de la personne.
+         * @param s le score de la personne.
+         * @param d la date du score fait.
          */
-        public DonneesScore(String score) {
-            this.score = score;
+        public DonneesScore(String n,String s, String d) {
+            this.nom_joueur = n;
+            this.score = s;
+            this.date = d;
+            this.niveau_en_cours = "";
+        }
+
+        public DonneesScore(){
+            this.nom_joueur = "";
+            this.score = "";
             this.date = "";
             this.niveau_en_cours = "";
         }
@@ -602,6 +620,13 @@ public class Sauvegarder {
             return Boolean.getBoolean(niveau_en_cours);
         }
 
-
+        /**
+         * Récupère le nom du joueur
+         *
+         * @return le nom du joueur
+         */
+        public String getNomJoueur() {
+            return nom_joueur;
+        }
     }
 }
