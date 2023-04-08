@@ -346,8 +346,8 @@ public class Profil {
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement des données du niveau
      */
     public DonneesNiveau chargerDonneesNiveau(int id_niveau, boolean en_cours) throws IOException {
-        donnees_niveau.historique = chargerHistorique();
         donnees_niveau = chargerGrille(id_niveau);
+        donnees_niveau.historique = chargerHistorique();
         donnees_niveau.score = chargerScore(id_niveau, en_cours);
         return donnees_niveau;
     }
