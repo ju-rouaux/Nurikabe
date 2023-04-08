@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.profil;
+package com.l3infogrp5.nurikabe.sauvegarde;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
@@ -6,8 +6,6 @@ import com.l3infogrp5.nurikabe.niveau.score.ScoreCLM;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreEndless;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
-import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 import java.io.File;

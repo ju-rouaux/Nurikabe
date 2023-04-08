@@ -5,7 +5,7 @@ import com.l3infogrp5.nurikabe.aide.Resultat;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
-import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Path;
 import javafx.animation.TranslateTransition;
@@ -44,7 +44,7 @@ public class ControllerNiveau {
     private final FXMLLoader loader;
     private final Stage stage;
     private final Scene scene;
-    
+
     private final BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
     private List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
     private Grille grille;

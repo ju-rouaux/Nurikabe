@@ -15,12 +15,12 @@ import javafx.scene.layout.BorderPane;
  *
  * @author Elias OKAT
  */
-public class BlancEntoure implements Algorithme {
+class BlancEntoure implements Algorithme {
 
     /**
      * Résoud l'algorithme de la case BLANCHE ou POINT entouré de voisins NOIR doit
      * devenir NOIR
-     * 
+     *
      * @param m la matrice à traiter
      * @return la liste des positions des cases à modifier
      */
