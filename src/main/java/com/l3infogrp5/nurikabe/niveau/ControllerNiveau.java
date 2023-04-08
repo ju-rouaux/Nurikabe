@@ -46,7 +46,7 @@ public class ControllerNiveau {
     private final Scene scene;
 
     private final BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
-    private List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
+    private final List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
     private Grille grille;
     private ScoreInterface score;
     private boolean niveau_en_cours; // Vrai si le niveau est en cours de jeu.
@@ -169,8 +169,7 @@ public class ControllerNiveau {
                 if (this.score.getScore() <= 0) {
                     btn_quitter = new ButtonType("Quitter");
                     texte_affiche += "Le temps s'est écoulé durant votre partie. Vous ne pouvez pas continuer";
-                }
-                else { // Le joueur gagne un bonus de temps et continue
+                } else { // Le joueur gagne un bonus de temps et continue
                     this.score.grilleComplete();
                     texte_affiche += "Cliquez pour poursuivre.";
                     ButtonType btn_suivant = new ButtonType("Grille suivante");

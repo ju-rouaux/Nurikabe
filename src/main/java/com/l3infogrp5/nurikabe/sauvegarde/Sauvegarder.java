@@ -549,7 +549,6 @@ public class Sauvegarder {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         return matrice;
     }
 
