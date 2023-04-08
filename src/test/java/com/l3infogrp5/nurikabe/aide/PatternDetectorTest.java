@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.pattern_matching;
+package com.l3infogrp5.nurikabe.Aide;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-import com.l3infogrp5.nurikabe.pattern_matching.PatternDetector;
+import com.l3infogrp5.nurikabe.aide.PatternDetector;
 import com.l3infogrp5.nurikabe.utils.Position;
 
 @TestInstance(Lifecycle.PER_CLASS)
