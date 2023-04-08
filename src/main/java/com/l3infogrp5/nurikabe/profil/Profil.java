@@ -19,8 +19,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 
 /**
  * Classe représentant un profil de joueur.
@@ -171,7 +169,30 @@ public class Profil {
         return id_niveau;
     }
 
-
+    /**
+     * Getter pour le score du niveau
+     *
+     * @param niveau_en_cours si le niveau est en cours ou non
+     * @return le score du niveau
+     * @throws IOException si le fichier de sauvegarde n'existe pas
+     */
+    private static Sauvegarder.DonneesScore getDonneesScore(boolean niveau_en_cours) throws IOException {
+        if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
+            score = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
+            for (Sauvegarder.DonneesScore s : score) {
+                if (s.getNiveauEnCours())
+                    donnees_niveau.donneesScore = s;
+            }
+            charger_nouvelle_grille = false;
+            return donnees_niveau.donneesScore;
+        }
+        if (mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
+            donnees_niveau.donneesScore.score = "5";
+            return donnees_niveau.donneesScore;
+        }
+        donnees_niveau.donneesScore.score = "0";
+        return donnees_niveau.donneesScore;
+    }
 
     /**
      * Initialise les donneesNiveau
@@ -245,14 +266,6 @@ public class Profil {
     }
 
     /**
-     * Getter pour le score du niveau
-     *
-     * @param niveau_en_cours si le niveau est en cours ou non
-     * @return le score du niveau
-     * @throws IOException si le fichier de sauvegarde n'existe pas
-     */
-
-    /**
      * Charge la grille à partir du fichier.
      * S'il n'y en a pas, chargement du niveau par défaut
      *
@@ -274,32 +287,6 @@ public class Profil {
 
         donnees_niveau.matrice_solution = Sauvegarder.chargerGrilleFichier(id_niveau, true);
         return donnees_niveau;
-    }
-
-
-    /**
-     * Getter pour le score du niveau
-     *
-     * @param niveau_en_cours si le niveau est en cours ou non
-     * @return le score du niveau
-     * @throws IOException si le fichier de sauvegarde n'existe pas
-     */
-    private static Sauvegarder.DonneesScore getDonneesScore(boolean niveau_en_cours) throws IOException {
-        if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
-            score = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
-            for (Sauvegarder.DonneesScore s : score) {
-                if (s.getNiveauEnCours())
-                    donnees_niveau.donneesScore = s;
-            }
-            charger_nouvelle_grille = false;
-            return donnees_niveau.donneesScore;
-        }
-        if (mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
-            donnees_niveau.donneesScore.score = "5";
-            return donnees_niveau.donneesScore;
-        }
-        donnees_niveau.donneesScore.score = "0";
-        return donnees_niveau.donneesScore;
     }
 
     /**
