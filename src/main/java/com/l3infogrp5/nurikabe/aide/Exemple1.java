@@ -1,5 +1,7 @@
 package com.l3infogrp5.nurikabe.aide;
 
+import java.util.List;
+
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
@@ -21,7 +23,7 @@ class Exemple1 implements Algorithme {
     @Override
     public Resultat resoudre(Matrice m) {
         System.out.println("Exécution de l'algorithme Exemple1");
-        return new Resultat(true, new Position(0,0), this.affichage);
+        return new Resultat(true, List.of(new Position(0,0)), this.affichage);
     }
 
 }

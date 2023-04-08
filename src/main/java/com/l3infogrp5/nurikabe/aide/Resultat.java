@@ -1,5 +1,7 @@
 package com.l3infogrp5.nurikabe.aide;
 
+import java.util.List;
+
 import com.l3infogrp5.nurikabe.utils.Position;
 
 import javafx.scene.layout.Pane;
@@ -15,26 +17,26 @@ import javafx.scene.layout.Pane;
 public class Resultat {
 
     private boolean succes;
-    private Position position;
+    private List<Position> position;
     private Pane affichage;
 
     /**
      * Constructeur de la classe.
      * 
      * @param succes    vrai si l'algorithme a trouvé une solution.
-     * @param position  la position d'une case à modifier pour avancer dans la
+     * @param position  les positions des cases à modifier pour avancer dans la
      *                  résolution (null si non succes).
      * @param affichage un affichage à placer dans le volet dédié à l'aide (null si
      *                  non succes).
      */
-    public Resultat(boolean succes, Position position, Pane affichage) {
+    public Resultat(boolean succes, List<Position> position, Pane affichage) {
         this.succes = succes;
         this.position = position;
         this.affichage = affichage;
     }
 
     /**
-     * Retourne vrai si l'algorithme a trouvé une solution.
+     * Retourne vrai si l'algorithme a trouvé une solution. 
      * 
      * @return vrai si l'algorithme a trouvé une solution.
      */
@@ -43,12 +45,12 @@ public class Resultat {
     }
 
     /**
-     * Retourne la position d'une case à modifier pour avancer dans la résolution.
+     * Retourne les positions des cases à modifier pour avancer dans la résolution.
      * Peut être null si le résultat n'est pas un succès.
      * 
-     * @return la position d'une case à modifier pour avancer dans la résolution.
+     * @return les positions des cases à modifier pour avancer dans la résolution.
      */
-    public Position getPosition() {
+    public List<Position> getPosition() {
         return position;
     }
 
