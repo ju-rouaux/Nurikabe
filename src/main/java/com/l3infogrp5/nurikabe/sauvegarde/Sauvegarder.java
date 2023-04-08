@@ -66,20 +66,19 @@ public class Sauvegarder {
     public static boolean RechercherSauvegardeNiveau(String joueur, ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
 
         Reader file_reader;
-        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
+        if (mode_de_jeu.equals(ModeDeJeu.SANSFIN)) {
             try {
-                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".score");
             } catch (FileNotFoundException e) {
                 return false;
             }
         } else {
             try {
-                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".score");
             } catch (FileNotFoundException e) {
                 return false;
             }
         }
-        System.out.println("[SAUVEGARDER] Chargement du fichier " + mode_de_jeu + "_" + id_niveau + ".save");
         BufferedReader bufferedReader = new BufferedReader(file_reader);
 
         boolean lastScoreInProgress = false;
@@ -88,7 +87,10 @@ public class Sauvegarder {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
             String nom_joueur = parts[0].trim();
-            enCours = parts[3].trim();
+            if (mode_de_jeu.equals(ModeDeJeu.SANSFIN))
+                enCours = "false";
+            else
+                enCours = parts[3].trim();
             if (nom_joueur.equals(joueur) && enCours.equals("true"))
                 lastScoreInProgress = true;
         }
@@ -162,13 +164,10 @@ public class Sauvegarder {
             }
 
             // verifie si les fichiers existent
-            String[] files = {"endless.save", "clm.save", "detente.save"};
-            for (String file : files) {
-                boolean fileExists = fichiers.contains(file);
-                if (!fileExists) {
-                    if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/" + file))) {
-                        System.out.println("[Sauvegarder] Erreur lors de la création du fichier " + file);
-                    }
+            String f = "endless.score";
+            if (!fichiers.contains(f)) {
+                if (!creerDossierFichier(Path.repertoire_score, new File(Path.repertoire_score + "/" + f))) {
+                    System.out.println("[Sauvegarder] Erreur lors de la création du fichier " + f);
                 }
             }
         } catch (IOException e) {
@@ -241,8 +240,8 @@ public class Sauvegarder {
         String date_formate = format.format(date);
 
         if (mode_de_jeu.equals(ModeDeJeu.SANSFIN))
-            writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
-        else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
+            writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".score", true);
+        else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".score", true);
         if (!mode_de_jeu.equals(ModeDeJeu.SANSFIN))
             writer.write(joueur + " % " + score + " % " + date_formate + " % " + enCours + "\n");
         else writer.write(joueur + " % " + score + " % " + date_formate + "\n");
@@ -263,10 +262,11 @@ public class Sauvegarder {
      * @throws IOException {@link IOException} si le fichier n'existe pas
      */
     public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
-        System.out.println("Chargement des scores pour le joueur " + joueur + " en mode " + mode_de_jeu + "niveau_en_cours" + niveau_en_cours);
         List<DonneesScore> scores = new ArrayList<>();
         DonneesScore donneeScore = new DonneesScore();
         BufferedReader bufferedReader = openFileReader(mode_de_jeu, id_niveau);
+
+        if (bufferedReader == null) return scores;
 
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
@@ -303,6 +303,7 @@ public class Sauvegarder {
     public static List<String> joueursScore(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
         List<String> joueurs = new ArrayList<>();
         BufferedReader bufferedReader = openFileReader(mode_de_jeu, id_niveau);
+
         if (bufferedReader == null) return joueurs;
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
@@ -316,15 +317,16 @@ public class Sauvegarder {
 
     private static BufferedReader openFileReader(ModeDeJeu mode_de_jeu, int id_niveau) {
         Reader file_reader;
-        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
+        if (mode_de_jeu.equals(ModeDeJeu.SANSFIN)) {
             try {
-                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".score");
+
             } catch (FileNotFoundException e) {
                 return null;
             }
         } else {
             try {
-                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".score");
             } catch (FileNotFoundException e) {
                 return null;
             }
