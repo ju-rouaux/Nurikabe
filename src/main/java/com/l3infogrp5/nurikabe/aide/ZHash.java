@@ -1,4 +1,5 @@
-package com.l3infogrp5.nurikabe.pattern_matching;
+package com.l3infogrp5.nurikabe.aide;
+
 import com.l3infogrp5.nurikabe.utils.Matrice;
 
 /**
@@ -18,8 +19,8 @@ public class ZHash {
   /**
    * Calcule le hash d'une grille de jeu
    * 
-   * @param grille la grille de jeu
-   * @param tailleLigne la taille de la grille en ligne
+   * @param grille        la grille de jeu
+   * @param tailleLigne   la taille de la grille en ligne
    * @param tailleColonne la taille de la grille en colonne
    * @return le hash de la grille
    */
@@ -38,8 +39,8 @@ public class ZHash {
   /**
    * Calcule le hash d'une grille de jeu
    * 
-   * @param grille la grille de jeu
-   * @param tailleLigne la taille de la grille en ligne
+   * @param grille        la grille de jeu
+   * @param tailleLigne   la taille de la grille en ligne
    * @param tailleColonne la taille de la grille en colonne
    * @return le hash de la grille
    */
@@ -54,5 +55,5 @@ public class ZHash {
     }
     return hash;
   }
-  
+
 }
