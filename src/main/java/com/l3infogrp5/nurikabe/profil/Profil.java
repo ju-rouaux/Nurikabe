@@ -396,6 +396,9 @@ public class Profil {
             this.score = score;
         }
 
+        /**
+         * Constructeur ne prenant aucun paramètre
+         */
         public DonneesNiveau(){
             historique = new Historique();
             matrice_niveau = new int[0][0];

@@ -266,13 +266,7 @@ public class Sauvegarder {
         System.out.println("Chargement des scores pour le joueur " + joueur + " en mode " + mode_de_jeu + "niveau_en_cours" + niveau_en_cours);
         List<DonneesScore> scores = new ArrayList<>();
         DonneesScore donneeScore = new DonneesScore();
-        Reader file_reader;
-        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
-            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
-        } else {
-            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
-        }
-        BufferedReader bufferedReader = new BufferedReader(file_reader);
+        BufferedReader bufferedReader = openFileReader(mode_de_jeu, id_niveau);
 
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
@@ -288,7 +282,6 @@ public class Sauvegarder {
                 enCours = "false";
             }
             if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
-            System.out.println("score : " + score + " date : " + date + " en cours : " + enCours + " mode de jeu : " + mode_de_jeu);
             donneeScore.joueur = nom_joueur;
             donneeScore.score = score;
             donneeScore.date = date;
@@ -297,6 +290,38 @@ public class Sauvegarder {
         }
         bufferedReader.close();
         return scores;
+    }
+
+    /**
+     * Recuperer les pseudos de tout les joueurs ayant joué à un mode de jeu
+     *
+     * @param mode_de_jeu le mode de jeu
+     * @param id_niveau   l'indice du niveau, négatif si en mode endless
+     * @return une liste de type String, contenant tout les pseudos des joueurs
+     * @throws IOException {@link IOException} si le fichier n'existe pas
+     */
+    public static List<String> joueursScore(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
+        List<String> joueurs = new ArrayList<>();
+        BufferedReader bufferedReader = openFileReader(mode_de_jeu, id_niveau);
+
+        while (bufferedReader.ready()) {
+            String line = bufferedReader.readLine();
+            String[] parts = line.split("%");
+            String nom_joueur = parts[0].trim();
+            if (!joueurs.contains(nom_joueur)) joueurs.add(nom_joueur);
+        }
+        bufferedReader.close();
+        return joueurs;
+    }
+
+    private static BufferedReader openFileReader(ModeDeJeu mode_de_jeu, int id_niveau) throws FileNotFoundException {
+        Reader file_reader;
+        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
+            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+        } else {
+            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
+        }
+        return new BufferedReader(file_reader);
     }
 
     /**
@@ -570,6 +595,9 @@ public class Sauvegarder {
             this.niveau_en_cours = "";
         }
 
+        /**
+         * Constructeur ne prenant aucun paramètre
+         */
         public DonneesScore() {
             this.joueur = "";
             this.score = "";

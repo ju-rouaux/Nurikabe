@@ -82,6 +82,7 @@ public class ControllerLeaderboard {
 
     /**
      * Charge l'image et le nom du niveau sur la carte.
+     * @throws IOException lancé lorsque le chargement du score n'a pas pû être effectué.
      */
     @FXML
     public void initialize() throws IOException {
@@ -91,15 +92,12 @@ public class ControllerLeaderboard {
         this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
         this.date.setCellValueFactory(new PropertyValueFactory<>("date"));
         // Récupère la liste des pseudos
-        List<String> pseudos = Sauvegarder.listeFichiers(Path.repertoire_lvl);
+        List<String> pseudos = Sauvegarder.joueursScore(Profil.getModeDeJeu(),id_niveau);
 
         // Ajoute les scores de chaque joueur
         ObservableList<Sauvegarder.DonneesScore> items = FXCollections.observableArrayList();
         for (String pseudo : pseudos) {
             List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
-            for (Sauvegarder.DonneesScore score : scores) {
-                System.out.println(score);
-            }
             if (!scores.isEmpty()) {
                 items.addAll(scores);
             }
