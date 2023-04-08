@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 /**
  * Cette classe représente une implémentation concrète de l'interface ScoreInterface, qui calcule le score pour le mode zen en utilisant un système d'étoiles allant de 0 à 5.
  * Elle contient une variable double représentant le nombre d'étoiles, ainsi qu'un objet Rating de la librairie ControlsFX utilisé pour l'affichage graphique du score.
- * @author Antoine Couapel
+ * @author Maël Vassenet, Antoine Couapel
  * @version 1.0
  */
 
