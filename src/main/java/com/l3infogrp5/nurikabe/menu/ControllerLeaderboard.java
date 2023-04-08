@@ -81,6 +81,7 @@ public class ControllerLeaderboard {
 
     /**
      * Charge l'image et le nom du niveau sur la carte.
+     *
      * @throws IOException lancé lorsque le chargement du score n'a pas pû être effectué.
      */
     @FXML
@@ -91,16 +92,32 @@ public class ControllerLeaderboard {
         this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
         this.date.setCellValueFactory(new PropertyValueFactory<>("date"));
         // Récupère la liste des pseudos
-        List<String> pseudos = Sauvegarder.joueursScore(Profil.getModeDeJeu(),id_niveau);
+        List<String> pseudos = Sauvegarder.joueursScore(Profil.getModeDeJeu(), id_niveau);
 
         // Ajoute les scores de chaque joueur
         ObservableList<Sauvegarder.DonneesScore> items = FXCollections.observableArrayList();
-        for (String pseudo : pseudos) {
-            List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
-            if (!scores.isEmpty()) {
-                items.addAll(scores);
+
+        // Récupère les données pour le profil sélectionné
+        ObservableList<Sauvegarder.DonneesScore> items_moi = FXCollections.observableArrayList();
+
+        if (!pseudos.isEmpty()) {
+            for (String pseudo : pseudos) {
+                List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
+                if (!scores.isEmpty()) {
+                    items.addAll(scores);
+                }
+            }
+            for (String pseudo : pseudos) {
+                if (pseudo.equals(Profil.getJoueur())) {
+                    List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
+                    if (!scores.isEmpty()) {
+                        items_moi.addAll(scores);
+                    }
+                    break;
+                }
             }
         }
+
         this.tableau.setItems(items);
         this.tableau.getSortOrder().addAll(date, nom, score);
 
@@ -108,17 +125,6 @@ public class ControllerLeaderboard {
         this.date_moi.setCellValueFactory(new PropertyValueFactory<>("date"));
         this.score_moi.setCellValueFactory(new PropertyValueFactory<>("score"));
 
-        // Récupère les données pour le profil sélectionné
-        ObservableList<Sauvegarder.DonneesScore> items_moi = FXCollections.observableArrayList();
-        for (String pseudo : pseudos) {
-            if (pseudo.equals(Profil.getJoueur())) {
-                List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
-                if (!scores.isEmpty()) {
-                    items_moi.addAll(scores);
-                }
-                break;
-            }
-        }
         this.tableau_moi.setItems(items_moi);
     }
 
