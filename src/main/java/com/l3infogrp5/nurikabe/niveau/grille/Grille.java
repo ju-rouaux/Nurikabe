@@ -1,7 +1,7 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
-import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.utils.Position;
 import javafx.beans.binding.Bindings;

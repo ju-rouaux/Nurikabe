@@ -12,11 +12,11 @@ import java.io.IOException;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
-import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 
 /**
  * Contrôleur du menu d'affichage des règles, et sa scène.
- * 
+ *
  * @author Nicolas
  */
 public class ControllerMenuRegles {
@@ -35,7 +35,7 @@ public class ControllerMenuRegles {
 
     /**
      * Initialise le menu de sélection d'affichage des règles et son contrôleur.
-     * 
+     *
      * @param stage la fenêtre contenant la scène.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
@@ -57,13 +57,13 @@ public class ControllerMenuRegles {
         this.preview_ile.setCenter(new Grille(new int[][] {{-2,-1}}, new int[][] {{50,50}}, new Historique()).getPanneau());
         this.preview_jeu.setCenter(new Grille(
             new int[][] {{-2, 2, -1, -1, -1}, {-1, -1, -1, -2, -1}, {-1, 1, -1, -2, -1}, {-1, -1, 4, -2, -1}, {-2, 2, -1, -1, -1}},
-            new int[][] {{-2, 2, -1, -1, -1}, {-1, -1, -1, -2, -1}, {-1, 1, -1, -2, -1}, {-1, -1, 4, -2, -1}, {-2, 2, -1, -1, -1}}, 
+            new int[][] {{-2, 2, -1, -1, -1}, {-1, -1, -1, -2, -1}, {-1, 1, -1, -2, -1}, {-1, -1, 4, -2, -1}, {-2, 2, -1, -1, -1}},
         new Historique()).getPanneau());
     }
 
     /**
      * Retourne la scène gérée par le contrôleur.
-     * 
+     *
      * @return la scène gérée par le contrôleur.
      */
     public Scene getScene() {

@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.l3infogrp5.nurikabe.niveau.ControllerNiveau;
-import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 
 /**
  * Contrôleur du menu de sélection de mode de jeu, et sa scène.

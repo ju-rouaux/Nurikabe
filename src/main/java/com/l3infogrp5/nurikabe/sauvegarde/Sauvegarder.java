@@ -240,7 +240,7 @@ public class Sauvegarder {
         // Formater la date en tant que chaîne de caractères en utilisant l'objet SimpleDateFormat
         String date_formate = format.format(date);
 
-        if (!mode_de_jeu.equals(ModeDeJeu.DETENTE))
+        if (mode_de_jeu.equals(ModeDeJeu.SANSFIN))
             writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".save", true);
         else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save", true);
         if (!mode_de_jeu.equals(ModeDeJeu.SANSFIN))
@@ -303,7 +303,7 @@ public class Sauvegarder {
     public static List<String> joueursScore(ModeDeJeu mode_de_jeu, int id_niveau) throws IOException {
         List<String> joueurs = new ArrayList<>();
         BufferedReader bufferedReader = openFileReader(mode_de_jeu, id_niveau);
-
+        if (bufferedReader == null) return joueurs;
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
@@ -314,12 +314,20 @@ public class Sauvegarder {
         return joueurs;
     }
 
-    private static BufferedReader openFileReader(ModeDeJeu mode_de_jeu, int id_niveau) throws FileNotFoundException {
+    private static BufferedReader openFileReader(ModeDeJeu mode_de_jeu, int id_niveau) {
         Reader file_reader;
         if (!mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
-            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+            try {
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + ".save");
+            } catch (FileNotFoundException e) {
+                return null;
+            }
         } else {
-            file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
+            try {
+                file_reader = new FileReader(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".save");
+            } catch (FileNotFoundException e) {
+                return null;
+            }
         }
         return new BufferedReader(file_reader);
     }
@@ -541,7 +549,6 @@ public class Sauvegarder {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         return matrice;
     }
 

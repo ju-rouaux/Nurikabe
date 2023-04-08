@@ -1,7 +1,7 @@
 package com.l3infogrp5.nurikabe;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
-import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import javafx.application.Application;
 import javafx.stage.Stage;

@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.profil;
+package com.l3infogrp5.nurikabe.sauvegarde;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique;
@@ -6,8 +6,6 @@ import com.l3infogrp5.nurikabe.niveau.score.ScoreCLM;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreEndless;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreZen;
-import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
-import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import com.l3infogrp5.nurikabe.utils.Path;
 
 import java.io.File;
@@ -178,6 +176,7 @@ public class Profil {
      */
     private static Sauvegarder.DonneesScore getDonneesScore(boolean niveau_en_cours) throws IOException {
         if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
+            niveau_en_cours = true;
             score = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
             for (Sauvegarder.DonneesScore s : score) {
                 if (s.getNiveauEnCours())
@@ -201,7 +200,7 @@ public class Profil {
      */
     private void initialiserDonnesNiveau() throws FileNotFoundException {
         donnees_niveau = new DonneesNiveau();
-        donnees_niveau.donneesScore = new Sauvegarder.DonneesScore("","","");
+        donnees_niveau.donneesScore = new Sauvegarder.DonneesScore("", "", "");
         donnees_niveau.score = new ScoreZen(5);
         donnees_niveau.historique = new Historique();
         donnees_niveau = chargerGrille(id_niveau);
@@ -224,7 +223,7 @@ public class Profil {
             Sauvegarder.creerDossierJoueur(joueur);
         donnees_niveau.score = chargerScore(id_niveau, true);
 
-        donnees_niveau.donneesScore = new Sauvegarder.DonneesScore("","","");
+        donnees_niveau.donneesScore = new Sauvegarder.DonneesScore();
 
 
     }
@@ -277,6 +276,7 @@ public class Profil {
         id_niveau = niv;
         File grille_repertoire = new File(Path.repertoire_lvl + "/" + joueur + "/" + mode_de_jeu);
         File grille_fichier = new File(grille_repertoire + "/Matrice_" + id_niveau + ".mat");
+
         if (grille_fichier.exists() && grille_fichier.length() > 0 && !charger_nouvelle_grille) {
             System.out.println(
                 "[Profil] Sauvegarde de la grille du niveau trouvée - Chargement de la grille du niveau sauvegardée...");
@@ -325,7 +325,8 @@ public class Profil {
 
     /**
      * Retourne l'instance du score en fonction du mode de jeu
-     * @param mode le mode de jeu
+     *
+     * @param mode       le mode de jeu
      * @param scoreValue la valeur du score
      * @return l'instance du score
      */
@@ -348,9 +349,9 @@ public class Profil {
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement des données du niveau
      */
     public DonneesNiveau chargerDonneesNiveau(int id_niveau, boolean en_cours) throws IOException {
-        donnees_niveau.historique = chargerHistorique();
-        donnees_niveau = chargerGrille(id_niveau);
         donnees_niveau.score = chargerScore(id_niveau, en_cours);
+        donnees_niveau = chargerGrille(id_niveau);
+        donnees_niveau.historique = chargerHistorique();
         return donnees_niveau;
     }
 
@@ -399,7 +400,7 @@ public class Profil {
         /**
          * Constructeur ne prenant aucun paramètre
          */
-        public DonneesNiveau(){
+        public DonneesNiveau() {
             historique = new Historique();
             matrice_niveau = new int[0][0];
             matrice_solution = new int[0][0];
