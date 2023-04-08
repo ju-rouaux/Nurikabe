@@ -99,8 +99,9 @@ public class ControllerMenuModeJeu {
      * Change la scène par le menu de consultation des scores du mode sans fin.
      */
     @FXML
-    private void scoreClique() {
-
+    private void scoreClique() throws IOException {
+        System.out.println("Lancement score Sans Fin");
+        stage.setScene(new ControllerLeaderboard(stage, 0).getScene());
     }
 
     /*

@@ -16,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -85,61 +84,50 @@ public class ControllerLeaderboard {
      * Charge l'image et le nom du niveau sur la carte.
      */
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
 
-
-        this.date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        this.nom.setCellValueFactory(new PropertyValueFactory<>("nom_joueur"));
+        // Définit les propriétés des colonnes pour le tableau de score
+        this.nom.setCellValueFactory(new PropertyValueFactory<>("joueur"));
         this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
-        List<String> pseudos = Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString()));
+        this.date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        // Récupère la liste des pseudos
+        List<String> pseudos = Sauvegarder.listeFichiers(Path.repertoire_lvl);
 
-
-        // ajout des valeurs
-        ObservableList<Sauvegarder.DonneesScore> items = FXCollections.observableArrayList(
-            new Sauvegarder.DonneesScore()
-        );
+        // Ajoute les scores de chaque joueur
+        ObservableList<Sauvegarder.DonneesScore> items = FXCollections.observableArrayList();
         for (String pseudo : pseudos) {
-            try {
-                List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
-                if (scores != null) {
-                    for(Sauvegarder.DonneesScore score : scores) {
-                        System.out.println(score.getNomJoueur() + " " + score.getScore() + " " + score.getDate());
-                        items = FXCollections.observableArrayList(scores);
-                    }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
+            for (Sauvegarder.DonneesScore score : scores) {
+                System.out.println(score);
+            }
+            if (!scores.isEmpty()) {
+                items.addAll(scores);
             }
         }
-
         this.tableau.setItems(items);
-
-        // rendre les colonnes triables
         this.tableau.getSortOrder().addAll(date, nom, score);
 
+        // Définit les propriétés des colonnes pour le tableau de score personnel
+        this.date_moi.setCellValueFactory(new PropertyValueFactory<>("date"));
+        this.score_moi.setCellValueFactory(new PropertyValueFactory<>("score"));
 
-        this.date_moi.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        this.score_moi.setCellValueFactory(new PropertyValueFactory<>("Score"));
-
-        ObservableList<Sauvegarder.DonneesScore> items_moi = null;
-
+        // Récupère les données pour le profil sélectionné
+        ObservableList<Sauvegarder.DonneesScore> items_moi = FXCollections.observableArrayList();
         for (String pseudo : pseudos) {
-            try {
-                if (pseudo.equals(Profil.getJoueur())) {
-                    List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, true);
-                    items_moi = FXCollections.observableArrayList(scores);
+            if (pseudo.equals(Profil.getJoueur())) {
+                List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
+                if (!scores.isEmpty()) {
+                    items_moi.addAll(scores);
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                break;
             }
         }
-
-
         this.tableau_moi.setItems(items_moi);
     }
 
+
     /*
-     * Retourne au menu précédent, le menu de selection  .
+     * Retourne au menu précédent, le menu de selection.
      */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
