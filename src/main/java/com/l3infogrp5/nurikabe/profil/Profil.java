@@ -200,8 +200,8 @@ public class Profil {
      * @throws FileNotFoundException si le fichier de sauvegarde n'existe pas
      */
     private void initialiserDonnesNiveau() throws FileNotFoundException {
-        donnees_niveau = new DonneesNiveau(null, null, null, null);
-        donnees_niveau.donneesScore = new Sauvegarder.DonneesScore("");
+        donnees_niveau = new DonneesNiveau();
+        donnees_niveau.donneesScore = new Sauvegarder.DonneesScore("","","");
         donnees_niveau.score = new ScoreZen(5);
         donnees_niveau.historique = new Historique();
         donnees_niveau = chargerGrille(id_niveau);
@@ -224,7 +224,7 @@ public class Profil {
             Sauvegarder.creerDossierJoueur(joueur);
         donnees_niveau.score = chargerScore(id_niveau, true);
 
-        donnees_niveau.donneesScore = new Sauvegarder.DonneesScore("");
+        donnees_niveau.donneesScore = new Sauvegarder.DonneesScore("","","");
 
 
     }
@@ -322,6 +322,13 @@ public class Profil {
         return donnees_niveau.score;
     }
 
+
+    /**
+     * Retourne l'instance du score en fonction du mode de jeu
+     * @param mode le mode de jeu
+     * @param scoreValue la valeur du score
+     * @return l'instance du score
+     */
     private ScoreInterface getScoreInstance(ModeDeJeu mode, double scoreValue) {
         return switch (mode) {
             case DETENTE -> new ScoreZen(scoreValue);
@@ -387,6 +394,16 @@ public class Profil {
             matrice_niveau = grille;
             matrice_solution = solution;
             this.score = score;
+        }
+
+        /**
+         * Constructeur ne prenant aucun paramètre
+         */
+        public DonneesNiveau(){
+            historique = new Historique();
+            matrice_niveau = new int[0][0];
+            matrice_solution = new int[0][0];
+            score = new ScoreZen(0);
         }
 
         /**
