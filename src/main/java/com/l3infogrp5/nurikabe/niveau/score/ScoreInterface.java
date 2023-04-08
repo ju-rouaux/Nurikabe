@@ -53,6 +53,11 @@ public interface ScoreInterface {
     public double getScore();
 
     /**
+     * Retourne le score formaté pour son affichage.
+     */
+    public String getScoreFormate();
+
+    /**
      * Méthode qui modifie le score
      * @param score le nouveau score
      */

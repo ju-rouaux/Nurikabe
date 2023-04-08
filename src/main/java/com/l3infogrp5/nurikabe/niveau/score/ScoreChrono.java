@@ -49,15 +49,25 @@ abstract public class ScoreChrono implements ScoreInterface {
      * Méthode d'affichage du chrono
      */
     public void afficheChrono() {
+        text.setText(getScoreFormate());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScoreFormate() {
+        String s;
 
         min = totalSec / 60;
         sec = totalSec % 60;
 
         if (sec >= 10)
-            text.setText((int) min + ":" + (int) sec);
+            s = min + ":" + sec;
         else
-            text.setText((int) min + ":0" + (int) sec);
+            s = min + ":0" + sec;
 
+        return s;
     }
 
     /**

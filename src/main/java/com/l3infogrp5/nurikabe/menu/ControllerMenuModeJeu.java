@@ -100,7 +100,7 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void scoreClique() throws IOException {
-        System.out.println("Lancement score Sans Fin");
+        Profil.getInstance().setModeDeJeu(ModeDeJeu.SANSFIN);
         stage.setScene(new ControllerLeaderboard(stage, 0).getScene());
     }
 

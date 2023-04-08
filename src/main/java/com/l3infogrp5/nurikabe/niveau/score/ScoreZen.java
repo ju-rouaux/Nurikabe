@@ -121,6 +121,11 @@ public class ScoreZen implements ScoreInterface {
     }
 
     @Override
+    public String getScoreFormate() {
+        return this.etoiles + " étoiles";
+    }
+
+    @Override
     public void setScore(double score) {
         this.etoiles = score;
         this.rating.setRating(etoiles);

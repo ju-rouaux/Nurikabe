@@ -163,12 +163,26 @@ public class ControllerNiveau {
 
             // Le joueur poursuit sa partie
             if (index_file < file_niveaux.size()) {
-                popup.setContentText("Nombre de grilles terminées : " + score.getScore() + ". Cliquez pour poursuivre.");
-                ButtonType btn_suivant = new ButtonType("Grille suivante");
-                btn_quitter = new ButtonType("Abandonner");
-                popup.getButtonTypes().add(btn_suivant);
+                String texte_affiche = "Nombre de grilles terminées : " + score.getScoreFormate() + ".";
+
+                // Le joueur ne peut plus poursuivre sa partie
+                if (this.score.getScore() <= 0) {
+                    btn_quitter = new ButtonType("Quitter");
+                    texte_affiche += "Le temps s'est écoulé durant votre partie. Vous ne pouvez pas continuer";
+                }
+                else { // Le joueur gagne un bonus de temps et continue
+                    this.score.grilleComplete();
+                    texte_affiche += "Cliquez pour poursuivre.";
+                    ButtonType btn_suivant = new ButtonType("Grille suivante");
+                    btn_quitter = new ButtonType("Abandonner");
+                    popup.getButtonTypes().add(btn_suivant);
+                }
+
+                popup.setContentText(texte_affiche);
+
+
             } else { // Le joueur a terminé la partie
-                popup.setContentText("Partie terminée ! Score : " + score.getScore() + ".");
+                popup.setContentText("Partie terminée ! Score : " + score.getScoreFormate() + ".");
                 btn_quitter = new ButtonType("Quitter");
             }
 
