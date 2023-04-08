@@ -26,7 +26,7 @@ public class ScoreEndless extends ScoreChrono {
         /**calcul pour la décrémentation du chrono */
         KeyFrame kf = new KeyFrame(Duration.millis(1000), e -> {
 
-            totalSec--;
+            this.totalSec--;
 
             if (totalSec <= 0) {
                 stop();
@@ -115,14 +115,6 @@ public class ScoreEndless extends ScoreChrono {
     @Override
     public void setScore(double score) {
         nbGrilles = score;
-    }
-
-    /**
-     * {@inheritDoc}}
-     */
-    @Override
-    public Pane get_Pane() {
-        super.getPane();
     }
 
 }

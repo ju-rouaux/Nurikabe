@@ -23,7 +23,7 @@ public class ScoreCLM extends ScoreChrono {
         /**calcul pour l'incrémentation du chrono */
         KeyFrame kf = new KeyFrame(Duration.millis(1000), e -> {
 
-            totalSec++;
+            this.totalSec++;
 
             afficheChrono();
 
@@ -82,14 +82,5 @@ public class ScoreCLM extends ScoreChrono {
     @Override
     public void restart() {
         totalSec = 0;
-    }
-
-    /**
-     * {@inheritDoc}}
-     * 
-     */
-    @Override
-    public Pane get_Pane() {
-        super.get_Pane();
     }
 }
