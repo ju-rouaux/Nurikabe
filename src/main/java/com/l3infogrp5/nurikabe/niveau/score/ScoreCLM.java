@@ -7,7 +7,7 @@ import javafx.util.Duration;
 /**
  * Implémentation du calcul d'un score pour le mode Contre La Montre
  *
- * @author Antoine Couapel, Killian Rattier
+ * @author Antoine Couapel
  * @version 1.0
  */
 
@@ -19,22 +19,24 @@ public class ScoreCLM extends ScoreChrono {
      */
     public ScoreCLM(double totalSec) {
         super(totalSec);
-    }
 
-    /**
-     * Méthode de calcul pour l'incrémentation du chrono
-     */
-    @Override
-    public void start() {
+        /**calcul pour l'incrémentation du chrono */
         KeyFrame kf = new KeyFrame(Duration.millis(1000), e -> {
 
-            totalSec++;
+            this.totalSec++;
 
             afficheChrono();
 
         });
 
-        Timeline timeline = new Timeline(kf);
+        this.timeline = new Timeline(kf);
+    }
+
+    /**
+     * Méthode qui démarre le chrono
+     */
+    @Override
+    public void start() {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
@@ -81,5 +83,4 @@ public class ScoreCLM extends ScoreChrono {
     public void restart() {
         totalSec = 0;
     }
-
 }
