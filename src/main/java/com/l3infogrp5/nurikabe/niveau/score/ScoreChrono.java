@@ -14,10 +14,10 @@ import javafx.scene.text.Text;
 abstract public class ScoreChrono implements ScoreInterface {
 
     /**secondes*/
-    protected double sec;
+    protected int sec;
 
     /**minutes*/ 
-    protected double min;
+    protected int min;
 
     /**nombre total de secondes écoulées*/
     protected double totalSec;
