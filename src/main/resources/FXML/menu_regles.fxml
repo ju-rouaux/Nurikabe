@@ -6,19 +6,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <HBox prefHeight="668.0" prefWidth="1018.0" styleClass="panneau-principal">
-         <children>
-            <HBox>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0">
+         <top>
+            <HBox BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="btn_retour" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour">
                      <graphic>
@@ -28,16 +31,11 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
                   </Button>
-                  <HBox prefHeight="658.0" prefWidth="150.0" spacing="10.0" />
-               </children>
-               <padding>
-                  <Insets left="10.0" top="10.0" />
-               </padding>
-            </HBox>
-            <VBox minWidth="-Infinity" prefHeight="501.0" prefWidth="668.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="82.0" prefWidth="577.0" styleClass="titre" text="Règles">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="82.0" prefWidth="577.0" styleClass="titre" text="Règles" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="60.0" />
                      </font>
@@ -45,172 +43,232 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </Label>
-                  <HBox minWidth="-Infinity" prefHeight="586.0" prefWidth="805.0">
-                     <children>
-                        <ScrollPane minWidth="-Infinity" prefHeight="586.0" prefWidth="575.0" vbarPolicy="ALWAYS">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="3480.0" prefWidth="674.0" style="-fx-pref-width: 50%;">
-                                 <padding>
-                                    <Insets top="10.0" />
-                                 </padding>
-                                 <children>
-                                    <Text layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. L'ile de 1 " underline="true" />
-                                    <Text layoutX="61.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsqu'on a une case de 1, on entoure d'une case sur l'horizontal et la verticale" AnchorPane.leftAnchor="40.0" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/1.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="14.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Deux iles séparées par une case" underline="true" />
-                                    <Text layoutX="68.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsque deux îles sont dans la même ligne ou colonne et séparées par une, la case entre les deux doit être une rivière." wrappingWidth="466.4064826965332" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/2.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="14.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Iles adjacentes en diagonale" underline="true" />
-                                    <Text layoutX="61.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Semblable à l'exemple ci-dessus, lorsque deux iles sont adjacentes en diagonale, chacune des cases touchant les deux iles doit faire partie d'une rivière." wrappingWidth="466.4064826965332" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/3.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Techniques de départ" />
-                                    <Text layoutX="20.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Techniques Basiques" />
-                                    <Text layoutX="12.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Case vide entourée de rivières" underline="true" />
-                                    <Text layoutX="61.0" layoutY="594.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsqu’une case vide est entourée verticalement et horizontalement par des cases de rivières, alors celle-ci est une rivière." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/4.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="12.0" layoutY="750.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. L’expansion d’une rivière" underline="true" />
-                                    <Text layoutX="61.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selon les règles de Nurikabe, tous les murs doivent former un seul chemin continu. Ainsi, s’il n’existe qu’un seul chemin pour cette rivière alors on doit la prolonger et la connecter aux autre rivières." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="810.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/5.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="12.0" layoutY="930.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. La continuité d’un mur" underline="true" />
-                                    <Text layoutX="61.0" layoutY="950.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il faut vérifier qu’aucun chemin ne soit séparée, il faut donc faire attention à bien maintenir la continuité du mur." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="980.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/6.png" />
-                                       </image>
-                                    </ImageView>
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="1100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. L’expansion de l’ile d’une case" underline="true" />
-                                    <Text layoutX="61.0" layoutY="1120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si l’ile est strictement supérieur à 1 et qu’il n’existe qu’une seule case libre pour l’expansion de l’ile, alors on place une case indice d’ile." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1150.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/7.png" />
-                                       </image>
-                                    </ImageView>
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="1270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. L’ile de 2 a une expansion possible que sur 2 directions" underline="true" />
-                                    <Text layoutX="61.0" layoutY="1290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsqu’une île de 2 ne peut être étendu que dans deux directions perpendiculaires, alors la case diagonale doit être une rivière." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1330.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/8.png" />
-                                       </image>
-                                    </ImageView>
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="1450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6. Case insuffisante à l’expasion d’une ile" underline="true" />
-                                    <Text layoutX="61.0" layoutY="1470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parfois, une île est trop grande pour tenir dans une zone donnée. Alors on peut poursuivre son expansion sur un chemin opposé." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1500.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/10.png" />
-                                       </image>
-                                    </ImageView>
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="1620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7. La continuité inverse d’une ile" underline="true" />
-                                    <Text layoutX="61.0" layoutY="1640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour éviter de faire une rivière 2x2, on place un indice d’une ile. Puis, s’il est possible de déterminer à quelle ile appartient cette indice, on continue son chemin pour les rejoindre entre eux." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1700.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/11.png" />
-                                       </image>
-                                    </ImageView>
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="1820.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8. Entourer une ile complétée" underline="true" />
-                                    <Text layoutX="61.0" layoutY="1840.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsqu’une ile est complétée par le bon nombre d’indice, alors on entoure d’une rivière chaque case adjacente verticalement et horizontalement." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1870.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/12.png" />
-                                       </image>
-                                    </ImageView>
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="1990.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9. Rivière 2x2" underline="true" />
-                                    <Text layoutX="61.0" layoutY="2010.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour éviter de faire une rivière 2x2, on place un indice d’une ile." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2030.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/13.png" />
-                                       </image>
-                                    </ImageView>
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="2150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10. Case inatteignable par une ile" underline="true" />
-                                    <Text layoutX="61.0" layoutY="2170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dans certains cas, une case ne peut appartenir à aucune île simplement parce qu'aucun indice ne peut ''l'atteindre''. On y place donc des cases de rivières." wrappingWidth="493.6752815246582" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2200.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/14.png" />
-                                       </image>
-                                    </ImageView>
-            
-                                                                                                                                                                                                            <Text layoutX="20.0" layoutY="2320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Techniques Basiques" />
-            
-                                                                                                                                                                                                            <Text layoutX="20.0" layoutY="2340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ici, nous devons faire attention à ne pas produire de cases de rivières 2x2, ou bien de ne pas isoler les chemins et aussi de ne pas bloquer des indices de rivières qui feraient d’elles des cases inatteignables." wrappingWidth="493.6752815246582" />
-            
-                                                                                                                                                                                                            <Text layoutX="20.0" layoutY="2400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="On va voir ceci avec des situations précises : " wrappingWidth="493.6752815246582" />
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="2440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1." underline="true" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2450.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/15.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="61.0" layoutY="2540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si l’on place l’expansion de la l’ile 2 sur son sud alors nous devons entourer cette dernière car elle est complète. Or, on observe qu’avec le placement de cette indice d’ile, on va produire une rivière de 2x2 et aussi produire des indices d’iles qui seront alors inatteignables." wrappingWidth="493.6752815246582" />
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="2640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2." underline="true" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2640.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/16.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="61.0" layoutY="2730.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Semblable à l'exemple précédent, si nous supposons que la case en surbrillance fait partie d'un mur, une fois de plus, une zone de rivères 2x2 sera créée, ce qui n'est pas autorisé. Par conséquent, la case en surbrillance doit faire partie d'une île et est marqué d'un indice d’ile comme indiqué dans le schéma de droite." wrappingWidth="493.6752815246582" />
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="2850.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3." underline="true" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2850.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/17.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="61.0" layoutY="2930.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si la case en surbrillance dans le diagramme de gauche ci-dessus fait partie d'une île, alors la case sous le 2 doit faire partie d'une rivière. Cependant, cette partie de rivière ne pourra pas se connecter à d'autres rivières du puzzle, comme indiquée dans le diagramme central. La case en surbrillance doit donc faire partie d'une rivière et est marqué par une rivière." wrappingWidth="493.6752815246582" />
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="3030.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4." underline="true" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="3030.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/18.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="61.0" layoutY="3120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La case en haut à droite est inatteignable. Par conséquent c’est une rivière. Néanmoins, elle doit poursuivre son chemin au risque de se retrouver isolée. Alors on peut poursuivre son chemin sur deux cases adjacentes et donc ainsi, va produire une zone 2x2. Nous avons donc forcément un indice d’ile à la diagonale du mur." wrappingWidth="493.6752815246582" />
-            
-                                                                                                                                                                                                            <Text layoutX="12.0" layoutY="3230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5." underline="true" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="3230.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../illustrations_regles/19.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text layoutX="61.0" layoutY="3320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous trouverez ci-dessus une section d'un puzzle plus grand partiellement résolu dans lequel l'île de 6 a besoin d'une dernière case pour être complétée. Si nous supposons que cette case est celle surlignée en rouge dans le schéma de gauche ci-dessus, la case en dessous doit faire partie d'une rivière et la case à gauche de cette rivière doit faire partie d'une île pour éviter une zone de rivières 2x2. Tout cela, comme le montre le schéma du centre, entourera complètement le mur à droite du 6 en éliminant la continuité du fleuve dans toutes les directions. Donc la dernière case de l'îlot de 6 doit être vers la droite et cet îlot peut être complété comme indiqué sur le schéma de droite." wrappingWidth="493.6752815246582" />
-            
-                                                                                                                                                                                                   </children>
-                              </AnchorPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </HBox>
+                  <Region prefWidth="52.0" />
                </children>
-            </VBox>
-         </children>
-      </HBox>
+            </HBox>
+         </top>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab closable="false" text="Règles">
+                  <content>
+                        <HBox>
+                           <children>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                  </content>
+                     <content>
+                        <HBox>
+                           <children>
+                              <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <ScrollPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="scroll-p" HBox.hgrow="ALWAYS">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="674.0" style="-fx-pref-width: 50%;">
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                       <children>
+                                          <Label layoutX="115.0" layoutY="30.0" text="Ceci est une ile.">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font></Label>
+                                          <BorderPane fx:id="preview_ile" layoutX="240.0" layoutY="10.0" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: black;" />
+                                          <Label layoutX="385.0" layoutY="30.0" text="Ceci est un fleuve.">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font></Label>
+                                          <Label layoutX="165.0" layoutY="75.0" text="Cliquez sur les cases pour leur faire changer d'état." />
+                                          <Label layoutX="165.0" layoutY="120.0" text="Le but est de séparer les îles par un UNIQUE fleuve." />
+                                          <Label layoutX="90.0" layoutY="140.0" text="Pour cela, aidez vous des nombres indiquants la taille que doivent faire vos îles." />
+                                          <Label layoutX="150.0" layoutY="160.0" text="Attention, le fleuve de peut pas avoir de lac de 2x2 cases." />
+                                          <BorderPane fx:id="preview_jeu" layoutX="200.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                     </content>
+                </Tab>
+                <Tab closable="false" text="Techniques">
+                     <content>
+                        <HBox>
+                           <children>
+                              <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <ScrollPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="scroll-p" vbarPolicy="ALWAYS" HBox.hgrow="ALWAYS">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="3480.0" prefWidth="674.0" style="-fx-pref-width: 50%;">
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                       <children>
+                                          <Text layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. L'ile de 1 " underline="true" />
+                                          <Text layoutX="61.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsqu'on a une case de 1, on entoure d'une case sur l'horizontal et la verticale" AnchorPane.leftAnchor="40.0" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/1.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="14.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Deux iles séparées par une case" underline="true" />
+                                          <Text layoutX="68.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsque deux îles sont dans la même ligne ou colonne et séparées par une, la case entre les deux doit être une rivière." wrappingWidth="466.4064826965332" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/2.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="14.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Iles adjacentes en diagonale" underline="true" />
+                                          <Text layoutX="61.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Semblable à l'exemple ci-dessus, lorsque deux iles sont adjacentes en diagonale, chacune des cases touchant les deux iles doit faire partie d'une rivière." wrappingWidth="466.4064826965332" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/3.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Techniques de départ" />
+                                          <Text layoutX="20.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Techniques Basiques" />
+                                          <Text layoutX="12.0" layoutY="576.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Case vide entourée de rivières" underline="true" />
+                                          <Text layoutX="61.0" layoutY="594.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsqu’une case vide est entourée verticalement et horizontalement par des cases de rivières, alors celle-ci est une rivière." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/4.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="12.0" layoutY="750.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. L’expansion d’une rivière" underline="true" />
+                                          <Text layoutX="61.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selon les règles de Nurikabe, tous les murs doivent former un seul chemin continu. Ainsi, s’il n’existe qu’un seul chemin pour cette rivière alors on doit la prolonger et la connecter aux autre rivières." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="810.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/5.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="12.0" layoutY="930.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. La continuité d’un mur" underline="true" />
+                                          <Text layoutX="61.0" layoutY="950.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il faut vérifier qu’aucun chemin ne soit séparée, il faut donc faire attention à bien maintenir la continuité du mur." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="980.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/6.png" />
+                                             </image>
+                                          </ImageView>
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="1100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. L’expansion de l’ile d’une case" underline="true" />
+                                          <Text layoutX="61.0" layoutY="1120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si l’ile est strictement supérieur à 1 et qu’il n’existe qu’une seule case libre pour l’expansion de l’ile, alors on place une case indice d’ile." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/7.png" />
+                                             </image>
+                                          </ImageView>
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="1270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5. L’ile de 2 a une expansion possible que sur 2 directions" underline="true" />
+                                          <Text layoutX="61.0" layoutY="1290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsqu’une île de 2 ne peut être étendu que dans deux directions perpendiculaires, alors la case diagonale doit être une rivière." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1330.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/8.png" />
+                                             </image>
+                                          </ImageView>
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="1450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6. Case insuffisante à l’expasion d’une ile" underline="true" />
+                                          <Text layoutX="61.0" layoutY="1470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parfois, une île est trop grande pour tenir dans une zone donnée. Alors on peut poursuivre son expansion sur un chemin opposé." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1500.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/10.png" />
+                                             </image>
+                                          </ImageView>
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="1620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7. La continuité inverse d’une ile" underline="true" />
+                                          <Text layoutX="61.0" layoutY="1640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour éviter de faire une rivière 2x2, on place un indice d’une ile. Puis, s’il est possible de déterminer à quelle ile appartient cette indice, on continue son chemin pour les rejoindre entre eux." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1700.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/11.png" />
+                                             </image>
+                                          </ImageView>
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="1820.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8. Entourer une ile complétée" underline="true" />
+                                          <Text layoutX="61.0" layoutY="1840.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorsqu’une ile est complétée par le bon nombre d’indice, alors on entoure d’une rivière chaque case adjacente verticalement et horizontalement." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="1870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/12.png" />
+                                             </image>
+                                          </ImageView>
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="1990.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9. Rivière 2x2" underline="true" />
+                                          <Text layoutX="61.0" layoutY="2010.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour éviter de faire une rivière 2x2, on place un indice d’une ile." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2030.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/13.png" />
+                                             </image>
+                                          </ImageView>
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="2150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10. Case inatteignable par une ile" underline="true" />
+                                          <Text layoutX="61.0" layoutY="2170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dans certains cas, une case ne peut appartenir à aucune île simplement parce qu'aucun indice ne peut ''l'atteindre''. On y place donc des cases de rivières." wrappingWidth="493.6752815246582" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2200.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/14.png" />
+                                             </image>
+                                          </ImageView>
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="20.0" layoutY="2320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Techniques Basiques" />
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="20.0" layoutY="2340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ici, nous devons faire attention à ne pas produire de cases de rivières 2x2, ou bien de ne pas isoler les chemins et aussi de ne pas bloquer des indices de rivières qui feraient d’elles des cases inatteignables." wrappingWidth="493.6752815246582" />
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="20.0" layoutY="2400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="On va voir ceci avec des situations précises : " wrappingWidth="493.6752815246582" />
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="2440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1." underline="true" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2450.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/15.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="61.0" layoutY="2540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si l’on place l’expansion de la l’ile 2 sur son sud alors nous devons entourer cette dernière car elle est complète. Or, on observe qu’avec le placement de cette indice d’ile, on va produire une rivière de 2x2 et aussi produire des indices d’iles qui seront alors inatteignables." wrappingWidth="493.6752815246582" />
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="2640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2." underline="true" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2640.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/16.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="61.0" layoutY="2730.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Semblable à l'exemple précédent, si nous supposons que la case en surbrillance fait partie d'un mur, une fois de plus, une zone de rivères 2x2 sera créée, ce qui n'est pas autorisé. Par conséquent, la case en surbrillance doit faire partie d'une île et est marqué d'un indice d’ile comme indiqué dans le schéma de droite." wrappingWidth="493.6752815246582" />
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="2850.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3." underline="true" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="2850.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/17.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="61.0" layoutY="2930.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si la case en surbrillance dans le diagramme de gauche ci-dessus fait partie d'une île, alors la case sous le 2 doit faire partie d'une rivière. Cependant, cette partie de rivière ne pourra pas se connecter à d'autres rivières du puzzle, comme indiquée dans le diagramme central. La case en surbrillance doit donc faire partie d'une rivière et est marqué par une rivière." wrappingWidth="493.6752815246582" />
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="3030.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4." underline="true" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="3030.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/18.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="61.0" layoutY="3120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La case en haut à droite est inatteignable. Par conséquent c’est une rivière. Néanmoins, elle doit poursuivre son chemin au risque de se retrouver isolée. Alors on peut poursuivre son chemin sur deux cases adjacentes et donc ainsi, va produire une zone 2x2. Nous avons donc forcément un indice d’ile à la diagonale du mur." wrappingWidth="493.6752815246582" />
+                        
+                                                                                                                                                                                                                                                                                                      <Text layoutX="12.0" layoutY="3230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5." underline="true" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="3230.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../illustrations_regles/19.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="61.0" layoutY="3320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous trouverez ci-dessus une section d'un puzzle plus grand partiellement résolu dans lequel l'île de 6 a besoin d'une dernière case pour être complétée. Si nous supposons que cette case est celle surlignée en rouge dans le schéma de gauche ci-dessus, la case en dessous doit faire partie d'une rivière et la case à gauche de cette rivière doit faire partie d'une île pour éviter une zone de rivières 2x2. Tout cela, comme le montre le schéma du centre, entourera complètement le mur à droite du 6 en éliminant la continuité du fleuve dans toutes les directions. Donc la dernière case de l'îlot de 6 doit être vers la droite et cet îlot peut être complété comme indiqué sur le schéma de droite." wrappingWidth="493.6752815246582" />
+                                          <Text layoutX="430.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Techniques tirées de l'application Conceptis Nurikabe" textAlignment="RIGHT" wrappingWidth="146.7178955078125">
+                                             <font>
+                                                <Font name="System Italic" size="12.218181610107422" />
+                                             </font>
+                                          </Text>
+                        
+                                                                                                                                                                                                                                                                                             </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                              <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                     </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+      </BorderPane>
    </root>
    <stylesheets>
       <URL value="@../css/menu.css" />

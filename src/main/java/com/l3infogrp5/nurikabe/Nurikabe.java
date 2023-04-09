@@ -1,7 +1,7 @@
 package com.l3infogrp5.nurikabe;
 
 import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
-import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -35,7 +35,7 @@ public class Nurikabe extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        Profil.getInstance().chargerProfil(Profil.getJoueur());
+        Profil.getInstance().chargerProfil(Profil.getInstance().getJoueur());
         ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
 
         stage.setMinHeight(480);
@@ -71,7 +71,7 @@ public class Nurikabe extends Application {
 //     score.aideUtilise();
 //     score.aideUtilise();
 //     score.aideUtilise();
-    
+
 //     root.getChildren().add(scorePane);
 // }
 
@@ -92,10 +92,10 @@ public class Nurikabe extends Application {
 //     System.out.println("test");
 //     score.aideUtilise();
 
-//     /* 
+//     /*
 //      * ScoreChrono score = new ScoreEndless(40,0, text);
 //      * score.calcul();
-//      * 
+//      *
 //      * System.out.println("test");
 //      * //score.aideUtilise(35);
 //      * score.grilleComplete();

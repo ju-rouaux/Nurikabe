@@ -1,7 +1,6 @@
 package com.l3infogrp5.nurikabe.menu;
 
 import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -9,8 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.util.List;
 
-import com.l3infogrp5.nurikabe.profil.Profil;
+import com.l3infogrp5.nurikabe.niveau.ControllerNiveau;
+import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 
 /**
  * Contrôleur du menu de sélection de mode de jeu, et sa scène.
@@ -69,8 +70,8 @@ public class ControllerMenuModeJeu {
      * Change la scène par le menu de sélection de niveau du mode détente.
      */
     @FXML
-    private void detenteClique(ActionEvent event) throws Exception {
-        Profil.getInstance().setMode_de_jeu(ModeDeJeu.DETENTE);
+    private void detenteClique() throws Exception {
+        Profil.getInstance().setModeDeJeu(ModeDeJeu.DETENTE);
         stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
@@ -78,8 +79,8 @@ public class ControllerMenuModeJeu {
      * Change la scène par le menu de sélection de niveau du mode contre la montre.
      */
     @FXML
-    private void contreMontreClique(ActionEvent event) throws Exception {
-        Profil.getInstance().setMode_de_jeu(ModeDeJeu.CONTRELAMONTRE);
+    private void contreMontreClique() throws Exception {
+        Profil.getInstance().setModeDeJeu(ModeDeJeu.CONTRELAMONTRE);
         stage.setScene(new ControllerMenuSelection(stage).getScene());
     }
 
@@ -87,16 +88,20 @@ public class ControllerMenuModeJeu {
      * Change la scène par une partie du mode sans fin.
      */
     @FXML
-    private void sansFinClique() {
-
+    private void sansFinClique() throws Exception {
+        Profil.getInstance().setModeDeJeu(ModeDeJeu.SANSFIN);
+        stage.setScene(new ControllerNiveau(stage, List.of(
+            0, 1//, 3, 4, 5, 6, 7, 8, 9, 10 //TODO selectionner les niveaux à jouer
+        )).getScene());
     }
 
     /**
      * Change la scène par le menu de consultation des scores du mode sans fin.
      */
     @FXML
-    private void scoreClique() {
-
+    private void scoreClique() throws IOException {
+        Profil.getInstance().setModeDeJeu(ModeDeJeu.SANSFIN);
+        stage.setScene(new ControllerLeaderboard(stage, 0).getScene());
     }
 
     /*

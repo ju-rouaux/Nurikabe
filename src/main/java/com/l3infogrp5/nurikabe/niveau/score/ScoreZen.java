@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 /**
  * Cette classe représente une implémentation concrète de l'interface ScoreInterface, qui calcule le score pour le mode zen en utilisant un système d'étoiles allant de 0 à 5.
  * Elle contient une variable double représentant le nombre d'étoiles, ainsi qu'un objet Rating de la librairie ControlsFX utilisé pour l'affichage graphique du score.
- * @author Antoine Couapel
+ * @author Maël Vassenet, Antoine Couapel
  * @version 1.0
  */
 
@@ -21,7 +21,7 @@ public class ScoreZen implements ScoreInterface {
     private Rating rating;
     /** Pane utilisé pour contenir le Rating */
     private BorderPane ratingPane;
-    
+
     /**
      * Constructeur de la classe ScoreZen.
      * @param etoiles le nombre d'étoiles initial du score.
@@ -95,7 +95,10 @@ public class ScoreZen implements ScoreInterface {
      * {@inheritDoc}
      */
     @Override
-    public void restart() {}
+    public void restart() {
+        this.etoiles = 5;
+        this.rating.setRating(etoiles);
+    }
 
     /**
      * Cette méthode permet de créer un objet Pane contenant un Rating, et d'initialiser les propriétés de celui-ci selon les valeurs définies dans l'objet ScoreZen.
@@ -106,7 +109,7 @@ public class ScoreZen implements ScoreInterface {
     public Pane get_Pane() {
         return this.ratingPane;
     }
-    
+
 
     /**
      * Méthodes qui retourne le nombre d'étoiles restante à la fin de la partie
@@ -115,5 +118,16 @@ public class ScoreZen implements ScoreInterface {
     @Override
     public double getScore() {
         return this.etoiles;
+    }
+
+    @Override
+    public String getScoreFormate() {
+        return this.etoiles + " étoiles";
+    }
+
+    @Override
+    public void setScore(double score) {
+        this.etoiles = score;
+        this.rating.setRating(etoiles);
     }
 }
