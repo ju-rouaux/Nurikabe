@@ -12,16 +12,21 @@ import javafx.util.Duration;
  */
 public class ScoreEndless extends ScoreChrono {
 
-    /**Nombres de grilles complétées lors de la partie*/
-    public double nbGrilles = 0;
+    /**
+     * Nombres de grilles complétées lors de la partie
+     */
+    public int nbGrilles;
 
 
     /**
      * Constructeur du ScoreEndless
+     *
      * @param totalSec nombre total de secondes
+     * @param nbGrilles nombre de grilles complétées
      */
-    public ScoreEndless(double totalSec) {
+    public ScoreEndless(double totalSec, int nbGrilles) {
         super(totalSec);
+        this.nbGrilles = nbGrilles;
 
         /**calcul pour la décrémentation du chrono */
         KeyFrame kf = new KeyFrame(Duration.millis(1000), e -> {
@@ -36,8 +41,9 @@ public class ScoreEndless extends ScoreChrono {
 
         });
 
-        this.timeline = new Timeline(kf);    
+        this.timeline = new Timeline(kf);
     }
+
 
     /**
      * Méthode qui démarre le chrono
@@ -81,9 +87,14 @@ public class ScoreEndless extends ScoreChrono {
 
         int bonus = 30;
 
-        nbGrilles++;
+        System.out.println("Grille complétée ! nbGrilles = " + nbGrilles);
 
+        nbGrilles++;
+        System.out.println("nbGrilles = " + nbGrilles);
+
+        System.out.println("totalSec = " + totalSec);
         totalSec += bonus;
+        System.out.println("totalSec = " + totalSec);
 
     }
 
@@ -105,16 +116,41 @@ public class ScoreEndless extends ScoreChrono {
 
     /**
      * Méthode qui retourne le nombre de grilles complétées durant la partie
+     *
+     * @param b si vrai retourne le temps total, sinon retourne le nombre de grilles
      * @return nbGrilles
      */
     @Override
-    public double getScore() {
-        return nbGrilles;
+    public double getScore(boolean b) {
+        if (!b)
+            return nbGrilles;
+        return totalSec;
     }
 
+    /**
+     * Méthode qui modifie le score selon le boolean
+     * Si b est faux, modifie le nombre de grilles
+     * Si b est vrai, modifie le temps total
+     *
+     * @param score le nouveau score
+     */
     @Override
     public void setScore(double score) {
-        nbGrilles = score;
+        totalSec = score;
+    }
+
+    /**
+     * Retourne le score formaté pour son affichage.
+     * Le parametre est uniquement pour le mode detente
+     *
+     * @param b si vrai retourne le temps total, sinon retourne le nombre de grilles
+     * @return le score formaté
+     */
+    @Override
+    public String getScoreFormate(boolean b) {
+        if (!b)
+            return String.valueOf(nbGrilles);
+        else return super.getScoreFormate(b);
     }
 
 }

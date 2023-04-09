@@ -10,57 +10,69 @@ import javafx.scene.layout.Pane;
  */
 public interface ScoreInterface {
 
+
     /**
      * Méthode abstraite de lancement de chrono
      */
-    public void start();
+    void start();
 
     /**
      * Méthode d'arrêt du chrono
      */
-    public void stop();
+    void stop();
 
     /**
      * Méthode abstraite à lancer quand une aide est utilisée
      */
-    public void aideUtilise();
+    void aideUtilise();
 
     /**
      * Méthode abstraite à lancer quand une grille est recommencée
      */
-    public void restart();
+    void restart();
 
     /**
      * Méthode abstraite à lancer quand une grille a été complétée
      */
-    public void grilleComplete();
+    void grilleComplete();
 
     /**
      * Méthode abstraite à lancer quand un check est utilisée
      */
-    public void checkUtilise();
+    void checkUtilise();
 
     /**
      * Méthode qui retourne l'affichage du score
+     *
      * @return Pane
      */
-    public Pane get_Pane();
+    Pane get_Pane();
 
     /**
-     * Méthode qui retourne le score
-     * @return double
+     * Méthode qui retourne le nombre de grilles complétées durant la partie
+     *
+     * @param b si vrai retourne le temps total, sinon retourne le nombre de grilles
+     * @return nbGrilles
      */
-    public double getScore();
+    double getScore(boolean b);
 
     /**
      * Retourne le score formaté pour son affichage.
+     * Le parametre est uniquement pour le mode detente
+     *
+     * @param b si vrai retourne le temps total, sinon retourne le nombre de grilles
+     * @return le score formaté
      */
-    public String getScoreFormate();
+    String getScoreFormate(boolean b);
 
     /**
-     * Méthode qui modifie le score
+     * Méthode qui modifie le score selon le boolean
+     * Si b est faux, modifie le nombre de grilles
+     * Si b est vrai, modifie le temps total
+     *
      * @param score le nouveau score
      */
-    public void setScore(double score);
+    void setScore(double score);
+
 
 }

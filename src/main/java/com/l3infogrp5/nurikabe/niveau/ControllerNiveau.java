@@ -50,6 +50,8 @@ public class ControllerNiveau {
     private Grille grille;
     private ScoreInterface score;
     private boolean niveau_en_cours; // Vrai si le niveau est en cours de jeu.
+
+    private boolean retour;
     private int index_file; // Indice du niveau lancé dans la liste
 
     private Profil.DonneesNiveau donnees_niveau; // Données du niveau en cours de jeu.
@@ -92,6 +94,7 @@ public class ControllerNiveau {
         this.aide_affichee = new SimpleBooleanProperty();
 
         this.niveau_en_cours = true;
+        this.retour = false;
 
         this.file_niveaux = niveaux;
         this.index_file = 0;
@@ -151,7 +154,8 @@ public class ControllerNiveau {
 
         // Evenement lancé lorsque la grille est terminée
         this.grille.addOnVictoire(() -> {
-            niveau_en_cours = false;
+
+
             System.out.println("gagné !");
             // Arrêter le comptage du score
             this.score.stop();
@@ -163,37 +167,59 @@ public class ControllerNiveau {
 
             // Le joueur poursuit sa partie
             if (index_file < file_niveaux.size()) {
-                String texte_affiche = "Nombre de grilles terminées : " + score.getScoreFormate() + ".";
+                String texte_affiche = "Nombre de grilles terminées : " + score.getScoreFormate(false) + ".";
 
                 // Le joueur ne peut plus poursuivre sa partie
-                if (this.score.getScore() <= 0) {
+                if (this.score.getScore(true) <= 0) {
                     btn_quitter = new ButtonType("Quitter");
                     texte_affiche += "Le temps s'est écoulé durant votre partie. Vous ne pouvez pas continuer";
+                    niveau_en_cours = false;
+
                 } else { // Le joueur gagne un bonus de temps et continue
+                    System.out.println("Score : " + this.score.getScore(true));
+
                     this.score.grilleComplete();
+                    System.out.println("Score : " + this.score.getScore(true));
+                    donnees_niveau.setChronoTemp((int) this.score.getScore(true));
+                    donnees_niveau.setNbGrilles(donnees_niveau.getNbGrilles() + 1);
+
+                    try {
+                        Profil.setScore(this.score.getScore(false), niveau_en_cours,false);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     texte_affiche += "Cliquez pour poursuivre.";
                     ButtonType btn_suivant = new ButtonType("Grille suivante");
                     btn_quitter = new ButtonType("Abandonner");
                     popup.getButtonTypes().add(btn_suivant);
+
                 }
 
                 popup.setContentText(texte_affiche);
 
 
             } else { // Le joueur a terminé la partie
-                popup.setContentText("Partie terminée ! Score : " + score.getScoreFormate() + ".");
+                popup.setContentText("Partie terminée ! Score : " + score.getScoreFormate(false) + ".");
                 btn_quitter = new ButtonType("Quitter");
+                niveau_en_cours = false;
+
             }
 
             popup.getButtonTypes().add(btn_quitter);
             Optional<ButtonType> result = popup.showAndWait();
 
-            if (result.get() == btn_quitter)
+            if (result.get() == btn_quitter) {
+                niveau_en_cours = false;
+                retour = true;
                 this.retourClique();
-            else {
+            } else {
                 try {
+                    System.out.println("Score : " + this.score.getScore(true));
                     this.loadNiveauSuivant();
                 } catch (Exception e) {
+                    niveau_en_cours = false;
+                    retour = true;
                     this.retourClique();
                 }
             }
@@ -234,7 +260,7 @@ public class ControllerNiveau {
     @FXML
     private void retourClique() {
         try {
-            Profil.setScore(score.getScore(), niveau_en_cours);
+            Profil.setScore(score.getScore(false), niveau_en_cours, retour);
             Profil.getInstance().sauvegarderNiveau(grille);
             this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
                 + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");

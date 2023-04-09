@@ -143,19 +143,6 @@ public class Profil {
         mode_de_jeu = mdj;
     }
 
-    /**
-     * Setter pour le score du joueur
-     *
-     * @param score   le score du joueur
-     * @param enCours si le niveau est en cours ou non
-     * @throws IOException si le fichier de sauvegarde n'existe pas
-     */
-    public static void setScore(double score, boolean enCours) throws IOException {
-        Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, enCours);
-        if (mode_de_jeu == ModeDeJeu.SANSFIN)
-            charger_nouvelle_grille = true;
-
-    }
 
     /**
      * Getter pour l'identifiant du niveau
@@ -167,6 +154,23 @@ public class Profil {
     }
 
     /**
+     * Setter pour le score du joueur
+     *
+     * @param score   le score du joueur
+     * @param enCours si le niveau est en cours ou non
+     * @param retour  si le joueur a quitter la partie avec le bouton retour
+     * @throws IOException si le fichier de sauvegarde n'existe pas
+     */
+    public static void setScore(double score, boolean enCours, boolean retour) throws IOException {
+        if (mode_de_jeu == ModeDeJeu.SANSFIN) {
+            charger_nouvelle_grille = false;
+            if (retour)
+                Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, false);
+
+        } else Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, enCours);
+    }
+
+    /**
      * Getter pour le score du niveau
      *
      * @param niveau_en_cours si le niveau est en cours ou non
@@ -174,8 +178,8 @@ public class Profil {
      * @throws IOException si le fichier de sauvegarde n'existe pas
      */
     private static Sauvegarder.DonneesScore getDonneesScore(boolean niveau_en_cours) throws IOException {
+
         if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
-            niveau_en_cours = true;
             score = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
             for (Sauvegarder.DonneesScore s : score) {
                 if (s.getNiveauEnCours())
@@ -183,12 +187,14 @@ public class Profil {
             }
             charger_nouvelle_grille = false;
             return donnees_niveau.donneesScore;
+        } else {
+            System.out.println("Attention reset score: ");
+            switch (mode_de_jeu) {
+                case DETENTE -> donnees_niveau.donneesScore.score = "5";
+                case SANSFIN -> donnees_niveau.donneesScore.score = "60";
+                case CONTRELAMONTRE -> donnees_niveau.donneesScore.score = "0";
+            }
         }
-        if (mode_de_jeu.equals(ModeDeJeu.DETENTE)) {
-            donnees_niveau.donneesScore.score = "5";
-            return donnees_niveau.donneesScore;
-        }
-        donnees_niveau.donneesScore.score = "0";
         return donnees_niveau.donneesScore;
     }
 
@@ -296,12 +302,15 @@ public class Profil {
      */
     private ScoreInterface chargerScore(int id_niveau, boolean niveau_en_cours) throws IOException {
 
-        if (mode_de_jeu != ModeDeJeu.SANSFIN && Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
+        if (Sauvegarder.RechercherSauvegardeNiveau(joueur, mode_de_jeu, id_niveau)) {
             List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(joueur, mode_de_jeu, id_niveau, niveau_en_cours);
             Sauvegarder.DonneesScore lastScore = scores.isEmpty() ? null : scores.get(scores.size() - 1);
             System.out.println("[Profil] Sauvegarde du score du niveau trouvée - Chargement du score du niveau sauvegardé...");
             charger_nouvelle_grille = false;
-            double scoreValue = Double.parseDouble(lastScore.score);
+            double scoreValue = 0;
+            if (mode_de_jeu != ModeDeJeu.SANSFIN)
+                scoreValue = Double.parseDouble(lastScore.score);
+            else scoreValue = Double.parseDouble(String.valueOf(donnees_niveau.chrono_temp));
             donnees_niveau.score = getScoreInstance(mode_de_jeu, scoreValue);
             donnees_niveau.score.setScore(scoreValue);
             donnees_niveau.donneesScore = lastScore;
@@ -330,8 +339,7 @@ public class Profil {
         return switch (mode) {
             case DETENTE -> new ScoreZen(scoreValue);
             case CONTRELAMONTRE -> new ScoreCLM(scoreValue);
-            case SANSFIN -> new ScoreEndless(scoreValue);
-            default -> throw new IllegalArgumentException("Mode de jeu Inconnu : " + mode);
+            case SANSFIN -> new ScoreEndless(scoreValue, donnees_niveau.nb_grilles_temp);
         };
     }
 
@@ -345,6 +353,7 @@ public class Profil {
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement des données du niveau
      */
     public DonneesNiveau chargerDonneesNiveau(int id_niveau, boolean en_cours) throws IOException {
+        System.out.println("[Profil] Chargement des données du niveau");
         donnees_niveau.score = chargerScore(id_niveau, en_cours);
         donnees_niveau = chargerGrille(id_niveau);
         donnees_niveau.historique = chargerHistorique();
@@ -377,6 +386,16 @@ public class Profil {
          * Le score du niveau.
          */
         protected ScoreInterface score;
+
+        /**
+         * Le temps du chrono
+         */
+        protected int chrono_temp;
+
+        /**
+         * Le nombre de grilles temporaires
+         */
+        protected int nb_grilles_temp;
 
         /**
          * Constructeur
@@ -437,6 +456,32 @@ public class Profil {
          */
         public ScoreInterface getScore() {
             return donnees_niveau.score;
+        }
+
+        /**
+         * Modifie le chrono temporaire
+         * @param chrono_temp le nouveau chrono temporaire
+         */
+        public void setChronoTemp(int chrono_temp) {
+            donnees_niveau.chrono_temp = chrono_temp;
+        }
+
+
+        /**
+         * Récupère le nombre de grilles
+         *
+         * @return le nombre de grilles
+         */
+        public int getNbGrilles() {
+            return nb_grilles_temp;
+        }
+
+        /**
+         * Modifie le nombre de grilles
+         * @param nb_grilles le nouveau nombre de grilles
+         */
+        public void setNbGrilles(int nb_grilles) {
+            this.nb_grilles_temp = nb_grilles;
         }
     }
 

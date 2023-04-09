@@ -103,8 +103,9 @@ public class ControllerLeaderboard {
         if (!pseudos.isEmpty()) {
             for (String pseudo : pseudos) {
                 List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
-                if (!scores.isEmpty()) {
-                    items.addAll(scores);
+                for(Sauvegarder.DonneesScore score : scores){
+                    System.out.println(score);
+                    items.add(score);
                 }
             }
             for (String pseudo : pseudos) {

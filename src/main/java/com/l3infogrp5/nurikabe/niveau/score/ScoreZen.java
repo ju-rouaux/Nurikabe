@@ -116,12 +116,12 @@ public class ScoreZen implements ScoreInterface {
      * @return etoiles
      */
     @Override
-    public double getScore() {
+    public double getScore(boolean b) {
         return this.etoiles;
     }
 
     @Override
-    public String getScoreFormate() {
+    public String getScoreFormate(boolean b) {
         return this.etoiles + " étoiles";
     }
 
