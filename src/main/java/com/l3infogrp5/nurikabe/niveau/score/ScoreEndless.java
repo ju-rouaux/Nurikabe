@@ -117,7 +117,6 @@ public class ScoreEndless extends ScoreChrono {
     /**
      * Méthode qui retourne le nombre de grilles complétées durant la partie
      *
-     * @param b si vrai retourne le temps total, sinon retourne le nombre de grilles
      * @return nbGrilles
      */
     @Override
@@ -151,6 +150,10 @@ public class ScoreEndless extends ScoreChrono {
         else return super.getScoreFormate(b);
     }
 
+    /**
+     * Méthode qui retourne le nombre de grilles complétées durant la partie
+     * @return nbGrilles
+     */
     public int getNbGrilles() {
         return nbGrilles + 1;
     }
