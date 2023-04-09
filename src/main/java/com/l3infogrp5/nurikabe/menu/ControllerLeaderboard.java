@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.menu;
 
+import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import javafx.collections.FXCollections;
@@ -134,7 +135,10 @@ public class ControllerLeaderboard {
      */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuSelection(stage).getScene());
+        if (Profil.getModeDeJeu() != ModeDeJeu.SANSFIN)
+            stage.setScene(new ControllerMenuSelection(stage).getScene());
+        else
+            stage.setScene(new ControllerMenuModeJeu(stage).getScene());
     }
 
     /**
