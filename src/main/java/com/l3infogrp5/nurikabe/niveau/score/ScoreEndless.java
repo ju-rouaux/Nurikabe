@@ -33,8 +33,8 @@ public class ScoreEndless extends ScoreChrono {
 
             this.totalSec--;
 
-            if (totalSec <= 0) {
-                stop();
+            if (this.totalSec <= 0) {
+                this.totalSec = 0;
             }
 
             afficheChrono();
@@ -71,7 +71,7 @@ public class ScoreEndless extends ScoreChrono {
         int malus = 40;
 
         if (totalSec - malus < 0) {
-            stop();
+            totalSec = 0;
         } else {
             totalSec -= malus;
         }

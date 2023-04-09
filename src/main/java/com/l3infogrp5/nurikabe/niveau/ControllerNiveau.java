@@ -169,7 +169,7 @@ public class ControllerNiveau {
             // Le joueur poursuit sa partie
             if (index_file < file_niveaux.size()) {
 
-                String texte_affiche = "Nombre de grilles terminées : " + (((ScoreEndless) score).getNbGrilles() + 1) + ".";
+                String texte_affiche = "Nombre de grilles terminées : " + (((ScoreEndless) score).getNbGrilles() + 1) + ". ";
 
                 // Le joueur ne peut plus poursuivre sa partie
                 if (this.score.getScore() <= 0) {
@@ -200,6 +200,7 @@ public class ControllerNiveau {
 
 
             } else { // Le joueur a terminé la partie
+                this.score.grilleComplete();
                 popup.setContentText("Partie terminée ! Score : " + score.getScoreFormate(false) + ".");
                 btn_quitter = new ButtonType("Quitter");
                 niveau_en_cours = false;
