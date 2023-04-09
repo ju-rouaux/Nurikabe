@@ -24,10 +24,10 @@
                   <center>
                      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                         <children>
-                           <TableView fx:id="tableau_moi" styleClass="col-height" stylesheets="@../css/menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <TableView fx:id="leaderboard_joueur_courant" styleClass="col-height" stylesheets="@../css/menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                               <columns>
-                                 <TableColumn fx:id="score_moi" maxWidth="1.7976931348623157E308" minWidth="128.0" prefWidth="-1.0" resizable="true" styleClass="table-row-cell" text="score" />
-                                 <TableColumn fx:id="date_moi" maxWidth="1.7976931348623157E308" minWidth="128.0" prefWidth="-1.0" resizable="true" styleClass="table-row-cell" text="date" />
+                                 <TableColumn fx:id="score_joueur_courant" maxWidth="1.7976931348623157E308" minWidth="128.0" prefWidth="-1.0" resizable="true" styleClass="table-row-cell" text="score" />
+                                 <TableColumn fx:id="date_joueur_courant" maxWidth="1.7976931348623157E308" minWidth="128.0" prefWidth="-1.0" resizable="true" styleClass="table-row-cell" text="date" />
                               </columns>
                            </TableView>
                         </children>
@@ -41,7 +41,7 @@
                   <center>
                      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                         <children>
-                           <TableView fx:id="tableau" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <TableView fx:id="leaderboard_general" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                              <columns>
                                  <TableColumn fx:id="nom" maxWidth="-Infinity" minWidth="128.0" prefWidth="-1.0" resizable="true" text="nom" />
                                <TableColumn fx:id="score" maxWidth="-1.0" minWidth="128.0" prefWidth="-1.0" resizable="true" text="score" />

@@ -42,7 +42,7 @@ public class ControllerLeaderboard {
     private TableColumn<Sauvegarder.DonneesScore, Date> date;
 
     @FXML
-    private TableColumn<Sauvegarder.DonneesScore, Date> date_moi;
+    private TableColumn<Sauvegarder.DonneesScore, Date> date_joueur_courant;
 
     @FXML
     private TableColumn<Sauvegarder.DonneesScore, String> nom;
@@ -51,13 +51,13 @@ public class ControllerLeaderboard {
     private TableColumn<Sauvegarder.DonneesScore, Double> score;
 
     @FXML
-    private TableColumn<Sauvegarder.DonneesScore, Double> score_moi;
+    private TableColumn<Sauvegarder.DonneesScore, Double> score_joueur_courant;
 
     @FXML
-    private TableView<Sauvegarder.DonneesScore> tableau;
+    private TableView<Sauvegarder.DonneesScore> leaderboard_general;
 
     @FXML
-    private TableView<Sauvegarder.DonneesScore> tableau_moi;
+    private TableView<Sauvegarder.DonneesScore> leaderboard_joueur_courant;
 
 
     /**
@@ -91,6 +91,7 @@ public class ControllerLeaderboard {
         // Définit les propriétés des colonnes pour le tableau de score
         this.nom.setCellValueFactory(new PropertyValueFactory<>("joueur"));
         this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
+        this.score.setSortType(TableColumn.SortType.DESCENDING);
         this.date.setCellValueFactory(new PropertyValueFactory<>("date"));
         // Récupère la liste des pseudos
         List<String> pseudos = Sauvegarder.joueursScore(Profil.getModeDeJeu(), id_niveau);
@@ -104,7 +105,7 @@ public class ControllerLeaderboard {
         if (!pseudos.isEmpty()) {
             for (String pseudo : pseudos) {
                 List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
-                for(Sauvegarder.DonneesScore score : scores){
+                for (Sauvegarder.DonneesScore score : scores) {
                     System.out.println(score);
                     items.add(score);
                 }
@@ -120,14 +121,17 @@ public class ControllerLeaderboard {
             }
         }
 
-        this.tableau.setItems(items);
-        this.tableau.getSortOrder().addAll(date, nom, score);
+        this.leaderboard_general.setItems(items);
+        this.leaderboard_general.getSortOrder().add(score);
 
         // Définit les propriétés des colonnes pour le tableau de score personnel
-        this.date_moi.setCellValueFactory(new PropertyValueFactory<>("date"));
-        this.score_moi.setCellValueFactory(new PropertyValueFactory<>("score"));
+        this.date_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("date"));
+        this.score_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("score"));
+        this.score_joueur_courant.setSortType(TableColumn.SortType.DESCENDING);
 
-        this.tableau_moi.setItems(items_moi);
+        this.leaderboard_joueur_courant.setItems(items_moi);
+        this.leaderboard_joueur_courant.getSortOrder().add(score_joueur_courant);
+
     }
 
 
