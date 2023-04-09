@@ -46,7 +46,7 @@ public class ControllerMenuRegles {
         this.stage = stage;
 
         loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FXML/new_regles.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/menu_regles.fxml"));
         loader.setController(this);
 
         scene = loader.load();

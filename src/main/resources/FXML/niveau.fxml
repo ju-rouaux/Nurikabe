@@ -24,7 +24,7 @@
                        <graphic>
                           <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                              <image>
-                                <Image url="@../close.png" />
+                                <Image url="@../img/close.png" />
                              </image>
                           </ImageView>
                        </graphic>
@@ -33,7 +33,7 @@
                         <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                              <image>
-                                <Image url="@../undo.png" />
+                                <Image url="@../img/undo.png" />
                              </image>
                           </ImageView>
                        </graphic>
@@ -42,7 +42,7 @@
                         <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                              <image>
-                                <Image url="@../redo.png" />
+                                <Image url="@../img/redo.png" />
                              </image>
                           </ImageView>
                        </graphic>
@@ -58,7 +58,7 @@
                         <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                              <image>
-                                <Image url="@../idea.png" />
+                                <Image url="@../img/idea.png" />
                              </image>
                           </ImageView>
                         </graphic>
@@ -67,7 +67,7 @@
                         <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                              <image>
-                                <Image url="@../check-mark.png" />
+                                <Image url="@../img/check-mark.png" />
                              </image>
                           </ImageView>
                         </graphic>
@@ -76,7 +76,7 @@
                       <graphic>
                           <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                              <image>
-                                <Image url="@../rotation.png" />
+                                <Image url="@../img/rotation.png" />
                              </image>
                           </ImageView>
                         </graphic>
@@ -98,7 +98,7 @@
                         <graphic>
                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                              <image>
-                                <Image url="@../chevron.png" />
+                                <Image url="@../img/chevron.png" />
                              </image>
                           </ImageView>
                         </graphic>
