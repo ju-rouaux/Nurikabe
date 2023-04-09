@@ -250,6 +250,11 @@
                                              </image>
                                           </ImageView>
                                           <Text layoutX="61.0" layoutY="3320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous trouverez ci-dessus une section d'un puzzle plus grand partiellement résolu dans lequel l'île de 6 a besoin d'une dernière case pour être complétée. Si nous supposons que cette case est celle surlignée en rouge dans le schéma de gauche ci-dessus, la case en dessous doit faire partie d'une rivière et la case à gauche de cette rivière doit faire partie d'une île pour éviter une zone de rivières 2x2. Tout cela, comme le montre le schéma du centre, entourera complètement le mur à droite du 6 en éliminant la continuité du fleuve dans toutes les directions. Donc la dernière case de l'îlot de 6 doit être vers la droite et cet îlot peut être complété comme indiqué sur le schéma de droite." wrappingWidth="493.6752815246582" />
+                                          <Text layoutX="430.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Techniques tirées de l'application Conceptis Nurikabe" textAlignment="RIGHT" wrappingWidth="146.7178955078125">
+                                             <font>
+                                                <Font name="System Italic" size="12.218181610107422" />
+                                             </font>
+                                          </Text>
                         
                                                                                                                                                                                                                                                                                              </children>
                                     </AnchorPane>
