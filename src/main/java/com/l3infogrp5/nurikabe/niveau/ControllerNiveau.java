@@ -216,8 +216,6 @@ public class ControllerNiveau {
                 this.retourClique();
             } else {
                 try {
-                    System.out.println("Score : " + this.score.getScore());
-
                     retour = false;
                     this.loadNiveauSuivant();
                 } catch (Exception e) {
