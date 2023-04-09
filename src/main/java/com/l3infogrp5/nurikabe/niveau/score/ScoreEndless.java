@@ -86,16 +86,8 @@ public class ScoreEndless extends ScoreChrono {
     public void grilleComplete() {
 
         int bonus = 30;
-
-        System.out.println("Grille complétée ! nbGrilles = " + nbGrilles);
-
         nbGrilles++;
-        System.out.println("nbGrilles = " + nbGrilles);
-
-        System.out.println("totalSec = " + totalSec);
         totalSec += bonus;
-        System.out.println("totalSec = " + totalSec);
-
     }
 
     /**
@@ -155,7 +147,7 @@ public class ScoreEndless extends ScoreChrono {
      * @return nbGrilles
      */
     public int getNbGrilles() {
-        return nbGrilles + 1;
+        return nbGrilles;
     }
 
 }
