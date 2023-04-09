@@ -115,7 +115,7 @@ public class ScoreEndless extends ScoreChrono {
     }
 
     /**
-     * Méthode qui retourne le nombre de grilles complétées durant la partie
+     * Méthode qui retourne le temps total restant
      *
      * @return nbGrilles
      */

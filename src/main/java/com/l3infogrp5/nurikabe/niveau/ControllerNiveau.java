@@ -168,6 +168,7 @@ public class ControllerNiveau {
 
             // Le joueur poursuit sa partie
             if (index_file < file_niveaux.size()) {
+
                 String texte_affiche = "Nombre de grilles terminées : " + ((ScoreEndless) score).getNbGrilles() + ".";
 
                 // Le joueur ne peut plus poursuivre sa partie
@@ -183,7 +184,7 @@ public class ControllerNiveau {
                     donnees_niveau.setNbGrilles(((ScoreEndless) score).getNbGrilles());
 
                     try {
-                        Profil.setScore(((ScoreEndless) this.score).getNbGrilles(), niveau_en_cours,false);
+                        Profil.setScore(((ScoreEndless) this.score).getNbGrilles(), niveau_en_cours,retour);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -215,6 +216,8 @@ public class ControllerNiveau {
             } else {
                 try {
                     System.out.println("Score : " + this.score.getScore());
+
+                    retour = false;
                     this.loadNiveauSuivant();
                 } catch (Exception e) {
                     niveau_en_cours = false;

@@ -165,8 +165,12 @@ public class Profil {
         if (mode_de_jeu == ModeDeJeu.SANSFIN) {
             charger_nouvelle_grille = false;
             score = donnees_niveau.nb_grilles_temp;
+            if(score > 1)
+                score --;
+
             if (retour)
                 Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, false);
+            else Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, enCours);
 
         } else Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, enCours);
     }
@@ -192,7 +196,10 @@ public class Profil {
             System.out.println("Attention reset score: ");
             switch (mode_de_jeu) {
                 case DETENTE -> donnees_niveau.donneesScore.score = "5";
-                case SANSFIN -> donnees_niveau.donneesScore.score = "60";
+                case SANSFIN -> {
+                    donnees_niveau.donneesScore.score = "60";
+                    donnees_niveau.nb_grilles_temp = 0;
+                }
                 case CONTRELAMONTRE -> donnees_niveau.donneesScore.score = "0";
             }
         }
