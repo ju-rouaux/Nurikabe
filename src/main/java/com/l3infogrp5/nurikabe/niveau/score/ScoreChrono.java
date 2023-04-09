@@ -77,7 +77,7 @@ abstract public class ScoreChrono implements ScoreInterface {
      * @return totalSec
      */
     @Override
-    public double getScore(boolean b) {
+    public double getScore() {
 
         return totalSec;
     }

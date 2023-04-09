@@ -51,10 +51,9 @@ public interface ScoreInterface {
     /**
      * Méthode qui retourne le nombre de grilles complétées durant la partie
      *
-     * @param b si vrai retourne le temps total, sinon retourne le nombre de grilles
      * @return nbGrilles
      */
-    double getScore(boolean b);
+    double getScore();
 
     /**
      * Retourne le score formaté pour son affichage.

@@ -121,9 +121,7 @@ public class ScoreEndless extends ScoreChrono {
      * @return nbGrilles
      */
     @Override
-    public double getScore(boolean b) {
-        if (!b)
-            return nbGrilles;
+    public double getScore() {
         return totalSec;
     }
 
@@ -151,6 +149,10 @@ public class ScoreEndless extends ScoreChrono {
         if (!b)
             return String.valueOf(nbGrilles);
         else return super.getScoreFormate(b);
+    }
+
+    public int getNbGrilles() {
+        return nbGrilles + 1;
     }
 
 }

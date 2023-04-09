@@ -164,6 +164,7 @@ public class Profil {
     public static void setScore(double score, boolean enCours, boolean retour) throws IOException {
         if (mode_de_jeu == ModeDeJeu.SANSFIN) {
             charger_nouvelle_grille = false;
+            score = donnees_niveau.nb_grilles_temp;
             if (retour)
                 Sauvegarder.sauvegarderScore(joueur, mode_de_jeu, id_niveau, score, false);
 
