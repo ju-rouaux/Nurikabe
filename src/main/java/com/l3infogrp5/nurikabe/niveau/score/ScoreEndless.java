@@ -21,7 +21,7 @@ public class ScoreEndless extends ScoreChrono {
     /**
      * Constructeur du ScoreEndless
      *
-     * @param totalSec nombre total de secondes
+     * @param totalSec  nombre total de secondes
      * @param nbGrilles nombre de grilles complétées
      */
     public ScoreEndless(double totalSec, int nbGrilles) {
