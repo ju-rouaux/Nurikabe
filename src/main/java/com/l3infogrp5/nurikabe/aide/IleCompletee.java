@@ -1,65 +1,94 @@
 package com.l3infogrp5.nurikabe.aide;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
-/**
- * Classe implémentant l'algorithme d'aide à la résolution lorsque 2 cases NUM
- * snt séparées d'une case
- * 
- * @author Killian Rattier, Guillaume Richard
- */
+import com.l3infogrp5.nurikabe.aide.Zone;
+
 public class IleCompletee implements Algorithme {
-    BorderPane affichage;
 
-    /**
-     * Constructeur de l'algorithme.
-     */
-    public IleCompletee() {
-        affichage = new BorderPane();
-        affichage.setCenter(new Label(
-                "Si 3 cases noires remplissent une zone de 4x4, la case restante appartient forcément à une île."));
-    }
-
-    /**
-     * Resouds l'algorithme d'aide dans une matrice donnée.
-     * 
-     * @param m la matrice à tester
-     * @return la liste des cases trouvées par l'algorithme
-     */
     @Override
     public Resultat resoudre(Matrice m) {
 
-        List<Position> resList = new ArrayList<>();
+        // On crée une liste de positions des cases numériques
+        List<Position> cases_num = new ArrayList<>();
 
-        for (int x = 0; x < m.getNbLignes(); x++) {
-            for (int y = 0; y < m.getNbColonnes(); y++) {
-                Position pos = new Position(x, y);
-                if (m.get(pos) == 1) {
-                    Zone zone = new Zone(new Matrice(m.getElements()));
-                    List<Position> listePositions = zone.findZone(pos);
-                    for (Position p : listePositions) {
-                        p.getVoisins().forEach(voisin -> {
-                            if (m.posValide(voisin)) {
-                                if (Etat.fromInt(m.get(voisin)) == Etat.BLANC) {
-                                    if (!resList.contains(voisin))
-                                        resList.add(voisin);
-                                }
-                            }
-                        });
-                    }
-                    
-                    if (!resList.isEmpty()) return new Resultat(true, resList, affichage);
+        // On crée une liste de positions des cases à modifier
+        List<Position> ile_non_complete = new ArrayList<>();
+
+        // On parcourt la matrice pour trouver les cases numériques avec la valeur 2
+        for (int i = 0; i < m.getNbLignes(); i++) {
+            for (int j = 0; j < m.getNbColonnes(); j++) {
+                if (m.get(new Position(i, j)) > 0) {
+                    cases_num.add(new Position(i, j));
                 }
             }
         }
-        return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
+
+        // On parcourt la liste des cases numériques
+        for (Position case_num : cases_num) {
+            // On trouve la zone de la case numérique
+            Zone zone = new Zone(m);
+            ArrayList<Position> zone_case_num = (ArrayList<Position>) zone.findZone(case_num);
+
+            ArrayList<Position> zone_case_num_distinct = (ArrayList<Position>) zone_case_num.stream().distinct()
+                    .collect(Collectors.toList());
+
+            System.out.println("\ncase num : " + m.get(case_num));
+            System.out.println("Case dans la zone : " + zone_case_num_distinct);
+            // System.out.println("taille de la zone : " + zone_case_num_distinct.size() + "
+            // valeur de la case : " + m.get(case_num) + " position de la case : " +
+            // case_num + "");
+            if (m.get(case_num) - zone_case_num_distinct.size() == 0) {
+                System.out.println("Ile completee a la position " + case_num + " valeur de la case : " + m.get(case_num)
+                        + " taille de la zone : " + zone_case_num_distinct.size());
+
+                for (Position pos : zone_case_num_distinct) {
+                    ArrayList<Position> voisins = (ArrayList<Position>) pos.getVoisins();
+
+                    for (Position voisin : voisins) {
+                        if ((m.posValide(voisin)) && ((m.get(voisin) == 0) || (m.get(voisin) == -2))) {
+
+                            if (!zone_case_num.contains(voisin)) {
+
+                                if (m.get(voisin) == -1) {
+                                    ile_non_complete.add(voisin);
+                                }
+
+                                // ile_non_complete.add(voisin);
+                            }
+
+                        }
+                    }
+                }
+
+
+
+                // Sinon, on retourne un résultat vrai avec la liste des cases à modifier
+                return new Resultat(true, ile_non_complete,
+                        new BorderPane(new Label(
+                                "Si une ile est completee, toutes les cases adjacente de l'ile doivent etre noires\n"
+                                        + " sur la case " + case_num + " la valeur de la case est : " + m.get(case_num)
+                                        + " \net il y a " + zone_case_num_distinct.size() + " cases dans la zone")));
+            }
+        }
+
+        // // si la liste des cases à modifier est vide, on retourne un résultat faux
+        // if (ile_non_complete.isEmpty()) {
+        // return new Resultat(false, ile_non_complete,
+        // new BorderPane(new Label("")));
+        // }
+
+        return new Resultat(false, ile_non_complete,
+                new BorderPane(new Label("")));
+
     }
+
 }
