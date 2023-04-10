@@ -146,7 +146,7 @@ public class ControllerMenuProfils {
 
         // On ajoute le profil créé aux profils existant et on met à jour le tableau des
         // noms.
-        ajoutProfils(Profil.getInstance().getJoueur());
+        ajoutProfils(Profil.getJoueur());
         chargerTableau();
     }
 
@@ -243,7 +243,7 @@ public class ControllerMenuProfils {
             String nom_actif = reader.next();
 
             // si la ligne récupérer n'est pas égal au profil en cour on change
-            if (!nom_actif.isEmpty() && !nom_actif.equals(Profil.getInstance().getJoueur())) {
+            if (!nom_actif.isEmpty() && !nom_actif.equals(Profil.getJoueur())) {
                 writeActif(nom_actif);
                 Profil.getInstance().chargerProfil(nom_actif);
             }
@@ -323,7 +323,7 @@ public class ControllerMenuProfils {
                 if(profil_actif > 0)
                     profil_actif --;
                 setActiveProfil(profil_actif);
-                writeActif(Profil.getInstance().getJoueur());
+                writeActif(Profil.getJoueur());
             }
         }
 

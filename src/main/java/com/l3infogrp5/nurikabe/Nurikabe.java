@@ -38,7 +38,7 @@ public class Nurikabe extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        Profil.getInstance().chargerProfil(Profil.getInstance().getJoueur());
+        Profil.getInstance().chargerProfil(Profil.getJoueur());
         stage.setScene(new Scene(new Group(new Text("test"))));
         stage.getScene().setRoot(new ControllerMenuPrincipal(stage.getScene()).getPane());
 
