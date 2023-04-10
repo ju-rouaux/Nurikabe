@@ -11,6 +11,7 @@ import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Path;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -36,8 +37,6 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -375,17 +374,31 @@ public class ControllerNiveau {
     @FXML
     private void afficherPosAide() {
         if (this.pos_aide != null) {
+            // Remonter le volet pour faciliter la lecture par l'utilisateur
+            this.toggle_aide.setSelected(false);
+
             for (Position p : this.pos_aide)
                 this.grille.surbrillance(p, true);
 
             // Désactiver la surbrillance après 2 secondes
-            new Timer().schedule(new TimerTask() {
+            new AnimationTimer() {
+                private long temps_debut;
+
                 @Override
-                public void run() {
-                    for (Position p : pos_aide)
-                        grille.surbrillance(p, false);
+                public void start() {
+                    super.start();
+                    temps_debut = System.currentTimeMillis();
                 }
-            }, 2000);
+
+                @Override
+                public void handle(long now) {
+                    if ((System.currentTimeMillis() - temps_debut) > 2000) {
+                        for (Position p : pos_aide)
+                            grille.surbrillance(p, false);
+                        this.stop();
+                    }
+                }
+            }.start();
         }
     }
 
