@@ -4,7 +4,7 @@ import javafx.scene.layout.Pane;
 
 /**
  * Classe interface répertoriant les méthodes à invoquer pour calculer un score
- * 
+ *
  * @author Antoine Couapel
  * @version 1.0
  */
@@ -51,5 +51,16 @@ public interface ScoreInterface {
      * @return double
      */
     public double getScore();
+
+    /**
+     * Retourne le score formaté pour son affichage.
+     */
+    public String getScoreFormate();
+
+    /**
+     * Méthode qui modifie le score
+     * @param score le nouveau score
+     */
+    public void setScore(double score);
 
 }

@@ -51,10 +51,13 @@
                                     <String fx:value="actif" />
                                     <String fx:value="btn" />
                                  </styleClass>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
                               </Button>
                               <Label styleClass="name-profile" text="default">
                                  <padding>
-                                    <Insets top="10.0" />
+                                    <Insets top="30.0" />
                                  </padding>
                               </Label>
                               <Button mnemonicParsing="false" onAction="#suprProfil" prefHeight="43.0" prefWidth="43.0" styleClass="btn-del" visible="false">

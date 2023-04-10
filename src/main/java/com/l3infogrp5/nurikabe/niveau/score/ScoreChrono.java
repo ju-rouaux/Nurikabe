@@ -13,12 +13,6 @@ import javafx.scene.text.Text;
  */
 abstract public class ScoreChrono implements ScoreInterface {
 
-    /**secondes*/
-    protected double sec;
-
-    /**minutes*/ 
-    protected double min;
-
     /**nombre total de secondes écoulées*/
     protected double totalSec;
 
@@ -49,15 +43,25 @@ abstract public class ScoreChrono implements ScoreInterface {
      * Méthode d'affichage du chrono
      */
     public void afficheChrono() {
+        text.setText(getScoreFormate());
+    }
 
-        min = totalSec / 60;
-        sec = totalSec % 60;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getScoreFormate() {
+        String s;
+
+        int min = (int) totalSec / 60;
+        int sec = (int) totalSec % 60;
 
         if (sec >= 10)
-            text.setText((int) min + ":" + (int) sec);
+            s = min + ":" + sec;
         else
-            text.setText((int) min + ":0" + (int) sec);
+            s = min + ":0" + sec;
 
+        return s;
     }
 
     /**
