@@ -23,18 +23,21 @@ public class Aide {
      * par Zone.
      */
     private static List<Algorithme> algos_simple = List.of(
+        new CasesInatteignables(),
         new Num1(),
         new NumVoisins(),
         new NumDiagonales(),
         new BlancEntoure(),
         new Agregat3CasesNoires()
+        
     );
 
     /**
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
      */
     private static List<Algorithme> algos_preprocessed = List.of(
-        new IleCompletee()
+        //new IleCompletee()
+        
     );
     
     /**
