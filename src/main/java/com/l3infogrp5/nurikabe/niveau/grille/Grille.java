@@ -369,4 +369,27 @@ public class Grille {
 
         return true;
     }
+
+    /**
+     * Retourne le nombre d'erreurs dans la grille.
+     * 
+     * @return le nombre d'erreurs dans la grille.
+     */
+    public int nbErreurs() {
+        int nb = 0;
+
+        for (int i = 0; i < this.solution.length; i++)
+            for (int j = 0; j < this.solution[j].length; j++) {
+                int v = this.grille[i][j].get();
+                if (v == Etat.BLANC.toInt()) // Ignorer les cases qui n'ont pas été coloriées
+                    continue;
+
+                if (v == Etat.POINT.toInt())
+                    v = Etat.BLANC.toInt();
+                if (this.solution[i][j] != v)
+                    nb++;
+            }
+
+        return nb;
+    }
 }

@@ -127,7 +127,7 @@ public class ControllerNiveau {
         this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
         this.toggle_aide.selectedProperty().addListener(new ChangeListener<Boolean>() {
             final TranslateTransition transition = new TranslateTransition(Duration.millis(150),
-                ControllerNiveau.this.panneau_aide);
+                    ControllerNiveau.this.panneau_aide);
 
             public void changed(ObservableValue<? extends Boolean> obj, Boolean ancien, Boolean nouveau) {
                 // De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers
@@ -151,11 +151,11 @@ public class ControllerNiveau {
 
         donnees_niveau = Profil.getInstance().chargerDonneesNiveau(id_niveau, true);
 
-        this.grille = new Grille(donnees_niveau.getMatriceNiveau(), donnees_niveau.getMatriceSolution(), donnees_niveau.getHistorique());
+        this.grille = new Grille(donnees_niveau.getMatriceNiveau(), donnees_niveau.getMatriceSolution(),
+                donnees_niveau.getHistorique());
 
         // Evenement lancé lorsque la grille est terminée
         this.grille.addOnVictoire(() -> {
-
 
             System.out.println("gagné !");
             // Arrêter le comptage du score
@@ -169,7 +169,8 @@ public class ControllerNiveau {
             // Le joueur poursuit sa partie
             if (index_file < file_niveaux.size()) {
 
-                String texte_affiche = "Nombre de grilles terminées : " + (((ScoreEndless) score).getNbGrilles() + 1) + ". ";
+                String texte_affiche = "Nombre de grilles terminées : " + (((ScoreEndless) score).getNbGrilles() + 1)
+                        + ". ";
 
                 // Le joueur ne peut plus poursuivre sa partie
                 if (this.score.getScore() <= 0) {
@@ -184,7 +185,7 @@ public class ControllerNiveau {
                     donnees_niveau.setNbGrilles(((ScoreEndless) score).getNbGrilles());
 
                     try {
-                        Profil.setScore(((ScoreEndless) this.score).getNbGrilles(), niveau_en_cours,retour);
+                        Profil.setScore(((ScoreEndless) this.score).getNbGrilles(), niveau_en_cours, retour);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -197,7 +198,6 @@ public class ControllerNiveau {
                 }
 
                 popup.setContentText(texte_affiche);
-
 
             } else { // Le joueur a terminé la partie
                 this.score.grilleComplete();
@@ -265,9 +265,9 @@ public class ControllerNiveau {
             Profil.setScore(score.getScore(), niveau_en_cours, retour);
             Profil.getInstance().sauvegarderNiveau(grille);
             this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
-                + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
+                    + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
 
-            stage.setScene(new ControllerMenuModeJeu(stage).getScene()); //TODO temporaire
+            stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // TODO temporaire
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -289,9 +289,13 @@ public class ControllerNiveau {
         grille.redo();
     }
 
-    //TODO
+    /**
+     * Invoque l'aide pour résoudre la grille.
+     * 
+     * @see Aide
+     */
     @FXML
-    void aideClique() {
+    private void aideClique() {
         Resultat r = Aide.calculer(new Matrice(this.grille.getMatrice()));
         if (r.getSucces()) {
             this.score.aideUtilise();
@@ -305,16 +309,45 @@ public class ControllerNiveau {
         }
     }
 
-    //TODO
+    /**
+     * Vérifie si la grille est correcte.
+     * Undo jusqu'à la dernière grille correcte si le joueur le demande.
+     */
     @FXML
     void checkClique() {
+        int nb_erreurs = this.grille.nbErreurs();
+
+        // Appliquer un malus si l'utilisateur a utilisé l'aide
         this.score.checkUtilise();
+
+        // Si aucune erreur, on affiche un message d'information
+        if (nb_erreurs == 0) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Vérification des erreurs");
+            alert.setHeaderText(
+                    "Aucune erreur détectée. Un malus vous a quand même été appliqué pour l'utilisation de l'aide.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Proposer de rétablir la grille au dernier état correct
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Vérification des erreurs");
+        alert.setHeaderText("Vous avez fait " + nb_erreurs
+                + " erreur(s). Voulez-vous rétablir la grille au dernier état correct ? Aucun malus supplémentaire ne vous sera appliqué.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            while (this.grille.nbErreurs() > 0)
+                this.grille.undo();
+        }
     }
 
-    //TODO
+    /**
+     * Réinitialise la grille et le score.
+     */
     @FXML
     void resetClique() {
-        //afficher une fenêtre de confirmation
+        // afficher une fenêtre de confirmation
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Réinitialiser la grille");
         alert.setHeaderText("Voulez-vous vraiment réinitialiser la grille ?");
