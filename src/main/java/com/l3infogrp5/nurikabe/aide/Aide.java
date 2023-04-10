@@ -28,7 +28,7 @@ public class Aide {
     private static List<Algorithme> algos_simple = List.of(
         new CasesInatteignables(),
         new Num1(),
-        new Agregat3CasesNoires()
+        new Agregat3CasesNoires(),
         //new IleCompletee()
         new BlancEntoure(),
         new Num2()

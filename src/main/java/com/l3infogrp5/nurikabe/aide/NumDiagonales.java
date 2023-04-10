@@ -3,7 +3,6 @@ package com.l3infogrp5.nurikabe.aide;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
