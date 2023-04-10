@@ -22,7 +22,7 @@ class BlancEntoure implements Algorithme {
      * devenir NOIR
      *
      * @param m la matrice à traiter
-     * @return la liste des positions des cases à modifier et le message à afficher en cas de succès
+     * @return la première valeur de la liste des positions des cases à modifier et le message à afficher en cas de succès
      */
     @Override
     public Resultat resoudre(Matrice m) {
@@ -71,7 +71,7 @@ class BlancEntoure implements Algorithme {
         }
 
         // Sinon la valeur de retour est vrai et on retourne la liste des positions à modifier
-        return new Resultat(true, PositionList,
+        return new Resultat(true, PositionList.subList(0, 1),
                 new BorderPane(new Label("Une case BLANCHE ou POINT entouré de voisins NOIR doit devenir NOIR")));
     }
 

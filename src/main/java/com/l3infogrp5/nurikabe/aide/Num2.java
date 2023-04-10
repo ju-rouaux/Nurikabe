@@ -22,7 +22,7 @@ class Num2 implements Algorithme {
      * Résoud l'algorithme de la case NUMÉRIQUE 2 entouré de deux cases noires
      *
      * @param m la matrice à traiter
-     * @return la liste des positions des cases qui doivent devenir noires
+     * @return la première valeur de la liste des positions des cases qui doivent devenir noires
      */
     @Override
     public Resultat resoudre(Matrice m) {
@@ -58,7 +58,8 @@ class Num2 implements Algorithme {
                 }
             }
 
-            // Si la case 2 est bloquée par deux bordures, sa seule diagonale doit devenir noire
+            // Si la case 2 est bloquée par deux bordures, sa seule diagonale doit devenir
+            // noire
             if (diagonales_valide.size() == 1) {
                 Position diag_pos = diagonales_valide.get(0);
 
@@ -69,8 +70,10 @@ class Num2 implements Algorithme {
                 ArrayList<Position> voisin_cases_noires = new ArrayList<>();
 
                 for (Position voisin : case_2.getVoisins()) {
-                    if (m.get(voisin) == -1) {
-                        voisin_cases_noires.add(voisin);
+                    if (m.posValide(voisin)) {
+                        if (m.get(voisin) == -1) {
+                            voisin_cases_noires.add(voisin);
+                        }
                     }
                 }
 
@@ -109,8 +112,10 @@ class Num2 implements Algorithme {
                             }
 
                             if ((count >= 2) && (diag_pos.getVoisins().containsAll(voisin_cases_noires))) {
-                                if ((m.get(oposite) < 1)&&(m.get(oposite) != -1)) {
-                                    case_noire.add(oposite);
+                                if (m.posValide(oposite)) {
+                                    if ((m.get(oposite) < 1) && (m.get(oposite) != -1)) {
+                                        case_noire.add(oposite);
+                                    }
                                 }
                             }
 
@@ -127,7 +132,7 @@ class Num2 implements Algorithme {
         }
 
         // Sinon, on retourne un résultat vrai avec la liste des cases à modifier
-        return new Resultat(true, case_noire,
+        return new Resultat(true, case_noire.subList(0, 1),
                 new BorderPane(new Label(
                         "Si un chiffre 2 est entouré dans sa diagonale de deux cases noires, la case diagonale opposée doit devenir une case noire")));
     }
