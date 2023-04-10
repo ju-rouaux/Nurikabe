@@ -58,7 +58,7 @@ public class NumDiagonales implements Algorithme {
                                     if (m.posValide(v2) && Aide.isNumPreproc(m, v2)) {
                                         count++;
                                     }
-                                    if (count == 2 && m.get(v) != -999) {
+                                    if (count == 2 && m.get(v) != -999 && !Aide.isNumPreproc(m,v)) {
                                         resList.add(v);
                                         break;
                                     }
