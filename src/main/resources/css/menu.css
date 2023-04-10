@@ -13,6 +13,8 @@
     -fx-effect: innershadow(gaussian, rgb(255, 227, 70), 28, 0.5, 0, 0);
     /*-fx-effect: dropshadow(three-pass-box, rgb(248, 255, 173),60, 0, 0, 0);*/
 }
+
+/* Style du text des boutons de sélection */
 .btn-principal .text{
     -fx-font-size: 26px;
     -fx-font-weight: bold;

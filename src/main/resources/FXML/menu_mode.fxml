@@ -14,13 +14,13 @@
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <AnchorPane>
+      <AnchorPane minHeight="480.0" minWidth="640.0">
          <children>
-            <GridPane alignment="CENTER" minHeight="500.0" minWidth="750.0" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane alignment="CENTER" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" />
                   <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints />
@@ -33,7 +33,8 @@
                      <children>
                         <GridPane layoutX="3.0" layoutY="9.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -41,7 +42,7 @@
                             <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
                                     <Button fx:id="btn_detente" minHeight="87.0" minWidth="349.0" mnemonicParsing="false" onAction="#detenteClique" styleClass="btn-principal" text="Détente" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
@@ -50,10 +51,10 @@
                                     </Button>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                    <Insets left="10.0" right="10.0" top="10.0" />
                                  </GridPane.margin>
                               </AnchorPane>
-                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
                                     <Button fx:id="btn_contre_montre" minHeight="87.0" minWidth="349.0" mnemonicParsing="false" onAction="#contreMontreClique" styleClass="btn-principal" text="Contre la montre" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
@@ -62,10 +63,10 @@
                                     </Button>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                    <Insets left="10.0" right="10.0" top="10.0" />
                                  </GridPane.margin>
                               </AnchorPane>
-                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
                                     <Button fx:id="btn_sans_fin" minHeight="87.0" minWidth="349.0" mnemonicParsing="false" onAction="#sansFinClique" styleClass="btn-principal" text="Sans fin" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
@@ -74,19 +75,26 @@
                                     </Button>
                                  </children>
                                  <GridPane.margin>
-                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                    <Insets left="10.0" right="10.0" top="10.0" />
                                  </GridPane.margin>
                               </AnchorPane>
-                              <Button fx:id="btn_score" mnemonicParsing="false" onAction="#scoreClique" styleClass="btn-trophee" translateX="260.0" GridPane.rowIndex="2">
-                                 <graphic>
-                                    <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../img/trophee2.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
+                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                 <children>
+                                    <Button fx:id="btn_score" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#scoreClique" styleClass="btn-trophee" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <graphic>
+                                          <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/trophee2.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
                            </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
                         </GridPane>
                      </children>
                   </AnchorPane>

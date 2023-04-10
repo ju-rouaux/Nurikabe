@@ -12,14 +12,14 @@
 
 .btn-profile {
   -fx-background-color: white;
-  -fx-background-image: url("../icon_utilisateur_default.png");
+  -fx-background-image: url("../img/icon_utilisateur_default.png");
   -fx-background-size: 50;
   -fx-background-position: center;
   -fx-background-repeat: no-repeat;
 }
 
 .btn-del {
-  -fx-background-image: url("../trash.png");
+  -fx-background-image: url("../img/trash.png");
   -fx-background-size: 30;
   -fx-background-position: center;
   -fx-background-repeat: no-repeat;

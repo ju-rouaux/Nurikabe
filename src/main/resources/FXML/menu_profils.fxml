@@ -17,12 +17,12 @@
 
 <Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <root>
-      <AnchorPane>
+      <AnchorPane minHeight="480.0" minWidth="640.0">
          <children>
-            <GridPane fx:id="pseudo_grid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="pseudo_grid" gridLinesVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
-                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="50.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="646.0" minWidth="10.0" prefWidth="608.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="50.0" />
               </columnConstraints>
               <rowConstraints>
@@ -195,6 +195,9 @@
                            </children>
                         </VBox>
                      </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
                   </GridPane>
                   <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour">
                      <graphic>

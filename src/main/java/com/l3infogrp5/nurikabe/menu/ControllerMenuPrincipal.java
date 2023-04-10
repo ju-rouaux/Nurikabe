@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 
@@ -16,6 +18,9 @@ import java.io.IOException;
  * @author Julien Rouaux - Nicolas
  */
 public class ControllerMenuPrincipal {
+
+    private final double MIN_POLICE_TAILLE = 80;
+    private final double MAX_POLICE_TAILLE = 500;
 
     private FXMLLoader loader;
     private Stage stage;
@@ -48,6 +53,26 @@ public class ControllerMenuPrincipal {
         loader.setController(this);
 
         scene = loader.load();
+
+        // Redimensionnement responsive du titre principal 
+        Label titreLabel = (Label) loader.getNamespace().get("titre_nurikabe");
+
+        scene.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double taillePolice = newVal.doubleValue() / 12;
+
+            if (taillePolice < MIN_POLICE_TAILLE) taillePolice = MIN_POLICE_TAILLE;
+            else if (taillePolice > MAX_POLICE_TAILLE) taillePolice = MAX_POLICE_TAILLE;
+            
+            titreLabel.setStyle("-fx-font-size: " + taillePolice + ";" + "-fx-font-weight:bold;");
+        });
+        scene.heightProperty().addListener((obs, oldVal, newVal) -> {
+            double taillePolice = newVal.doubleValue() / 6;
+
+            if (taillePolice < MIN_POLICE_TAILLE) taillePolice = MIN_POLICE_TAILLE;
+            else if (taillePolice > MAX_POLICE_TAILLE) taillePolice = MAX_POLICE_TAILLE;
+            
+            titreLabel.setStyle("-fx-font-size: " + taillePolice + ";" + "-fx-font-weight:bold;");
+        });
 
         ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage);
         controller_profil.getActif();
