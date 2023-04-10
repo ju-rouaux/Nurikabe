@@ -4,6 +4,9 @@ import com.l3infogrp5.nurikabe.menu.ControllerMenuPrincipal;
 import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -36,11 +39,11 @@ public class Nurikabe extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Profil.getInstance().chargerProfil(Profil.getInstance().getJoueur());
-        ControllerMenuPrincipal menu = new ControllerMenuPrincipal(stage);
+        stage.setScene(new Scene(new Group(new Text("test"))));
+        stage.getScene().setRoot(new ControllerMenuPrincipal(stage.getScene()).getPane());
 
         stage.setMinHeight(480);
         stage.setMinWidth(640);
-        stage.setScene(menu.getScene());
         stage.show();
     }
 

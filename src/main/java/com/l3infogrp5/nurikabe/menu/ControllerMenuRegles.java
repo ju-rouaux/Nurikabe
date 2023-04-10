@@ -2,11 +2,11 @@ package com.l3infogrp5.nurikabe.menu;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
@@ -22,8 +22,8 @@ import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 public class ControllerMenuRegles {
 
     private FXMLLoader loader;
-    private Stage stage;
-    private Scene scene;
+    private Scene root;
+    private Pane main;
     Profil joueur;
 
     @FXML
@@ -36,20 +36,20 @@ public class ControllerMenuRegles {
     /**
      * Initialise le menu de sélection d'affichage des règles et son contrôleur.
      *
-     * @param stage la fenêtre contenant la scène.
+     * @param root la scene racine de l'application.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuRegles(Stage stage) throws IOException {
+    public ControllerMenuRegles(Scene root) throws IOException {
         this.joueur = Profil.getInstance();
 
-        this.stage = stage;
+        this.root = root;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_regles.fxml"));
         loader.setController(this);
 
-        scene = loader.load();
+        main = loader.load();
     }
 
     @FXML
@@ -62,12 +62,12 @@ public class ControllerMenuRegles {
     }
 
     /**
-     * Retourne la scène gérée par le contrôleur.
+     * Retourne l'affichage géré par le contrôleur.
      *
-     * @return la scène gérée par le contrôleur.
+     * @return l'affichage géré par le contrôleur.
      */
-    public Scene getScene() {
-        return scene;
+    public Pane getPane() {
+        return main;
     }
 
     /*
@@ -75,7 +75,7 @@ public class ControllerMenuRegles {
      */
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
+        root.setRoot(new ControllerMenuPrincipal(root).getPane());
     }
 
 }

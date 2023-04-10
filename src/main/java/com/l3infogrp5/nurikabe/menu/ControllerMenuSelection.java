@@ -2,7 +2,6 @@ package com.l3infogrp5.nurikabe.menu;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -85,7 +84,7 @@ public class ControllerMenuSelection {
         private void scoreClique() throws IOException{
             // TODO charger score ici
             System.out.println("Lancement score " + (id_niveau));
-            stage.setScene(new ControllerLeaderboard(stage, id_niveau).getScene());
+            root.setRoot(new ControllerLeaderboard(root, id_niveau).getPane());
         }
 
         /**
@@ -94,7 +93,7 @@ public class ControllerMenuSelection {
          */
         @FXML
         private void selectionClique() throws IOException {
-            stage.setScene(new ControllerNiveau(stage, List.of(id_niveau)).getScene());
+            root.setRoot(new ControllerNiveau(root, List.of(id_niveau)).getPane());
             System.out.println("Lancement niveau " + id_niveau);
         }
     }
@@ -111,8 +110,8 @@ public class ControllerMenuSelection {
     private int nb_grilles;
 
     private FXMLLoader loader;
-    private Stage stage;
-    private Scene scene;
+    private Scene root;
+    private Pane main;
 
     @FXML
     private GridPane grille;
@@ -124,12 +123,12 @@ public class ControllerMenuSelection {
     /**
      * Initialise le menu de sélection de niveau et son contrôleur.
      *
-     * @param stage la fenêtre contenant la scène.
+     * @param root la scene racine de l'application.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuSelection(Stage stage) throws IOException {
-        this.stage = stage;
+    public ControllerMenuSelection(Scene root) throws IOException {
+        this.root = root;
         this.page_chargee = new SimpleIntegerProperty(1);
         this.nb_grilles = Sauvegarder.nbGrilles();
         this.liens_images = Profil.chargerImageNiveau();
@@ -138,7 +137,7 @@ public class ControllerMenuSelection {
         loader.setLocation(getClass().getResource("/FXML/menu_selection.fxml"));
         loader.setController(this);
 
-        scene = loader.load();
+        main = loader.load();
     }
 
     /**
@@ -184,12 +183,12 @@ public class ControllerMenuSelection {
     }
 
     /**
-     * Retourne la scène gérée par le contrôleur.
+     * Retourne l'affichage géré par le contrôleur.
      *
-     * @return la scène gérée par le contrôleur.
+     * @return l'affichage géré par le contrôleur.
      */
-    public Scene getScene() {
-        return scene;
+    public Pane getPane() {
+        return main;
     }
 
     /**
@@ -215,6 +214,6 @@ public class ControllerMenuSelection {
      */
     @FXML
     private void retourClique() throws Exception {
-        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
+        root.setRoot(new ControllerMenuModeJeu(root).getPane());
     }
 }
