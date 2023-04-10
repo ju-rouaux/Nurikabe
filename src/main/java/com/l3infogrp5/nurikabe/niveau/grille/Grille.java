@@ -1,8 +1,10 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import com.l3infogrp5.nurikabe.aide.Zone;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
 import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
+import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
@@ -18,6 +20,7 @@ import javafx.scene.layout.Priority;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Génère une grille de {@link Case} à partir de la matrice donnée.
@@ -107,16 +110,8 @@ public class Grille {
                 if (matrice[i][j] > 0) {
                     case_courante = new CaseNumerique(new Position(i, j));
 
-                    // Définition des événements de maintien
-                    // TODO ceci est une démo
                     case_courante.setEventMaintienGauche(new EventClicMaintenu() {
-                        public void maintenu(Case c) {
-                            System.out.println("Maintien de : " + c.getPosition());
-                        }
-
-                        public void relache(Case c) {
-                            System.out.println("Relâchement de : " + c.getPosition());
-                        }
+                        
                     });
                 }
 
@@ -124,17 +119,22 @@ public class Grille {
                 else {
                     case_courante = new CaseInteractive(new Position(i, j));
 
-                    // Définition des événements de maintien
-                    // TODO ceci est une démo
                     case_courante.setEventMaintienGauche(new EventClicMaintenu() {
+                        List<Position> positions;
+
                         public void maintenu(Case c) {
-                            System.out.println("Maintien de : " + c.getPosition());
-                            c.surbrillance(true);
+                            positions = new Zone(new Matrice(getMatrice())).findZone(c.getPosition());
+
+                            for (Position p : positions)
+                                getCase(grille[p.getX()][p.getY()]).surbrillance(true);
                         }
 
                         public void relache(Case c) {
-                            System.out.println("Relâchement de : " + c.getPosition());
-                            c.surbrillance(false);
+                            if (positions != null) {
+                                for (Position p : positions)
+                                    getCase(grille[p.getX()][p.getY()]).surbrillance(false);
+                                positions = null;
+                            }
                         }
                     });
 
