@@ -74,9 +74,6 @@ class Num2 implements Algorithme {
                     }
                 }
 
-                System.out
-                        .println("\033[31m" + "Cases noires autour de la case 2 : " + voisin_cases_noires + " \033[0m");
-
                 // si il y a moins de 2 cases noires autour de la case 2, on ne fait rien
                 if (voisin_cases_noires.size() >= 2) {
 
@@ -112,7 +109,6 @@ class Num2 implements Algorithme {
                             }
 
                             if ((count >= 2) && (diag_pos.getVoisins().containsAll(voisin_cases_noires))) {
-                                System.out.println("La case " + m.get(oposite) + " [" + oposite + "] doit devenir NOIR");
                                 if ((m.get(oposite) < 1)&&(m.get(oposite) != -1)) {
                                     case_noire.add(oposite);
                                 }
