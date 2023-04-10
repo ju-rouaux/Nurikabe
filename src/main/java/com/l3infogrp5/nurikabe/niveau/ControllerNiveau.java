@@ -31,7 +31,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -46,8 +45,8 @@ import java.util.Optional;
 public class ControllerNiveau {
 
     private final FXMLLoader loader;
-    private final Stage stage;
-    private final Scene scene;
+    private final Scene root;
+    private final Pane main;
 
     private final BooleanProperty aide_affichee; // Vrai si l'aide est affichée sur l'écran.
     private final List<Integer> file_niveaux; // Liste des niveaux à jouer successivement
@@ -91,13 +90,13 @@ public class ControllerNiveau {
     /**
      * Initialise la vue du niveau.
      *
-     * @param stage   la fenêtre contenant la scène.
+     * @param root   la scene racine de l'application.
      * @param niveaux la liste de niveaux à jouer successivement.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerNiveau(Stage stage, List<Integer> niveaux) throws IOException {
-        this.stage = stage;
+    public ControllerNiveau(Scene root, List<Integer> niveaux) throws IOException {
+        this.root = root;
         this.aide_affichee = new SimpleBooleanProperty();
 
         this.niveau_en_cours = true;
@@ -110,7 +109,7 @@ public class ControllerNiveau {
         loader.setLocation(getClass().getResource("/FXML/niveau.fxml"));
         loader.setController(this);
 
-        scene = loader.load();
+        main = loader.load();
     }
 
     /**
@@ -254,12 +253,12 @@ public class ControllerNiveau {
     }
 
     /**
-     * Retourne la scène gérée par le contrôleur.
+     * Retourne l'affichage géré par le contrôleur.
      *
-     * @return la scène gérée par le contrôleur.
+     * @return l'affichage géré par le contrôleur.
      */
-    public Scene getScene() {
-        return scene;
+    public Pane getPane() {
+        return main;
     }
 
     /*
@@ -274,7 +273,7 @@ public class ControllerNiveau {
             this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
                     + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
 
-            stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // TODO temporaire
+            root.setRoot(new ControllerMenuModeJeu(root).getPane()); // TODO temporaire
         } catch (Exception e) {
             e.printStackTrace();
         }

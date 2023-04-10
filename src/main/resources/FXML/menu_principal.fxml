@@ -2,7 +2,6 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,127 +10,124 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <root>
-      <AnchorPane>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane alignment="CENTER" minHeight="500.0" minWidth="750.0" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+            <ColumnConstraints halignment="CENTER" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints fillHeight="false" valignment="TOP" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints minHeight="30.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
+         </rowConstraints>
          <children>
-            <GridPane alignment="CENTER" minHeight="500.0" minWidth="750.0" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <columnConstraints>
-                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
-                  <ColumnConstraints halignment="CENTER" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints fillHeight="false" valignment="TOP" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
-                  <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                  <RowConstraints minHeight="30.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
-               </rowConstraints>
+            <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="SOMETIMES">
                <children>
-                  <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="SOMETIMES">
-                     <children>
-                        <Label id="titre-nurikabe" alignment="TOP_CENTER" contentDisplay="CENTER" text="NURIKABE" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font name="System Bold" size="60.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                     <padding>
-                        <Insets bottom="50.0" left="25.0" right="25.0" top="25.0" />
-                     </padding>
-                  </AnchorPane>
-                  <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <rowConstraints>
-                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                              <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                          </rowConstraints>
-                           <children>
-                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                                 <children>
-                                    <Button fx:id="btn_jouer" mnemonicParsing="false" onAction="#jouerClique" styleClass="btn-principal" text="Jouer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" left="200.0" right="200.0" />
-                                 </padding>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </AnchorPane>
-                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                                 <children>
-                                    <Button fx:id="btn_profils" mnemonicParsing="false" onAction="#profilsClique" styleClass="btn-principal" text="Profils" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" left="200.0" right="200.0" />
-                                 </padding>
-                              </AnchorPane>
-                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                                 <children>
-                                    <Button fx:id="btn_regles" mnemonicParsing="false" onAction="#reglesClique" styleClass="btn-principal" text="Règles" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" left="200.0" right="200.0" />
-                                 </padding>
-                              </AnchorPane>
-                              <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                                 <children>
-                                    <Button fx:id="btn_quitter" mnemonicParsing="false" onAction="#quitterClique" styleClass="btn-principal" text="Quitter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                                 <padding>
-                                    <Insets bottom="20.0" left="200.0" right="200.0" />
-                                 </padding>
-                              </AnchorPane>
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-                           </columnConstraints>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
+                  <Label id="titre-nurikabe" alignment="TOP_CENTER" contentDisplay="CENTER" text="NURIKABE" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold" size="60.0" />
+                     </font>
+                  </Label>
                </children>
-            </GridPane>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="50.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+            </AnchorPane>
+            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                    </rowConstraints>
+                     <children>
+                        <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                           <children>
+                              <Button fx:id="btn_jouer" mnemonicParsing="false" onAction="#jouerClique" styleClass="btn-principal" text="Jouer" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="200.0" right="200.0" />
+                           </padding>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </AnchorPane>
+                        <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                           <children>
+                              <Button fx:id="btn_profils" mnemonicParsing="false" onAction="#profilsClique" styleClass="btn-principal" text="Profils" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="200.0" right="200.0" />
+                           </padding>
+                        </AnchorPane>
+                        <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                           <children>
+                              <Button fx:id="btn_regles" mnemonicParsing="false" onAction="#reglesClique" styleClass="btn-principal" text="Règles" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="200.0" right="200.0" />
+                           </padding>
+                        </AnchorPane>
+                        <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                           <children>
+                              <Button fx:id="btn_quitter" mnemonicParsing="false" onAction="#quitterClique" styleClass="btn-principal" text="Quitter" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font name="DejaVu Sans Mono Bold Nerd Font Complete Mono" size="28.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="200.0" right="200.0" />
+                           </padding>
+                        </AnchorPane>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                     </columnConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
-   </root>
+      </GridPane>
+   </children>
    <stylesheets>
       <URL value="@../css/menu.css" />
       <URL value="@../css/global.css" />
    </stylesheets>
-</Scene>
+</AnchorPane>
