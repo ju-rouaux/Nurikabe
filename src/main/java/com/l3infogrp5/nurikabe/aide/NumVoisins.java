@@ -39,11 +39,11 @@ public class NumVoisins implements Algorithme {
         for (int x = 0; x < m.getNbLignes(); x++) {
             for (int y = 0; y < m.getNbColonnes(); y++) {
                 Position pos = new Position(x, y);
-                if (m.get(pos) == Etat.BLANC.toInt() || m.get(pos) == Etat.POINT.toInt()) {
-                    if (((m.posValide(pos.getN()) && Aide.isNum(m, pos.getN())))
-                            && (m.posValide(pos.getS()) && Aide.isNum(m, pos.getS()))
-                            || (m.posValide(pos.getE()) && Aide.isNum(m, pos.getE()))
-                                    && (m.posValide(pos.getO()) && Aide.isNum(m, pos.getO()))) {
+                if (m.get(pos) == 999) {
+                    if (((m.posValide(pos.getN()) && Aide.isNumPreproc(m, pos.getN())))
+                            && (m.posValide(pos.getS()) && Aide.isNumPreproc(m, pos.getS()))
+                            || (m.posValide(pos.getE()) && Aide.isNumPreproc(m, pos.getE()))
+                                    && (m.posValide(pos.getO()) && Aide.isNumPreproc(m, pos.getO()))) {
                         resList.add(pos);
                     }
                 }

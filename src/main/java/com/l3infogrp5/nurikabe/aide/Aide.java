@@ -1,10 +1,13 @@
 package com.l3infogrp5.nurikabe.aide;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import java.util.List;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
+
 
 /**
  * Classe permettant de lancer les algorithmes d'aide à la résolution.
@@ -25,10 +28,12 @@ public class Aide {
     private static List<Algorithme> algos_simple = List.of(
         new CasesInatteignables(),
         new Num1(),
-        new NumVoisins(),
         new NumDiagonales(),
-        new BlancEntoure(),
+
+        //new BlancEntoure(),
         new Agregat3CasesNoires()
+        
+        //new IleCompletee()
         
     );
 
@@ -36,7 +41,12 @@ public class Aide {
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
      */
     private static List<Algorithme> algos_preprocessed = List.of(
-        //new IleCompletee()
+        
+        new NumVoisins(),
+        new IleCompletee(),
+        new Exemple1()
+
+
         
     );
     
@@ -66,10 +76,14 @@ public class Aide {
         }
 
         // Si aucun algorithme n'a trouvé de solution.
-        return new Resultat(false, null, null);
+        return new Resultat(false, null, new BorderPane(new Label("test")));
     }
 
     public static boolean isNum(Matrice m, Position pos){
         return (Etat.fromInt(m.get(pos)) == Etat.NUMERIQUE);
+    }
+
+    public static boolean isNumPreproc(Matrice m, Position pos){
+        return (m.get(pos) != 999 && m.get(pos) != -999);
     }
 }

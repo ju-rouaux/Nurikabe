@@ -46,7 +46,6 @@ public class IleCompletee implements Algorithme {
                 if (m.get(pos) == 1) {
                     Zone zone = new Zone(new Matrice(m.getElements()));
                     List<Position> listePositions = zone.findZone(pos);
-                    System.out.println(listePositions);
                     for (Position p : listePositions) {
                         p.getVoisins().forEach(voisin -> {
                             if (m.posValide(voisin)) {
@@ -57,6 +56,7 @@ public class IleCompletee implements Algorithme {
                             }
                         });
                     }
+                    
                     if (!resList.isEmpty()) return new Resultat(true, resList, affichage);
                 }
             }
