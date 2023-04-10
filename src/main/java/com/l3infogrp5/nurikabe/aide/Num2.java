@@ -26,9 +26,6 @@ class Num2 implements Algorithme {
      */
     @Override
     public Resultat resoudre(Matrice m) {
-
-        System.out.println(m);
-
         // On crée une liste de positions des cases numériques
         List<Position> num2_List = new ArrayList<>();
 
