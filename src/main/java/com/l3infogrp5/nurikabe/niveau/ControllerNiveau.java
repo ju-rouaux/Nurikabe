@@ -9,6 +9,8 @@ import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Path;
+import com.l3infogrp5.nurikabe.utils.Position;
+
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -34,6 +36,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -51,6 +55,7 @@ public class ControllerNiveau {
     private Grille grille;
     private ScoreInterface score;
     private boolean niveau_en_cours; // Vrai si le niveau est en cours de jeu.
+    private List<Position> pos_aide; // Liste des positions de l'aide, peut être null.
 
     private boolean retour;
     private int index_file; // Indice du niveau lancé dans la liste
@@ -81,6 +86,8 @@ public class ControllerNiveau {
     private BorderPane panneau_aide;
     @FXML
     private HBox barre;
+    @FXML
+    private Button btn_pos_aide;
 
     /**
      * Initialise la vue du niveau.
@@ -132,7 +139,8 @@ public class ControllerNiveau {
             public void changed(ObservableValue<? extends Boolean> obj, Boolean ancien, Boolean nouveau) {
                 // De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers
                 // le haut sinon
-                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight()) * (nouveau ? 1 : -1));
+                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight() - btn_pos_aide.getHeight())
+                        * (nouveau ? 1 : -1));
                 transition.play();
             }
         });
@@ -297,14 +305,14 @@ public class ControllerNiveau {
     @FXML
     private void aideClique() {
         Resultat r = Aide.calculer(new Matrice(this.grille.getMatrice()));
+        this.pos_aide = r.getPosition();
         if (r.getSucces()) {
             this.score.aideUtilise();
             this.toggle_aide.setSelected(true);
-            // TODO proposer de marquer l'emplacement de la solution
             if (r.getAffichage() != null) {
                 Pane p = r.getAffichage();
-                p.getStyleClass().add("panneau-aide");
-                this.panneau_aide.setCenter(p);
+                p.setMouseTransparent(true);
+                ((BorderPane) this.panneau_aide.getCenter()).setCenter(p);
             }
         }
     }
@@ -355,6 +363,29 @@ public class ControllerNiveau {
         if (result.get() == ButtonType.OK) {
             this.score.restart();
             this.grille.reset();
+        }
+    }
+
+    /**
+     * Mets en surbrillance pendant 2 secondes les cases de la grille qui sont
+     * sugérées par l'aide.
+     * 
+     * @see Aide
+     */
+    @FXML
+    private void afficherPosAide() {
+        if (this.pos_aide != null) {
+            for (Position p : this.pos_aide)
+                this.grille.surbrillance(p, true);
+
+            // Désactiver la surbrillance après 2 secondes
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    for (Position p : pos_aide)
+                        grille.surbrillance(p, false);
+                }
+            }, 2000);
         }
     }
 

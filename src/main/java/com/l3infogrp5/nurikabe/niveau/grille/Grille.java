@@ -392,4 +392,15 @@ public class Grille {
 
         return nb;
     }
+
+    /**
+     * Met en surbrillance la case à la position donnée.
+     * 
+     * @param p la position de la case à mettre en surbrillance.
+     * @param b vrai si la case doit être mise en surbrillance, faux sinon.
+     */
+    public void surbrillance(Position p, boolean b) {
+        if (p != null && p.getX() >= 0 && p.getX() < this.nb_lignes && p.getY() >= 0 && p.getY() < this.nb_colonnes)
+            this.getCase(this.grille[p.getX()][p.getY()]).surbrillance(b, 0);
+    }
 }
