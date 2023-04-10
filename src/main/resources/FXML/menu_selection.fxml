@@ -2,7 +2,6 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,72 +11,69 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <root>
-      <AnchorPane minHeight="480.0" minWidth="640.0">
+
+<AnchorPane minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane alignment="CENTER" gridLinesVisible="true" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="66.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="497.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.12724372296304" minWidth="10.0" prefWidth="66.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <GridPane alignment="CENTER" gridLinesVisible="true" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="66.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="497.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.12724372296304" minWidth="10.0" prefWidth="66.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
-                  <RowConstraints minHeight="10.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <children>
-                  <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <children>
-                        <GridPane fx:id="grille" alignment="CENTER" gridLinesVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-                  <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-                     <graphic>
+                  <GridPane fx:id="grille" alignment="CENTER" gridLinesVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                     <Image url="@../img/back.png" />
+                  </ImageView>
+               </graphic>
+            </Button>
+            <HBox alignment="TOP_CENTER" spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <children>
+                  <Button fx:id="btn_precedent" mnemonicParsing="false" onAction="#precedentClique" styleClass="btn-retour">
+                  <graphic>
                         <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                           <Image url="@../img/back.png" />
+                           <Image url="@../img/left-arrow.png" />
                         </ImageView>
                      </graphic>
                   </Button>
-                  <HBox alignment="TOP_CENTER" spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                     <children>
-                        <Button fx:id="btn_precedent" mnemonicParsing="false" onAction="#precedentClique" styleClass="btn-retour">
-                        <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                                 <Image url="@../img/left-arrow.png" />
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btn_suivant" mnemonicParsing="false" onAction="#suivantClique" styleClass="btn-retour">
-                        <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                                 <Image url="@../img/right-arrow.png" />
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" />
-                     </GridPane.margin>
-                  </HBox>
+                  <Button fx:id="btn_suivant" mnemonicParsing="false" onAction="#suivantClique" styleClass="btn-retour">
+                  <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                           <Image url="@../img/right-arrow.png" />
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
-            </GridPane>
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </HBox>
          </children>
-      </AnchorPane>
-   </root>
+      </GridPane>
+   </children>
    <stylesheets>
       <URL value="@../css/menu.css" />
       <URL value="@../css/global.css" />
    </stylesheets>
-</Scene>
+</AnchorPane>

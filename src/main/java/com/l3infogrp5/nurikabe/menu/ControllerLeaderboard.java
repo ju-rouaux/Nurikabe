@@ -14,7 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -27,9 +27,9 @@ import java.util.List;
  */
 
 public class ControllerLeaderboard {
-    private final Stage stage;
+    private final Scene root;
     private final FXMLLoader loader;
-    private final Scene scene;
+    private final Pane main;
     private final int id_niveau;
 
     @FXML
@@ -63,20 +63,20 @@ public class ControllerLeaderboard {
     /**
      * Initialise le menu de sélection de mode de jeu et son contrôleur.
      *
-     * @param stage     la fenêtre contenant la scène.
+     * @param root     la scene racine de l'application.
      * @param id_niveau le numéro du niveau.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerLeaderboard(Stage stage, int id_niveau) throws IOException {
-        this.stage = stage;
+    public ControllerLeaderboard(Scene root, int id_niveau) throws IOException {
+        this.root = root;
         this.id_niveau = id_niveau;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/leaderboard.fxml"));
         loader.setController(this);
 
-        scene = loader.load();
+        main = loader.load();
     }
 
 
@@ -141,18 +141,18 @@ public class ControllerLeaderboard {
     @FXML
     private void retourClique(ActionEvent event) throws Exception {
         if (Profil.getModeDeJeu() != ModeDeJeu.SANSFIN)
-            stage.setScene(new ControllerMenuSelection(stage).getScene());
+            root.setRoot(new ControllerMenuSelection(root).getPane());
         else
-            stage.setScene(new ControllerMenuModeJeu(stage).getScene());
+            root.setRoot(new ControllerMenuModeJeu(root).getPane());
     }
 
     /**
-     * Retourne la scène gérée par le contrôleur.
+     * Retourne l'affichage géré par le contrôleur.
      *
-     * @return la scène gérée par le contrôleur.
+     * @return l'affichage géré par le contrôleur.
      */
-    public Scene getScene() {
-        return scene;
+    public Pane getPane() {
+        return main;
     }
 }
 

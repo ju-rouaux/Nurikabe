@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,8 +34,8 @@ import java.util.Scanner;
 public class ControllerMenuProfils {
 
     private final FXMLLoader loader;
-    private final Stage stage;
-    private final Scene scene;
+    private final Scene root;
+    private final Pane main;
 
     /**
      * Le nom du joueur actif
@@ -52,29 +53,29 @@ public class ControllerMenuProfils {
     /**
      * Initialise le menu de sélection d'affichages des profils et son contrôleur.
      *
-     * @param stage La fenêtre contenant la scène.
+     * @param root la scene racine de l'application.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuProfils(Stage stage) throws IOException {
-        this.stage = stage;
+    public ControllerMenuProfils(Scene root) throws IOException {
+        this.root = root;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_profils.fxml"));
         loader.setController(this);
-        scene = loader.load();
+        main = loader.load();
 
         profil_actif = 0;
         profils_attributs = Sauvegarder.listeFichiers(new File(Path.repertoire_lvl.toString()));
     }
 
     /**
-     * Retourne la scène gérée par le contrôleur.
+     * Retourne l'affichage géré par le contrôleur.
      *
-     * @return La scène gérée par le contrôleur.
+     * @return l'affichage géré par le contrôleur.
      */
-    public Scene getScene() {
-        return scene;
+    public Pane getPane() {
+        return main;
     }
 
     /**
@@ -84,7 +85,7 @@ public class ControllerMenuProfils {
      */
     @FXML
     private void retourClique(ActionEvent event) throws IOException {
-        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
+        root.setRoot(new ControllerMenuPrincipal(root).getPane());
     }
 
     /**
@@ -330,8 +331,8 @@ public class ControllerMenuProfils {
         profils_attributs.remove(name_to_delete);
 
         // Rechargement de la scène
-        ControllerMenuProfils reload = new ControllerMenuProfils(stage);
-        stage.setScene(reload.getScene());
+        ControllerMenuProfils reload = new ControllerMenuProfils(root);
+        root.setRoot(reload.getPane());
         reload.chargerTableau();
     }
 
