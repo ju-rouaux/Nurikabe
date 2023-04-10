@@ -196,9 +196,8 @@ public abstract class Case extends Button {
      * Met la case en surbrillance ou non.
      * 
      * @param b           vrai si la case doit être en surbrillance, faux sinon.
-     * @param taille_zone nombre de cases mises en surbrillance.
      */
-    public void surbrillance(boolean b, int taille_zone) {
+    public void surbrillance(boolean b) {
         if (b)
             this.getStyleClass().add("surbrillance");
         else

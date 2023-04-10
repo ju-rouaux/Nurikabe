@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
@@ -13,108 +12,107 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-  <BorderPane fx:id="panneau_principal" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0">
-     <top>
-        <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="640.0" styleClass="toolBar" BorderPane.alignment="CENTER">
-           <items>
-              <HBox fx:id="barre" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="614.0" spacing="10.0">
-                 <children>
-                    <Button fx:id="btn_retour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
-                       <graphic>
-                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                             <image>
-                                <Image url="@../img/close.png" />
-                             </image>
-                          </ImageView>
-                       </graphic>
-                    </Button>
-                    <Button fx:id="btn_undo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#undoClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
-                        <graphic>
-                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                             <image>
-                                <Image url="@../img/undo.png" />
-                             </image>
-                          </ImageView>
-                       </graphic>
+
+<BorderPane fx:id="panneau_principal" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <top>
+     <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="640.0" styleClass="toolBar" BorderPane.alignment="CENTER">
+        <items>
+           <HBox fx:id="barre" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="614.0" spacing="10.0">
+              <children>
+                 <Button fx:id="btn_retour" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#retourClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
+                    <graphic>
+                       <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                          <image>
+                             <Image url="@../img/close.png" />
+                          </image>
+                       </ImageView>
+                    </graphic>
+                 </Button>
+                 <Button fx:id="btn_undo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#undoClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
+                     <graphic>
+                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                          <image>
+                             <Image url="@../img/undo.png" />
+                          </image>
+                       </ImageView>
+                    </graphic>
+                  </Button>
+                 <Button fx:id="btn_redo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redoClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
+                     <graphic>
+                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                          <image>
+                             <Image url="@../img/redo.png" />
+                          </image>
+                       </ImageView>
+                    </graphic>
                      </Button>
-                    <Button fx:id="btn_redo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redoClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
-                        <graphic>
-                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                             <image>
-                                <Image url="@../img/redo.png" />
-                             </image>
-                          </ImageView>
-                       </graphic>
-                        </Button>
-                    <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                    <BorderPane fx:id="panneau_score" prefHeight="300.0" prefWidth="250.0" styleClass="score">
-                       <center>
-                          <Label styleClass="score-text" text="Score" BorderPane.alignment="CENTER" />
-                       </center>
-                    </BorderPane>
-                    <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                    <Button fx:id="btn_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aideClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
-                        <graphic>
-                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                             <image>
-                                <Image url="@../img/idea.png" />
-                             </image>
-                          </ImageView>
-                        </graphic>
-                     </Button>
-                    <Button fx:id="btn_check" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
-                        <graphic>
-                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                             <image>
-                                <Image url="@../img/check-mark.png" />
-                             </image>
-                          </ImageView>
-                        </graphic>
-                     </Button>
-                  <Button fx:id="btn_reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#resetClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
-                      <graphic>
-                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                             <image>
-                                <Image url="@../img/rotation.png" />
-                             </image>
-                          </ImageView>
-                        </graphic>
-                     </Button>
-                 </children>
-              </HBox>
-           </items>
-        </ToolBar>
-     </top>
-     <center>
-         <StackPane fx:id="panneau_central" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-               <BorderPane fx:id="panneau_aide" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="225.0" prefWidth="600.0" translateY="-197.0" StackPane.alignment="TOP_CENTER">
-                  <bottom>
-                     <ToggleButton fx:id="toggle_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" styleClass="btn-toggle-aide" textOverrun="CLIP" BorderPane.alignment="CENTER">
-                        <graphic>
-                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
-                             <image>
-                                <Image url="@../img/chevron.png" />
-                             </image>
-                          </ImageView>
-                        </graphic>
-                     </ToggleButton>
-                  </bottom>
-                  <center>
-                     <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panneau-aide" BorderPane.alignment="CENTER">
-                        <top>
-                           <Button fx:id="btn_pos_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#afficherPosAide" prefHeight="25.0" prefWidth="120.0" styleClass="btn-aff-pos" text="Afficher la position" translateX="-6.0" translateY="164.0" BorderPane.alignment="CENTER_RIGHT" />
-                        </top>
-                     </BorderPane>
-                  </center>
-               </BorderPane>
-            </children>
-         </StackPane>
-      </center>
-  </BorderPane>
+                 <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                 <BorderPane fx:id="panneau_score" prefHeight="300.0" prefWidth="250.0" styleClass="score">
+                    <center>
+                       <Label styleClass="score-text" text="Score" BorderPane.alignment="CENTER" />
+                    </center>
+                 </BorderPane>
+                 <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                 <Button fx:id="btn_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aideClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
+                     <graphic>
+                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                          <image>
+                             <Image url="@../img/idea.png" />
+                          </image>
+                       </ImageView>
+                     </graphic>
+                  </Button>
+                 <Button fx:id="btn_check" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
+                     <graphic>
+                       <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                          <image>
+                             <Image url="@../img/check-mark.png" />
+                          </image>
+                       </ImageView>
+                     </graphic>
+                  </Button>
+               <Button fx:id="btn_reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#resetClique" prefHeight="30.0" prefWidth="30.0" textOverrun="CLIP">
+                   <graphic>
+                       <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                          <image>
+                             <Image url="@../img/rotation.png" />
+                          </image>
+                       </ImageView>
+                     </graphic>
+                  </Button>
+              </children>
+           </HBox>
+        </items>
+     </ToolBar>
+  </top>
+  <center>
+      <StackPane fx:id="panneau_central" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane fx:id="panneau_aide" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="225.0" prefWidth="600.0" translateY="-197.0" StackPane.alignment="TOP_CENTER">
+               <bottom>
+                  <ToggleButton fx:id="toggle_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" styleClass="btn-toggle-aide" textOverrun="CLIP" BorderPane.alignment="CENTER">
+                     <graphic>
+                       <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
+                          <image>
+                             <Image url="@../img/chevron.png" />
+                          </image>
+                       </ImageView>
+                     </graphic>
+                  </ToggleButton>
+               </bottom>
+               <center>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panneau-aide" BorderPane.alignment="CENTER">
+                     <top>
+                        <Button fx:id="btn_pos_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#afficherPosAide" prefHeight="25.0" prefWidth="120.0" styleClass="btn-aff-pos" text="Afficher la position" translateX="-6.0" translateY="164.0" BorderPane.alignment="CENTER_RIGHT" />
+                     </top>
+                  </BorderPane>
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </center>
    <stylesheets>
       <URL value="@../css/niveau.css" />
       <URL value="@../css/global.css" />
    </stylesheets>
-</Scene>
+</BorderPane>

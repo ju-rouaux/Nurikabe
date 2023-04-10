@@ -3,9 +3,9 @@ package com.l3infogrp5.nurikabe.menu;
 import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,8 +21,8 @@ import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 public class ControllerMenuModeJeu {
 
     private FXMLLoader loader;
-    private Stage stage;
-    private Scene scene;
+    private Scene root;
+    private Pane main;
 
     @FXML
     private Button btn_detente;
@@ -42,28 +42,28 @@ public class ControllerMenuModeJeu {
     /**
      * Initialise le menu de sélection de mode de jeu et son contrôleur.
      *
-     * @param stage la fenêtre contenant la scène.
+     * @param root la scene racine de l'application.
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuModeJeu(Stage stage) throws IOException {
-        this.stage = stage;
+    public ControllerMenuModeJeu(Scene root) throws IOException {
+        this.root = root;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_mode.fxml"));
         loader.setController(this);
 
-        scene = loader.load();
+        main = loader.load();
 
     }
 
     /**
-     * Retourne la scène gérée par le contrôleur.
+     * Retourne l'affichage géré par le contrôleur.
      *
-     * @return la scène gérée par le contrôleur.
+     * @return l'affichage géré par le contrôleur.
      */
-    public Scene getScene() {
-        return scene;
+    public Pane getPane() {
+        return main;
     }
 
     /**
@@ -72,7 +72,7 @@ public class ControllerMenuModeJeu {
     @FXML
     private void detenteClique() throws Exception {
         Profil.getInstance().setModeDeJeu(ModeDeJeu.DETENTE);
-        stage.setScene(new ControllerMenuSelection(stage).getScene());
+        root.setRoot(new ControllerMenuSelection(root).getPane());
     }
 
     /**
@@ -81,7 +81,7 @@ public class ControllerMenuModeJeu {
     @FXML
     private void contreMontreClique() throws Exception {
         Profil.getInstance().setModeDeJeu(ModeDeJeu.CONTRELAMONTRE);
-        stage.setScene(new ControllerMenuSelection(stage).getScene());
+        root.setRoot(new ControllerMenuSelection(root).getPane());
     }
 
     /**
@@ -90,9 +90,9 @@ public class ControllerMenuModeJeu {
     @FXML
     private void sansFinClique() throws Exception {
         Profil.getInstance().setModeDeJeu(ModeDeJeu.SANSFIN);
-        stage.setScene(new ControllerNiveau(stage, List.of(
+        root.setRoot(new ControllerNiveau(root, List.of(
             0, 1, 3, 4, 5, 6, 7, 8, 9, 10 //TODO selectionner les niveaux à jouer
-        )).getScene());
+        )).getPane());
     }
 
     /**
@@ -101,7 +101,7 @@ public class ControllerMenuModeJeu {
     @FXML
     private void scoreClique() throws IOException {
         Profil.getInstance().setModeDeJeu(ModeDeJeu.SANSFIN);
-        stage.setScene(new ControllerLeaderboard(stage, 0).getScene());
+        root.setRoot(new ControllerLeaderboard(root, 0).getPane());
     }
 
     /*
@@ -109,6 +109,6 @@ public class ControllerMenuModeJeu {
      */
     @FXML
     private void retourClique() throws Exception {
-        stage.setScene(new ControllerMenuPrincipal(stage).getScene());
+        root.setRoot(new ControllerMenuPrincipal(root).getPane());
     }
 }

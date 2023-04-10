@@ -2,9 +2,9 @@ package com.l3infogrp5.nurikabe.menu;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 
@@ -18,8 +18,8 @@ import java.io.IOException;
 public class ControllerMenuPrincipal {
 
     private FXMLLoader loader;
-    private Stage stage;
-    private Scene scene;
+    private Scene root;
+    private Pane main;
 
     @FXML
     private Button btn_jouer;
@@ -36,30 +36,30 @@ public class ControllerMenuPrincipal {
     /**
      * Initialise le menu principal et son contrôleur.
      * 
-     * @param stage la fenêtre contenant la scène.
+     * @param root la scene racine de l'application. 
      * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
      *                     être lu.
      */
-    public ControllerMenuPrincipal(Stage stage) throws IOException {
-        this.stage = stage;
+    public ControllerMenuPrincipal(Scene root) throws IOException {
+        this.root = root;
 
         loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/FXML/menu_principal.fxml"));
         loader.setController(this);
 
-        scene = loader.load();
+        main = loader.load();
 
-        ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage);
+        ControllerMenuProfils controller_profil = new ControllerMenuProfils(root);
         controller_profil.getActif();
     }
 
     /**
-     * Retourne la scène gérée par le contrôleur.
+     * Retourne l'affichage géré par le contrôleur.
      * 
-     * @return la scène gérée par le contrôleur.
+     * @return l'affichage géré par le contrôleur.
      */
-    public Scene getScene() {
-        return scene;
+    public Pane getPane() {
+        return main;
     }
 
     /**
@@ -67,7 +67,7 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void jouerClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuModeJeu(stage).getScene());
+        root.setRoot(new ControllerMenuModeJeu(root).getPane());
     }
 
     /**
@@ -77,8 +77,8 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void profilsClique(ActionEvent event) throws IOException {
-        ControllerMenuProfils controller_profil = new ControllerMenuProfils(stage);
-        stage.setScene(controller_profil.getScene());
+        ControllerMenuProfils controller_profil = new ControllerMenuProfils(root);
+        root.setRoot(controller_profil.getPane());
         controller_profil.chargerTableau();
     }
 
@@ -87,7 +87,7 @@ public class ControllerMenuPrincipal {
      */
     @FXML
     private void reglesClique(ActionEvent event) throws Exception {
-        stage.setScene(new ControllerMenuRegles(stage).getScene());
+        root.setRoot(new ControllerMenuRegles(root).getPane());
     }
 
     /**
