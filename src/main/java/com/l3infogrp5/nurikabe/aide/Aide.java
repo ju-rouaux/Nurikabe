@@ -21,6 +21,7 @@ public class Aide {
      * par Zone.
      */
     private static List<Algorithme> algos_simple = List.of(
+        new Num1(),
         new Agregat3CasesNoires()
     );
 
