@@ -2,7 +2,9 @@ package com.l3infogrp5.nurikabe.aide;
 
 import java.util.List;
 
+import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
+import com.l3infogrp5.nurikabe.utils.Position;
 
 /**
  * Classe permettant de lancer les algorithmes d'aide à la résolution.
@@ -22,6 +24,7 @@ public class Aide {
      */
     private static List<Algorithme> algos_simple = List.of(
         new Num1(),
+        new NumDiagonales(),
         new Agregat3CasesNoires()
     );
 
@@ -59,5 +62,9 @@ public class Aide {
 
         // Si aucun algorithme n'a trouvé de solution.
         return new Resultat(false, null, null);
+    }
+
+    public static boolean isNum(Matrice m, Position pos){
+        return (Etat.fromInt(m.get(pos)) == Etat.NUMERIQUE);
     }
 }

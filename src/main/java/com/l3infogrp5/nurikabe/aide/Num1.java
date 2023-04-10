@@ -59,8 +59,8 @@ public class Num1 implements Algorithme {
             }
         }
         // On renvoie la liste des cases concernées
-        if(resList.size() != 0) return new Resultat(true, resList, affichage);
+        if(!resList.isEmpty()) return new Resultat(true, resList, affichage);
 
-        return new Resultat(false, resList, affichage);
+        return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
     }
 }

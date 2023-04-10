@@ -49,10 +49,10 @@ public class Agregat3CasesNoires implements Algorithme {
                 resList.add(p);
             }
         }
-        if(resList.size() != 0){
+        if(!resList.isEmpty()){
             return new Resultat(true, resList, this.affichage);
         }
 
-        return new Resultat(false, null, null);
+        return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
     }
 }
