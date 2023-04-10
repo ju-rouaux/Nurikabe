@@ -25,9 +25,6 @@ class Num2 implements Algorithme {
      */
     @Override
     public Resultat resoudre(Matrice m) {
-
-        System.out.println(m);
-
         // On crée une liste de positions des cases numériques
         List<Position> num2_List = new ArrayList<>();
 
@@ -67,37 +64,58 @@ class Num2 implements Algorithme {
 
                 // On cherche les cases noires autour de la case 2
                 ArrayList<Position> voisin_cases_noires = new ArrayList<>();
+                ArrayList<Position> case_voisine_invalide = new ArrayList<>();
 
                 for (Position voisin : case_2.getVoisins()) {
                     if (m.posValide(voisin)) {
                         if (m.get(voisin) == -1) {
                             voisin_cases_noires.add(voisin);
                         }
+                    } else {
+                        // si la case voisine n'est pas valide, on la supprime de la liste
+                        case_voisine_invalide.add(voisin);
+                    }
+                }
+
+                // si il y a une case noire autour de la case 2 et un mur 
+                if ((voisin_cases_noires.size()  == 1) && (case_voisine_invalide.size() == 1)) {
+
+                    // si la case noire est sur la même diagonale que la case voisine invalide
+                    if (voisin_cases_noires.get(0).getDiagonales().contains(case_voisine_invalide.get(0))) {
+                        // case_noire.add(case_voisine_invalide.get(0));
+
+                        // on cherche l'opposé de la case voisine invalide
+                        Position oposite = new Position(0, 0);
+
+                        ArrayList <Position> diagonales_case_2 = (ArrayList<Position>) case_2.getDiagonales();
+                        ArrayList <Position> voisin_case_noire = (ArrayList<Position>) voisin_cases_noires.get(0).getVoisins();
+                        ArrayList <Position> voisin_case_invalide = (ArrayList<Position>) case_voisine_invalide.get(0).getVoisins();
+
+                        diagonales_case_2.retainAll(voisin_case_noire);
+                        diagonales_case_2.retainAll(voisin_case_invalide);
+
+
+                        oposite = getOposite(diagonales_case_2.get(0), case_2);
+
+                        if (m.posValide(oposite)) {
+
+                            if ((m.get(oposite) < 1) && (m.get(oposite) != -1)) {
+                                case_noire.add(oposite);
+                            }
+
+        
+                        }
+
                     }
                 }
 
                 // si il y a moins de 2 cases noires autour de la case 2, on ne fait rien
-                if (voisin_cases_noires.size() >= 2) {
-
+                if ((voisin_cases_noires.size() >= 2)) {
+                    
                     // on cherche les cases diagonales de la case 2
                     for (Position diag_pos : case_2.getDiagonales()) {
                         if (m.posValide(diag_pos)) {
-                            Position oposite = new Position(0, 0);
-
-                            // on cherche l'opposé de la case diagonale
-                            if (diag_pos.equals(case_2.getNE())) {
-                                // l'opposé de NE est SO
-                                oposite = case_2.getSO();
-                            } else if (diag_pos.equals(case_2.getNO())) {
-                                // l'opposé de NO est SE
-                                oposite = case_2.getSE();
-                            } else if (diag_pos.equals(case_2.getSE())) {
-                                // l'opposé de SE est NO
-                                oposite = case_2.getNO();
-                            } else if (diag_pos.equals(case_2.getSO())) {
-                                // l'opposé de SO est NE
-                                oposite = case_2.getNE();
-                            }
+                            Position oposite = getOposite(diag_pos, case_2);
 
                             // si la case diagonale est entourée de 2 cases noire (-1)
 
@@ -123,6 +141,7 @@ class Num2 implements Algorithme {
                 }
             }
         }
+        
 
         // si la liste des cases à modifier est vide, on retourne un résultat faux
         if (case_noire.isEmpty()) {
@@ -133,7 +152,28 @@ class Num2 implements Algorithme {
         // Sinon, on retourne un résultat vrai avec la liste des cases à modifier
         return new Resultat(true, case_noire.subList(0, 1),
                 new BorderPane(new Label(
-                        "Si un chiffre 2 est entouré dans sa diagonale de deux cases noires, la case diagonale opposée doit devenir une case noire")));
+                        "Si un chiffre 2 est entouré dans sa diagonale de deux cases noires\nla case diagonale opposée doit devenir une case noire")));
+    }
+
+    private Position getOposite(Position diagonales, Position case_centrale) {
+        Position oposite = new Position(0, 0);
+
+        // on cherche l'opposé de la case diagonale
+        if (diagonales.equals(case_centrale.getNE())) {
+            // l'opposé de NE est SO
+            oposite = case_centrale.getSO();
+        } else if (diagonales.equals(case_centrale.getNO())) {
+            // l'opposé de NO est SE
+            oposite = case_centrale.getSE();
+        } else if (diagonales.equals(case_centrale.getSE())) {
+            // l'opposé de SE est NO
+            oposite = case_centrale.getNO();
+        } else if (diagonales.equals(case_centrale.getSO())) {
+            // l'opposé de SO est NE
+            oposite = case_centrale.getNE();
+        }
+
+        return oposite;
     }
 
 }
