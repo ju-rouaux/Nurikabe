@@ -28,7 +28,6 @@ public class Aide {
     private static List<Algorithme> algos_simple = List.of(
         new CasesInatteignables(),
         new Num1(),
-        new NumDiagonales(),
 
         //new BlancEntoure(),
         new Agregat3CasesNoires()
@@ -43,6 +42,7 @@ public class Aide {
     private static List<Algorithme> algos_preprocessed = List.of(
         
         new NumVoisins(),
+        new NumDiagonales(),
         new IleCompletee(),
         new Exemple1()
 

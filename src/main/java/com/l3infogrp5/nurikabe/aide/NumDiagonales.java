@@ -42,11 +42,11 @@ public class NumDiagonales implements Algorithme {
             for (int y = 0; y < m.getNbColonnes(); y++) {
                 Position pos = new Position(x, y);
                 // Si pos est une case NUM
-                if (Aide.isNum(m, pos)) {
+                if (Aide.isNumPreproc(m, pos)) {
                     // On vérifie si une de ses diagonales est aussi une case NUM
                     List<Position> diagonales = pos.getDiagonales();
                     for (Position diag : diagonales) {
-                        if (m.posValide(diag) && Aide.isNum(m, diag)) {
+                        if (m.posValide(diag) && Aide.isNumPreproc(m, diag)) {
                             // On regarde les voisins à cette diagonale
                             List<Position> voisinsDiag = diag.getVoisins();
                             // Pour chaque voisin
@@ -56,10 +56,10 @@ public class NumDiagonales implements Algorithme {
                                 int count = 0;
                                 // Parcours des voisins au 2eme degré
                                 for (Position v2 : voisins2deg) {
-                                    if (m.posValide(v2) && Aide.isNum(m, v2)) {
+                                    if (m.posValide(v2) && Aide.isNumPreproc(m, v2)) {
                                         count++;
                                     }
-                                    if (count == 2 && Etat.fromInt(m.get(v)) != Etat.NOIR) {
+                                    if (count == 2 && m.get(v) != -999) {
                                         resList.add(v);
                                         break;
                                     }
