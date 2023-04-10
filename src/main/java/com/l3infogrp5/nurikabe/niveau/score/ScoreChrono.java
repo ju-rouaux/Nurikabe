@@ -7,7 +7,7 @@ import javafx.scene.text.Text;
 
 /**
  * Implémentation du calcul du score selon le chronomètre
- * 
+ *
  * @author Antoine Couapel, Killian Rattier
  * @version 1.0
  */
@@ -28,7 +28,7 @@ abstract public class ScoreChrono implements ScoreInterface {
 
     /**
      * Constructeur du chronomètre
-     * 
+     *
      * @param totalSec nombre total de secondes
      */
     public ScoreChrono(double totalSec) {
@@ -43,14 +43,14 @@ abstract public class ScoreChrono implements ScoreInterface {
      * Méthode d'affichage du chrono
      */
     public void afficheChrono() {
-        text.setText(getScoreFormate());
+        text.setText(getScoreFormate(true));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getScoreFormate() {
+    public String getScoreFormate(boolean b) {
         String s;
 
         int min = (int) totalSec / 60;
@@ -73,7 +73,7 @@ abstract public class ScoreChrono implements ScoreInterface {
 
     /**
      * Méthode qui retourne le nombre de secondes écoulées durant la partie
-     * 
+     *
      * @return totalSec
      */
     @Override
@@ -91,7 +91,7 @@ abstract public class ScoreChrono implements ScoreInterface {
 
     /**
      * {@inheritDoc}}
-     * 
+     *
      * @return affichage
      */
     @Override

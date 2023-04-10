@@ -369,4 +369,38 @@ public class Grille {
 
         return true;
     }
+
+    /**
+     * Retourne le nombre d'erreurs dans la grille.
+     * 
+     * @return le nombre d'erreurs dans la grille.
+     */
+    public int nbErreurs() {
+        int nb = 0;
+
+        for (int i = 0; i < this.solution.length; i++)
+            for (int j = 0; j < this.solution[j].length; j++) {
+                int v = this.grille[i][j].get();
+                if (v == Etat.BLANC.toInt()) // Ignorer les cases qui n'ont pas été coloriées
+                    continue;
+
+                if (v == Etat.POINT.toInt())
+                    v = Etat.BLANC.toInt();
+                if (this.solution[i][j] != v)
+                    nb++;
+            }
+
+        return nb;
+    }
+
+    /**
+     * Met en surbrillance la case à la position donnée.
+     * 
+     * @param p la position de la case à mettre en surbrillance.
+     * @param b vrai si la case doit être mise en surbrillance, faux sinon.
+     */
+    public void surbrillance(Position p, boolean b) {
+        if (p != null && p.getX() >= 0 && p.getX() < this.nb_lignes && p.getY() >= 0 && p.getY() < this.nb_colonnes)
+            this.getCase(this.grille[p.getX()][p.getY()]).surbrillance(b, 0);
+    }
 }

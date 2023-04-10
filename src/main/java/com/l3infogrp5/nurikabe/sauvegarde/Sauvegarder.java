@@ -87,10 +87,7 @@ public class Sauvegarder {
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
             String nom_joueur = parts[0].trim();
-            if (mode_de_jeu.equals(ModeDeJeu.SANSFIN))
-                enCours = "false";
-            else
-                enCours = parts[3].trim();
+            enCours = parts[3].trim();
             if (nom_joueur.equals(joueur) && enCours.equals("true"))
                 lastScoreInProgress = true;
         }
@@ -242,9 +239,8 @@ public class Sauvegarder {
         if (mode_de_jeu.equals(ModeDeJeu.SANSFIN))
             writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + ".score", true);
         else writer = new FileWriter(Path.repertoire_score + "/" + mode_de_jeu + "_" + id_niveau + ".score", true);
-        if (!mode_de_jeu.equals(ModeDeJeu.SANSFIN))
-            writer.write(joueur + " % " + score + " % " + date_formate + " % " + enCours + "\n");
-        else writer.write(joueur + " % " + score + " % " + date_formate + "\n");
+
+        writer.write(joueur + " % " + score + " % " + date_formate + " % " + enCours + "\n");
         writer.close();
 
     }
@@ -263,24 +259,22 @@ public class Sauvegarder {
      */
     public static List<DonneesScore> chargerScore(String joueur, ModeDeJeu mode_de_jeu, int id_niveau, boolean niveau_en_cours) throws IOException {
         List<DonneesScore> scores = new ArrayList<>();
-        DonneesScore donneeScore = new DonneesScore();
         BufferedReader bufferedReader = openFileReader(mode_de_jeu, id_niveau);
+        DonneesScore donneeScore;
 
         if (bufferedReader == null) return scores;
 
         while (bufferedReader.ready()) {
+            //initialisation
+            donneeScore = new DonneesScore();
             String line = bufferedReader.readLine();
             String[] parts = line.split("%");
             String nom_joueur = parts[0].trim();
             if (!nom_joueur.equals(joueur)) continue;
             String score = parts[1].trim();
             String date = parts[2].trim();
-            String enCours = "";
-            if (mode_de_jeu != ModeDeJeu.SANSFIN)
-                enCours = parts[3].trim();
-            else {
-                enCours = "false";
-            }
+            String enCours = parts[3].trim();
+
             if (!Boolean.parseBoolean(enCours) == niveau_en_cours) continue;
             donneeScore.joueur = nom_joueur;
             donneeScore.score = score;
@@ -289,6 +283,7 @@ public class Sauvegarder {
             scores.add(donneeScore);
         }
         bufferedReader.close();
+
         return scores;
     }
 
@@ -659,5 +654,7 @@ public class Sauvegarder {
         public String getJoueur() {
             return joueur;
         }
+
+
     }
 }

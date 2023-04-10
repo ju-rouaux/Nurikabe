@@ -91,7 +91,7 @@ public class ControllerMenuModeJeu {
     private void sansFinClique() throws Exception {
         Profil.getInstance().setModeDeJeu(ModeDeJeu.SANSFIN);
         stage.setScene(new ControllerNiveau(stage, List.of(
-            0, 1//, 3, 4, 5, 6, 7, 8, 9, 10 //TODO selectionner les niveaux à jouer
+            0, 1, 3, 4, 5, 6, 7, 8, 9, 10 //TODO selectionner les niveaux à jouer
         )).getScene());
     }
 

@@ -48,7 +48,7 @@ public class Position implements Serializable {
      * @return la position située au Nord de la position courante.
      */
     public Position getN() {
-        return new Position(this.x + 1, this.y);
+        return new Position(this.x - 1, this.y);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Position implements Serializable {
      * @return la position située au Nord Est de la position courante.
      */
     public Position getNE() {
-        return new Position(this.x + 1, this.y + 1);
+        return new Position(this.x - 1, this.y + 1);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Position implements Serializable {
      * @return la position située au Sud Est de la position courante.
      */
     public Position getSE() {
-        return new Position(this.x - 1, this.y + 1);
+        return new Position(this.x + 1, this.y + 1);
     }
 
     /**
@@ -84,7 +84,7 @@ public class Position implements Serializable {
      * @return la position située au Sud de la position courante.
      */
     public Position getS() {
-        return new Position(this.x - 1, this.y);
+        return new Position(this.x + 1, this.y);
     }
 
     /**
@@ -93,7 +93,7 @@ public class Position implements Serializable {
      * @return la position située au Sud Ouest de la position courante.
      */
     public Position getSO() {
-        return new Position(this.x - 1, this.y - 1);
+        return new Position(this.x + 1, this.y - 1);
     }
 
     /**
@@ -111,7 +111,7 @@ public class Position implements Serializable {
      * @return la position située au Nord Ouest de la position courante.
      */
     public Position getNO() {
-        return new Position(this.x + 1, this.y - 1);
+        return new Position(this.x - 1, this.y - 1);
     }
 
     /**
