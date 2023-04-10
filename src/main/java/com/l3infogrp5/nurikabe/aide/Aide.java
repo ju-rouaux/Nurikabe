@@ -21,7 +21,7 @@ public class Aide {
      * par Zone.
      */
     private static List<Algorithme> algos_simple = List.of(
-        new Exemple1() //, new Exemple2(), new Exemple3()...
+        new Num2() //, new Exemple2(), new Exemple3()...
     );
 
     /**
