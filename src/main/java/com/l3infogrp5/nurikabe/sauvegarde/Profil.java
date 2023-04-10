@@ -352,7 +352,7 @@ public class Profil {
     /**
      * Actualise les données du niveau et les retourne
      *
-     * @param id_niveau l'id du niveau
+     * @param id_niv l'id du niveau
      * @param en_cours  si le niveau est en cours ou non
      * @return les données du niveau
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement des données du niveau
