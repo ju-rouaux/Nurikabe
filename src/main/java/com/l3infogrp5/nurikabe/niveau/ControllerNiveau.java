@@ -392,8 +392,9 @@ public class ControllerNiveau {
                 @Override
                 public void handle(long now) {
                     if ((System.currentTimeMillis() - temps_debut) > 2000) {
-                        for (Position p : pos_aide)
-                            grille.surbrillance(p, false);
+                        if (pos_aide != null)
+                            for (Position p : pos_aide)
+                                grille.surbrillance(p, false);
                         this.stop();
                     }
                 }

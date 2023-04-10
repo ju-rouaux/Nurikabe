@@ -26,11 +26,10 @@ public class Aide {
      * par Zone.
      */
     private static List<Algorithme> algos_simple = List.of(
-        new CasesInatteignables(),
         new Num1(),
-        new Agregat3CasesNoires(),
-        //new IleCompletee()
         new BlancEntoure(),
+        new Agregat3CasesNoires(),
+        new CasesInatteignables(),
         new Num2()
     );
 
@@ -39,9 +38,8 @@ public class Aide {
      */
     private static List<Algorithme> algos_preprocessed = List.of(
         new NumVoisins(),
-        new NumDiagonales(),
-        new IleCompletee(),
-        new Exemple1()
+        new NumDiagonales()
+        // new IleCompletee(),
     );
     
     /**
