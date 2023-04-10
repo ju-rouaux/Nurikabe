@@ -14,17 +14,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane fx:id="pseudo_grid" gridLinesVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane fx:id="pseudo_grid" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="50.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints />
           <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -200,7 +199,7 @@
                   <Insets />
                </GridPane.margin>
             </GridPane>
-            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour">
+            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="42.0" prefWidth="42.0" styleClass="btn-retour" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                      <image>
@@ -208,6 +207,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
             </Button>
             <Label contentDisplay="CENTER" styleClass="titre" text="PROFILS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>

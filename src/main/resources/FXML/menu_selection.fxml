@@ -11,24 +11,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane alignment="CENTER" gridLinesVisible="true" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane alignment="CENTER" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.75034720925441" minWidth="10.0" prefWidth="66.0" />
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="497.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.12724372296304" minWidth="10.0" prefWidth="66.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="60.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints minHeight="10.0" valignment="BOTTOM" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <children>
-                  <GridPane fx:id="grille" alignment="CENTER" gridLinesVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <GridPane fx:id="grille" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
@@ -41,12 +40,15 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="42.0" prefWidth="42.0" styleClass="btn-retour" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                      <Image url="@../img/back.png" />
                   </ImageView>
                </graphic>
+               <GridPane.margin>
+                  <Insets left="10.0" top="10.0" />
+               </GridPane.margin>
             </Button>
             <HBox alignment="TOP_CENTER" spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <children>

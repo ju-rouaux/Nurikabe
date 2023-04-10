@@ -11,19 +11,18 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane alignment="CENTER" styleClass="panneau-principal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" />
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+          <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints />
             <RowConstraints minHeight="50.0" valignment="TOP" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
           <RowConstraints minHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -31,13 +30,13 @@
                <children>
                   <GridPane layoutX="3.0" layoutY="9.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <AnchorPane maxHeight="150.0" maxWidth="450.0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
@@ -96,7 +95,7 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="41.0" prefWidth="42.0" styleClass="btn-retour" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <Button fx:id="btn_retour" mnemonicParsing="false" onAction="#retourClique" prefHeight="42.0" prefWidth="42.0" styleClass="btn-retour" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" styleClass="img-retour">
                      <image>

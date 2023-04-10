@@ -78,6 +78,93 @@
     -fx-background-color: #ffee57;
 }
 
+.texte-simple {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-fill: rgb(255, 255, 255);
+    -fx-stroke: #85690e;
+    -fx-stroke-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgb(233, 190, 0), 2, 0.7, 2, 2);
+    
+}
+.table-view {
+    -fx-background-radius: 25px;
+    -fx-border-radius : 25px;
+    -fx-border-width: 4px;
+    -fx-border-color: rgb(226, 185, 0);
+    -fx-effect: innershadow(gaussian, rgb(255, 227, 70), 28, 0.5, 0, 0);
+}
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+    
+}
+.table-view .corner {
+    -fx-background-color: transparent;
+    
+    
+}
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom, #ffc400c6, #eeff00);
+    -fx-background-radius: 30px 30px 0px 0px;
+    -fx-text-background-color: rgb(135, 83, 0);
+    
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #000000;
+    -fx-text-background-color: rgb(0, 0, 0);
+}
+.table-row-cell:odd{
+    -fx-background-color: #f6b4002f;
+
+}
+.table-row-cell:even{
+    -fx-background-color: #ffeccb44;
+
+}
+/*
+.table-view {
+    -fx-background-radius : 25px;
+    -fx-border-color: transparent;
+    
+}
+
+.table-col {
+    -fx-background-radius : 25px;
+    -fx-border-radius : 25px;
+}
+
+.table-col .column-header-background {
+    -fx-background-radius: 25px;
+    -fx-border-radius: 25px;
+    -fx-background-color: blue
+}
+*/
+/**
+.table-column .label {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px 10px 0px 0px;
+    -fx-border-radius: 10px 10px 0px 0px;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.table-column .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+}
+*/
+
+
 /* ==================== IDs ==================== */
 
 /* Style du titre Nurikabe */
