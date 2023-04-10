@@ -26,6 +26,7 @@ public class Aide {
         new Num1(),
         new NumVoisins(),
         new NumDiagonales(),
+        new BlancEntoure(),
         new Agregat3CasesNoires()
     );
 
@@ -33,7 +34,7 @@ public class Aide {
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
      */
     private static List<Algorithme> algos_preprocessed = List.of(
-
+        new IleCompletee()
     );
     
     /**
