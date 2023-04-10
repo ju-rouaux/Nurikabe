@@ -129,12 +129,12 @@ public class Grille {
                     case_courante.setEventMaintienGauche(new EventClicMaintenu() {
                         public void maintenu(Case c) {
                             System.out.println("Maintien de : " + c.getPosition());
-                            c.surbrillance(true, 0);
+                            c.surbrillance(true);
                         }
 
                         public void relache(Case c) {
                             System.out.println("Relâchement de : " + c.getPosition());
-                            c.surbrillance(false, 0);
+                            c.surbrillance(false);
                         }
                     });
 
@@ -401,6 +401,6 @@ public class Grille {
      */
     public void surbrillance(Position p, boolean b) {
         if (p != null && p.getX() >= 0 && p.getX() < this.nb_lignes && p.getY() >= 0 && p.getY() < this.nb_colonnes)
-            this.getCase(this.grille[p.getX()][p.getY()]).surbrillance(b, 0);
+            this.getCase(this.grille[p.getX()][p.getY()]).surbrillance(b);
     }
 }

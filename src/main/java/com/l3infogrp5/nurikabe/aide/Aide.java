@@ -21,14 +21,15 @@ public class Aide {
      * par Zone.
      */
     private static List<Algorithme> algos_simple = List.of(
-        new BlancEntoure() //, new Exemple2(), new Exemple3()...
+        new BlancEntoure(),
+        new Num2()
     );
 
     /**
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
      */
     private static List<Algorithme> algos_preprocessed = List.of(
-        new Exemple1()
+        
     );
     
     /**
