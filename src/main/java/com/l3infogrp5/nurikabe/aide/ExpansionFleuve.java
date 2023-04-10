@@ -1,10 +1,8 @@
 package com.l3infogrp5.nurikabe.aide;
 
 import java.util.List;
-import java.util.Stack;
 import java.util.ArrayList;
 
-import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
@@ -17,13 +15,13 @@ import javafx.scene.layout.BorderPane;
  * 
  * @author Killian Rattier
  */
-public class ExpansionMur implements Algorithme {
+public class ExpansionFleuve implements Algorithme {
     BorderPane affichage;
 
     /**
      * Constructeur de l'algorithme.
      */
-    public ExpansionMur() {
+    public ExpansionFleuve() {
         affichage = new BorderPane();
         affichage.setCenter(new Label(
                 "Les cases noires doivent être reliées en un seul chemin continu. Si une case noire ne peut se connecter qu'à un seul chemin, elle doit être prolongée pour se connecter aux autres."));
@@ -43,7 +41,7 @@ public class ExpansionMur implements Algorithme {
             for (int j = 0; j < m.getNbColonnes(); j++) {
                 Position pos = new Position(i, j);
 
-                // Si la case est blanche et est bloquée entre un MUR et une autre case non
+                // Si la case est blanche et est bloquée entre un MUR (ou une case non blanche) et une autre case non
                 // blanche, ajouter la position à la liste
                 if (m.get(pos) == 999) {
                     boolean caseVoisin = false;

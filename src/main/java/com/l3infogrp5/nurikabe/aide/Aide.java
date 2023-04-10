@@ -38,7 +38,7 @@ public class Aide {
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
      */
     private static List<Algorithme> algos_preprocessed = List.of(
-        new ExpansionMur(),
+        new ExpansionFleuve(),
         new NumVoisins(),
         new NumDiagonales(),
         new IleCompletee(),
