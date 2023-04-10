@@ -24,6 +24,7 @@ public class Aide {
      */
     private static List<Algorithme> algos_simple = List.of(
         new Num1(),
+        new NumVoisins(),
         new NumDiagonales(),
         new Agregat3CasesNoires()
     );
