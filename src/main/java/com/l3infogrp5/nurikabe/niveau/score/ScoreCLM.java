@@ -15,6 +15,7 @@ public class ScoreCLM extends ScoreChrono {
 
     /**
      * Constructeur du Score Contre La Montre
+     *
      * @param totalSec nombre total de secondes
      */
     public ScoreCLM(double totalSec) {

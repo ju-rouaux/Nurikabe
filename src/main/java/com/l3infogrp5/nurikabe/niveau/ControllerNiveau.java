@@ -4,10 +4,13 @@ import com.l3infogrp5.nurikabe.aide.Aide;
 import com.l3infogrp5.nurikabe.aide.Resultat;
 import com.l3infogrp5.nurikabe.menu.ControllerMenuModeJeu;
 import com.l3infogrp5.nurikabe.niveau.grille.Grille;
+import com.l3infogrp5.nurikabe.niveau.score.ScoreEndless;
 import com.l3infogrp5.nurikabe.niveau.score.ScoreInterface;
 import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Path;
+import com.l3infogrp5.nurikabe.utils.Position;
+
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -33,6 +36,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Contrôleur d'affichage d'un niveau
@@ -50,6 +55,9 @@ public class ControllerNiveau {
     private Grille grille;
     private ScoreInterface score;
     private boolean niveau_en_cours; // Vrai si le niveau est en cours de jeu.
+    private List<Position> pos_aide; // Liste des positions de l'aide, peut être null.
+
+    private boolean retour;
     private int index_file; // Indice du niveau lancé dans la liste
 
     private Profil.DonneesNiveau donnees_niveau; // Données du niveau en cours de jeu.
@@ -78,6 +86,8 @@ public class ControllerNiveau {
     private BorderPane panneau_aide;
     @FXML
     private HBox barre;
+    @FXML
+    private Button btn_pos_aide;
 
     /**
      * Initialise la vue du niveau.
@@ -92,6 +102,7 @@ public class ControllerNiveau {
         this.aide_affichee = new SimpleBooleanProperty();
 
         this.niveau_en_cours = true;
+        this.retour = false;
 
         this.file_niveaux = niveaux;
         this.index_file = 0;
@@ -123,12 +134,13 @@ public class ControllerNiveau {
         this.toggle_aide.selectedProperty().bindBidirectional(this.aide_affichee);
         this.toggle_aide.selectedProperty().addListener(new ChangeListener<Boolean>() {
             final TranslateTransition transition = new TranslateTransition(Duration.millis(150),
-                ControllerNiveau.this.panneau_aide);
+                    ControllerNiveau.this.panneau_aide);
 
             public void changed(ObservableValue<? extends Boolean> obj, Boolean ancien, Boolean nouveau) {
                 // De combien déplacer la fenêtre d'aide, vers le bas si nouveau == true, vers
                 // le haut sinon
-                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight()) * (nouveau ? 1 : -1));
+                transition.setByY((panneau_aide.getHeight() - btn_aide.getHeight() - btn_pos_aide.getHeight())
+                        * (nouveau ? 1 : -1));
                 transition.play();
             }
         });
@@ -147,11 +159,12 @@ public class ControllerNiveau {
 
         donnees_niveau = Profil.getInstance().chargerDonneesNiveau(id_niveau, true);
 
-        this.grille = new Grille(donnees_niveau.getMatriceNiveau(), donnees_niveau.getMatriceSolution(), donnees_niveau.getHistorique());
+        this.grille = new Grille(donnees_niveau.getMatriceNiveau(), donnees_niveau.getMatriceSolution(),
+                donnees_niveau.getHistorique());
 
         // Evenement lancé lorsque la grille est terminée
         this.grille.addOnVictoire(() -> {
-            niveau_en_cours = false;
+
             System.out.println("gagné !");
             // Arrêter le comptage du score
             this.score.stop();
@@ -163,37 +176,59 @@ public class ControllerNiveau {
 
             // Le joueur poursuit sa partie
             if (index_file < file_niveaux.size()) {
-                String texte_affiche = "Nombre de grilles terminées : " + score.getScoreFormate() + ".";
+
+                String texte_affiche = "Nombre de grilles terminées : " + (((ScoreEndless) score).getNbGrilles() + 1)
+                        + ". ";
 
                 // Le joueur ne peut plus poursuivre sa partie
                 if (this.score.getScore() <= 0) {
                     btn_quitter = new ButtonType("Quitter");
                     texte_affiche += "Le temps s'est écoulé durant votre partie. Vous ne pouvez pas continuer";
+                    niveau_en_cours = false;
+
                 } else { // Le joueur gagne un bonus de temps et continue
+
                     this.score.grilleComplete();
+                    donnees_niveau.setChronoTemp((int) this.score.getScore());
+                    donnees_niveau.setNbGrilles(((ScoreEndless) score).getNbGrilles());
+
+                    try {
+                        Profil.setScore(((ScoreEndless) this.score).getNbGrilles(), niveau_en_cours, retour);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     texte_affiche += "Cliquez pour poursuivre.";
                     ButtonType btn_suivant = new ButtonType("Grille suivante");
                     btn_quitter = new ButtonType("Abandonner");
                     popup.getButtonTypes().add(btn_suivant);
+
                 }
 
                 popup.setContentText(texte_affiche);
 
-
             } else { // Le joueur a terminé la partie
-                popup.setContentText("Partie terminée ! Score : " + score.getScoreFormate() + ".");
+                this.score.grilleComplete();
+                popup.setContentText("Partie terminée ! Score : " + score.getScoreFormate(false) + ".");
                 btn_quitter = new ButtonType("Quitter");
+                niveau_en_cours = false;
+
             }
 
             popup.getButtonTypes().add(btn_quitter);
             Optional<ButtonType> result = popup.showAndWait();
 
-            if (result.get() == btn_quitter)
+            if (result.get() == btn_quitter) {
+                niveau_en_cours = false;
+                retour = true;
                 this.retourClique();
-            else {
+            } else {
                 try {
+                    retour = false;
                     this.loadNiveauSuivant();
                 } catch (Exception e) {
+                    niveau_en_cours = false;
+                    retour = true;
                     this.retourClique();
                 }
             }
@@ -233,13 +268,14 @@ public class ControllerNiveau {
      */
     @FXML
     private void retourClique() {
+        retour = true;
         try {
-            Profil.setScore(score.getScore(), niveau_en_cours);
+            Profil.setScore(score.getScore(), niveau_en_cours, retour);
             Profil.getInstance().sauvegarderNiveau(grille);
             this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
-                + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
+                    + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
 
-            stage.setScene(new ControllerMenuModeJeu(stage).getScene()); //TODO temporaire
+            stage.setScene(new ControllerMenuModeJeu(stage).getScene()); // TODO temporaire
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,32 +297,65 @@ public class ControllerNiveau {
         grille.redo();
     }
 
-    //TODO
+    /**
+     * Invoque l'aide pour résoudre la grille.
+     * 
+     * @see Aide
+     */
     @FXML
-    void aideClique() {
+    private void aideClique() {
         Resultat r = Aide.calculer(new Matrice(this.grille.getMatrice()));
+        this.pos_aide = r.getPosition();
         if (r.getSucces()) {
             this.score.aideUtilise();
             this.toggle_aide.setSelected(true);
-            // TODO proposer de marquer l'emplacement de la solution
             if (r.getAffichage() != null) {
                 Pane p = r.getAffichage();
-                p.getStyleClass().add("panneau-aide");
-                this.panneau_aide.setCenter(p);
+                p.setMouseTransparent(true);
+                ((BorderPane) this.panneau_aide.getCenter()).setCenter(p);
             }
         }
     }
 
-    //TODO
+    /**
+     * Vérifie si la grille est correcte.
+     * Undo jusqu'à la dernière grille correcte si le joueur le demande.
+     */
     @FXML
     void checkClique() {
+        int nb_erreurs = this.grille.nbErreurs();
+
+        // Appliquer un malus si l'utilisateur a utilisé l'aide
         this.score.checkUtilise();
+
+        // Si aucune erreur, on affiche un message d'information
+        if (nb_erreurs == 0) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Vérification des erreurs");
+            alert.setHeaderText(
+                    "Aucune erreur détectée. Un malus vous a quand même été appliqué pour l'utilisation de l'aide.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Proposer de rétablir la grille au dernier état correct
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Vérification des erreurs");
+        alert.setHeaderText("Vous avez fait " + nb_erreurs
+                + " erreur(s). Voulez-vous rétablir la grille au dernier état correct ? Aucun malus supplémentaire ne vous sera appliqué.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            while (this.grille.nbErreurs() > 0)
+                this.grille.undo();
+        }
     }
 
-    //TODO
+    /**
+     * Réinitialise la grille et le score.
+     */
     @FXML
     void resetClique() {
-        //afficher une fenêtre de confirmation
+        // afficher une fenêtre de confirmation
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Réinitialiser la grille");
         alert.setHeaderText("Voulez-vous vraiment réinitialiser la grille ?");
@@ -294,6 +363,29 @@ public class ControllerNiveau {
         if (result.get() == ButtonType.OK) {
             this.score.restart();
             this.grille.reset();
+        }
+    }
+
+    /**
+     * Mets en surbrillance pendant 2 secondes les cases de la grille qui sont
+     * sugérées par l'aide.
+     * 
+     * @see Aide
+     */
+    @FXML
+    private void afficherPosAide() {
+        if (this.pos_aide != null) {
+            for (Position p : this.pos_aide)
+                this.grille.surbrillance(p, true);
+
+            // Désactiver la surbrillance après 2 secondes
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    for (Position p : pos_aide)
+                        grille.surbrillance(p, false);
+                }
+            }, 2000);
         }
     }
 

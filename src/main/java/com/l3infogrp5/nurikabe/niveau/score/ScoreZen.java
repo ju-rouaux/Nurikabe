@@ -53,7 +53,7 @@ public class ScoreZen implements ScoreInterface {
     @Override
     public void aideUtilise() {
 
-        if (etoiles >= 0) {
+        if (etoiles >= 0.5) {
             this.etoiles -= 0.5;
             this.rating.setRating(etoiles);
         }
@@ -73,7 +73,7 @@ public class ScoreZen implements ScoreInterface {
      */
     @Override
     public void checkUtilise() {
-        if (etoiles >= 0) {
+        if (etoiles > 0) {
             this.etoiles -= 1;
             this.rating.setRating(etoiles);
         }
@@ -121,7 +121,7 @@ public class ScoreZen implements ScoreInterface {
     }
 
     @Override
-    public String getScoreFormate() {
+    public String getScoreFormate(boolean b) {
         return this.etoiles + " étoiles";
     }
 

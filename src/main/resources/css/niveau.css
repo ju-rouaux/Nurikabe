@@ -112,4 +112,19 @@
     -fx-border-radius: 0px 0px 20px 20px;
     -fx-border-width: 0px 2px 2px 2px;
 }
+
+/* Bouton d'affichage des posiitions des aides */
+.btn-aff-pos {
+    -fx-background-color : white;
+    -fx-background-radius: 20px;
+    -fx-border-color: rgb(255, 153, 0);
+    -fx-border-style: solid outside;
+    -fx-border-radius: 20px;
+    -fx-border-width: 2px;
+}
+
+.btn-aff-pos:hover
+{
+    -fx-background-color: rgb(255, 223, 133);
+}
 /* ==================== IDs ==================== */

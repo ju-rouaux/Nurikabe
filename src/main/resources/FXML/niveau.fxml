@@ -89,10 +89,7 @@
      <center>
          <StackPane fx:id="panneau_central" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-               <BorderPane fx:id="panneau_aide" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" translateY="-172.0" StackPane.alignment="TOP_CENTER">
-                  <center>
-                     <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="panneau-aide" text="Demonstration" BorderPane.alignment="CENTER" />
-                  </center>
+               <BorderPane fx:id="panneau_aide" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="225.0" prefWidth="600.0" translateY="-197.0" StackPane.alignment="TOP_CENTER">
                   <bottom>
                      <ToggleButton fx:id="toggle_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" styleClass="btn-toggle-aide" textOverrun="CLIP" BorderPane.alignment="CENTER">
                         <graphic>
@@ -104,6 +101,13 @@
                         </graphic>
                      </ToggleButton>
                   </bottom>
+                  <center>
+                     <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panneau-aide" BorderPane.alignment="CENTER">
+                        <top>
+                           <Button fx:id="btn_pos_aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#afficherPosAide" prefHeight="25.0" prefWidth="120.0" styleClass="btn-aff-pos" text="Afficher la position" translateX="-6.0" translateY="164.0" BorderPane.alignment="CENTER_RIGHT" />
+                        </top>
+                     </BorderPane>
+                  </center>
                </BorderPane>
             </children>
          </StackPane>
