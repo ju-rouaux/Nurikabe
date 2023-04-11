@@ -22,7 +22,8 @@ class BlancEntoure implements Algorithme {
      * devenir NOIR
      *
      * @param m la matrice à traiter
-     * @return la première valeur de la liste des positions des cases à modifier et le message à afficher en cas de succès
+     * @return la première valeur de la liste des positions des cases à modifier et
+     *         le message à afficher en cas de succès
      */
     @Override
     public Resultat resoudre(Matrice m) {
@@ -38,7 +39,7 @@ class BlancEntoure implements Algorithme {
                 // Si c'est une case blanche ou un point
                 if (Etat.fromInt(m.get(pos)) == Etat.BLANC || Etat.fromInt(m.get(pos)) == Etat.POINT) {
                     List<Position> position_voisins = pos.getVoisins();
-                    
+
                     List<Position> position_voisins_valides = new ArrayList<Position>();
                     // Les voisins invalides sont les voisins qui sont hors de la matrice
                     List<Position> position_voisins_invalides = new ArrayList<Position>();
@@ -56,7 +57,8 @@ class BlancEntoure implements Algorithme {
 
                     // Si il y a au moins 2 voisins noirs autour de la case blanche ou du point
                     // alors on ajoute la case à la liste des résultats
-                    if ((position_voisins_valides.size() >= 2) && (position_voisins_valides.size() + position_voisins_invalides.size() == 4)) {
+                    if ((position_voisins_valides.size() >= 2)
+                            && (position_voisins_valides.size() + position_voisins_invalides.size() == 4)) {
                         // On ajoute la case à notre liste de résultats
                         PositionList.add(pos);
                     }
@@ -64,15 +66,19 @@ class BlancEntoure implements Algorithme {
             }
         }
 
-        // Si la liste est vide, la valeur de retour est faux et on retourne une liste vide
+        // Si la liste est vide, la valeur de retour est faux et on retourne une liste
+        // vide
         if (PositionList.isEmpty()) {
             return new Resultat(false, PositionList,
                     new BorderPane(new Label("")));
         }
 
-        // Sinon la valeur de retour est vrai et on retourne la liste des positions à modifier
+        // Sinon la valeur de retour est vrai et on retourne la liste des positions à
+        // modifier
         return new Resultat(true, PositionList.subList(0, 1),
-                new BorderPane(new Label("Une case BLANCHE ou POINT entouré de voisins NOIR doit devenir NOIR")));
+                new BorderPane(
+                        new Label(
+                                "Une case blanche où point entouré de cases voisines noires doit devenir elle aussi noire.")));
     }
 
 }

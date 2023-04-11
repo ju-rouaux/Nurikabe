@@ -8,41 +8,40 @@ import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
-
 /**
  * Classe permettant de lancer les algorithmes d'aide à la résolution.
  * Classe non instanciable.
- * Toujours vérifier que le résultat rénvoyé est un succès avant d'utiliser les autres
+ * Toujours vérifier que le résultat rénvoyé est un succès avant d'utiliser les
+ * autres
  * méthodes.
  * 
  * @author Julien Rouaux
  */
 public class Aide {
 
-    private Aide() {}
+    private Aide() {
+    }
 
     /**
      * Liste des algorithmes ne nécessitant pas de prétraitement réalisé
      * par Zone.
      */
     private static List<Algorithme> algos_simple = List.of(
-        new Num1(),
-        new BlancEntoure(),
-        new Agregat3CasesNoires(),
-        new CasesInatteignables(),
-        new Num2()
-    );
+            new Num1(),
+            new BlancEntoure(),
+            new Agregat3CasesNoires(),
+            new CasesInatteignables(),
+            new IleCompletee(),
+            new Num2());
 
     /**
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
      */
     private static List<Algorithme> algos_preprocessed = List.of(
-        new ExpansionFleuve(),
-        new NumVoisins(),
-        new NumDiagonales()
-        // new IleCompletee(),
-    );
-    
+            new ExpansionFleuve(),
+            new NumVoisins(),
+            new NumDiagonales());
+
     /**
      * Exécute les algorithmes d'aide à la résolution et retourne le résultat.
      * 
@@ -61,7 +60,7 @@ public class Aide {
         // Prétraitement des zones.
         Zone z = new Zone(m);
         z.decremente(m);
-        
+
         for (Algorithme algo : algos_preprocessed) {
             resultat = algo.resoudre(m.clone());
             if (resultat.getSucces())
@@ -72,11 +71,11 @@ public class Aide {
         return new Resultat(false, null, new BorderPane(new Label("test")));
     }
 
-    public static boolean isNum(Matrice m, Position pos){
+    public static boolean isNum(Matrice m, Position pos) {
         return (Etat.fromInt(m.get(pos)) == Etat.NUMERIQUE);
     }
 
-    public static boolean isNumPreproc(Matrice m, Position pos){
+    public static boolean isNumPreproc(Matrice m, Position pos) {
         return (m.get(pos) != 999 && m.get(pos) != -999);
     }
 }
