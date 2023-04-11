@@ -27,22 +27,20 @@ public class Aide {
      * par Zone.
      */
     private static List<Algorithme> algos_simple = List.of(
-            // new CasesInatteignables(),
-            // new Num1(),
-            // new Agregat3CasesNoires(),
-            new IleCompletee(),
+            new Num1(),
             new BlancEntoure(),
+            new Agregat3CasesNoires(),
+            new CasesInatteignables(),
+            new IleCompletee(),
             new Num2());
 
     /**
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
      */
     private static List<Algorithme> algos_preprocessed = List.of(
-    // new NumVoisins(),
-    // new NumDiagonales(),
-    // new IleCompletee(),
-    // new Exemple1()
-    );
+            new ExpansionFleuve(),
+            new NumVoisins(),
+            new NumDiagonales());
 
     /**
      * Exécute les algorithmes d'aide à la résolution et retourne le résultat.

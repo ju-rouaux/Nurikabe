@@ -28,6 +28,8 @@ public class ScoreZen implements ScoreInterface {
      */
 
     public ScoreZen(double etoiles) {
+        if (etoiles < 0)
+            etoiles = 0;
         this.etoiles = etoiles;
 
         this.rating = new Rating();
@@ -52,11 +54,10 @@ public class ScoreZen implements ScoreInterface {
      */
     @Override
     public void aideUtilise() {
-
-        if (etoiles >= 0.5) {
-            this.etoiles -= 0.5;
-            this.rating.setRating(etoiles);
-        }
+        this.etoiles -= 0.5;
+        if (this.etoiles < 0)
+            this.etoiles = 0;
+        this.rating.setRating(etoiles);
     }
 
 
@@ -73,10 +74,10 @@ public class ScoreZen implements ScoreInterface {
      */
     @Override
     public void checkUtilise() {
-        if (etoiles > 0) {
-            this.etoiles -= 1;
-            this.rating.setRating(etoiles);
-        }
+        this.etoiles -= 1;
+        if (this.etoiles < 0)
+            this.etoiles = 0;
+        this.rating.setRating(etoiles);
     }
 
     /**
