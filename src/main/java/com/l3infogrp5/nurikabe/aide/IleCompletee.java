@@ -10,10 +10,25 @@ import com.l3infogrp5.nurikabe.utils.Position;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
-import com.l3infogrp5.nurikabe.aide.Zone;
-
+/**
+ * Cette classe implémente la technique "Entourer une île complétée".
+ * Cette technique consiste à ajouter des murs horizontaux et verticaux autour
+ * d'une île complétée,
+ * c'est-à-dire une île dont toutes les cases adjacentes sont noires.
+ *
+ * @author Elias OKAT
+ */
 public class IleCompletee implements Algorithme {
 
+    /**
+     * Implémentation de la méthode resoudre(Matrice m) de l'interface Algorithme.
+     * Cette méthode prend une matrice en entrée, parcourt la matrice pour trouver
+     * les îles complétées et ajoute des murs horizontaux et verticaux autour de ces
+     * îles.
+     * 
+     * @param m La matrice à résoudre.
+     * @return Un objet Resultat contenant le résultat de l'algorithme.
+     */
     @Override
     public Resultat resoudre(Matrice m) {
 
@@ -34,58 +49,54 @@ public class IleCompletee implements Algorithme {
 
         // On parcourt la liste des cases numériques
         for (Position case_num : cases_num) {
+
             // On trouve la zone de la case numérique
             Zone zone = new Zone(m);
             ArrayList<Position> zone_case_num = (ArrayList<Position>) zone.findZone(case_num);
 
+            // On enlève les doublons de la zone de la case numérique
             ArrayList<Position> zone_case_num_distinct = (ArrayList<Position>) zone_case_num.stream().distinct()
                     .collect(Collectors.toList());
 
-            System.out.println("\ncase num : " + m.get(case_num));
-            System.out.println("Case dans la zone : " + zone_case_num_distinct);
-            // System.out.println("taille de la zone : " + zone_case_num_distinct.size() + "
-            // valeur de la case : " + m.get(case_num) + " position de la case : " +
-            // case_num + "");
+            // On vérifie si la zone de la case numérique est complétée
             if (m.get(case_num) - zone_case_num_distinct.size() == 0) {
-                System.out.println("Ile completee a la position " + case_num + " valeur de la case : " + m.get(case_num)
-                        + " taille de la zone : " + zone_case_num_distinct.size());
 
+                // On parcourt la liste des cases de la zone de la case numérique
                 for (Position pos : zone_case_num_distinct) {
                     ArrayList<Position> voisins = (ArrayList<Position>) pos.getVoisins();
 
+                    // On vérifie si les cases adjacentes de la zone de la case numérique sont
+                    // noires
                     for (Position voisin : voisins) {
                         if ((m.posValide(voisin)) && ((m.get(voisin) == 0) || (m.get(voisin) == -2))) {
 
+                            // On vérifie si la case adjacente n'est pas dans la zone de la case numérique
                             if (!zone_case_num.contains(voisin)) {
 
-                                if (m.get(voisin) == -1) {
+                                // si la case adjacente n'est pas une case noire, ou une case numérique, on
+                                // l'ajoute à la liste des cases à modifier
+                                if ((m.get(voisin) < 1) && (m.get(voisin) != -1)) {
                                     ile_non_complete.add(voisin);
                                 }
 
-                                // ile_non_complete.add(voisin);
                             }
 
                         }
                     }
                 }
 
+                // si la liste des cases à modifier n'est pas vide, on retourne un résultat vrai
+                // avec la liste des cases à modifier
+                if (!ile_non_complete.isEmpty()) {
+                    return new Resultat(true, ile_non_complete,
+                            new BorderPane(new Label(
+                                    "Si une île est complétée, toutes les cases adjacentes de l'île doivent être noires.")));
+                }
 
-
-                // Sinon, on retourne un résultat vrai avec la liste des cases à modifier
-                return new Resultat(true, ile_non_complete,
-                        new BorderPane(new Label(
-                                "Si une ile est completee, toutes les cases adjacente de l'ile doivent etre noires\n"
-                                        + " sur la case " + case_num + " la valeur de la case est : " + m.get(case_num)
-                                        + " \net il y a " + zone_case_num_distinct.size() + " cases dans la zone")));
             }
         }
 
-        // // si la liste des cases à modifier est vide, on retourne un résultat faux
-        // if (ile_non_complete.isEmpty()) {
-        // return new Resultat(false, ile_non_complete,
-        // new BorderPane(new Label("")));
-        // }
-
+        // si la liste des cases à modifier est vide, on retourne un résultat faux
         return new Resultat(false, ile_non_complete,
                 new BorderPane(new Label("")));
 
