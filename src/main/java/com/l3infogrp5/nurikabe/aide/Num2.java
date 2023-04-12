@@ -8,6 +8,7 @@ import com.l3infogrp5.nurikabe.utils.Position;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 
 /**
  * Classe implémentant l'algorithme de la case NUMÉRIQUE 2 entouré de deux cases
