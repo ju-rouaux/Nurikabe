@@ -191,7 +191,6 @@ public class Profil {
             charger_nouvelle_grille = false;
             return donnees_niveau.donneesScore;
         } else {
-            System.out.println("Attention reset score: ");
             switch (mode_de_jeu) {
                 case DETENTE -> donnees_niveau.donneesScore.score = "5";
                 case SANSFIN -> {
@@ -353,13 +352,14 @@ public class Profil {
     /**
      * Actualise les données du niveau et les retourne
      *
-     * @param id_niveau l'id du niveau
+     * @param id_niv l'id du niveau
      * @param en_cours  si le niveau est en cours ou non
      * @return les données du niveau
      * @throws IOException {@link IOException} exception levée si une erreur survient lors du chargement des données du niveau
      */
-    public DonneesNiveau chargerDonneesNiveau(int id_niveau, boolean en_cours) throws IOException {
+    public DonneesNiveau chargerDonneesNiveau(int id_niv, boolean en_cours) throws IOException {
         System.out.println("[Profil] Chargement des données du niveau");
+        id_niveau = id_niv;
         donnees_niveau.score = chargerScore(id_niveau, en_cours);
         donnees_niveau = chargerGrille(id_niveau);
         donnees_niveau.historique = chargerHistorique();
