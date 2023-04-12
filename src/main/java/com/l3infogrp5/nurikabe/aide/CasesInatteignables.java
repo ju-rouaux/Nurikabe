@@ -30,14 +30,12 @@ public class CasesInatteignables implements Algorithme {
     }
 
     /**
-     * Resouds l'algorithme d'aide dans une matrice donnée.
-     * 
+     * Méthode parcourant la matrice et renvoyant les cases que l'on peut atteindre
      * @param m la matrice à tester
-     * @return la liste des cases trouvées par l'algorithme
+     * @return la liste des cases atteignables
      */
-    @Override
-    public Resultat resoudre(Matrice m) {
-        List<Position> inatteignables = new ArrayList<>();
+    public List<Position> atteignables(Matrice m){
+        //List<Position> inatteignables = new ArrayList<>();
         List<Position> atteignables = new ArrayList<>();
         List<Position> cases = new ArrayList<>();
 
@@ -61,7 +59,7 @@ public class CasesInatteignables implements Algorithme {
                         for (Position caseCourante : casesATraiter) {
                             List<Position> voisins = caseCourante.getVoisins();
                             for (Position voisin : voisins) {
-                                if (m.posValide(voisin)) {
+                                if (m.posValide(voisin) && Etat.fromInt(m.get(voisin)) != Etat.NOIR) {
                                     int distance = Math.abs(voisin.getX() - pos.getX())
                                             + Math.abs(voisin.getY() - pos.getY());
                                     if (distance <= dist && !atteignables.contains(voisin)) {
@@ -76,6 +74,20 @@ public class CasesInatteignables implements Algorithme {
             }
         }
 
+        return atteignables;
+    }
+
+    /**
+     * Resouds l'algorithme d'aide dans une matrice donnée.
+     * 
+     * @param m la matrice à tester
+     * @return la liste des cases trouvées par l'algorithme
+     */
+    @Override
+    public Resultat resoudre(Matrice m) {
+        List<Position> inatteignables = new ArrayList<>();
+        List<Position> atteignables = atteignables(m);
+        
         // Parcourir la matrice pour ajouter les cases innaccessibles à la liste
         for (int i = 0; i < m.getNbLignes(); i++) {
             for (int j = 0; j < m.getNbColonnes(); j++) {
