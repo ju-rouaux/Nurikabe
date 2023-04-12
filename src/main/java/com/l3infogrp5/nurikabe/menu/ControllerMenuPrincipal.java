@@ -56,6 +56,11 @@ public class ControllerMenuPrincipal {
         // Redimensionnement responsive du titre principal 
         Label titreLabel = (Label) loader.getNamespace().get("titre_nurikabe");
 
+        if(root.getWidth()<=1000)
+            titreLabel.setStyle("-fx-font-size: 80px; -fx-font-weight:bold;");
+        else
+            titreLabel.setStyle("-fx-font-size: " + root.getWidth()/12 + ";" + "-fx-font-weight:bold;");
+
         root.widthProperty().addListener((obs, oldVal, newVal) -> {
             double taillePolice = newVal.doubleValue() / 12;
 
