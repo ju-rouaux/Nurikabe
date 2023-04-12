@@ -53,18 +53,21 @@ public class CasesInatteignables implements Algorithme {
                     atteignables.add(pos);
 
                     int distanceMax = m.getElement(pos.getX(), pos.getY()) - 1;
-
                     // Ajouter les cases atteignables pour chaque distance
-                    for (int dist = 0; dist <= distanceMax; dist++) {
+                    for (int dist = 1; dist <= distanceMax; dist++) {
                         List<Position> casesATraiter = new ArrayList<>(pile);
                         for (Position caseCourante : casesATraiter) {
                             List<Position> voisins = caseCourante.getVoisins();
                             for (Position voisin : voisins) {
                                 if (m.posValide(voisin)) {
+                                    if(voisin.getX() == 5 && voisin.getY() == 5){
+                                        System.out.println("[5,5] inat. par " + caseCourante + "découlant de " + pos + " " + m.get(pos));
+                                    }
                                     int distance = Math.abs(voisin.getX() - pos.getX()) + Math.abs(voisin.getY() - pos.getY());
-                                    if (distance <= dist && !atteignables.contains(voisin) && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
+                                    if (distance <= dist && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
                                         atteignables.add(voisin);
                                         pile.push(voisin);
+                                        
                                     }
                                 }
                             }
@@ -94,6 +97,8 @@ public class CasesInatteignables implements Algorithme {
         List<Position> inatteignables = new ArrayList<>();
         List<Position> atteignables = atteignables(m);
         List<Position> cases = new ArrayList<>();
+
+        System.out.println("[5,5] atteignable ? " + atteignables.contains(new Position(5,5)));
 
         System.out.println(caseAtteignable(m, new Position(0,0))); 
 
