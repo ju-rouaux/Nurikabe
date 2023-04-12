@@ -1,7 +1,6 @@
 package com.l3infogrp5.nurikabe.aide;
 
 import java.util.List;
-import java.util.Stack;
 import java.util.ArrayList;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Etat;
@@ -12,10 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 /**
- * Classe implémentant l'algorithme d'aide à la résolution indiquant comment
- * connecter deux îles
  * 
- * @author Killian Rattier
+ * Classe implémentant l'algorithme d'aide à la résolution correspondant à la technique d'expansion d'île.
+ * 
+ * Si une île n'est pas complète et qu'il y a une seule case blanche adjacente à l'île, il faut la prolonger sur cette case blanche.
+ * 
+ * @author Killian Rattier, Elias OKAT
  */
 public class ExpansionIle implements Algorithme {
     BorderPane affichage;
@@ -26,7 +27,7 @@ public class ExpansionIle implements Algorithme {
     public ExpansionIle() {
         affichage = new BorderPane();
         affichage.setCenter(new Label(
-                "Les cases noires doivent être reliées en un seul chemin continu. Si une case noire ne peut se connecter qu'à un seul chemin, elle doit être prolongée pour se connecter aux autres."));
+                "Les cases noires doivent être reliées en un seul chemin continu. \nSi une case noire ne peut se connecter qu'à un seul chemin, elle doit être prolongée pour se connecter aux autres."));
     }
 
     /**
@@ -39,35 +40,43 @@ public class ExpansionIle implements Algorithme {
     public Resultat resoudre(Matrice m) {
         List<Position> resList = new ArrayList<>();
 
+        // On crée une liste de positions des cases numériques
+        List<Position> cases_num = new ArrayList<>();
+
+        // On parcourt la matrice pour trouver les cases numériques
         for (int i = 0; i < m.getNbLignes(); i++) {
             for (int j = 0; j < m.getNbColonnes(); j++) {
-                Position pos = new Position(i, j);
-
-                // Si la case est blanche et est bloquée entre un MUR (ou une case non blanche) et une autre case non
-                // blanche, ajouter la position à la liste
-                if (m.get(pos) == 999) {
-                    boolean caseVoisin = false;
-                    boolean autreCaseVoisin = false;
-
-                    for (Position voisin : pos.getVoisins()) {
-                        if (!m.posValide(voisin) || m.get(voisin) != -999) {
-                            caseVoisin = true;
-                        } else if (m.get(voisin) != -999) {
-                            autreCaseVoisin = true;
-                        }
-                    }
-
-                    if (caseVoisin && autreCaseVoisin) {
-                        resList.add(pos);
-                    }
+                if (m.get(new Position(i, j)) > 0) {
+                    cases_num.add(new Position(i, j));
                 }
             }
         }
 
-        if (!resList.isEmpty()) {
-            return new Resultat(true, resList, affichage);
+        // On parcourt la liste des cases numériques
+        for (Position pos : cases_num) {
+            // On trouve la zone de la case numérique
+            Zone zone = new Zone(m);
+            List<Position> case_num_zone = zone.findZone(pos);
+
+            // Si l'ile de la case numérique est déjà entièrement connectée, on passe à la case suivante
+            if (case_num_zone.size() != m.get(pos)) {
+                // On fait appel à la classe SousAlgo pour trouver les cases blanches adjacentes à la zone
+                List<Position> case_blanche_adj = SousAlgo.case_blanche_adjacentes(m, case_num_zone);
+
+                // On parcourt la liste des cases blanches adjacentes
+                if (case_blanche_adj.size() == 1) {
+                    // Si la liste contient une seule case blanche adjacente, on l'ajoute à la liste des cases à ajouter
+                    resList.add(case_blanche_adj.get(0));
+                }
+            }
+
         }
-        return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
+
+        if (!resList.isEmpty()) {
+            return new Resultat(true, resList.subList(0, 1), affichage);
+        }
+
+        return new Resultat(false, null, new BorderPane(new Label("")));
     }
 
 }
