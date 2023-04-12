@@ -41,18 +41,4 @@ public class CaseNumerique extends Case {
     public int getValeur() {
         return Integer.valueOf(this.textProperty().get());
     }
-
-    /**
-     * {@inheritDoc}
-     * Le nombre de case contenues dans la zone est affiché à côté du numéro de la
-     * case.
-     */
-    @Override
-    public void surbrillance(boolean b, int taille_zone) {
-        super.surbrillance(b, taille_zone);
-        /*
-         * TODO : afficher le nombre de case contenues dans la zone.
-         * NE JAMAIS MODIFIER LA VALEUR DE this.textProperty()
-         */
-    }
 }

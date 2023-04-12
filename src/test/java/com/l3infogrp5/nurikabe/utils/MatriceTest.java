@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-import com.l3infogrp5.nurikabe.aide.*;
-import com.l3infogrp5.nurikabe.utils.Matrice;
-
 /**
  * Unit test for simple App.
  */

@@ -81,9 +81,7 @@ public class ControllerMenuSelection {
          * Lance la fenêtre d'affichage des scores.
          */
         @FXML
-        private void scoreClique() throws IOException{
-            // TODO charger score ici
-            System.out.println("Lancement score " + (id_niveau));
+        private void scoreClique() throws IOException {
             root.setRoot(new ControllerLeaderboard(root, id_niveau).getPane());
         }
 

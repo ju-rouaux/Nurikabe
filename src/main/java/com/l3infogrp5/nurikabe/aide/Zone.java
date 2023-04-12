@@ -86,19 +86,25 @@ public class Zone {
     /**
      * Méthode permettant de trouver un chemin existant à partir d'une position.
      * 
-     * @param pos la position à tester.
-     * 
+     * @param pos la position de départ à tester.
+     * @return La liste des positions formant la zone.
      */
     private List<Position> findZoneRecursive(Position pos) {
+
+        // Récupération de l'état de la position de départ
         List<Etat> etatInit = new ArrayList<>();
         etatInit.add(Etat.fromInt(matrice.get(pos)));
 
-        
+        // Si l'état est NUMERIQUE on ajoute un point, si l'état est POINT on ajoute un numérique
         if (etatInit.get(0) == Etat.NUMERIQUE)
             etatInit.add(Etat.POINT);
-
+        else if (etatInit.get(0) == Etat.POINT)
+            etatInit.add(Etat.NUMERIQUE);
+        
+        // Récupération des positions voisines
         List<Position> checkVois = pos.getVoisins();
 
+        // On parcourt les positions voisines pour voir si elles sont similaires à la position de départ
         for (Position vois : checkVois) {
             // On vérifie que le voisin à liste si la position est dans la matrice.
             if (matrice.posValide(vois)) {
@@ -121,18 +127,22 @@ public class Zone {
      * Méthode qui décrémente la valeur d'une case en fonction de la taille de la
      * zone.
      * 
-     * @param matrice la matrice d'entiers dans laquelle on veut décrémenter la
-     *                valeur.
+     * Important : Cette méthode modifie directement la matrice qui lui est passée en paramètre.
+     * 
+     * @param matrice la matrice d'entiers dans laquelle on veut décrémenter la valeur.
      */
     public void decremente(Matrice matrice) {
+        // On initialise deux listes vides pour stocker les positions numériques et toutes les positions des zones trouvées.
         List<Position> num_pos = new ArrayList<>();
         List<Position> all_zone = new ArrayList<>();
 
+        // On parcourt toutes les positions de la matrice.
         for (int i = 0; i < matrice.getNbColonnes(); i++) {
             for (int j = 0; j < matrice.getNbLignes(); j++) {
                 Position pos = new Position(j, i);
-
+                // On vérifie que la position est valide.
                 if (matrice.posValide(pos)) {
+                    // On vérifie que la position est numérique.
                     if (Etat.fromInt(matrice.get(pos)) == Etat.NUMERIQUE) {
                         num_pos.add(pos);
                     }
@@ -140,12 +150,13 @@ public class Zone {
             }
         }
 
+        // Pour chaque position numérique, on cherche la zone à laquelle elle appartient.
         for (Position position : num_pos) {
             Zone laZone = new Zone(matrice);
             laZone.findZone(position);
 
+            // On décrémente la valeur de chaque cellule dans la zone, en utilisant la taille de la zone plus un.
             int valeur_decremente = matrice.get(position) - laZone.zone.size() + 1;
-            List<Position> zone = laZone.getZone();
 
             for (Position cell_in_zone : laZone.zone) {
                 matrice.set(cell_in_zone, valeur_decremente);
@@ -153,7 +164,8 @@ public class Zone {
                 this.removeFromZone(cell_in_zone);
             }
         }
-
+        
+        // On remplit la matrice avec des valeurs spéciales pour les cellules qui ne sont pas dans une zone.
         for (int i = 0; i < matrice.getNbColonnes(); i++) {
             for (int j = 0; j < matrice.getNbLignes(); j++) {
                 Position pos = new Position(j, i);
@@ -163,7 +175,7 @@ public class Zone {
                         if (Etat.fromInt(matrice.get(pos)) == Etat.NOIR) {
                             matrice.set(pos, -999);
                         }
-
+                        
                         if (Etat.fromInt(matrice.get(pos)) == Etat.BLANC) {
                             matrice.set(pos, 999);
                         }
