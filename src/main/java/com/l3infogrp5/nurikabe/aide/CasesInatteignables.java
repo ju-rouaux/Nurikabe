@@ -29,15 +29,8 @@ public class CasesInatteignables implements Algorithme {
                 "Si une case blanche ne peut appartenir à aucun chemin de case numérique, elle doit être noircie."));
     }
 
-    /**
-     * Resouds l'algorithme d'aide dans une matrice donnée.
-     * 
-     * @param m la matrice à tester
-     * @return la liste des cases trouvées par l'algorithme
-     */
-    @Override
-    public Resultat resoudre(Matrice m) {
-        List<Position> inatteignables = new ArrayList<>();
+    public List<Position> atteignables(Matrice m){
+        //List<Position> inatteignables = new ArrayList<>();
         List<Position> atteignables = new ArrayList<>();
         List<Position> cases = new ArrayList<>();
 
@@ -76,6 +69,20 @@ public class CasesInatteignables implements Algorithme {
             }
         }
 
+        return atteignables;
+    }
+
+    /**
+     * Resouds l'algorithme d'aide dans une matrice donnée.
+     * 
+     * @param m la matrice à tester
+     * @return la liste des cases trouvées par l'algorithme
+     */
+    @Override
+    public Resultat resoudre(Matrice m) {
+        List<Position> inatteignables = new ArrayList<>();
+        List<Position> atteignables = atteignables(m);
+        
         // Parcourir la matrice pour ajouter les cases innaccessibles à la liste
         for (int i = 0; i < m.getNbLignes(); i++) {
             for (int j = 0; j < m.getNbColonnes(); j++) {
