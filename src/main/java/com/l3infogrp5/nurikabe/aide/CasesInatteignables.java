@@ -65,9 +65,6 @@ public class CasesInatteignables implements Algorithme {
                                     if (distance <= dist && !atteignables.contains(voisin) && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
                                         atteignables.add(voisin);
                                         pile.push(voisin);
-                                        if(voisin.getX() == 4 && voisin.getY() == 0){
-                                            System.out.println("4,0 est atteignable par " + pos + " de valeur " + m.get(pos));
-                                        }
                                     }
                                 }
                             }
@@ -76,7 +73,6 @@ public class CasesInatteignables implements Algorithme {
                 }
             }
         }
-
         return atteignables;
     }
 
@@ -92,10 +88,6 @@ public class CasesInatteignables implements Algorithme {
         List<Position> atteignables = atteignables(m);
         List<Position> cases = new ArrayList<>();
 
-        if(atteignables.contains(new Position(4,0))){
-            System.out.println("4,0 est atteignable");
-        }
-
         // Parcourir la matrice pour ajouter les cases innaccessibles à la liste
         for (int i = 0; i < m.getNbLignes(); i++) {
             for (int j = 0; j < m.getNbColonnes(); j++) {
@@ -107,17 +99,8 @@ public class CasesInatteignables implements Algorithme {
             }
         }
 
-
-
-        System.out.println(atteignables.size());
-        System.out.println(inatteignables.size());
-        System.out.println(cases);
-        System.out.println(cases.size());
         if (!inatteignables.isEmpty())
             return new Resultat(true, inatteignables, affichage);
         return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
     }
 }
-
-
-//if(((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) break;
