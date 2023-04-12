@@ -32,7 +32,8 @@ public class Aide {
             new Agregat3CasesNoires(),
             new CasesInatteignables(),
             new IleCompletee(),
-            new Num2());
+            new Num2()
+    );
 
     /**
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
@@ -41,10 +42,10 @@ public class Aide {
         new ExpansionIle(),
         new ExpansionFleuve(),
         new NumVoisins(),
-        new NumDiagonales()
-        //new IleCompletee()
+        new NumDiagonales(),
+        new IleCompletee()
     );
-    
+
     /**
      * Exécute les algorithmes d'aide à la résolution et retourne le résultat.
      * 
