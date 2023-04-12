@@ -161,10 +161,12 @@
 }
 .table-view .column-header {
     -fx-background-color: transparent;
+    -fx-border-width: 0 2px 0 0;
+    -fx-border-color: rgb(249, 167, 45);
 }
 
 .table-view .table-cell{
-    -fx-border-color: transparent;
+    -fx-border-color: rgba(255, 174, 0, 0.659);
 }
 
 .table-row-cell:hover {
