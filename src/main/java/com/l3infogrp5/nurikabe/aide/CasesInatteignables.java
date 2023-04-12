@@ -76,6 +76,13 @@ public class CasesInatteignables implements Algorithme {
         return atteignables;
     }
 
+    public boolean caseAtteignable(Matrice m, Position p){
+        List<Position> att = atteignables(m);
+        return att.contains(p);
+    }
+
+
+
     /**
      * Resouds l'algorithme d'aide dans une matrice donnée.
      * 
@@ -87,6 +94,8 @@ public class CasesInatteignables implements Algorithme {
         List<Position> inatteignables = new ArrayList<>();
         List<Position> atteignables = atteignables(m);
         List<Position> cases = new ArrayList<>();
+
+        System.out.println(caseAtteignable(m, new Position(0,0))); 
 
         // Parcourir la matrice pour ajouter les cases innaccessibles à la liste
         for (int i = 0; i < m.getNbLignes(); i++) {
