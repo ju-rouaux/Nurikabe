@@ -38,7 +38,6 @@ public class Aide {
      * Liste des algorithmes nécessitant un prétraitement réalisé par Zone.
      */
     private static List<Algorithme> algos_preprocessed = List.of(
-<<<<<<< HEAD
         new ExpansionIle(),
         new ExpansionFleuve(),
         new NumVoisins(),
@@ -46,12 +45,6 @@ public class Aide {
         //new IleCompletee()
     );
     
-=======
-            new ExpansionFleuve(),
-            new NumVoisins(),
-            new NumDiagonales());
-
->>>>>>> ec2b219c5a0d583e37803e3a25a44e49889e7da3
     /**
      * Exécute les algorithmes d'aide à la résolution et retourne le résultat.
      * 
