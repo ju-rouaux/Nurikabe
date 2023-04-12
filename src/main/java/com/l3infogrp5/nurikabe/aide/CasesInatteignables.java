@@ -29,6 +29,11 @@ public class CasesInatteignables implements Algorithme {
                 "Si une case blanche ne peut appartenir à aucun chemin de case numérique, elle doit être noircie."));
     }
 
+    /**
+     * Méthode parcourant la matrice et renvoyant les cases que l'on peut atteindre
+     * @param m la matrice à tester
+     * @return la liste des cases atteignables
+     */
     public List<Position> atteignables(Matrice m){
         //List<Position> inatteignables = new ArrayList<>();
         List<Position> atteignables = new ArrayList<>();
@@ -54,7 +59,7 @@ public class CasesInatteignables implements Algorithme {
                         for (Position caseCourante : casesATraiter) {
                             List<Position> voisins = caseCourante.getVoisins();
                             for (Position voisin : voisins) {
-                                if (m.posValide(voisin)) {
+                                if (m.posValide(voisin) && Etat.fromInt(m.get(voisin)) != Etat.NOIR) {
                                     int distance = Math.abs(voisin.getX() - pos.getX())
                                             + Math.abs(voisin.getY() - pos.getY());
                                     if (distance <= dist && !atteignables.contains(voisin)) {
