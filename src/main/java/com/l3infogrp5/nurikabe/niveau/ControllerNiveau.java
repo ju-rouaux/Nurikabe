@@ -241,7 +241,7 @@ public class ControllerNiveau {
         this.panneau_central.getChildren().remove(panneau_aide);
         this.panneau_central.getChildren().add(panneau_aide);
 
-        // TODO charger les données de score depuis le profil
+        // Données de score
         this.score = donnees_niveau.getScore();
         this.panneau_score.setCenter(this.score.get_Pane());
 
@@ -273,7 +273,7 @@ public class ControllerNiveau {
             this.grille.capturerGrille(Path.repertoire_lvl.toString() + "/" + Profil.getJoueur() + "/"
                     + Profil.getModeDeJeu() + "/" + "capture_niveau_" + Profil.getIdNiveau() + ".png");
 
-            root.setRoot(new ControllerMenuModeJeu(root).getPane()); // TODO temporaire
+            root.setRoot(new ControllerMenuModeJeu(root).getPane());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,7 +9,6 @@ import com.l3infogrp5.nurikabe.utils.Position;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 
 /**
  * 

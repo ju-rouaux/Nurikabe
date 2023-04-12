@@ -51,7 +51,6 @@ public class CaseInteractive extends Case {
      * @param nouveau nouvel état.
      */
     private void changerApparence(Etat ancien, Etat nouveau) {
-        // TODO changer l'apparence du bouton ici (ce qui suit a pour valeur d'exemple)
 
         // Retirer l'apparence de l'ancien état
         switch (ancien) {
