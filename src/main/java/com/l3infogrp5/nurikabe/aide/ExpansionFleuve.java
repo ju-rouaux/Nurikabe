@@ -3,17 +3,21 @@ package com.l3infogrp5.nurikabe.aide;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 
 /**
- * Classe implémentant l'algorithme d'aide à la résolution indiquant comment
- * connecter deux fleuves
  * 
- * @author Killian Rattier
+ * Classe implémentant l'algorithme d'aide à la résolution correspondant à la technique d'expansion de fleuve.
+ * 
+ * Si une île n'est pas complète et qu'il y a une seule case blanche adjacente à l'île, il faut la prolonger sur cette case blanche.
+ * 
+ * @author Killian Rattier, Elias OKAT
  */
 public class ExpansionFleuve implements Algorithme {
     BorderPane affichage;
@@ -24,7 +28,7 @@ public class ExpansionFleuve implements Algorithme {
     public ExpansionFleuve() {
         affichage = new BorderPane();
         affichage.setCenter(new Label(
-                "Les cases noires doivent être reliées en un seul chemin continu. Si une case noire ne peut se connecter qu'à un seul chemin, elle doit être prolongée pour se connecter aux autres."));
+                "Les cases noires doivent être reliées en un seul chemin continu. \nSi une case noire ne peut se connecter qu'à un seul chemin, elle doit être prolongée pour se connecter aux autres."));
     }
 
     /**
@@ -37,100 +41,40 @@ public class ExpansionFleuve implements Algorithme {
     public Resultat resoudre(Matrice m) {
         List<Position> resList = new ArrayList<>();
 
+        // On crée une liste de positions des cases noires
+        List<Position> cases_noire = new ArrayList<>();
+
+        // On parcourt la matrice pour trouver les cases noires
         for (int i = 0; i < m.getNbLignes(); i++) {
             for (int j = 0; j < m.getNbColonnes(); j++) {
-                Position pos = new Position(i, j);
-                if (m.get(pos) == 1) { // si la case est un mur
-                    if (!estConnecte(m, pos)) { // si le mur n'est pas connecté
-                        List<Position> casesAdjacentes = pos.getVoisins(); // on récupère les cases adjacentes
-                        List<Position> casesAdjacentesLibres = new ArrayList<>(); // on crée une liste pour stocker les
-                                                                                  // cases adjacentes libres
-
-                        // on parcourt les cases adjacentes pour trouver celles qui sont libres
-                        for (Position caseAdjacente : casesAdjacentes) {
-                            if (m.posValide(caseAdjacente) && m.get(caseAdjacente) == 0) {
-                                casesAdjacentesLibres.add(caseAdjacente);
-                            }
-                        }
-
-                        if (casesAdjacentesLibres.size() == 3) { // si on a trouvé 3 cases adjacentes libres, on les
-                                                                 // ajoute à la liste des cases à ajouter
-                            resList.addAll(casesAdjacentesLibres);
-                        }
-                    }
+                if (m.get(new Position(i, j)) == Etat.NOIR.toInt()) {
+                    cases_noire.add(new Position(i, j));
                 }
+            }
+        }
+
+        // On parcourt la liste des cases noires
+        for (Position pos : cases_noire) {
+            // On trouve la zone de la case noire
+            Zone zone = new Zone(m);
+            List<Position> case_noire_zone = zone.findZone(pos);
+
+            // On fait appel à la classe SousAlgo pour trouver les cases blanches adjacentes à la zone
+            List<Position> case_blanche_adj = SousAlgo.case_blanche_adjacentes(m, case_noire_zone);
+
+
+            // On parcourt la liste des cases blanches adjacentes
+            if (case_blanche_adj.size() == 1) {
+                // Si la liste contient une seule case blanche adjacente, on l'ajoute à la liste des cases à ajouter
+                resList.add(case_blanche_adj.get(0));
             }
         }
 
         if (!resList.isEmpty()) {
-            return new Resultat(true, resList, affichage);
+            return new Resultat(true, resList.subList(0, 1), affichage);
         }
-        return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
+
+        return new Resultat(false, null, new BorderPane(new Label("")));
     }
-
-    /**
-     * Vérifie si le mur à la position donnée est connecté à d'autres murs
-     * 
-     * @param matrice la matrice du jeu Nurikabe
-     * @param pos     la position du mur
-     * @return vrai si le mur est connecté à d'autres murs, faux sinon
-     */
-    private static boolean estConnecte(Matrice matrice, Position pos) {
-        List<Position> casesAdjacentes = pos.getVoisins();
-
-        // on parcourt les cases adjacentes pour trouver un autre mur connecté
-        for (Position caseAdjacente : casesAdjacentes) {
-            if (matrice.posValide(caseAdjacente) && matrice.get(caseAdjacente) == 1 && estConnecteRec(matrice, caseAdjacente, new boolean[matrice.getNbLignes()][matrice.getNbColonnes()])) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Méthode récursive pour vérifier si une case est connectée à une autre case
-     * 
-     * @param m             la matrice
-     * @param pos           la position de la case en cours de vérification
-     * @param casesVisitees une liste des cases déjà visitées
-     * @return vrai si la case est connectée à une autre case, faux sinon
-     */
-    private static boolean estConnecteRec(Matrice matrice, Position position, boolean[][] visite) {
-        int ligne = position.getX();
-        int colonne = position.getY();
-    
-        if (!matrice.posValide(position) || visite[ligne][colonne] || matrice.get(position) == 999) {
-            return false;
-        }
-    
-        visite[ligne][colonne] = true;
-    
-        // Vérifier si la case courante est un mur
-        if (matrice.get(position) == 0) {
-            boolean voisinMur = false;
-    
-            // Vérifier si la case courante a un mur comme voisin
-            for (Position voisin : position.getVoisins()) {
-                if (matrice.posValide(voisin) && matrice.get(voisin) == 0) {
-                    voisinMur = true;
-                    break;
-                }
-            }
-    
-            if (!voisinMur) {
-                return false;
-            }
-        }
-    
-        // Explorer les voisins récursivement
-        boolean connecte = false;
-        for (Position voisin : position.getVoisins()) {
-            connecte |= estConnecteRec(matrice, voisin, visite);
-        }
-    
-        return connecte;
-    }
-    
 
 }
