@@ -382,6 +382,7 @@ public class ControllerNiveau {
             // Désactiver la surbrillance après 2 secondes
             new AnimationTimer() {
                 private long temps_debut;
+                private List <Position> l = pos_aide;
 
                 @Override
                 public void start() {
@@ -392,9 +393,8 @@ public class ControllerNiveau {
                 @Override
                 public void handle(long now) {
                     if ((System.currentTimeMillis() - temps_debut) > 2000) {
-                        if (pos_aide != null)
-                            for (Position p : pos_aide)
-                                grille.surbrillance(p, false);
+                        for (Position p : l)
+                            grille.surbrillance(p, false);
                         this.stop();
                     }
                 }
