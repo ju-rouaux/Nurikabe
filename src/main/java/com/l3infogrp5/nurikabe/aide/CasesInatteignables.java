@@ -31,11 +31,12 @@ public class CasesInatteignables implements Algorithme {
 
     /**
      * Méthode parcourant la matrice et renvoyant les cases que l'on peut atteindre
+     * 
      * @param m la matrice à tester
      * @return la liste des cases atteignables
      */
-    public List<Position> atteignables(Matrice m){
-        //List<Position> inatteignables = new ArrayList<>();
+    public List<Position> atteignables(Matrice m) {
+        // List<Position> inatteignables = new ArrayList<>();
         List<Position> atteignables = new ArrayList<>();
         List<Position> cases = new ArrayList<>();
 
@@ -54,17 +55,19 @@ public class CasesInatteignables implements Algorithme {
                     int distanceMax = m.getElement(pos.getX(), pos.getY()) - 1;
 
                     // Ajouter les cases atteignables pour chaque distance
-                    for (int dist = 1; dist <= distanceMax; dist++) {
-                        List<Position> casesATraiter = new ArrayList<>(atteignables);
+                    for (int dist = 0; dist <= distanceMax; dist++) {
+                        List<Position> casesATraiter = new ArrayList<>(pile);
                         for (Position caseCourante : casesATraiter) {
                             List<Position> voisins = caseCourante.getVoisins();
                             for (Position voisin : voisins) {
-                                if (m.posValide(voisin) && Etat.fromInt(m.get(voisin)) != Etat.NOIR) {
-                                    int distance = Math.abs(voisin.getX() - pos.getX())
-                                            + Math.abs(voisin.getY() - pos.getY());
-                                    if (distance <= dist && !atteignables.contains(voisin)) {
+                                if (m.posValide(voisin)) {
+                                    int distance = Math.abs(voisin.getX() - pos.getX()) + Math.abs(voisin.getY() - pos.getY());
+                                    if (distance <= dist && !atteignables.contains(voisin) && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
                                         atteignables.add(voisin);
                                         pile.push(voisin);
+                                        if(voisin.getX() == 4 && voisin.getY() == 0){
+                                            System.out.println("4,0 est atteignable par " + pos + " de valeur " + m.get(pos));
+                                        }
                                     }
                                 }
                             }
@@ -87,18 +90,34 @@ public class CasesInatteignables implements Algorithme {
     public Resultat resoudre(Matrice m) {
         List<Position> inatteignables = new ArrayList<>();
         List<Position> atteignables = atteignables(m);
-        
+        List<Position> cases = new ArrayList<>();
+
+        if(atteignables.contains(new Position(4,0))){
+            System.out.println("4,0 est atteignable");
+        }
+
         // Parcourir la matrice pour ajouter les cases innaccessibles à la liste
         for (int i = 0; i < m.getNbLignes(); i++) {
             for (int j = 0; j < m.getNbColonnes(); j++) {
                 Position pos = new Position(i, j);
-                if (!atteignables.contains(pos) && Etat.fromInt(m.get(pos)) == Etat.BLANC) {
+                cases.add(pos);
+                if (!atteignables.contains(pos) && (!(Etat.fromInt(m.get(pos)) == Etat.NOIR))) {
                     inatteignables.add(pos);
                 }
             }
         }
+
+
+
+        System.out.println(atteignables.size());
+        System.out.println(inatteignables.size());
+        System.out.println(cases);
+        System.out.println(cases.size());
         if (!inatteignables.isEmpty())
             return new Resultat(true, inatteignables, affichage);
         return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
     }
 }
+
+
+//if(((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) break;
