@@ -134,7 +134,7 @@ public class ControllerLeaderboard {
                 if (pseudo.equals(Profil.getJoueur())) {
                     List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
                     if(Profil.getModeDeJeu().equals(ModeDeJeu.CONTRELAMONTRE)){
-                        this.score.setSortType(TableColumn.SortType.ASCENDING);
+                        this.score_joueur_courant.setSortType(TableColumn.SortType.ASCENDING);
                         for(DonneesScore dc: scores){
                             Float scoreEntier = Float.parseFloat(dc.getScore());
                             System.out.println(scoreEntier);
