@@ -35,7 +35,8 @@ public class ControllerNouveauxProfil {
      * 
      * @param profils l'instance du menu profil actif
      *
-     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû être lu.
+     * @throws IOException lancé lorsque le fichier FXML correspondant n'a pas pû
+     *                     être lu.
      */
     public ControllerNouveauxProfil(ControllerMenuProfils profils) throws IOException {
         this.profils = profils;
