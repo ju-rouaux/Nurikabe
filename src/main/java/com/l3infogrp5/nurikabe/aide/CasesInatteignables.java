@@ -26,7 +26,7 @@ public class CasesInatteignables implements Algorithme {
     public CasesInatteignables() {
         affichage = new BorderPane();
         affichage.setCenter(new Label(
-                "Si une case blanche ne peut appartenir à aucun chemin de case numérique, elle doit être noircie."));
+                "Si une case blanche ne peut appartenir à aucun chemin de case numérique,\nelle doit être noircie."));
     }
 
     /**
@@ -77,8 +77,15 @@ public class CasesInatteignables implements Algorithme {
             }
         }
         return atteignables;
-    }
+    }   
 
+    /**
+     * Méthode parcourant la matrice et renvoyant si l'on peut atteindre une case donnée
+     * 
+     * @param m la matrice à tester
+     * @param p la position à tester
+     * @return la liste des cases atteignables
+     */
     public boolean caseAtteignable(Matrice m, Position p){
         List<Position> att = atteignables(m);
         return att.contains(p);
