@@ -37,7 +37,9 @@ public class Num1 implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label("Si une case numérique vaut 1,\nvous pouvez entourer les 4 cases autour d'elle avec des cases noires."));
+        Label texte = new Label("Si une case numérique vaut 1, vous pouvez entourer les 4 cases autour d'elle avec des cases noires.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**

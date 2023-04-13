@@ -36,8 +36,9 @@ public class NumDiagonales implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label(
-                "Si deux cases numériques sont adjacentes en diagonale,\nles deux cases blanches de la diagonale opposée doivent être noircies."));
+        Label texte = new Label("Si deux cases numériques sont adjacentes en diagonale, les deux cases qui les séparent doivent être noircies.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**
@@ -86,12 +87,8 @@ public class NumDiagonales implements Algorithme {
 
             // si la liste des cases à modifier n'est pas vide, on retourne un résultat vrai
             // avec la liste des cases à modifier
-            if (!case_a_modifier.isEmpty()) {
-                return new Resultat(true, case_a_modifier,
-                        new BorderPane(new Label(
-                                "Si deux cases numériques sont adjacentes en diagonale,\nles deux cases blanches de la diagonale opposée doivent être noircies.")));
-            }
-
+            if (!case_a_modifier.isEmpty())
+                return new Resultat(true, case_a_modifier, affichage);
         }
 
         // si la liste des cases à modifier est vide, on retourne un résultat faux

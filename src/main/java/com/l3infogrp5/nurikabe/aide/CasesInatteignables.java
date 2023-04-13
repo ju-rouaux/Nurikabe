@@ -39,8 +39,9 @@ public class CasesInatteignables implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         // Ajouter le texte
-        affichage.setCenter(new Label(
-                "Si une case blanche ne peut appartenir à aucun chemin \nde case numérique, elle doit être noircie."));
+        Label texte = new Label("Si une case blanche ne peut être atteinte par aucune case numérique, elle doit être noircie.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**

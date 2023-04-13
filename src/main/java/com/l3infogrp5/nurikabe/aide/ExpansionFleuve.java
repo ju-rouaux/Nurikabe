@@ -40,8 +40,9 @@ public class ExpansionFleuve implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label(
-                "Les cases noires doivent être reliées en un seul chemin continu. \nSi une case noire ne peut se connecter qu'à un seul chemin,\n elle doit être prolongée pour se connecter aux autres."));
+        Label texte = new Label("Les cases noires doivent former un seul fleuve continu. Si une case noire ne peut s'étendre que dans une direction, elle doit être prolongée pour se connecter aux autres.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**

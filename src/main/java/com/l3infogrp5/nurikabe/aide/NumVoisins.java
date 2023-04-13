@@ -36,8 +36,9 @@ public class NumVoisins implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label(
-                "Si deux cases numériques sont séparées par une case blanche dans la même ligne ou colonne,\n la case blanche doit être noircie."));
+        Label texte = new Label("Si deux cases numériques sont séparées par une case blanche dans la même ligne ou colonne, la case blanche doit être noircie.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**

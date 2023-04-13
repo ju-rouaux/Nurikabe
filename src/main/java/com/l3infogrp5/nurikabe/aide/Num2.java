@@ -40,8 +40,9 @@ class Num2 implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label(
-                        "Si un chiffre 2 est entouré dans sa diagonale de deux cases noires,\nla case diagonale opposée doit devenir une case noire."));
+        Label texte = new Label("Si un chiffre 2 est entouré dans sa diagonale de deux cases noires, la case diagonale opposée doit devenir une case noire.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
     
     /**

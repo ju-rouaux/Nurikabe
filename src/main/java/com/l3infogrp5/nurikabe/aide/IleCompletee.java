@@ -33,15 +33,16 @@ public class IleCompletee implements Algorithme {
         ImageView img = new ImageView("/img/aide/ileComplete.png");
         // Taille de l'image
         img.setFitWidth(100);
-        img.setFitHeight(100);
+        img.setFitHeight(125);
         // Ajouter l'image à gauche et la centrer verticalement
         affichage.setLeft(img);
         BorderPane.setAlignment(img, Pos.CENTER);
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label(
-                        "Si une île est complétée, toutes les cases adjacentes\nà l'île doivent être noires."));
+        Label texte = new Label("Si une île est complétée, toutes les cases adjacentes à l'île doivent être noires.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**

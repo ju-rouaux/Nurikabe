@@ -38,8 +38,9 @@ public class Agregat3CasesNoires implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label(
-                "Si 3 cases noires remplissent une zone de 4x4,\nla case restante appartient forcément à une île."));
+        Label texte = new Label("Si 3 cases noires remplissent une zone de 4x4, la case restante appartient forcément à une île.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**

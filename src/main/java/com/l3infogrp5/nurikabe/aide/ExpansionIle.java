@@ -39,8 +39,9 @@ public class ExpansionIle implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label(
-                "Les cases noires doivent être reliées en un seul chemin continu. \nSi une case noire ne peut se connecter qu'à un seul chemin,\nelle doit être prolongée pour se connecter aux autres."));
+        Label texte = new Label("Si une île n'est pas complète et qu'il y a une seule case blanche adjacente à l'île, il faut la prolonger sur cette case blanche.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**

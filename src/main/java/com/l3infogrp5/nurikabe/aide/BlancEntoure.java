@@ -37,8 +37,10 @@ class BlancEntoure implements Algorithme {
         // Aouter une marge autour de l'image
         BorderPane.setMargin(img, new Insets(10));
         //Ajouter le texte
-        affichage.setCenter(new Label(
-                "Une case blanche ou point entourée de cases voisines noires\ndoit devenir elle aussi noire."));
+        Label texte = new Label("Une case blanche ou un point entouré de cases voisines noires doit devenir noire.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
+        
     }
 
     /**
