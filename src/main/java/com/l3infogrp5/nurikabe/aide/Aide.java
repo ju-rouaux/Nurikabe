@@ -31,8 +31,8 @@ public class Aide {
             new BlancEntoure(),
             new Agregat3CasesNoires(),
             new CasesInatteignables(),
-            new IleCompletee(),*/
-            new Num2(),
+            new IleCompletee(),
+            new Num2(),*/
             new ExpansionIle(),
             new ExpansionFleuve()
     );

@@ -43,6 +43,7 @@ class Num2 implements Algorithme {
         affichage.setCenter(new Label(
                         "Si un chiffre 2 est entouré dans sa diagonale de deux cases noires,\nla case diagonale opposée doit devenir une case noire."));
     }
+    
     /**
      * Résoud l'algorithme de la case NUMÉRIQUE 2 entouré de deux cases noires
      *
