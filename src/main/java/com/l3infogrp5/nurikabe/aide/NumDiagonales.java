@@ -33,13 +33,6 @@ public class NumDiagonales implements Algorithme {
     @Override
     public Resultat resoudre(Matrice m) {
 
-        System.out.print("\033[32m");
-
-        System.out.println("\nLa matrice est :");
-        System.out.println(m);
-
-        System.out.print("\033[0m");
-
         int[][] patternA = {
                 { 0, 666 },
                 { 666, 0 }
@@ -55,8 +48,6 @@ public class NumDiagonales implements Algorithme {
         patternList.add(new Matrice(patternB));
 
         ArrayList<Position> case_a_modifier = new ArrayList<Position>();
-
-        // affiche_mat(m,new Position(0, 0),new ArrayList<Position>());
 
         for (Matrice pattern : patternList) {
             Matrice m2 = new Matrice(m.getElements());
