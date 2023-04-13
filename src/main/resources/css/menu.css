@@ -78,6 +78,14 @@
 .scroll-p .scroll-bar {
     -fx-background-color: rgba(189, 171, 112, 0.652);
     -fx-background-radius: 25px;
+}
+.scroll-p .scroll-bar:vertical {
+
+    -fx-translate-x: -5;
+
+}
+.scroll-p .scroll-bar:horizontal {
+    -fx-pref-width:100px;
     -fx-translate-x: -5;
 
 }
@@ -179,6 +187,37 @@
 .table-row-cell:even{
     -fx-background-color: #ffeccb44;
 
+}
+
+.table-view .scroll-bar {
+    -fx-background-color: rgba(189, 171, 112, 0.652);
+    -fx-background-radius: 25px;
+}
+.table-view .scroll-bar:vertical {
+
+    -fx-translate-x: -5;
+
+}
+.table-view .scroll-bar:horizontal {
+    -fx-pref-width:100px;
+    -fx-translate-x: -5;
+
+}
+.table-view .scroll-bar .thumb {
+    -fx-background-color: rgb(255, 162, 0);
+}
+
+.table-view .scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-shape: " ";
+}
+
+.table-view .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-background-color: gray;
+}
+
+.table-view .scroll-bar .increment-arrow:hover, .scroll-bar .decrement-arrow:hover {
+    -fx-background-color: rgb(255, 162, 0);
 }
 
 /* ==================== IDs ==================== */
