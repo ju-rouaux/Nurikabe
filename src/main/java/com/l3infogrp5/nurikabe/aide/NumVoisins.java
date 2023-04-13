@@ -15,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 /**
  * Classe implémentant l'algorithme d'aide à la résolution lorsque 2 cases NUM snt séparées d'une case
  * 
- * @author Killian Rattier, Guillaume Richard
+ * @author Killian Rattier, Elias Okat
  */
 public class NumVoisins implements Algorithme {
     BorderPane affichage;
@@ -49,10 +49,13 @@ public class NumVoisins implements Algorithme {
     @Override
     public Resultat resoudre(Matrice m) {
         List<Position> resList = new ArrayList<>();
+        // Pour chaque case de la matrice
         for (int x = 0; x < m.getNbLignes(); x++) {
             for (int y = 0; y < m.getNbColonnes(); y++) {
                 Position pos = new Position(x, y);
+                // Si la case est blanche
                 if (m.get(pos) == 999) {
+                    // Si Nord et Sud ou Est et Ouest sont numériques on ajoute la case est un résultat
                     if (((m.posValide(pos.getN()) && Aide.isNumPreproc(m, pos.getN())))
                             && (m.posValide(pos.getS()) && Aide.isNumPreproc(m, pos.getS()))
                             || (m.posValide(pos.getE()) && Aide.isNumPreproc(m, pos.getE()))

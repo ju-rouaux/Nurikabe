@@ -16,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 /**
  * Une case BLANCHE ou Point entouré de voisins NOIR doit devenir NOIR
  *
- * @author Elias OKAT
+ * @author Elias OKAT, Killian Rattier
  */
 class BlancEntoure implements Algorithme {
     BorderPane affichage;

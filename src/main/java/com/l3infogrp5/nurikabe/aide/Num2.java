@@ -19,7 +19,7 @@ import javafx.scene.layout.BorderPane;
  * cases noires,
  * la case diagonale opposée doit devenir noire
  *
- * @author Elias OKAT
+ * @author Elias OKAT, Killian Rattier
  */
 class Num2 implements Algorithme {
     BorderPane affichage;

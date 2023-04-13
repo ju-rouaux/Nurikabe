@@ -19,7 +19,7 @@ import javafx.scene.layout.BorderPane;
  * d'une île complétée,
  * c'est-à-dire une île dont toutes les cases adjacentes sont noires.
  *
- * @author Elias OKAT
+ * @author Elias OKAT, Killian Rattier
  */
 public class IleCompletee implements Algorithme {
     BorderPane affichage;
