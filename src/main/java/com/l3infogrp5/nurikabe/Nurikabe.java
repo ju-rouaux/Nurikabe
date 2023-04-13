@@ -6,6 +6,7 @@ import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -45,6 +46,7 @@ public class Nurikabe extends Application {
         stage.setMinHeight(480);
         stage.setMinWidth(640);
         stage.setTitle("Nurikabe");
+        stage.getIcons().add(new Image("/icon.png"));
         stage.show();
     }
 
