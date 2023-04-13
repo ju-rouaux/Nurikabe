@@ -194,7 +194,7 @@ public class Profil {
             switch (mode_de_jeu) {
                 case DETENTE -> donnees_niveau.donneesScore.score = "5";
                 case SANSFIN -> {
-                    donnees_niveau.donneesScore.score = "60";
+                    donnees_niveau.donneesScore.score = "300";
                     donnees_niveau.nb_grilles_temp = 0;
                 }
                 case CONTRELAMONTRE -> donnees_niveau.donneesScore.score = "0";

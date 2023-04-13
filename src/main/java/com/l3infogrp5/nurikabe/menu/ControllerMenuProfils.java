@@ -311,17 +311,17 @@ public class ControllerMenuProfils {
             }
         }
 
-        if(name_to_delete != ""){
+        if (name_to_delete != "") {
             // Si le joueur courant est supprimer on charge le profils par default
-            if(name_to_delete.equals(nom_joueur)){
+            if (name_to_delete.equals(nom_joueur)) {
                 profil_actif = 0;
                 setActiveProfil(0);
                 writeActif("default");
                 Profil.getInstance().chargerProfil("default");
-            }// sinon on récupère le joueur actif et on applique le décalage
+            } // sinon on récupère le joueur actif et on applique le décalage
             else {
-                if(profil_actif > 0)
-                    profil_actif --;
+                if (profil_actif > 0)
+                    profil_actif--;
                 setActiveProfil(profil_actif);
                 writeActif(Profil.getJoueur());
             }
