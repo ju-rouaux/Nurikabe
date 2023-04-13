@@ -1,4 +1,4 @@
-package com.l3infogrp5.nurikabe.Aide;
+package com.l3infogrp5.nurikabe.aide;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-import com.l3infogrp5.nurikabe.aide.Zone;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
