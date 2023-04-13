@@ -6,7 +6,10 @@ import java.util.List;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -16,10 +19,32 @@ import javafx.scene.layout.BorderPane;
  * cases noires,
  * la case diagonale opposée doit devenir noire
  *
- * @author Elias OKAT
+ * @author Elias OKAT, Killian Rattier
  */
 class Num2 implements Algorithme {
+    BorderPane affichage;
 
+    /**
+     * Constructeur de l'algorithme
+     */
+    public Num2 (){
+        affichage = new BorderPane();
+        // Image
+        ImageView img = new ImageView("/img/aide/num2.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        //Ajouter le texte
+        Label texte = new Label("Si un chiffre 2 est entouré dans sa diagonale de deux cases noires, la case diagonale opposée doit devenir une case noire.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
+    }
+    
     /**
      * Résoud l'algorithme de la case NUMÉRIQUE 2 entouré de deux cases noires
      *
@@ -153,9 +178,7 @@ class Num2 implements Algorithme {
         }
 
         // Sinon, on retourne un résultat vrai avec la liste des cases à modifier
-        return new Resultat(true, case_noire.subList(0, 1),
-                new BorderPane(new Label(
-                        "Si un chiffre 2 est entouré dans sa diagonale de deux cases noires,\nla case diagonale opposée doit devenir une case noire.")));
+        return new Resultat(true, case_noire.subList(0, 1),affichage);
     }
 
     private Position getOposite(Position diagonales, Position case_centrale) {

@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -25,8 +28,20 @@ public class ExpansionIle implements Algorithme {
      */
     public ExpansionIle() {
         affichage = new BorderPane();
-        affichage.setCenter(new Label(
-                "Les cases noires doivent être reliées en un seul chemin continu. \nSi une case noire ne peut se connecter qu'à un seul chemin, elle doit être prolongée pour se connecter aux autres."));
+        // Image
+        ImageView img = new ImageView("/img/aide/expIle.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        //Ajouter le texte
+        Label texte = new Label("Si une île n'est pas complète et qu'il y a une seule case blanche adjacente à l'île, il faut la prolonger sur cette case blanche.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**

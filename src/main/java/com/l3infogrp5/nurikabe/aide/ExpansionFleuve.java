@@ -7,7 +7,10 @@ import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -26,8 +29,20 @@ public class ExpansionFleuve implements Algorithme {
      */
     public ExpansionFleuve() {
         affichage = new BorderPane();
-        affichage.setCenter(new Label(
-                "Les cases noires doivent être reliées en un seul chemin continu. \nSi une case noire ne peut se connecter qu'à un seul chemin, elle doit être prolongée pour se connecter aux autres."));
+        // Image
+        ImageView img = new ImageView("/img/aide/expNoir.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        //Ajouter le texte
+        Label texte = new Label("Les cases noires doivent former un seul fleuve continu. Si une case noire ne peut s'étendre que dans une direction, elle doit être prolongée pour se connecter aux autres.");
+        texte.setWrapText(true);
+        affichage.setCenter(texte);
     }
 
     /**
