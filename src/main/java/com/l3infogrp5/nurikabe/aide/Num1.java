@@ -23,7 +23,7 @@ public class Num1 implements Algorithme {
      */
     public Num1(){
         affichage = new BorderPane();
-        affichage.setCenter(new Label("Si une case numérique vaut 1, vous pouvez entourer les 4 cases,\n autour d'elle avec des cases noires."));
+        affichage.setCenter(new Label("Si une case numérique vaut 1, vous pouvez entourer les 4 cases,\nautour d'elle avec des cases noires."));
     }
 
     /**
