@@ -68,7 +68,7 @@ public class ScoreEndless extends ScoreChrono {
     @Override
     public void aideUtilise() {
 
-        int malus = 40;
+        int malus = 30;
 
         if (totalSec - malus < 0) {
             totalSec = 0;
@@ -96,7 +96,7 @@ public class ScoreEndless extends ScoreChrono {
     @Override
     public void checkUtilise() {
 
-        int malus = 60;
+        int malus = 45;
 
         if (totalSec - malus < 0) {
             stop();

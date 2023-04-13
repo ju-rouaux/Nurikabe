@@ -3,6 +3,8 @@ package com.l3infogrp5.nurikabe.menu;
 import com.l3infogrp5.nurikabe.sauvegarde.ModeDeJeu;
 import com.l3infogrp5.nurikabe.sauvegarde.Profil;
 import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder;
+import com.l3infogrp5.nurikabe.sauvegarde.Sauvegarder.DonneesScore;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,6 +95,12 @@ public class ControllerLeaderboard {
         this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
         this.score.setSortType(TableColumn.SortType.DESCENDING);
         this.date.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        // Définit les propriétés des colonnes pour le tableau de score personnel
+        this.date_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("date"));
+        this.score_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("score"));
+        this.score_joueur_courant.setSortType(TableColumn.SortType.DESCENDING);
+
         // Récupère la liste des pseudos
         List<String> pseudos = Sauvegarder.joueursScore(Profil.getModeDeJeu(), id_niveau);
 
@@ -106,13 +114,52 @@ public class ControllerLeaderboard {
             for (String pseudo : pseudos) {
                 List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
                 for (Sauvegarder.DonneesScore score : scores) {
-                    System.out.println(score);
+                    if(Profil.getModeDeJeu().equals(ModeDeJeu.CONTRELAMONTRE)){
+                        this.score.setSortType(TableColumn.SortType.ASCENDING);
+                        Float scoreEntier = Float.parseFloat(score.getScore());
+                        System.out.println(scoreEntier);
+                        int sec = Math.round(scoreEntier % 60);
+                        int min;
+                        if(!(sec== scoreEntier))
+                            min = Math.round(scoreEntier / 60);
+                        else {
+                            min=0;
+                        }
+                        
+                        if (sec >= 10)
+                        score.score = min + ":" + sec;
+                        else
+                        score.score = min + ":0" + sec;
+                        System.out.println(score.score);
+                        }
+                    //System.out.println(score);
                     items.add(score);
                 }
             }
             for (String pseudo : pseudos) {
                 if (pseudo.equals(Profil.getJoueur())) {
                     List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
+                    if(Profil.getModeDeJeu().equals(ModeDeJeu.CONTRELAMONTRE)){
+                        this.score_joueur_courant.setSortType(TableColumn.SortType.ASCENDING);
+                        for(DonneesScore dc: scores){
+                            Float scoreEntier = Float.parseFloat(dc.getScore());
+                            System.out.println(scoreEntier);
+                            int sec = Math.round(scoreEntier % 60);
+                            int min;
+                            if(!(sec== scoreEntier))
+                                min = (int)(scoreEntier / 60);
+                            else {
+                                min=0;
+                            }
+                            
+                            if (sec >= 10)
+                            dc.score = min + ":" + sec;
+                            else
+                            dc.score = min + ":0" + sec;
+                            System.out.println(dc.score);
+                
+                        }
+                    }
                     if (!scores.isEmpty()) {
                         items_moi.addAll(scores);
                     }
@@ -124,10 +171,7 @@ public class ControllerLeaderboard {
         this.leaderboard_general.setItems(items);
         this.leaderboard_general.getSortOrder().add(score);
 
-        // Définit les propriétés des colonnes pour le tableau de score personnel
-        this.date_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("date"));
-        this.score_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("score"));
-        this.score_joueur_courant.setSortType(TableColumn.SortType.DESCENDING);
+
 
         this.leaderboard_joueur_courant.setItems(items_moi);
         this.leaderboard_joueur_courant.getSortOrder().add(score_joueur_courant);

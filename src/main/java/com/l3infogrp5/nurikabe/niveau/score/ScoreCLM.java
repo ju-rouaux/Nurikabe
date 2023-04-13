@@ -56,7 +56,7 @@ public class ScoreCLM extends ScoreChrono {
     @Override
     public void aideUtilise() {
 
-        int malus = 40;
+        int malus = 20;
         totalSec += malus;
 
     }
