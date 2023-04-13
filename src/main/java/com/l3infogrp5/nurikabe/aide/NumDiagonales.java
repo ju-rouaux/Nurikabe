@@ -1,7 +1,6 @@
 package com.l3infogrp5.nurikabe.aide;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
@@ -13,7 +12,7 @@ import javafx.scene.layout.BorderPane;
  * Classe implémentant l'algorithme d'aide à la résolution lorsque l'on a 2
  * cases NUM en diagonale
  * 
- * @author Killian Rattier
+ * @author Elias Okat, Killian Rattier
  */
 public class NumDiagonales implements Algorithme {
     BorderPane affichage;
@@ -22,10 +21,7 @@ public class NumDiagonales implements Algorithme {
      * Constructeur de l'algorithme.
      */
     public NumDiagonales() {
-        affichage = new BorderPane();
-        affichage.setCenter(new Label(
-                "Si deux cases numériques sont adjacentes en diagonale, les deux cases blanches de la diagonale opposée doivent être noircies."));
-    }
+        }
 
     /**
      * Resouds l'algorithme d'aide dans une matrice donnée.
@@ -35,41 +31,56 @@ public class NumDiagonales implements Algorithme {
      */
     @Override
     public Resultat resoudre(Matrice m) {
-        List<Position> resList = new ArrayList<>();
-        // Pour chaque case de la matrice
-        for (int x = 0; x < m.getNbLignes(); x++) {
-            for (int y = 0; y < m.getNbColonnes(); y++) {
-                Position pos = new Position(x, y);
-                // Si pos est une case NUM
-                if (Aide.isNumPreproc(m, pos)) {
-                    // On vérifie si une de ses diagonales est aussi une case NUM
-                    List<Position> diagonales = pos.getDiagonales();
-                    for (Position diag : diagonales) {
-                        if (m.posValide(diag) && Aide.isNumPreproc(m, diag)) {
-                            // On regarde les voisins à cette diagonale
-                            List<Position> voisinsDiag = diag.getVoisins();
-                            // Pour chaque voisin
-                            for (Position v : voisinsDiag) {
-                                // Si il a au moins 2 voisins NUM
-                                List<Position> voisins2deg = v.getVoisins();
-                                int count = 0;
-                                // Parcours des voisins au 2eme degré
-                                for (Position v2 : voisins2deg) {
-                                    if (m.posValide(v2) && Aide.isNumPreproc(m, v2)) {
-                                        count++;
-                                    }
-                                    if (count == 2 && m.get(v) != -999 && !Aide.isNumPreproc(m,v)) {
-                                        resList.add(v);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
+
+        int[][] patternA = {
+                { 0, 666 },
+                { 666, 0 }
+        };
+
+        int[][] patternB = {
+                { -1, 666 },
+                { 666, 0 }
+        };
+
+        ArrayList<Matrice> patternList = new ArrayList<Matrice>();
+        patternList.add(new Matrice(patternA));
+        patternList.add(new Matrice(patternB));
+
+        ArrayList<Position> case_a_modifier = new ArrayList<Position>();
+
+        for (Matrice pattern : patternList) {
+            Matrice m2 = new Matrice(m.getElements());
+            // On crée un PatternDetector avec le pattern
+            PatternDetector patternDetector = new PatternDetector(pattern.getElements());
+
+            // On détecte le pattern dans la matrice
+            ArrayList<Position> positions = patternDetector.detectNumPreproc(m2.getElements());
+
+            // On parcourt la liste des positions trouvées
+            for (Position position : positions) {
+                // On vérifie que la position est valide
+                if (m2.posValide(position)) {
+                    // On ajoute les cases blanches dans la liste des cases à modifier
+                    if (m2.get(position) == 999) {
+                        case_a_modifier.add(position);
                     }
                 }
-                if (!resList.isEmpty()) return new Resultat(true, resList, affichage);
             }
+
+            // si la liste des cases à modifier n'est pas vide, on retourne un résultat vrai
+            // avec la liste des cases à modifier
+            if (!case_a_modifier.isEmpty()) {
+                return new Resultat(true, case_a_modifier,
+                        new BorderPane(new Label(
+                                "Si deux cases numériques sont adjacentes en diagonale,\nles deux cases blanches de la diagonale opposée doivent être noircies.")));
+            }
+
         }
-        return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
+
+        // si la liste des cases à modifier est vide, on retourne un résultat faux
+        return new Resultat(false, case_a_modifier,
+                new BorderPane(new Label("")));
+
     }
+
 }

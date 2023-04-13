@@ -19,6 +19,9 @@ import com.l3infogrp5.nurikabe.utils.Position;
  */
 public class Aide {
 
+    /**
+     * Constructeur privé pour empêcher l'instanciation de la classe.
+     */
     private Aide() {
     }
 
@@ -42,8 +45,7 @@ public class Aide {
      */
     private static List<Algorithme> algos_preprocessed = List.of(
         new NumVoisins(),
-        new NumDiagonales(),
-        new IleCompletee()
+        new NumDiagonales()
     );
 
     /**
@@ -75,10 +77,24 @@ public class Aide {
         return new Resultat(false, null, new BorderPane(new Label("test")));
     }
 
+    /**
+     * Vérifie si une case est numérique.
+     * 
+     * @param m la matrice dans laquelle la case est.
+     * @param pos la position de la case.
+     * @return true si la case est numérique, false sinon.
+     */
     public static boolean isNum(Matrice m, Position pos) {
         return (Etat.fromInt(m.get(pos)) == Etat.NUMERIQUE);
     }
 
+    /**
+     * Vérifie si une case est numérique et après prétraitée.
+     * 
+     * @param m la matrice dans laquelle la case est.
+     * @param pos la position de la case.
+     * @return true si la case est numérique et non prétraitée, false sinon.
+     */
     public static boolean isNumPreproc(Matrice m, Position pos) {
         return (m.get(pos) != 999 && m.get(pos) != -999);
     }

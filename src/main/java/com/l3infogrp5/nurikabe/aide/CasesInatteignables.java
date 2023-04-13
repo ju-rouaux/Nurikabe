@@ -15,7 +15,7 @@ import javafx.scene.layout.BorderPane;
  * Classe implémentant l'algorithme d'aide à la résolution indiquant les cases
  * ne pouvant être atteintes par aucune case NUM
  * 
- * @author Killian Rattier
+ * @author Killian Rattier, Elias Okat
  */
 public class CasesInatteignables implements Algorithme {
     BorderPane affichage;
@@ -26,7 +26,7 @@ public class CasesInatteignables implements Algorithme {
     public CasesInatteignables() {
         affichage = new BorderPane();
         affichage.setCenter(new Label(
-                "Si une case blanche ne peut appartenir à aucun chemin de case numérique, elle doit être noircie."));
+                "Si une case blanche ne peut appartenir à aucun chemin de case numérique,\nelle doit être noircie."));
     }
 
     /**
@@ -60,9 +60,6 @@ public class CasesInatteignables implements Algorithme {
                             List<Position> voisins = caseCourante.getVoisins();
                             for (Position voisin : voisins) {
                                 if (m.posValide(voisin)) {
-                                    if(voisin.getX() == 5 && voisin.getY() == 5){
-                                        System.out.println("[5,5] inat. par " + caseCourante + "découlant de " + pos + " " + m.get(pos));
-                                    }
                                     int distance = Math.abs(voisin.getX() - pos.getX()) + Math.abs(voisin.getY() - pos.getY());
                                     if (distance <= dist && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
                                         atteignables.add(voisin);
@@ -77,8 +74,15 @@ public class CasesInatteignables implements Algorithme {
             }
         }
         return atteignables;
-    }
+    }   
 
+    /**
+     * Méthode parcourant la matrice et renvoyant si l'on peut atteindre une case donnée
+     * 
+     * @param m la matrice à tester
+     * @param p la position à tester
+     * @return la liste des cases atteignables
+     */
     public boolean caseAtteignable(Matrice m, Position p){
         List<Position> att = atteignables(m);
         return att.contains(p);
@@ -97,10 +101,6 @@ public class CasesInatteignables implements Algorithme {
         List<Position> inatteignables = new ArrayList<>();
         List<Position> atteignables = atteignables(m);
         List<Position> cases = new ArrayList<>();
-
-        System.out.println("[5,5] atteignable ? " + atteignables.contains(new Position(5,5)));
-
-        System.out.println(caseAtteignable(m, new Position(0,0))); 
 
         // Parcourir la matrice pour ajouter les cases innaccessibles à la liste
         for (int i = 0; i < m.getNbLignes(); i++) {
