@@ -133,7 +133,7 @@ public class ControllerMenuPrincipal {
         else {
             stage.setFullScreen(false);
             stage.setWidth(640);
-            stage.setHeight(480);
+            stage.setHeight(570);
         }
     }
 
