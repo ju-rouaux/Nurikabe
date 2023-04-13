@@ -22,10 +22,7 @@ public class NumDiagonales implements Algorithme {
      * Constructeur de l'algorithme.
      */
     public NumDiagonales() {
-        affichage = new BorderPane();
-        affichage.setCenter(new Label(
-                "Si deux cases numériques sont adjacentes en diagonale, les deux cases blanches de la diagonale opposée doivent être noircies."));
-    }
+        }
 
     /**
      * Resouds l'algorithme d'aide dans une matrice donnée.
@@ -85,7 +82,7 @@ public class NumDiagonales implements Algorithme {
             if (!case_a_modifier.isEmpty()) {
                 return new Resultat(true, case_a_modifier,
                         new BorderPane(new Label(
-                                "Si deux cases numériques sont adjacentes en diagonale,\n les deux cases blanches de la diagonale opposée doivent être noircies.")));
+                                "Si deux cases numériques sont adjacentes en diagonale,\nles deux cases blanches de la diagonale opposée doivent être noircies.")));
             }
 
         }
