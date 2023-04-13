@@ -22,7 +22,7 @@
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#scoreClique" prefHeight="30.0" prefWidth="30.0" styleClass="btn-trophee">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../img/trophee2.png" />
+                     <Image url="@../img/trophee.png" />
                   </ImageView>
                </graphic>
             </Button>

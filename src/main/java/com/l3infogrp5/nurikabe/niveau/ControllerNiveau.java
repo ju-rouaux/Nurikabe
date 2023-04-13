@@ -146,6 +146,9 @@ public class ControllerNiveau {
 
         // Charger le premier niveau
         this.loadNiveauSuivant();
+
+        // Sauvegader à la fermeture du programme
+        root.getWindow().setOnCloseRequest((e) -> this.retourClique());
     }
 
     /**
@@ -171,6 +174,9 @@ public class ControllerNiveau {
             // Afficher une popup de victoire
             Alert popup = new Alert(AlertType.NONE);
             popup.setTitle("Grille terminée !");
+            DialogPane alertPane = popup.getDialogPane();
+            alertPane.getStylesheets().add(getClass().getResource("/css/niveau.css").toExternalForm());
+            alertPane.getStyleClass().add("alert");
             ButtonType btn_quitter;
 
             // Le joueur poursuit sa partie
@@ -335,6 +341,10 @@ public class ControllerNiveau {
             alert.setTitle("Vérification des erreurs");
             alert.setHeaderText(
                     "Aucune erreur détectée. Un malus vous a quand même été appliqué pour l'utilisation de l'aide.");
+
+            DialogPane alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add(getClass().getResource("/css/niveau.css").toExternalForm());
+            alertPane.getStyleClass().add("alert");
             alert.showAndWait();
             return;
         }
@@ -346,8 +356,7 @@ public class ControllerNiveau {
                 + " erreur(s). Voulez-vous rétablir la grille au dernier état correct ? Aucun malus supplémentaire ne vous sera appliqué.");
 
         DialogPane alertPane = alert.getDialogPane();
-        alertPane.getStylesheets().add(
-        getClass().getResource("/css/niveau.css").toExternalForm());
+        alertPane.getStylesheets().add(getClass().getResource("/css/niveau.css").toExternalForm());
         alertPane.getStyleClass().add("alert");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -367,8 +376,7 @@ public class ControllerNiveau {
         alert.setHeaderText("Voulez-vous vraiment réinitialiser la grille ?");
 
         DialogPane alertPane = alert.getDialogPane();
-        alertPane.getStylesheets().add(
-        getClass().getResource("/css/niveau.css").toExternalForm());
+        alertPane.getStylesheets().add(getClass().getResource("/css/niveau.css").toExternalForm());
         alertPane.getStyleClass().add("alert");
 
         Optional<ButtonType> result = alert.showAndWait();
