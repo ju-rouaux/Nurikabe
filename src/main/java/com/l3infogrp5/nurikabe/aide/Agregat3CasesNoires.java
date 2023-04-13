@@ -60,18 +60,29 @@ public class Agregat3CasesNoires implements Algorithme {
         // On détecte le pattern dans notre matrice
         ArrayList<Position> pos_res = pd.detectInGrid(m.getElements());
 
+        // On compte le nombre de cases noires
+        int cases_noir = 0;
+
         // Pour chaque position dans notre pattern
         for (Position p : pos_res) {
             // Si la position est blanche on l'ajoute aux résultats
-            if (Etat.fromInt(m.get(p)) == Etat.BLANC) {
+            // Sinon on incrémente le nombre de cases noires
+            if (Etat.fromInt(m.get(p)) == Etat.NOIR) {
+                cases_noir++;
+            } else if (Etat.fromInt(m.get(p)) == Etat.BLANC) {
                 resList.add(p);
+            } 
+        }
+
+        // Si la liste n'est pas vide
+        if(!resList.isEmpty()){
+            // Si on a bien 3 cases noires on renvoie le résultat
+            if (cases_noir == 3) {
+                return new Resultat(true, resList, this.affichage);
             }
         }
 
-        // Si la liste n'est pas vide on renvoie le résultat
-        if(!resList.isEmpty()){
-            return new Resultat(true, resList, this.affichage);
-        }
+
 
         return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
     }
