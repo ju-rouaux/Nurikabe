@@ -106,6 +106,9 @@ public class ControllerLeaderboard {
             for (String pseudo : pseudos) {
                 List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
                 for (Sauvegarder.DonneesScore score : scores) {
+                    if(Profil.getModeDeJeu().equals(ModeDeJeu.CLM)){
+                        score.getScore()
+                    }
                     System.out.println(score);
                     items.add(score);
                 }
@@ -113,6 +116,9 @@ public class ControllerLeaderboard {
             for (String pseudo : pseudos) {
                 if (pseudo.equals(Profil.getJoueur())) {
                     List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
+                    if(Profil.getModeDeJeu().equals(ModeDeJeu.CLM)){
+                        score.getScore()
+                    }
                     if (!scores.isEmpty()) {
                         items_moi.addAll(scores);
                     }
