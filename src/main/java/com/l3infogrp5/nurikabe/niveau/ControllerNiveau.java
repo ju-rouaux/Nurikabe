@@ -146,6 +146,9 @@ public class ControllerNiveau {
 
         // Charger le premier niveau
         this.loadNiveauSuivant();
+
+        // Sauvegader à la fermeture du programme
+        root.getWindow().setOnCloseRequest((e) -> this.retourClique());
     }
 
     /**
