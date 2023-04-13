@@ -93,7 +93,7 @@ public class ControllerLeaderboard {
         // Définit les propriétés des colonnes pour le tableau de score
         this.nom.setCellValueFactory(new PropertyValueFactory<>("joueur"));
         this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
-        this.score.setSortType(TableColumn.SortType.ASCENDING);
+        this.score.setSortType(TableColumn.SortType.DESCENDING);
         this.date.setCellValueFactory(new PropertyValueFactory<>("date"));
         // Récupère la liste des pseudos
         List<String> pseudos = Sauvegarder.joueursScore(Profil.getModeDeJeu(), id_niveau);
@@ -109,6 +109,7 @@ public class ControllerLeaderboard {
                 List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
                 for (Sauvegarder.DonneesScore score : scores) {
                     if(Profil.getModeDeJeu().equals(ModeDeJeu.CONTRELAMONTRE)){
+                        this.score.setSortType(TableColumn.SortType.ASCENDING);
                         Float scoreEntier = Float.parseFloat(score.getScore());
                         System.out.println(scoreEntier);
                         int sec = Math.round(scoreEntier % 60);
@@ -133,6 +134,7 @@ public class ControllerLeaderboard {
                 if (pseudo.equals(Profil.getJoueur())) {
                     List<Sauvegarder.DonneesScore> scores = Sauvegarder.chargerScore(pseudo, Profil.getModeDeJeu(), id_niveau, false);
                     if(Profil.getModeDeJeu().equals(ModeDeJeu.CONTRELAMONTRE)){
+                        this.score.setSortType(TableColumn.SortType.ASCENDING);
                         for(DonneesScore dc: scores){
                             Float scoreEntier = Float.parseFloat(dc.getScore());
                             System.out.println(scoreEntier);
@@ -166,7 +168,7 @@ public class ControllerLeaderboard {
         // Définit les propriétés des colonnes pour le tableau de score personnel
         this.date_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("date"));
         this.score_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("score"));
-        this.score_joueur_courant.setSortType(TableColumn.SortType.ASCENDING);
+        this.score_joueur_courant.setSortType(TableColumn.SortType.DESCENDING);
 
         this.leaderboard_joueur_courant.setItems(items_moi);
         this.leaderboard_joueur_courant.getSortOrder().add(score_joueur_courant);
