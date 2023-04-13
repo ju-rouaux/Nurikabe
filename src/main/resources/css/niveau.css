@@ -34,6 +34,7 @@
     -fx-effect: innershadow(gaussian, rgb(255, 200, 0), 40, 0.1, 0, 0);
 }
 
+/* Menu de navigation(outil)*/
 .toolBar{
     /*-fx-background-color: #ffffff;*/
     -fx-background-color: radial-gradient(focus-distance 0% , center 0% 0% , radius 0% , #fcec91,rgb(255, 213, 63));
@@ -98,6 +99,7 @@
     
 }
 
+/* menu déroulant d'aide*/
 .panneau-aide
 {
     -fx-background-color : white;
@@ -109,7 +111,7 @@
     -fx-text-fill: red;
 }
 
-/* Bouton d'affichage des posiitions des aides */
+/* Bouton d'affichage des positions des aides */
 .btn-aff-pos {
     -fx-background-color : white;
     -fx-background-radius: 20px;
@@ -124,7 +126,7 @@
     -fx-background-color: rgb(255, 223, 133);
 }
 
-
+/* Pop-up alert */
 .alert {
     -fx-background-color: linear-gradient(from 5px 5px to 52px 100px, reflect,  rgb(255, 234, 0), #ffc800 100%);
     -fx-font-size: 14px;
