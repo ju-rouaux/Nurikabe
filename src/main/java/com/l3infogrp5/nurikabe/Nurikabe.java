@@ -49,17 +49,4 @@ public class Nurikabe extends Application {
         stage.getIcons().add(new Image("/icon.png"));
         stage.show();
     }
-
-    /**
-     * Fonction appelée avant la fermeture du programme.
-     * Utiliser Platform.exit() au lieu de System.exit() pour s'assurer de
-     * l'exécution de cette méthode.
-     *
-     * @throws Exception {@inheritDoc}
-     */
-    @Override
-    public void stop() throws Exception {
-        // TODO : ajouter une fermeture du programme propre qui s'assure de la
-        // sauvegarde de la partie.
-    }
 }
