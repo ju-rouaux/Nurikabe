@@ -27,7 +27,7 @@ public class ExpansionFleuve implements Algorithme {
     public ExpansionFleuve() {
         affichage = new BorderPane();
         affichage.setCenter(new Label(
-                "Les cases noires doivent être reliées en un seul chemin continu. \nSi une case noire ne peut se connecter qu'à un seul chemin, elle doit être prolongée pour se connecter aux autres."));
+                "Les cases noires doivent être reliées en un seul chemin continu. \nSi une case noire ne peut se connecter qu'à un seul chemin,\nelle doit être prolongée pour se connecter aux autres."));
     }
 
     /**
