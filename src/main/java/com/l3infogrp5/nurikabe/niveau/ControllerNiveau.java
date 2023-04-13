@@ -232,13 +232,15 @@ public class ControllerNiveau {
             }
         });
 
+        // Vider le panneau central
+        this.panneau_central.getChildren().clear();
+
         // Mettre la grille au centre (et ajouter une marge)
         Pane panneau_grille = grille.getPanneau();
         StackPane.setMargin(panneau_grille, new Insets(30, 30, 30, 30));
         this.panneau_central.getChildren().add(panneau_grille);
 
         // Recharger la fenêtre d'aide pour l'afficher par dessus la grille
-        this.panneau_central.getChildren().remove(panneau_aide);
         this.panneau_central.getChildren().add(panneau_aide);
 
         // Données de score
