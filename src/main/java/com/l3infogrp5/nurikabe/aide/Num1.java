@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 /**
  * Classe implémentant l'algorithme d'aide à la résolution lorsque qu'une case NUM est à 1
  * 
- * @author Killian Rattier, Guillaume Richard
+ * @author Killian Rattier, Elias Okat
  */
 public class Num1 implements Algorithme {
     BorderPane affichage;

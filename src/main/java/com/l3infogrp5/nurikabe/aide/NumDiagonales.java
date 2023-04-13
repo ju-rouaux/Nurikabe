@@ -1,7 +1,6 @@
 package com.l3infogrp5.nurikabe.aide;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
@@ -13,7 +12,7 @@ import javafx.scene.layout.BorderPane;
  * Classe implémentant l'algorithme d'aide à la résolution lorsque l'on a 2
  * cases NUM en diagonale
  * 
- * @author Killian Rattier
+ * @author Elias Okat, Killian Rattier
  */
 public class NumDiagonales implements Algorithme {
     BorderPane affichage;

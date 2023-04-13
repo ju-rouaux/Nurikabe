@@ -14,7 +14,7 @@ import javafx.scene.layout.BorderPane;
  * Classe implémentant l'algorithme d'aide à la résolution lorsque l'on a un
  * agrégat de 3 cases NOIR
  * 
- * @author Killian Rattier, Guillaume Richard
+ * @author Killian Rattier, Elias Okat
  */
 public class Agregat3CasesNoires implements Algorithme {
     BorderPane affichage;
@@ -38,17 +38,23 @@ public class Agregat3CasesNoires implements Algorithme {
     public Resultat resoudre(Matrice m) {
         List<Position> resList = new ArrayList<>();
 
+        // On déclare le pattern à détecter
         int[][] pattern = new int[][] { { Etat.NOIR.toInt(), Etat.NOIR.toInt() },
                 { Etat.NOIR.toInt(), Etat.BLANC.toInt() } };
         PatternDetector pd = new PatternDetector(pattern);
-        pd.detectInGrid(m.getElements());
+
+        // On détecte le pattern dans notre matrice
         ArrayList<Position> pos_res = pd.detectInGrid(m.getElements());
 
+        // Pour chaque position dans notre pattern
         for (Position p : pos_res) {
+            // Si la position est blanche on l'ajoute aux résultats
             if (Etat.fromInt(m.get(p)) == Etat.BLANC) {
                 resList.add(p);
             }
         }
+
+        // Si la liste n'est pas vide on renvoie le résultat
         if(!resList.isEmpty()){
             return new Resultat(true, resList, this.affichage);
         }
