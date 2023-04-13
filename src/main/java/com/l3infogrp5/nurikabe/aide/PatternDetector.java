@@ -1,6 +1,7 @@
 package com.l3infogrp5.nurikabe.aide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
@@ -124,6 +125,59 @@ public class PatternDetector {
 
     Matrice matriceGrid = new Matrice(grid);
     // fait un parcourir la grille avec des boucles for
+    for (int i = 0; i < matriceGrid.getNbLignes(); i++) {
+      for (int j = 0; j < matriceGrid.getNbColonnes(); j++) {
+
+        if (Etat.fromInt(matriceGrid.getElement(i, j)) == Etat.NUMERIQUE) {
+          matriceGrid.setElement(i, j, 666);
+        }
+
+      }
+    }
+
+    return detectInGrid(matriceGrid.getElements());
+  }
+
+
+  /**
+   * 
+   * Cette méthode prend en paramètre une grille de nombres entiers et renvoie une
+   * liste de positions où un certain motif spécifié par la variable "pattern" est
+   * détecté dans la grille.
+   * 
+   * Important : pour que cette méthode fonctionne il est nécessaire de replacer
+   * les case numérique par la valeur 666 dans le pattern.
+   * 
+   * exemple : int[][] pattern = { { 666, 0, 0 }, { 0, -1, 0 }, { 0, 0, 666 } };
+   * 
+   * 
+   * Elle parcourt la grille à l'aide de boucles for pour remplacer tous les
+   * éléments qui ne sont pas égaux à 0, -1 ou -2 par la valeur 666.
+   * Elle affiche la grille modifiée ainsi que le motif recherché.
+   * Enfin, elle renvoie les positions où le motif est détecté dans la grille en
+   * appelant la méthode "detectInGrid".
+   * 
+   * cette méthode est la version préprocesseur de la méthode "detectNum"
+   * 
+   * @param grid une grille de nombres entiers dans laquelle chercher le motif
+   * @return une liste de positions de la première occurrence où le motif est
+   *         détecté dans la grille
+   */
+  public ArrayList<Position> detectNumPreproc(int[][] grid) {
+
+    // si le pattern ne contient aucune valeur 666, on ne peut pas le détecter dans
+    if (!(pattern.valeurPresente(666))) {
+      // retourne une exeption
+      throw new IllegalArgumentException(
+          "Le pattern ne contient pas de valeur 666, aucune valeur numérique ne peut être détectée");
+    }
+
+    Matrice matriceGrid = new Matrice(grid);
+
+    matriceGrid.remplacerValeurs(999, 0);
+    matriceGrid.remplacerValeurs(-999, -1);
+
+    // fait un parcourir la grille avec des boucles for et remplace les valeurs numériques par 666
     for (int i = 0; i < matriceGrid.getNbLignes(); i++) {
       for (int j = 0; j < matriceGrid.getNbColonnes(); j++) {
 
