@@ -43,7 +43,7 @@ public class Nurikabe extends Application {
         stage.setScene(new Scene(new Group(new Text("test"))));
         stage.getScene().setRoot(new ControllerMenuPrincipal(stage.getScene()).getPane());
 
-        stage.setMinHeight(480);
+        stage.setMinHeight(550);
         stage.setMinWidth(640);
         stage.setTitle("Nurikabe");
         stage.getIcons().add(new Image("/icon.png"));
