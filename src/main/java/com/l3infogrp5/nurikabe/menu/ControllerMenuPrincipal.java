@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 
@@ -52,7 +53,7 @@ public class ControllerMenuPrincipal {
         loader.setController(this);
 
         main = loader.load();
-
+        
         // Redimensionnement responsive du titre principal 
         Label titreLabel = (Label) loader.getNamespace().get("titre_nurikabe");
 
@@ -117,6 +118,19 @@ public class ControllerMenuPrincipal {
     @FXML
     private void reglesClique(ActionEvent event) throws Exception {
         root.setRoot(new ControllerMenuRegles(root).getPane());
+    }
+
+    @FXML
+    private void pleinEcranClique(ActionEvent event) throws Exception {
+        Stage stage = (Stage) root.getWindow();
+        if(!stage.isFullScreen()) {
+            stage.setFullScreen(true);
+        }
+        else {
+            stage.setFullScreen(false);
+            stage.setWidth(640);
+            stage.setHeight(480);
+        }
     }
 
     /**

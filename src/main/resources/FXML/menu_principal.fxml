@@ -4,12 +4,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane minHeight="480.0" minWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -21,7 +22,7 @@
             <RowConstraints valignment="TOP" vgrow="ALWAYS" />
             <RowConstraints minHeight="5.0" prefHeight="5.0" valignment="TOP" vgrow="ALWAYS" />
             <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" valignment="TOP" vgrow="ALWAYS" />
+            <RowConstraints minHeight="30.0" prefHeight="60.0" valignment="TOP" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
             <AnchorPane GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="SOMETIMES">
@@ -121,6 +122,18 @@
                   <Insets />
                </GridPane.margin>
             </AnchorPane>
+            <Button fx:id="btn_plein_ecran" mnemonicParsing="false" onAction="#pleinEcranClique" prefHeight="35.0" prefWidth="35.0" styleClass="btn-plein-ecran" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" styleClass="img-plein-ecran">
+                     <image>
+                        <Image url="@../img/plein-ecran.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <GridPane.margin>
+                  <Insets bottom="50.0" left="10.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
    </children>

@@ -58,6 +58,15 @@
     -fx-effect: dropshadow(gaussian, rgb(255, 255, 255),3.1, 1, 0, 0);
 }
 
+/* Bouton plein ecran */
+.btn-plein-ecran {
+    -fx-background-color: transparent;
+}
+/* Images boutons plein ecran*/
+.img-plein-ecran{
+    -fx-effect: dropshadow(gaussian, rgb(255, 255, 255),4, 1, 0, 0);
+}
+
 /* ScrollPane - Menu règles*/
 .scroll-p > .viewport {
     -fx-background-color: transparent;
