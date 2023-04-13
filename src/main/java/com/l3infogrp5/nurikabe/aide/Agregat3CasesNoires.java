@@ -7,7 +7,10 @@ import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -24,8 +27,19 @@ public class Agregat3CasesNoires implements Algorithme {
      */
     public Agregat3CasesNoires() {
         affichage = new BorderPane();
+        // Image
+        ImageView img = new ImageView("/img/aide/agregatNoir.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        //Ajouter le texte
         affichage.setCenter(new Label(
-                "Si 3 cases noires remplissent une zone de 4x4, la case restante appartient forcément à une île."));
+                "Si 3 cases noires remplissent une zone de 4x4,\nla case restante appartient forcément à une île."));
     }
 
     /**

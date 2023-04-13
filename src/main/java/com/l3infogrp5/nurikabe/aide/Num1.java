@@ -7,7 +7,10 @@ import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -23,7 +26,18 @@ public class Num1 implements Algorithme {
      */
     public Num1(){
         affichage = new BorderPane();
-        affichage.setCenter(new Label("Si une case numérique vaut 1, vous pouvez entourer les 4 cases autour d'elle avec des cases noires."));
+        // Image
+        ImageView img = new ImageView("/img/aide/ile1.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        //Ajouter le texte
+        affichage.setCenter(new Label("Si une case numérique vaut 1,\nvous pouvez entourer les 4 cases autour d'elle avec des cases noires."));
     }
 
     /**
@@ -56,11 +70,10 @@ public class Num1 implements Algorithme {
                         }
                     }
                 }
+                // On renvoie la liste des cases concernées
+                if(!resList.isEmpty()) return new Resultat(true, resList, affichage);
             }
         }
-        // On renvoie la liste des cases concernées
-        if(!resList.isEmpty()) return new Resultat(true, resList, affichage);
-
         return new Resultat(false, null, new BorderPane(new Label("Aucune aide disponible")));
     }
 }
