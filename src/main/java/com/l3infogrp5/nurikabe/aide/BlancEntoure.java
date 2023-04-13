@@ -21,6 +21,9 @@ import javafx.scene.layout.BorderPane;
 class BlancEntoure implements Algorithme {
     BorderPane affichage;
 
+    /**
+     * Constructeur de l'algorithme
+     */
     public BlancEntoure(){
         affichage = new BorderPane();
         // Image

@@ -29,9 +29,9 @@ public class Aide {
     private static List<Algorithme> algos_simple = List.of(
             /*new Num1(),
             new BlancEntoure(),
-            new Agregat3CasesNoires(),*/
+            new Agregat3CasesNoires(),
             new CasesInatteignables(),
-            new IleCompletee(),
+            new IleCompletee(),*/
             new Num2(),
             new ExpansionIle(),
             new ExpansionFleuve()
