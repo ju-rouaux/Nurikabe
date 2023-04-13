@@ -45,63 +45,63 @@ public class CasesInatteignables implements Algorithme {
     }
 
     /**
-     * Méthode parcourant la matrice et renvoyant les cases que l'on peut atteindre
+     * Retourne les cases atteignables depuis une case numérique donnée.
      * 
-     * @param m la matrice à tester
-     * @return la liste des cases atteignables
+     * @param m la matrice
+     * @param pos la position de la case à tester
      */
-    public List<Position> atteignables(Matrice m) {
-        // List<Position> inatteignables = new ArrayList<>();
+    public static List<Position> atteignablesParCase(Matrice m, Position pos) {
         List<Position> atteignables = new ArrayList<>();
-        List<Position> cases = new ArrayList<>();
+        
+        // Si on a une case NUM
+        if (Aide.isNum(m, pos)) {
+            // On ajoute la case à la pile
+            Stack<Position> pile = new Stack<>();
+            pile.push(pos);
+            atteignables.add(pos);
 
-        // Pour chaque case de la matrice
-        for (int x = 0; x < m.getNbLignes(); x++) {
-            for (int y = 0; y < m.getNbColonnes(); y++) {
-                Position pos = new Position(x, y);
-                cases.add(pos);
-                // Si on a une case NUM
-                if (Aide.isNum(m, pos)) {
-                    // On ajoute la case à la pile
-                    Stack<Position> pile = new Stack<>();
-                    pile.push(pos);
-                    atteignables.add(pos);
+            int distanceMax = m.getElement(pos.getX(), pos.getY()) - 1;
+            // Ajouter les cases atteignables pour chaque distance
+            for (int dist = 1; dist <= distanceMax; dist++) {
+                List<Position> casesATraiter = new ArrayList<>(pile);
+                for (Position caseCourante : casesATraiter) {
+                    List<Position> voisins = caseCourante.getVoisins();
+                    for (Position voisin : voisins) {
+                        if (m.posValide(voisin)) {
+                            int distance = Math.abs(voisin.getX() - pos.getX()) + Math.abs(voisin.getY() - pos.getY());
+                            if (distance <= dist && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
+                                atteignables.add(voisin);
+                                pile.push(voisin);
 
-                    int distanceMax = m.getElement(pos.getX(), pos.getY()) - 1;
-                    // Ajouter les cases atteignables pour chaque distance
-                    for (int dist = 1; dist <= distanceMax; dist++) {
-                        List<Position> casesATraiter = new ArrayList<>(pile);
-                        for (Position caseCourante : casesATraiter) {
-                            List<Position> voisins = caseCourante.getVoisins();
-                            for (Position voisin : voisins) {
-                                if (m.posValide(voisin)) {
-                                    int distance = Math.abs(voisin.getX() - pos.getX()) + Math.abs(voisin.getY() - pos.getY());
-                                    if (distance <= dist && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
-                                        atteignables.add(voisin);
-                                        pile.push(voisin);
-
-                                    }
-                                }
                             }
                         }
                     }
                 }
             }
         }
+
         return atteignables;
-    }   
+    }
+
 
     /**
-     * Méthode parcourant la matrice et renvoyant si l'on peut atteindre une case donnée
+     * Méthode parcourant la matrice et renvoyant les cases que l'on peut atteindre
      * 
      * @param m la matrice à tester
-     * @param p la position à tester
      * @return la liste des cases atteignables
      */
-    public boolean caseAtteignable(Matrice m, Position p){
-        List<Position> att = atteignables(m);
-        return att.contains(p);
-    }
+    public List<Position> atteignables(Matrice m) {
+        List<Position> atteignables = new ArrayList<>();
+
+        // Pour chaque case de la matrice
+        for (int x = 0; x < m.getNbLignes(); x++) {
+            for (int y = 0; y < m.getNbColonnes(); y++) {
+                Position pos = new Position(x, y);
+                atteignables.addAll(atteignablesParCase(m, pos));
+            }
+        }
+        return atteignables;
+    }   
 
     /**
      * Resouds l'algorithme d'aide dans une matrice donnée.

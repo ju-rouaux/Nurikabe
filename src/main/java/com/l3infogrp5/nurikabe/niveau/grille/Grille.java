@@ -1,5 +1,6 @@
 package com.l3infogrp5.nurikabe.niveau.grille;
 
+import com.l3infogrp5.nurikabe.aide.CasesInatteignables;
 import com.l3infogrp5.nurikabe.aide.Zone;
 import com.l3infogrp5.nurikabe.niveau.grille.Historique.Mouvement;
 import com.l3infogrp5.nurikabe.sauvegarde.Profil;
@@ -111,7 +112,22 @@ public class Grille {
                     case_courante = new CaseNumerique(new Position(i, j));
 
                     case_courante.setEventMaintienGauche(new EventClicMaintenu() {
-                        
+                        List<Position> positions;
+
+                        public void maintenu(Case c) {
+                            positions = CasesInatteignables.atteignablesParCase(new Matrice(getMatrice()), c.getPosition());
+
+                            for (Position p : positions)
+                                getCase(grille[p.getX()][p.getY()]).surbrillance(true);
+                        }
+
+                        public void relache(Case c) {
+                            if (positions != null) {
+                                for (Position p : positions)
+                                    getCase(grille[p.getX()][p.getY()]).surbrillance(false);
+                                positions = null;
+                            }
+                        }
                     });
                 }
 
