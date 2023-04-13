@@ -44,6 +44,7 @@ public class Nurikabe extends Application {
 
         stage.setMinHeight(480);
         stage.setMinWidth(640);
+        stage.setTitle("Nurikabe");
         stage.show();
     }
 
