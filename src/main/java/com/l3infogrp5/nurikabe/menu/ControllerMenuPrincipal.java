@@ -120,6 +120,10 @@ public class ControllerMenuPrincipal {
         root.setRoot(new ControllerMenuRegles(root).getPane());
     }
 
+    /**
+     * 
+     * Plein ecran
+     */
     @FXML
     private void pleinEcranClique(ActionEvent event) throws Exception {
         Stage stage = (Stage) root.getWindow();
