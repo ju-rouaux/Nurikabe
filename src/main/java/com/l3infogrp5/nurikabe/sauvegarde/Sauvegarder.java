@@ -337,7 +337,6 @@ public class Sauvegarder {
     public static int nbGrilles() {
 
         int nb_grilles;
-//        TODO : modifier mode de jeu pour fichier des grilles
         try (InputStream inputStream = Sauvegarder.class.getClassLoader().getResourceAsStream("grilles/grilles_" + ModeDeJeu.DETENTE + ".txt")) {
             assert inputStream != null;
             try (BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
@@ -363,8 +362,6 @@ public class Sauvegarder {
      * @throws FileNotFoundException {@link FileNotFoundException} si le fichier n'est pas trouvé
      */
     public static int[][] chargerGrilleFichier(int id_niveau, Boolean solution) throws FileNotFoundException {
-
-//    TODO : Modifier si split niveaux en différents fichiers
         String nom_fichier = "grilles_" + ModeDeJeu.DETENTE;
         if (solution) {
             nom_fichier += "_solutions";

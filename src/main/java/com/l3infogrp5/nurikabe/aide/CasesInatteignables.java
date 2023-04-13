@@ -49,6 +49,8 @@ public class CasesInatteignables implements Algorithme {
      * 
      * @param m la matrice
      * @param pos la position de la case à tester
+     * 
+     * @return la liste des cases atteignables
      */
     public static List<Position> atteignablesParCase(Matrice m, Position pos) {
         List<Position> atteignables = new ArrayList<>();
