@@ -7,7 +7,10 @@ import java.util.stream.Collectors;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -19,6 +22,27 @@ import javafx.scene.layout.BorderPane;
  * @author Elias OKAT, Killian Rattier
  */
 public class IleCompletee implements Algorithme {
+    BorderPane affichage;
+    
+    /**
+     * Constructeur de l'algorithme
+     */
+    public IleCompletee (){
+        affichage = new BorderPane();
+        // Image
+        ImageView img = new ImageView("/img/aide/ileComplete.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        //Ajouter le texte
+        affichage.setCenter(new Label(
+                        "Si une île est complétée, toutes les cases adjacentes\nà l'île doivent être noires."));
+    }
 
     /**
      * Implémentation de la méthode resoudre(Matrice m) de l'interface Algorithme.
@@ -88,9 +112,7 @@ public class IleCompletee implements Algorithme {
                 // si la liste des cases à modifier n'est pas vide, on retourne un résultat vrai
                 // avec la liste des cases à modifier
                 if (!ile_non_complete.isEmpty()) {
-                    return new Resultat(true, ile_non_complete,
-                            new BorderPane(new Label(
-                                    "Si une île est complétée, toutes les cases adjacentes de l'île doivent être noires.")));
+                    return new Resultat(true, ile_non_complete,affichage);
                 }
 
             }

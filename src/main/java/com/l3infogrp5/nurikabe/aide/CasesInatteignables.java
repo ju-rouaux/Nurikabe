@@ -8,7 +8,10 @@ import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -25,8 +28,19 @@ public class CasesInatteignables implements Algorithme {
      */
     public CasesInatteignables() {
         affichage = new BorderPane();
+        // Image
+        ImageView img = new ImageView("/img/aide/inatteignables.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        // Ajouter le texte
         affichage.setCenter(new Label(
-                "Si une case blanche ne peut appartenir à aucun chemin de case numérique,\nelle doit être noircie."));
+                "Si une case blanche ne peut appartenir à aucun chemin \nde case numérique, elle doit être noircie."));
     }
 
     /**
@@ -64,7 +78,7 @@ public class CasesInatteignables implements Algorithme {
                                     if (distance <= dist && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
                                         atteignables.add(voisin);
                                         pile.push(voisin);
-                                        
+
                                     }
                                 }
                             }
@@ -87,8 +101,6 @@ public class CasesInatteignables implements Algorithme {
         List<Position> att = atteignables(m);
         return att.contains(p);
     }
-
-
 
     /**
      * Resouds l'algorithme d'aide dans une matrice donnée.
