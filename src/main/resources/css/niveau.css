@@ -127,4 +127,34 @@
 {
     -fx-background-color: rgb(255, 223, 133);
 }
+
+
+.alert {
+    -fx-background-color: linear-gradient(from 13px 38px to 52px 100px, reflect,  rgb(255, 203, 91), #ffbe47 100%);
+    -fx-font-size: 14px;
+}
+
+.alert:header *.header-panel{
+    -fx-background-color: linear-gradient(from 13px 38px to 52px 100px, reflect,  rgb(255, 203, 91), #ffbe47 100%);/*#ffe552;*/
+}
+
+.alert .dialog-pane .content {
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
+
+.alert .button-bar .button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-border-width:5px;
+    -fx-border-color:rgb(255, 255, 255);
+    -fx-effect: dropshadow(three-pass-box, rgb(7, 121, 3),3, 0, 5, 5);
+}
+
+.alert .button-bar .button:hover {
+    -fx-background-color: #43A047;
+}
+
 /* ==================== IDs ==================== */

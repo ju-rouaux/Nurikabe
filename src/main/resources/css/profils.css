@@ -1,7 +1,3 @@
-* {
-  -fx-base: #636363;
-}
-
 /* ==================== Classes ==================== */
 
 .btn {
@@ -18,11 +14,19 @@
   -fx-background-repeat: no-repeat;
 }
 
+
 .btn-del {
   -fx-background-image: url("../img/trash.png");
   -fx-background-size: 30;
   -fx-background-position: center;
   -fx-background-repeat: no-repeat;
+  -fx-background-color : transparent;
+  -fx-effect: dropshadow(three-pass-box, rgb(0, 0, 0), 4, 0.4, 0, 0);
+}
+
+.btn-del:hover{
+  -fx-opacity: 0.8;
+  -fx-effect: dropshadow(three-pass-box, rgb(255, 255, 255), 5, 0.6, 0, 0);
 }
 
 .btn-add {

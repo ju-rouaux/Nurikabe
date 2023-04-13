@@ -1,7 +1,6 @@
 package com.l3infogrp5.nurikabe.niveau.score;
 
 import org.controlsfx.control.Rating;
-
 import javafx.scene.layout.BorderPane;
 //import javafx.scene.effect.ColorAdjust;
 import javafx.scene.layout.Pane;
@@ -33,16 +32,17 @@ public class ScoreZen implements ScoreInterface {
         this.etoiles = etoiles;
 
         this.rating = new Rating();
+        rating.getStylesheets().add("/css/global.css");
         this.rating.setUpdateOnHover(false); // On désactive la mise à jour du Rating au survol de la souris
         this.rating.setDisable(true);        // On désactive la possibilité de cliquer sur le Rating
         this.rating.setPartialRating(true);  // On active l'affichage des demi-étoiles
         this.rating.setRating(etoiles);             // On définit la valeur du Rating en fonction du nombre d'étoiles
 
-        /* Augmente la saturation mais ça colore le fond en rose
-        ColorAdjust colorAdjust = new ColorAdjust();
+        //Augmente la saturation mais ça colore le fond en rose
+        /*ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setSaturation(1);
         this.rating.setEffect(colorAdjust);*/
-
+        
         this.ratingPane = new BorderPane();           // On crée un nouvel objet Pane pour contenir le Rating
         this.ratingPane.setCenter(rating);   // On ajoute le Rating à l'objet Pane
     }

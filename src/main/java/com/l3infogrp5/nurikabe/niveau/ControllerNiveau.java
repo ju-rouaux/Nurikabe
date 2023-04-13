@@ -25,6 +25,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -341,6 +342,11 @@ public class ControllerNiveau {
         alert.setTitle("Vérification des erreurs");
         alert.setHeaderText("Vous avez fait " + nb_erreurs
                 + " erreur(s). Voulez-vous rétablir la grille au dernier état correct ? Aucun malus supplémentaire ne vous sera appliqué.");
+
+        DialogPane alertPane = alert.getDialogPane();
+        alertPane.getStylesheets().add(
+        getClass().getResource("/css/niveau.css").toExternalForm());
+        alertPane.getStyleClass().add("alert");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             while (this.grille.nbErreurs() > 0)
@@ -357,6 +363,12 @@ public class ControllerNiveau {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Réinitialiser la grille");
         alert.setHeaderText("Voulez-vous vraiment réinitialiser la grille ?");
+
+        DialogPane alertPane = alert.getDialogPane();
+        alertPane.getStylesheets().add(
+        getClass().getResource("/css/niveau.css").toExternalForm());
+        alertPane.getStyleClass().add("alert");
+
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             this.score.restart();

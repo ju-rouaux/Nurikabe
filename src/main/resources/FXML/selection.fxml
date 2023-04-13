@@ -14,7 +14,7 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="145.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="texte" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="139.0" text="Niveau 999">
+            <Label fx:id="texte" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="139.0" text="Niveau 999" style="-fx-text-fill:#80571b; -fx-font-weight:bold;">
                <font>
                   <Font size="15.0" />
                </font>

@@ -75,27 +75,26 @@
 }
 
 
-.scroll-p .scroll-bar:vertical {
+.scroll-p .scroll-bar {
     -fx-background-color: rgba(189, 171, 112, 0.652);
-    /*-fx-background-radius: 25px;*/
+    -fx-background-radius: 25px;
     -fx-translate-x: -5;
 
 }
-
-.scroll-p .scroll-bar:vertical .thumb {
+.scroll-p .scroll-bar .thumb {
     -fx-background-color: rgb(255, 162, 0);
 }
 
-.scroll-p .scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+.scroll-p .scroll-bar .increment-button, .scroll-bar .decrement-button {
     -fx-background-color: transparent;
     -fx-shape: " ";
 }
 
-.scroll-p .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+.scroll-p .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
     -fx-background-color: gray;
 }
 
-.scroll-p .scroll-bar:vertical .increment-arrow:hover, .scroll-bar:vertical .decrement-arrow:hover {
+.scroll-p .scroll-bar .increment-arrow:hover, .scroll-bar .decrement-arrow:hover {
     -fx-background-color: rgb(255, 162, 0);
 }
 
