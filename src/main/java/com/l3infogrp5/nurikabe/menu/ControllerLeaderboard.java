@@ -95,6 +95,12 @@ public class ControllerLeaderboard {
         this.score.setCellValueFactory(new PropertyValueFactory<>("score"));
         this.score.setSortType(TableColumn.SortType.DESCENDING);
         this.date.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        // Définit les propriétés des colonnes pour le tableau de score personnel
+        this.date_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("date"));
+        this.score_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("score"));
+        this.score_joueur_courant.setSortType(TableColumn.SortType.DESCENDING);
+
         // Récupère la liste des pseudos
         List<String> pseudos = Sauvegarder.joueursScore(Profil.getModeDeJeu(), id_niveau);
 
@@ -141,7 +147,7 @@ public class ControllerLeaderboard {
                             int sec = Math.round(scoreEntier % 60);
                             int min;
                             if(!(sec== scoreEntier))
-                                min = Math.round(scoreEntier / 60);
+                                min = (int)(scoreEntier / 60);
                             else {
                                 min=0;
                             }
@@ -165,10 +171,7 @@ public class ControllerLeaderboard {
         this.leaderboard_general.setItems(items);
         this.leaderboard_general.getSortOrder().add(score);
 
-        // Définit les propriétés des colonnes pour le tableau de score personnel
-        this.date_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("date"));
-        this.score_joueur_courant.setCellValueFactory(new PropertyValueFactory<>("score"));
-        this.score_joueur_courant.setSortType(TableColumn.SortType.DESCENDING);
+
 
         this.leaderboard_joueur_courant.setItems(items_moi);
         this.leaderboard_joueur_courant.getSortOrder().add(score_joueur_courant);
