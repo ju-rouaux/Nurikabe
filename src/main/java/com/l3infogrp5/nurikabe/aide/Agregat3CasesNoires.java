@@ -25,7 +25,7 @@ public class Agregat3CasesNoires implements Algorithme {
     public Agregat3CasesNoires() {
         affichage = new BorderPane();
         affichage.setCenter(new Label(
-                "Si 3 cases noires remplissent une zone de 4x4, la case restante appartient forcément à une île."));
+                "Si 3 cases noires remplissent une zone de 4x4,\nla case restante appartient forcément à une île."));
     }
 
     /**
