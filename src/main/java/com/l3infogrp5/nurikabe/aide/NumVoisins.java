@@ -6,7 +6,10 @@ import java.util.List;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -22,8 +25,19 @@ public class NumVoisins implements Algorithme {
      */
     public NumVoisins() {
         affichage = new BorderPane();
+        // Image
+        ImageView img = new ImageView("/img/aide/numVois.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        //Ajouter le texte
         affichage.setCenter(new Label(
-                "Si deux cases numériques sont séparées par une case blanche dans la même ligne ou colonne, la case blanche doit être noircie."));
+                "Si deux cases numériques sont séparées par une case blanche dans la même ligne ou colonne,\n la case blanche doit être noircie."));
     }
 
     /**
