@@ -115,8 +115,7 @@ public class PatternDetector {
    */
   public ArrayList<Position> detectNum(int[][] grid) {
 
-    // si le pattern ne contient aucune valeur 666, on ne peut pas le détecter dans
-    // la grille
+    // si le pattern ne contient aucune valeur 666, on ne peut pas le détecter dans la grille
     if (!(pattern.valeurPresente(666))) {
       // retourne une exeption
       throw new IllegalArgumentException(

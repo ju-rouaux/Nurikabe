@@ -23,7 +23,7 @@ public class Num1 implements Algorithme {
      */
     public Num1(){
         affichage = new BorderPane();
-        affichage.setCenter(new Label("Si une case numérique vaut 1, vous pouvez entourer les 4 cases autour d'elle avec des cases noires."));
+        affichage.setCenter(new Label("Si une case numérique vaut 1, vous pouvez entourer les 4 cases,\nautour d'elle avec des cases noires."));
     }
 
     /**
@@ -35,8 +35,6 @@ public class Num1 implements Algorithme {
     public Resultat resoudre(Matrice m) {
 
         List<Position> resList = new ArrayList<>();
-
-        // Result res = new Result(null, null);
 
         // Pour chaque case de la matrice
         for (int x = 0; x < m.getNbLignes(); x++) {

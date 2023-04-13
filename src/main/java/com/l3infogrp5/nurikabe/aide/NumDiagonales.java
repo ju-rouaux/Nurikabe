@@ -22,10 +22,7 @@ public class NumDiagonales implements Algorithme {
      * Constructeur de l'algorithme.
      */
     public NumDiagonales() {
-        affichage = new BorderPane();
-        affichage.setCenter(new Label(
-                "Si deux cases numériques sont adjacentes en diagonale, les deux cases blanches de la diagonale opposée doivent être noircies."));
-    }
+        }
 
     /**
      * Resouds l'algorithme d'aide dans une matrice donnée.
@@ -35,13 +32,6 @@ public class NumDiagonales implements Algorithme {
      */
     @Override
     public Resultat resoudre(Matrice m) {
-
-        System.out.print("\033[32m");
-
-        System.out.println("\nLa matrice est :");
-        System.out.println(m);
-
-        System.out.print("\033[0m");
 
         int[][] patternA = {
                 { 0, 666 },
@@ -58,8 +48,6 @@ public class NumDiagonales implements Algorithme {
         patternList.add(new Matrice(patternB));
 
         ArrayList<Position> case_a_modifier = new ArrayList<Position>();
-
-        // affiche_mat(m,new Position(0, 0),new ArrayList<Position>());
 
         for (Matrice pattern : patternList) {
             Matrice m2 = new Matrice(m.getElements());
@@ -85,7 +73,7 @@ public class NumDiagonales implements Algorithme {
             if (!case_a_modifier.isEmpty()) {
                 return new Resultat(true, case_a_modifier,
                         new BorderPane(new Label(
-                                "Si deux cases numériques sont adjacentes en diagonale,\n les deux cases blanches de la diagonale opposée doivent être noircies.")));
+                                "Si deux cases numériques sont adjacentes en diagonale,\nles deux cases blanches de la diagonale opposée doivent être noircies.")));
             }
 
         }
