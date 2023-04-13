@@ -129,14 +129,16 @@ public class ControllerMenuProfils {
         popup.setScene(new ControllerNouveauxProfil(this).getScene());
         popup.setResizable(false);
 
+        popup.initOwner((Stage) root.getWindow());
         // empêche l'utilisation de la croix pour fermer la fenêtre
         popup.setOnCloseRequest((WindowEvent event) -> {
             event.consume();
         });
-
+        
         // On ne peux pas agir sur la fenêtre actuelle tant que la pop-up n'est pas
         // fermé
         popup.initModality(Modality.APPLICATION_MODAL);
+        
         popup.showAndWait();
 
         // Modification de l'affichage

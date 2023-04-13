@@ -32,6 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -345,6 +346,7 @@ public class ControllerNiveau {
             DialogPane alertPane = alert.getDialogPane();
             alertPane.getStylesheets().add(getClass().getResource("/css/niveau.css").toExternalForm());
             alertPane.getStyleClass().add("alert");
+            alert.initOwner((Stage) root.getWindow());
             alert.showAndWait();
             return;
         }
@@ -358,6 +360,7 @@ public class ControllerNiveau {
         DialogPane alertPane = alert.getDialogPane();
         alertPane.getStylesheets().add(getClass().getResource("/css/niveau.css").toExternalForm());
         alertPane.getStyleClass().add("alert");
+        alert.initOwner((Stage) root.getWindow());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             while (this.grille.nbErreurs() > 0)
@@ -378,7 +381,7 @@ public class ControllerNiveau {
         DialogPane alertPane = alert.getDialogPane();
         alertPane.getStylesheets().add(getClass().getResource("/css/niveau.css").toExternalForm());
         alertPane.getStyleClass().add("alert");
-
+        alert.initOwner((Stage) root.getWindow());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             this.score.restart();
