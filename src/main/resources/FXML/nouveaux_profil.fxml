@@ -14,14 +14,14 @@
    <root>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Label text="Veuillez saisir un nom pour le profil.">
+            <Label id="texte" text="Veuillez saisir un nom pour le profil.">
                <padding>
                   <Insets bottom="40.0" top="10.0" />
                </padding>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);">
                <image>
-                  <Image url="@../img/icon_utilisateur_default.png" />
+                  <Image url="@../img/icon_utilisateur_actif.png" />
                </image>
                <VBox.margin>
                   <Insets bottom="50.0" />

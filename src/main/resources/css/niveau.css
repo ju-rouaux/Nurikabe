@@ -11,7 +11,7 @@
 
 /* Case numérique */
 .case-numerique {
-
+    -fx-text-fill:#80571b;
 }
 
 /* Case blanche */
@@ -70,11 +70,6 @@
     -fx-border-style: solid outside;
     -fx-border-radius: 10px;
     -fx-border-width: 1px 1px 1px 1px;
-    /*-fx-effect: dropshadow(three-pass-box, rgb(246, 255, 0), 2, 1, 0, 0);
-    -fx-border-color: linear-gradient(from 13px 38px to 52px 52px, reflect,  #fff200, #ffd000 100%);
-    -fx-border-style: solid outside;
-    -fx-border-radius: 10px;
-    -fx-border-width: 2px 0px 2px 0px;*/
 }
 
 .score-text .text
@@ -111,6 +106,7 @@
     -fx-border-style: solid outside;
     -fx-border-radius: 0px 0px 20px 20px;
     -fx-border-width: 0px 2px 2px 2px;
+    -fx-text-fill: red;
 }
 
 /* Bouton d'affichage des posiitions des aides */
@@ -130,31 +126,28 @@
 
 
 .alert {
-    -fx-background-color: linear-gradient(from 13px 38px to 52px 100px, reflect,  rgb(255, 203, 91), #ffbe47 100%);
+    -fx-background-color: linear-gradient(from 5px 5px to 52px 100px, reflect,  rgb(255, 234, 0), #ffc800 100%);
     -fx-font-size: 14px;
+    
 }
 
 .alert:header *.header-panel{
-    -fx-background-color: linear-gradient(from 13px 38px to 52px 100px, reflect,  rgb(255, 203, 91), #ffbe47 100%);/*#ffe552;*/
-}
-
-.alert .dialog-pane .content {
-    -fx-text-fill: #333333;
-    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(from 5px 5px to 52px 100px, reflect,  rgb(255, 234, 0), #ffc800 100%);/*#ffe552;*/
+    
 }
 
 .alert .button-bar .button {
-    -fx-background-color: #4CAF50;
+    -fx-background-color: #1fa724;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
-    -fx-border-width:5px;
+    -fx-border-width:3px;
     -fx-border-color:rgb(255, 255, 255);
-    -fx-effect: dropshadow(three-pass-box, rgb(7, 121, 3),3, 0, 5, 5);
+    -fx-effect: dropshadow(three-pass-box, rgb(18, 105, 15),2, 0.9, 2, 2);
 }
 
 .alert .button-bar .button:hover {
-    -fx-background-color: #43A047;
+    -fx-background-color: #2e7a32;
 }
 
 /* ==================== IDs ==================== */

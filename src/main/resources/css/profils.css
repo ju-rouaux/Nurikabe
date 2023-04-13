@@ -7,7 +7,7 @@
 }
 
 .btn-profile {
-  -fx-background-color: white;
+  -fx-background-color: rgb(227, 227, 227);
   -fx-background-image: url("../img/icon_utilisateur_default.png");
   -fx-background-size: 50;
   -fx-background-position: center;
@@ -30,20 +30,21 @@
 }
 
 .btn-add {
-  -fx-text-fill: black;
+  -fx-text-fill: rgb(228, 129, 0);
   -fx-font-weight: bold;
-  -fx-font-size: 20px;
-  -fx-background-color: grey;
+  -fx-font-size: 25px;
+  -fx-background-color: rgba(255, 220, 145, 0.736);
   -fx-border-color: white;
 }
 
 .name-profile {
-  -fx-text-fill: black;
+  -fx-text-fill: #7f581d;
   -fx-font-size: 20px;
 }
 
 .actif {
-  -fx-background-color: #bfffa9;
+  -fx-background-color: #fbeb6f;
+  -fx-background-image: url("../img/icon_utilisateur_actif.png");
 }
 
 /* ==================== IDs ==================== */
