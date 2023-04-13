@@ -8,7 +8,10 @@ import com.l3infogrp5.nurikabe.niveau.grille.Etat;
 import com.l3infogrp5.nurikabe.utils.Matrice;
 import com.l3infogrp5.nurikabe.utils.Position;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -25,8 +28,19 @@ public class CasesInatteignables implements Algorithme {
      */
     public CasesInatteignables() {
         affichage = new BorderPane();
+        // Image
+        ImageView img = new ImageView("/img/aide/inatteignables.png");
+        // Taille de l'image
+        img.setFitWidth(100);
+        img.setFitHeight(100);
+        // Ajouter l'image à gauche et la centrer verticalement
+        affichage.setLeft(img);
+        BorderPane.setAlignment(img, Pos.CENTER);
+        // Aouter une marge autour de l'image
+        BorderPane.setMargin(img, new Insets(10));
+        // Ajouter le texte
         affichage.setCenter(new Label(
-                "Si une case blanche ne peut appartenir à aucun chemin de case numérique, elle doit être noircie."));
+                "Si une case blanche ne peut appartenir à aucun chemin \nde case numérique, elle doit être noircie."));
     }
 
     /**
@@ -60,14 +74,17 @@ public class CasesInatteignables implements Algorithme {
                             List<Position> voisins = caseCourante.getVoisins();
                             for (Position voisin : voisins) {
                                 if (m.posValide(voisin)) {
-                                    if(voisin.getX() == 5 && voisin.getY() == 5){
-                                        System.out.println("[5,5] inat. par " + caseCourante + "découlant de " + pos + " " + m.get(pos));
+                                    if (voisin.getX() == 5 && voisin.getY() == 5) {
+                                        System.out.println("[5,5] inat. par " + caseCourante + "découlant de " + pos
+                                                + " " + m.get(pos));
                                     }
-                                    int distance = Math.abs(voisin.getX() - pos.getX()) + Math.abs(voisin.getY() - pos.getY());
-                                    if (distance <= dist && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR) && (!Aide.isNum(m, voisin)))) {
+                                    int distance = Math.abs(voisin.getX() - pos.getX())
+                                            + Math.abs(voisin.getY() - pos.getY());
+                                    if (distance <= dist && ((Etat.fromInt(m.get(voisin)) != Etat.NOIR)
+                                            && (!Aide.isNum(m, voisin)))) {
                                         atteignables.add(voisin);
                                         pile.push(voisin);
-                                        
+
                                     }
                                 }
                             }
@@ -79,12 +96,10 @@ public class CasesInatteignables implements Algorithme {
         return atteignables;
     }
 
-    public boolean caseAtteignable(Matrice m, Position p){
+    public boolean caseAtteignable(Matrice m, Position p) {
         List<Position> att = atteignables(m);
         return att.contains(p);
     }
-
-
 
     /**
      * Resouds l'algorithme d'aide dans une matrice donnée.
@@ -98,9 +113,9 @@ public class CasesInatteignables implements Algorithme {
         List<Position> atteignables = atteignables(m);
         List<Position> cases = new ArrayList<>();
 
-        System.out.println("[5,5] atteignable ? " + atteignables.contains(new Position(5,5)));
+        System.out.println("[5,5] atteignable ? " + atteignables.contains(new Position(5, 5)));
 
-        System.out.println(caseAtteignable(m, new Position(0,0))); 
+        System.out.println(caseAtteignable(m, new Position(0, 0)));
 
         // Parcourir la matrice pour ajouter les cases innaccessibles à la liste
         for (int i = 0; i < m.getNbLignes(); i++) {

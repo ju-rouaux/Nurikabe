@@ -27,9 +27,9 @@ public class Aide {
      * par Zone.
      */
     private static List<Algorithme> algos_simple = List.of(
-            /*new Num1(),*/
+            /*new Num1(),
             new BlancEntoure(),
-            new Agregat3CasesNoires(),
+            new Agregat3CasesNoires(),*/
             new CasesInatteignables(),
             new IleCompletee(),
             new Num2(),
